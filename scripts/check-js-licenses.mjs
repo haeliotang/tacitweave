@@ -8,6 +8,8 @@ const allowed = new Set([
   'LGPL-2.1-or-later', 'LGPL-3.0-or-later', 'MIT', 'MPL-2.0', 'Unicode-3.0',
   'Unicode-DFS-2016', 'Zlib', 'CC-BY-4.0',
 ])
+// caniuse-lite is CC-BY-4.0 browser-data used at build time; compatible with the AGPL
+// output and attributed in NOTICE. Keep this review marker rather than silently allowing it.
 const review = new Set(['CC-BY-4.0'])
 const raw = execFileSync('pnpm', ['licenses', 'list', '--json'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
 const groups = JSON.parse(raw)

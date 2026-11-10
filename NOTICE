@@ -10,3 +10,5 @@ Third-party vendored code and assets keep their own licenses.
 
 Tacitweave names, logos, icons and Inceptless marks are excluded from these
 licenses under LicenseRef-Inceptless-Brand. See LICENSING.md.
+
+Third-party build data: caniuse-lite, CC-BY-4.0, Copyright 2014-present Ben Briggs and contributors; used by browserslist at build time.
