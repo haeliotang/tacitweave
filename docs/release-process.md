@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## 1. 版本与内容
 
-1. 确认 `apps/desktop/src-tauri/tauri.conf.json` 的 `version` 与目标版本一致（当前 `0.1.3`）。
+1. 确认 `apps/desktop/src-tauri/tauri.conf.json` 的 `version` 与目标版本一致（当前 `0.1.4`）。
 2. 确认 README 的已知限制/签名状态与产物一致。
 3. 确认没有把证书、私钥、`.env`、`.local-assets` 或本机路径提交。
 
@@ -34,8 +34,8 @@ sh scripts/package-macos.sh        # macOS 构建 + strip + ad-hoc + zip
 ```sh
 git status --short          # 必须为空
 git log -1
-git tag -a v0.1.3 -m "Tacitweave v0.1.3"
-git push origin v0.1.3
+git tag -a v0.1.4 -m "Tacitweave v0.1.4"
+git push origin v0.1.4
 ```
 
 标签会触发 `Desktop builds`。workflow 会先检查 tag 与 `tauri.conf.json` 的版本是否一致，然后：

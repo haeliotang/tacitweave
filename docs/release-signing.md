@@ -4,15 +4,16 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 # Release signing and notarization
 
-日期：2026-11-06，更新 2026-11-07。状态：本机可用 Developer ID 签名，但公证凭据尚未配置；Windows 证书尚未配置；v0.1.2 已以未签名 Linux/Windows 资产发布（资产名仍为 Familiweave）；v0.1.3（Tacitweave 改名版）暂不发布，等 macOS 公证与 Windows 签名就绪后再发签名版。逐步操作见 [signing-setup.md](signing-setup.md) 和 [macOS signed workflow](../.github/workflows/macos-signed.yml)。
+日期：2026-11-10。状态：本机可用 Developer ID 签名，但公证凭据尚未配置；Windows 证书尚未配置。v0.1.4 已按 AGPL-3.0-or-later 发布 Linux/Windows 未签名资产；本版本没有 macOS 资产。逐步操作见 [signing-setup.md](signing-setup.md) 和 [macOS signed workflow](../.github/workflows/macos-signed.yml)。
 
 ## 当前产物
 
 - v0.1.2 Release：Linux AppImage/DEB + Windows NSIS，均未签名；没有 macOS 资产
-- v0.1.3：已通过完整本地验证，但按 2026-11-07 的决定暂不打 tag / 发布
+- v0.1.3：从未打 tag / 发布；本地构建保持 Apache-2.0
+- v0.1.4：首个 AGPL-3.0-or-later 发布，Linux/Windows 未签名；没有 macOS 资产
 - 本机 macOS 构建仍为 ad-hoc 签名，**未公证**
 
-Gatekeeper / SmartScreen 会警告。v0.1.1 Release 是未签名归档；v0.1.3 应在 macOS 公证和 Windows 签名都通过后再发布。
+Gatekeeper / SmartScreen 会警告。v0.1.1/v0.1.2 是未签名归档；v0.1.4 的 Windows/Linux 资产同样未签名，不得在文案中称为已签名/已公证。
 
 ## macOS Developer ID
 

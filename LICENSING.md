@@ -34,7 +34,8 @@ If a file is ambiguous, it is treated as `AGPL-3.0-or-later` until reviewed.
 | `v0.1.1` | tag `v0.1.1` | Apache-2.0 |
 | `v0.1.2` | tag `v0.1.2` | Apache-2.0 |
 | `0.1.3` | packaged but untagged/unreleased; bundle mtime 2026-11-07 17:18:27; inferred from `2fec794` or an uncommitted worktree above it | Apache-2.0 |
-| Future releases from merge commit `1a342b7` onward | `1a342b7` | layered AGPL-3.0-or-later / Apache-2.0 / CC-BY-4.0 / brand |
+| `v0.1.4` | tag `v0.1.4` | layered AGPL-3.0-or-later / Apache-2.0 / CC-BY-4.0 / brand |
+| Future releases after `v0.1.4` | layered licensing | layered AGPL-3.0-or-later / Apache-2.0 / CC-BY-4.0 / brand |
 
 `0.1.3` is intentionally not assigned a new license here. Inceptless will
 decide whether to publish the existing Apache-2.0 package or rebuild an AGPL

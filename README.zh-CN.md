@@ -23,7 +23,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## 下载
 
-最新公开 tag 为 [v0.1.2](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.2)，以旧名 Familiweave 发布（仅 Linux/Windows，未签名；macOS 签名仍待完成）。已归档的 [v0.1.1 Release](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.1) 仍是下载资产最完整的版本。改名后的 main 版本为 0.1.3，**尚未发布**。
+最新公开 tag 为 [v0.1.4](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.4)，是 Tacitweave 首个按 AGPL-3.0-or-later 分层许可发布的版本。提供未签名的 Linux/Windows 构建；macOS 签名仍待完成。已归档的 [v0.1.1 Release](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.1) 仍是下载资产最完整的版本。
 
 已归档 v0.1.1 资产（旧名）：
 
@@ -32,7 +32,7 @@ SPDX-License-Identifier: CC-BY-4.0
 - Linux x86_64：`Familiweave_0.1.1_amd64.AppImage` / `.deb`
 - `SHA256SUMS.txt` 校验所有产物
 
-> v0.1.2 是改名前的仅 Linux/Windows **未签名** tag 构建；macOS Developer ID 签名/公证与 Windows Authenticode 仍待完成。v0.1.1 归档早于 storage v2、BCI 容错、关系拓扑与 LSM-0 工作。体验最新原型请构建 main；改名后的 v0.1.3 尚未发布。
+> v0.1.4 是仅 Linux/Windows 的 **未签名** AGPL-3.0-or-later tag 构建，本版本尚无 macOS 资产。v0.1.1 归档早于 storage v2、BCI 容错、关系拓扑与 LSM-0 工作。研究原型，不用于临床。
 
 macOS 为 ad-hoc 签名、未公证；Windows/Linux 未签名。研究原型，不用于临床。
 

@@ -23,7 +23,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Download
 
-The latest public tag is [v0.1.2](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.2), published under the former Familiweave name (Linux/Windows only, unsigned; macOS signing is still pending). The archived [v0.1.1 release](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.1) remains the most complete downloadable archive. The renamed main branch is version 0.1.3 and is **not released yet**.
+The latest public tag is [v0.1.4](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.4), the first Tacitweave release under the layered AGPL-3.0-or-later license. It provides unsigned Linux and Windows builds; macOS signing is still pending. The archived [v0.1.1 release](https://github.com/haeliotang/tacitweave/releases/tag/v0.1.1) remains the most complete downloadable archive.
 
 Archived v0.1.1 assets (former name):
 
@@ -32,7 +32,7 @@ Archived v0.1.1 assets (former name):
 - Linux x86_64: `Familiweave_0.1.1_amd64.AppImage` / `.deb`
 - `SHA256SUMS.txt` for every artifact
 
-> v0.1.2 is a Linux/Windows **unsigned** tag build published before the rename. The v0.1.1 archive predates the storage-v2, BCI resilience, topology and LSM-0 work. Build `main` for the newest prototype; a renamed v0.1.3 is not released yet. Research prototype, not for clinical use.
+> v0.1.4 is a Linux/Windows **unsigned** AGPL-3.0-or-later tag build. There is no macOS asset in this release yet. The v0.1.1 archive predates the storage-v2, BCI resilience, topology and LSM-0 work. Research prototype, not for clinical use.
 
 Tacitweave is a public research project initiated by **Inceptless** about pre-verbal experience and optional local BCI signals.
 
