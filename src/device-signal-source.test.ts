@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { grantLocalSignalConsent } from './somatic-signal'
 import { isLocalBridgeUrl, parseBridgePacket, reconnectDelay, WebSocketSignalSource } from './device-signal-source'

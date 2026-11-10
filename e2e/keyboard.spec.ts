@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: Apache-2.0
 import { expect, test } from '@playwright/test'
 
 test('field nodes are keyboard-selectable and controls expose focus styles', async ({ page }) => {

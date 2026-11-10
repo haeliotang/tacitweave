@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # LSM-0 precision simulation
 
 日期：2026-11-07。状态：可执行审计工具；不是功效计算，也不是研究结果。

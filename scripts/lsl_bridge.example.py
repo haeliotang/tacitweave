@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """Minimal local LSL -> WebSocket bridge for the BCI-2 panel.
 
 This is a reference example, not tested against hardware. It requires:

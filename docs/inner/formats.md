@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 内在体验的形式
 
 日期：2026-11-01。状态：方向说明；只有“相遇”形式有可运行原型。本文明确 Tacitweave 不把“75 秒相遇”当作唯一产品形式。

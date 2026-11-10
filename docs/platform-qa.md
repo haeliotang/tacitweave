@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Desktop platform QA
 
 日期：2026-11-03。状态：macOS 已本机启动并截图；Windows/Linux 已在 CI 中完成当前 main 的构建与启动 smoke test。

@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 意识、潜意识与可塑性：对 Tacitweave 的文献启发
 
 日期：2026-11-06。状态：文献调研与项目定位建议，不是临床或理论定论。

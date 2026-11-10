@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Release signing and notarization
 
 日期：2026-11-06，更新 2026-11-07。状态：本机可用 Developer ID 签名，但公证凭据尚未配置；Windows 证书尚未配置；v0.1.2 已以未签名 Linux/Windows 资产发布（资产名仍为 Familiweave）；v0.1.3（Tacitweave 改名版）暂不发布，等 macOS 公证与 Windows 签名就绪后再发签名版。逐步操作见 [signing-setup.md](signing-setup.md) 和 [macOS signed workflow](../.github/workflows/macos-signed.yml)。

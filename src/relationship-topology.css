@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 /* Longitudinal comparison view for user-authored relationship triggers.
    Self-contained paper/ink styles that sit next to src/shell.css without
    editing it. The Lead can mount the section inside the shell as-is. */

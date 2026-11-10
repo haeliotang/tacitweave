@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Research capture schema (v1)
 
 日期：2026-11-07。状态：schema + 文档；尚未接入采集 UI。

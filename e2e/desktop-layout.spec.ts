@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: Apache-2.0
 import { expect, test } from '@playwright/test'
 
 test('three-pane shell and symbolic space fit the minimum desktop window', async ({ page }) => {

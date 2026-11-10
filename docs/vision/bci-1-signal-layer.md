@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # BCI-1：设备无关的信号层与 LSL 模拟器
 
 日期：2026-11-01。状态：本地原型。无真实硬件、无 LSL 依赖、无神经数据。

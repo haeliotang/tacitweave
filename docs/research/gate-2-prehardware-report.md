@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Gate 2 pre-hardware acceptance report
 
 日期：2026-11-07。状态：**PARTIAL — CORRECTIONS APPLIED; RE-REVIEW REQUIRED**。

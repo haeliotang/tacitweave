@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # LSM-0 evaluation protocol
 
 日期：2026-11-01。状态：协议草案；未招募、未采集、未训练、未获伦理批准。

@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { buildReplayPackets, parseReplaySamples, type ReplaySample } from './bci3-replay'
 import { createSignalSession } from './signal-session'
 import { dedupeSignalSamples } from './signal-source'

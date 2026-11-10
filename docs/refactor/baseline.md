@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # R0 构建基线
 
 日期：2026-11-06。命令：`pnpm build && pnpm measure:build`。

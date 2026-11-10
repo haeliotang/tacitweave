@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: Apache-2.0
 import { defineConfig } from '@playwright/test'
 
 export default defineConfig({

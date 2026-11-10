@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { invoke } from '@tauri-apps/api/core'
 import { isTauriRuntime } from './host'
 import { clearEncryptedState, clearLegacyAppData, clearLocalFiles, loadEncryptedState, saveEncryptedState } from './host'

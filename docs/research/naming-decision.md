@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 命名决策：保留 `+ weave` 格式
 
 日期：2026-11-06。状态：**已确认 Tacitweave；改名迁移进行中。**

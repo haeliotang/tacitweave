@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
 import { createAppLockRecord } from './app-lock'
 import { decryptLocalSnapshot, deriveDataKey, encryptLocalSnapshot, isEncryptedLocalState } from './encrypted-store'

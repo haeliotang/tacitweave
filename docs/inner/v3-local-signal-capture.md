@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # v3：可选的本机声音测量
 
 日期：2026-11-01。状态：本地原型，单模态（麦克风音量/停顿）。

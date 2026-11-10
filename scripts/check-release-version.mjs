@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { readFile } from 'node:fs/promises'
 
 const expectedTag = process.argv[2] ?? process.env.GITHUB_REF_NAME

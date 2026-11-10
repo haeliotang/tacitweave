@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 从 v0 到 LSM / 关系拓扑
 
 日期：2026-11-01。状态：方向文档，未实现。本文把“潜意识拓扑与重塑系统”的愿景拆成可验证阶段，避免把隐喻当成已成立的技术能力。

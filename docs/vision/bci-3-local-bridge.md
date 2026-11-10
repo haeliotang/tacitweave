@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # BCI-3 本机桥接
 
 日期：2026-11-01。状态：协议实现与鉴权已落地；真实设备未验收。

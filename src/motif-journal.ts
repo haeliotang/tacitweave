@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { isSomaticCapture, type SomaticCapture } from './somatic'
 import { isSignalConsent, isVoiceTrace, type MotifSignals } from './somatic-signal'
 

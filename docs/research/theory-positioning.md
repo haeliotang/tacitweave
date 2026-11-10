@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Theory positioning
 
 日期：2026-11-06。状态：项目内部理论定位；不是临床或意识理论定论。

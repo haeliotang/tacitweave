@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 // Local-only browser measurement. Requires `pnpm dev` and a Chrome instance
 // started with --remote-debugging-port=9222.
 const cdp = 'http://127.0.0.1:9222'

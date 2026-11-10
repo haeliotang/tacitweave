@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { CapturedRenderer, validateCaptured } from './captured-renderer'
 import { SymbolicRenderer, validateSymbolic } from './symbolic-renderer'
 import { worldRenderers, type WorldRendererProps } from './world-renderer'

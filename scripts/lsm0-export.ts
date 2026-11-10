@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 /**
  * Convert a local-dataset-v2 JSON export into LSM-0 session JSON.
  * Offline only; no network, no consent inference, no clinical claim.

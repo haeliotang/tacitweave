@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process'
 import WebSocket from 'ws'

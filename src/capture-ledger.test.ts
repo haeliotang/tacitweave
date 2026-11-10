@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
 import { addCaptureProvenance, captureStorageKey, clearCaptureProvenance, loadCaptureProvenance, removeCaptureProvenance, saveCaptureProvenance } from './capture-ledger'
 import type { CaptureProvenance } from './capture'

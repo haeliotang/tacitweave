@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { formatPrecisionReport, simulatePrecision } from '../src/lsm0-precision'

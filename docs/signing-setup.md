@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Signing setup: Apple and Windows
 
 日期：2026-11-04。本文是操作指南，不包含任何证书或私钥。

@@ -1,4 +1,6 @@
 #!/bin/sh
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Local ad-hoc signing only; this does NOT notarize the app and is not suitable
 # for distribution. Use a Developer ID identity + notarytool for real releases.
 set -eu

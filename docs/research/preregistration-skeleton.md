@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Preregistration skeleton — LSM-0
 
 日期：2026-11-07。状态：骨架；**尚未提交任何注册平台**。

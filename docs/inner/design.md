@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 内在景观：方向说明
 
 日期：2026-11-01。状态：方向已确立，渲染器与入口仍在开发。本文定义 Tacitweave 从“缺席关系”转向“象征空间”后的产品原则；不声称任何心理疗效，也不读取或解释潜意识。

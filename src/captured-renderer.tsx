@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { captureIssue } from './capture'
 import { useLanguage } from './i18n'
 import type { Encounter } from './encounter'

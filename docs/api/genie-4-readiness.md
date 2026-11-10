@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Genie 4 API 开放检查清单
 
 日期：2026-11-01。范围：在等待 Genie 4 API / Project Genie 访问期间，记录真正接入前必须确认的事项。当前项目不调用任何 Genie 服务；`genie4` 渲染器保持 `requires_api_access`。
