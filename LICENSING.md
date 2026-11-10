@@ -33,7 +33,7 @@ If a file is ambiguous, it is treated as `AGPL-3.0-or-later` until reviewed.
 | `0.1.3` | packaged but untagged/unreleased; built before this licensing change | Apache-2.0 |
 | Future releases from this branch | `license/agpl-split` licensing change commit | layered AGPL-3.0-or-later / Apache-2.0 / CC-BY-4.0 / brand |
 
-`0.1.3` is intentionally not assigned a new license here. The founder will
+`0.1.3` is intentionally not assigned a new license here. Inceptless will
 decide whether to publish the existing Apache-2.0 package or rebuild an AGPL
 package from the new branch.
 

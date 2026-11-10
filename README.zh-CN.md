@@ -387,4 +387,4 @@ Tacitweave 采用分层许可：应用与运行时为 AGPL-3.0-or-later，契约
 
 ## 13. 发起方
 
-Tacitweave 由 **Inceptless 公司**发起。
+Tacitweave 由 **Inceptless** 发起。
