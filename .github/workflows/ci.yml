@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 name: Symbolic space checks
 
 on:
@@ -27,7 +29,29 @@ jobs:
       - run: pnpm sil:test
       - run: pnpm lsm0:precision --replicates 50 --bootstrap 50
       - run: pnpm build
+        env:
+          VITE_SOURCE_COMMIT: ${{ github.sha }}
 
+
+  licenses:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: fsfe/reuse-action@v5
+      - uses: taiki-e/install-action@cargo-deny
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm license:js
+      - run: cargo deny --manifest-path rust/Cargo.toml check licenses
+      - run: cargo deny --manifest-path apps/desktop/src-tauri/Cargo.toml check licenses
 
   e2e:
     name: Browser E2E
@@ -71,4 +95,6 @@ jobs:
             libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev patchelf
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+        env:
+          VITE_SOURCE_COMMIT: ${{ github.sha }}
       - run: cargo test --manifest-path apps/desktop/src-tauri/Cargo.toml --locked
