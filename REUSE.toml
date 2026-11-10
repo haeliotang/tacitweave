@@ -23,7 +23,6 @@ SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = [
-  "docs/evaluation/experiment-log.example.json",
   "docs/assets/desktop-shell-dark-en.png",
   "docs/assets/desktop-shell-en.png",
   "docs/assets/desktop-shell.png",
@@ -36,6 +35,11 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "apps/desktop/src-tauri/icons/**"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "LicenseRef-Inceptless-Brand"
+
+[[annotations]]
+path = "docs/evaluation/experiment-log.example.json"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
 path = "CLA.md"

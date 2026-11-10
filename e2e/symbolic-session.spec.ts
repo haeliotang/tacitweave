@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
-// SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { expect, test } from '@playwright/test'
 
 test('records symbolic agency choices and allows explicit retraction', async ({ page }) => {
