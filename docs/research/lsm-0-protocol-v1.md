@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # LSM-0 protocol v1（审阅稿）
 
 日期：2026-11-07。状态：**内部审阅稿；尚未伦理批准、尚未预注册、尚无参与者数据。**

@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 name: Signed macOS build
 
 on:
@@ -83,6 +85,7 @@ jobs:
         shell: bash
         env:
           CARGO_PROFILE_RELEASE_STRIP: none
+          VITE_SOURCE_COMMIT: ${{ github.sha }}
         run: |
           cd apps/desktop
           ../../node_modules/.bin/tauri build --bundles app

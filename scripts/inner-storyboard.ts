@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { innerPlan, innerSpace, innerStoryboardMarkdown, type InnerFeeling } from '../src/inner'
 
 const args = process.argv.slice(2)

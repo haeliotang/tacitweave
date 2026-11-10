@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { useEffect, useRef, useState } from 'react'
 import { grantLocalSignalConsent } from './somatic-signal'
 import { WebSocketSignalSource, type DeviceSourceState } from './device-signal-source'

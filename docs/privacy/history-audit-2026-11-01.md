@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Git 历史大文件与音频审计
 
 日期：2026-11-01。范围：当前仓库所有可达提交（`git rev-list --objects --all`）。

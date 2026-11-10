@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Gate 2A — OpenBCI Cyton 非人体台架计划
 
 日期：2026-11-07

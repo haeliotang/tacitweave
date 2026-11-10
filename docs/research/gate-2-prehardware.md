@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Gate 2 pre-hardware hardening
 
 日期：2026-11-07。状态：真实设备接入前的工程里程碑。逐项证据见 [gate-2-prehardware-report.md](gate-2-prehardware-report.md)。

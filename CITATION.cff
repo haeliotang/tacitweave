@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+cff-version: 1.2.0
+message: "If you use Tacitweave in research, cite this repository and the exact version or commit."
+title: Tacitweave
+type: software
+authors:
+  - name: Inceptless
+    email: support@inceptless.com
+repository-code: "https://github.com/haeliotang/tacitweave"
+license: AGPL-3.0-or-later

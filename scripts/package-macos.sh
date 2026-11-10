@@ -1,4 +1,6 @@
 #!/bin/sh
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Build, strip, ad-hoc sign and zip the macOS app for local distribution.
 # This is still NOT a Developer ID signature or notarization.
 set -eu

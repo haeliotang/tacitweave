@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Auto-update plan
 
 日期：2026-11-04。状态：已实现显式更新检查；**完整自动下载/安装尚未启用 updater**，没有提交 updater 私钥。

@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Project review — 2026-11-07
 
 Scope: Tacitweave at `5265b28` + handoff commit `43a70c0`; remediation applied 2026-11-07, workspace `/Users/hao/Documents/tacitweave`.

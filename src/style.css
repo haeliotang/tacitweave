@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 * { box-sizing: border-box }
 body { margin: 0; background: #f5f2e9; color: #292d29; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif }
 button, textarea { font: inherit }

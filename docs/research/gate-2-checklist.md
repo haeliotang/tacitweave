@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Gate 2A/2B checklist
 
 日期：2026-11-07。状态：可执行检查清单；真实设备接入前先跑 SIL。

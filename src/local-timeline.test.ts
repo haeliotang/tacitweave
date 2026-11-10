@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
 import type { LocalDataset } from './local-dataset'
 import { buildLocalTimeline, exportLocalTimeline } from './local-timeline'

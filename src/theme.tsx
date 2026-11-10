@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type Theme = 'light' | 'dark'

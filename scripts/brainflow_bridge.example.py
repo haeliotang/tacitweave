@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """Reference BrainFlow / OpenBCI -> JSONL adapter for scripts/bci3-bridge.ts.
 
 This is an example, not a hardware validation. It requires:

@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 /* Desktop shell: warm paper, three panes, quiet borders. */
 html, body, #root { height: 100% }
 body { overflow: hidden; background: #f3f0e7; color: #2b2d29 }

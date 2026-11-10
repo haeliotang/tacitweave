@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 核心重构与性能计划
 
 日期：2026-11-01。状态：完成（本地验证范围）。目标：后续开发只基于当前内在景观核心，并让性能可测量、可回归。

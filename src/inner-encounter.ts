@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Encounter } from './encounter'
 import { innerPlan, innerPlanFromCapture, innerSpace, type InnerFeeling, type InnerFormat } from './inner'
 import type { SomaticCapture } from './somatic'

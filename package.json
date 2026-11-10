@@ -31,7 +31,8 @@
     "bci:replay": "tsx scripts/bci3-replay.ts",
     "sil:test": "tsx scripts/sil-harness.ts",
     "sil:report": "tsx scripts/sil-harness.ts --out artifacts/sil-report.json",
-    "lsm0:precision": "tsx scripts/lsm0-precision.ts"
+    "lsm0:precision": "tsx scripts/lsm0-precision.ts",
+    "license:js": "node scripts/check-js-licenses.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.4",
@@ -53,7 +54,7 @@
     "vitest": "^4.1.12",
     "ws": "^8.22.1"
   },
-  "license": "Apache-2.0",
+  "license": "AGPL-3.0-or-later",
   "pnpm": {
     "overrides": {
       "source-map-js": "1.2.2"

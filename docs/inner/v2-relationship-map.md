@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # v2：关系触发点地图（用户自述版）
 
 日期：2026-11-01。状态：本地原型已实现。

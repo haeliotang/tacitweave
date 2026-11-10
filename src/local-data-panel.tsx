@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { useRef, useState } from 'react'
 import { localDatasetFromSnapshot, parseLocalDataset, type LocalSnapshot } from './local-dataset'
 import { exportLocalTimeline } from './local-timeline'

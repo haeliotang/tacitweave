@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 下一阶段研究里程碑（Gate 1–4）
 
 日期：2026-11-07。状态：采纳并细化；不是伦理批准，也不是临床方案。

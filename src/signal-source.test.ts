@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
 import { grantLocalSignalConsent } from './somatic-signal'
 import { dedupeSignalSamples, mergeSignalTraces, reconcileSignalSamples, SimulatedSignalSource, summarizeTimeline, traceToTimeline, type SignalTrace } from './signal-source'

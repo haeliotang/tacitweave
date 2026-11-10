@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import { addFieldLink, clampFieldPosition, fieldNodeKey, removeFieldLink, resetFieldPositions, setFieldPosition, type FieldLayout, type FieldLens, type FieldRange } from './field'
 import { regions } from './somatic'

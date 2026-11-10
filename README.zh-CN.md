@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Tacitweave
 
 [English](README.md) | **中文**
@@ -377,10 +381,10 @@ GitHub Actions 的 `Desktop builds` workflow 会构建 Windows NSIS 与 Linux Ap
 
 ## 12. 许可证
 
-Apache License 2.0。Copyright 2026 Inceptless。见 [LICENSE](LICENSE)。
+Tacitweave 采用分层许可：应用与运行时为 AGPL-3.0-or-later，契约层为 Apache-2.0，文档为 CC-BY-4.0，品牌资产除外。Copyright 2026 Inceptless。见 [LICENSING.md](LICENSING.md)。
 
 历史大文件与音频审计见 [docs/privacy/history-audit-2026-11-01.md](docs/privacy/history-audit-2026-11-01.md)。
 
 ## 13. 发起方
 
-Tacitweave 由 **Inceptless 公司**发起。
+Tacitweave 由 **Inceptless** 发起。

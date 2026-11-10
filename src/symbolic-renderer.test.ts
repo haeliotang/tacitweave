@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
 import { demoInnerEncounter, demoInnerSpaceEncounter } from './inner-encounter'
 import { symbolicPhase, validateSymbolic } from './symbolic-renderer'

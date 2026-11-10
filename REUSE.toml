@@ -1,0 +1,96 @@
+version = 1
+
+[[annotations]]
+path = "LICENSE"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = [
+  "package.json",
+  "pnpm-lock.yaml",
+  "tsconfig.json",
+  "apps/desktop/package.json",
+  "apps/desktop/src-tauri/Cargo.lock",
+  "apps/desktop/src-tauri/Entitlements.plist",
+  "apps/desktop/src-tauri/capabilities/default.json",
+  "apps/desktop/src-tauri/tauri.conf.json",
+  "rust/Cargo.lock",
+  "NOTICE",
+]
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = [
+  "docs/assets/desktop-shell-dark-en.png",
+  "docs/assets/desktop-shell-en.png",
+  "docs/assets/desktop-shell.png",
+  "docs/assets/desktop-tauri-dark.png",
+]
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "apps/desktop/src-tauri/icons/**"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "LicenseRef-Inceptless-Brand"
+
+[[annotations]]
+path = "docs/evaluation/experiment-log.example.json"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "CLA.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = [
+  "dist/**",
+  "test-results/**",
+  "playwright-report/**",
+  "blob-report/**",
+]
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Files whose header parser did not recognise the otherwise-present SPDX header.
+# Declared explicitly so `reuse lint` remains reproducible.
+[[annotations]]
+path = [
+  ".env.example",
+  ".gitignore",
+  "apps/desktop/src-tauri/.gitignore",
+  "src/i18n.tsx",
+]
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = [
+  "README.zh-CN.md",
+  "docs/api/genie-4-readiness.md",
+  "docs/evaluation/experiments.md",
+  "docs/inner/v0-somatic-capture.md",
+  "docs/inner/v2-relationship-map.md",
+  "docs/inner/v3-local-signal-capture.md",
+  "docs/privacy/history-audit-2026-11-01.md",
+  "docs/refactor/baseline.md",
+  "docs/refactor/plan.md",
+  "docs/release-signing.md",
+  "docs/research/gate-2-checklist.md",
+  "docs/research/gate-2a-cyton-bench-plan.md",
+  "docs/research/lsm-0-evaluation.md",
+  "docs/research/lsm-0-protocol-v1.md",
+  "docs/research/naming-decision.md",
+  "docs/research/next-milestones.md",
+  "docs/research/theory-positioning.md",
+  "docs/research/theory-to-project-plan.md",
+  "docs/signing-setup.md",
+  "docs/updater-plan.md",
+  "docs/vision/bci-open-source-landscape.md",
+]
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

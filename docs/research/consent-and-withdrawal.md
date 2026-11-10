@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Consent and withdrawal
 
 日期：2026-11-01。状态：本机原型；研究用正式同意尚未开始。

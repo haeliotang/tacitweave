@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { useId, useMemo, useState } from 'react'
 import { useLanguage, type Language } from './i18n'
 import { responses, type RelationshipTrigger } from './relationship'

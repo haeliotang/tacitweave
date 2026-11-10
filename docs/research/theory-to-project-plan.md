@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 从意识/潜意识文献到项目改动：开发方案
 
 日期：2026-11-06。状态：方案先行，分批落地。

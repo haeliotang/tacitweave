@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { useState } from 'react'
 import { breaths, regions, sensations, type BreathState, type SomaticRegion, type SomaticSensation } from './somatic'
 import { exportRelationshipTriggers, responses, summarizeRelationshipTriggers, type RelationshipInput, type RelationshipResponse, type RelationshipSummary, type RelationshipTrigger } from './relationship'

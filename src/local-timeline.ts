@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import type { LocalDataset } from './local-dataset'
 import type { SignalSample, SignalTimeline } from './signal-source'
 

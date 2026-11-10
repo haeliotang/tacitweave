@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { z } from 'zod'
 
 // No network calls live here. This only describes what a future Genie 4 adapter

@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # BCI 开源生态调研（Neuralink 与可参考项目）
 
 日期：2026-11-01。范围：公开网络与 GitHub 检索；不包含未公开的 Neuralink 内部代码、临床数据或 N1 固件。本文是技术方向调研，不是医疗、监管或投资建议。

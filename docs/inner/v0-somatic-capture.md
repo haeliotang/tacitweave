@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # v0：躯体地图 + 意象碎片
 
 日期：2026-11-01。状态：本地原型已实现。

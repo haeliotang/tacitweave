@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 桌面外壳：Tauri 2 + 三栏工作台
 
 日期：2026-11-01。状态：外壳与前端已搭建；Tauri Rust 已通过 `cargo check`，并在完整宿主权限下成功启动窗口。打包与正式签名/公证尚未验收。

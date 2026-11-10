@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Device signal identity contract (v1)
 
 日期：2026-11-07。状态：SIL 契约；HIL 尚未验证。

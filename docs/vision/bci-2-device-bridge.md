@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # BCI-2：本机设备桥接
 
 日期：2026-11-01。状态：桥接契约与 UI 已实现；真实硬件/LSL 桥接尚未验收。

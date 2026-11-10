@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 世界模型验证实验与评分表
 
 日期：2026-11-01。用途：Genie 4 API / Project Genie 访问开放后，按同一口径记录 6 个生成实验，避免用单次演示代替验证。实验不要求真实逝者资料，全部使用合成记忆与合成参考帧。

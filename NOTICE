@@ -1,0 +1,15 @@
+Tacitweave
+Copyright 2026 Inceptless <support@inceptless.com>
+
+Source code, applications, runtime, services, build and operations files are
+licensed under AGPL-3.0-or-later, except where a file or path says otherwise.
+
+The only Apache-2.0 file currently is
+`docs/evaluation/experiment-log.example.json`; all other application and runtime
+code is AGPL-3.0-or-later. Documentation is licensed under CC-BY-4.0.
+Third-party vendored code and assets keep their own licenses.
+
+Tacitweave names, logos, icons and Inceptless marks are excluded from these
+licenses under LicenseRef-Inceptless-Brand. See LICENSING.md.
+
+Third-party build data: caniuse-lite, CC-BY-4.0, Copyright 2014-present Ben Briggs and contributors; used by browserslist at build time.

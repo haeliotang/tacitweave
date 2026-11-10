@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import type { CaptureProvenance } from './capture'
 import type { InnerPlan } from './inner'
 import type { EpisodePlan } from './episode-plan'

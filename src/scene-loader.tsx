@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { Component, Suspense, type ReactNode } from 'react'
 import type { Encounter, SymbolicAgencyEvent } from './encounter'
 import { worldRenderers } from './world-renderer'

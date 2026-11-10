@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 /**
  * One-time migration from the former Familiweave localStorage namespace.
  * Keep these legacy strings here only; the rest of the app uses Tacitweave keys.

@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 export type SomaticRegion = 'head' | 'jaw' | 'throat' | 'shoulders' | 'chest' | 'stomach' | 'back' | 'hands' | 'legs'
 
 export type SomaticSensation = 'pressure' | 'heaviness' | 'hollowness' | 'tightness' | 'tingling' | 'heat' | 'cold' | 'numbness'

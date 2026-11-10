@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { breaths, fragments, regions, sensations } from './somatic'
 import { exportMotifs, motifDisplayName, type MotifEntry } from './motif-journal'
 import { useLanguage, type Language } from './i18n'

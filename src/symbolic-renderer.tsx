@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { useEffect, useState } from 'react'
 import type { InnerAction } from './inner'
 import type { Encounter } from './encounter'

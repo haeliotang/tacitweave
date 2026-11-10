@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # 内在景观：实验与安全评估
 
 日期：2026-11-01。用于 symbolic 渲染器与 Genie 内在场景验证；不是临床量表，不用于诊断。

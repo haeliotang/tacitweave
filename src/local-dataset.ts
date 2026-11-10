@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { isMotifEntry, loadMotifs, motifStorageKey, type MotifEntry, type StorageLike } from './motif-journal'
 import { isRelationshipTrigger, loadRelationshipTriggers, relationshipStorageKey, type RelationshipStorageLike, type RelationshipTrigger } from './relationship'
 import { clearFieldLayout, emptyFieldLayout, fieldStorageKey, isFieldLayout, loadFieldLayout, type FieldLayout } from './field'

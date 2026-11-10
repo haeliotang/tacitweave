@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 use rusqlite::Connection;
 use serde::Serialize;
 use serde_json::{Value, json};
