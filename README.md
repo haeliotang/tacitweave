@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 # Tacitweave
 
 [中文](README.zh-CN.md) | **English**
@@ -378,7 +382,7 @@ The current artifact is ad-hoc signed for local validation; Developer ID signing
 
 ## 12. License
 
-Apache License 2.0. Copyright 2026 Inceptless. See [LICENSE](LICENSE).
+Tacitweave uses layered licensing: AGPL-3.0-or-later for the application and runtime, Apache-2.0 for contract surfaces, CC-BY-4.0 for documentation, and separate terms for brand assets. Copyright 2026 Inceptless. See [LICENSING.md](LICENSING.md).
 
 Historical large-file and audio audit: [docs/privacy/history-audit-2026-11-01.md](docs/privacy/history-audit-2026-11-01.md).
 
