@@ -53,7 +53,7 @@ Questions: support@inceptless.com.
 
 ## Contributor terms
 
-Contributions require the Inceptless Contributor License Agreement. The CLA is
-currently a draft for legal review; until version 1.0 is effective, external
-contributions are not merged. See [CLA.md](CLA.md) and
+Contributions require the Inceptless Contributor License Agreement (CLA 1.0).
+Sign at https://cla-assistant.io/haeliotang/tacitweave. Pull requests are merged
+only after the CLA check (`license/cla`) passes. See [CLA.md](CLA.md) and
 [CONTRIBUTING.md](CONTRIBUTING.md).

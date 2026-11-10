@@ -12,6 +12,5 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## CLA
 
-- [ ] I have signed, or will sign before merge, the Inceptless CLA.
-      Signing link: `TODO(maintainer)`.
-      External contributions are not merged until CLA 1.0 is effective.
+- [ ] I have signed the Inceptless CLA: https://cla-assistant.io/haeliotang/tacitweave
+      Pull requests are merged only after the CLA check (`license/cla`) passes.

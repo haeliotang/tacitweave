@@ -15,20 +15,15 @@ Every contribution must be made under the [Inceptless CLA](CLA.md). Signing
 once covers every open-source project initiated by Inceptless that refers to
 the same agreement.
 
-- CLA signing tool: `TODO(maintainer)` — the maintainer will add the signing
-  link after installing the CLA service.
-- Until CLA version 1.0 is final and effective, **external contributions are
-  not merged**.
+- Sign the CLA at https://cla-assistant.io/haeliotang/tacitweave.
+- Pull requests are merged only after the CLA check (`license/cla`) passes.
 - Do not add `Signed-off-by` lines as a substitute for the CLA.
 - If you are contributing on behalf of an employer or another legal entity,
   follow the entity-signing process in the CLA.
 
-The CLA is a draft for legal review. Do not treat this file or the CLA as legal
-advice.
-
 ## Before opening a pull request
 
-1. Sign the CLA through the link above once it is available.
+1. Sign the CLA through the link above before opening a pull request.
 2. Keep the change focused and describe the user-visible effect.
 3. Run the relevant local checks.
 4. Update documentation when behaviour or licensing changes.
