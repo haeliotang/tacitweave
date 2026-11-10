@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { lazy, Suspense, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Encounter, SymbolicAgencyEvent } from './encounter'
 import { createInnerCaptureEncounter } from './inner-encounter'
@@ -8,6 +10,7 @@ import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipI
 import { clearActiveEncryption, clearLocalSnapshot, disableLocalEncryption, enableLocalEncryption, hasEncryptedLocalState, loadLocalSnapshot, recoverEncryptedSnapshot, saveLocalSnapshot, unlockLocalSnapshot } from './local-store'
 import type { LocalSnapshot } from './local-dataset'
 import { useLanguage, type Language } from './i18n'
+import { sourceUrl } from './source-link'
 import { useTheme } from './theme'
 import { appLockStorageKey, createAppLockRecord, loadAppLockRecord, loadLockout, lockoutRemainingMs, registerFailedAttempt, saveAppLockRecord, saveLockout, verifyAppLock, type AppLockRecord, type LockoutState } from './app-lock'
 
@@ -573,6 +576,12 @@ export function DesktopShell() {
                   <p className="card-label">{t('研究工具')}</p>
                   <p className="muted">{t('可选信号与设备桥接；研究导出在本机数据中。')}</p>
                   <div className="actions"><button type="button" className="quiet" onClick={() => setView('research')}>{t('打开研究工具')}</button></div>
+                </div>
+                <div className="paper-card host-card">
+                  <p className="card-label">{t('源码')}</p>
+                  <p className="muted">{t('运行版本的源代码。')}</p>
+                  <p className="muted">{t('许可')}：{t('GNU Affero 通用公共许可证第 3 版或更高版本')}</p>
+                  <div className="actions"><a className="quiet" href={sourceUrl} target="_blank" rel="noreferrer">{t('查看源码')}</a></div>
                 </div>
                 <Suspense fallback={null}><UpdatePanel currentVersion={host?.app_version ?? '0.1.3'} /></Suspense>
                 <Suspense fallback={null}><AppLockSettings enabled={Boolean(lockRecord)} autoLockMs={autoLockMs} onAutoLockChange={updateAutoLock} onEnable={enableAppLock} onDisable={disableAppLock} onLock={lockNow} /></Suspense>

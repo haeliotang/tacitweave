@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type Language = 'zh' | 'en'
@@ -10,6 +12,11 @@ const en: Record<string, string> = {
   '关系瞬间': 'Relationship moments',
   '可选信号': 'Optional signals',
   '设置': 'Settings',
+  '源码': 'Source',
+  '许可': 'License',
+  'GNU Affero 通用公共许可证第 3 版或更高版本': 'GNU Affero General Public License v3.0 or later',
+  '运行版本的源代码。': 'Source code for this running version.',
+  '查看源码': 'View source',
   '来源标记': 'Origin',
   '硬件': 'hardware',
   '未验证': 'unverified',
