@@ -34,8 +34,8 @@ the same agreement.
 Unless a file or path says otherwise:
 
 - application, runtime, build and operations code is `AGPL-3.0-or-later`;
-- contract types, schemas, test vectors and conformance fixtures are
-  `Apache-2.0`;
+- the example data fixture `docs/evaluation/experiment-log.example.json` is
+  `Apache-2.0` (the only Apache-2.0 file currently);
 - documentation is `CC-BY-4.0`;
 - brand assets are `LicenseRef-Inceptless-Brand`.
 

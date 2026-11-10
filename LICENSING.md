@@ -6,14 +6,16 @@ SPDX-License-Identifier: CC-BY-4.0
 # Licensing
 
 Tacitweave uses a layered license model. The application, runtime and
-operations code are copyleft; the contract surface remains permissive so that
-other implementations can interoperate without adopting this codebase.
+operations code are copyleft. The only permissive Apache-2.0 file currently is
+`docs/evaluation/experiment-log.example.json`, an example data fixture; all
+other application/runtime code is AGPL-3.0-or-later and documentation is
+CC-BY-4.0.
 
 ## Layers
 
 | Path / component | SPDX license | Reason |
 | --- | --- | --- |
-| `src/` (except contract-only fixtures), `apps/desktop/`, `rust/`, `deploy/`, `scripts/`, `index.html`, frontend build configuration | `AGPL-3.0-or-later` | Application and runtime code; default for anything not clearly contract-only. |
+| `src/`, `apps/desktop/`, `rust/`, `deploy/`, `scripts/`, `index.html`, frontend build configuration | `AGPL-3.0-or-later` | Application and runtime code; default for anything not clearly contract-only. |
 | `e2e/`, `playwright.config.ts` | `AGPL-3.0-or-later` | Application-specific UI tests, not an independent contract/conformance suite. |
 | `docs/evaluation/experiment-log.example.json` | `Apache-2.0` | Example data fixture intended for independent implementation and tooling. |
 | `docs/`, `README.md`, `README.zh-CN.md`, `LICENSING.md` | `CC-BY-4.0` | Prose documentation and design material. |
