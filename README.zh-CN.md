@@ -2,6 +2,10 @@
 SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 SPDX-License-Identifier: CC-BY-4.0
 -->
+<p align="center">
+  <img src="docs/assets/tacitweave-mono.svg" alt="Tacitweave — 在语言之前" width="120">
+</p>
+
 # Tacitweave
 
 [English](README.md) | **中文**
