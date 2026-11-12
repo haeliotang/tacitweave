@@ -32,7 +32,10 @@ SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
-path = "docs/assets/tacitweave-mono.svg"
+path = [
+  "docs/assets/tacitweave-mono.svg",
+  "docs/assets/tacitweave-mono-dark.svg",
+]
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "LicenseRef-Inceptless-Brand"
 

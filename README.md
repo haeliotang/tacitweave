@@ -3,7 +3,10 @@ SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 <p align="center">
-  <img src="docs/assets/tacitweave-mono.svg" alt="Tacitweave — Before words" width="120">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/tacitweave-mono-dark.svg">
+    <img src="docs/assets/tacitweave-mono.svg" alt="Tacitweave — Before words" width="120">
+  </picture>
 </p>
 
 # Tacitweave
