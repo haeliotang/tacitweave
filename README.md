@@ -129,12 +129,18 @@ The capture becomes an `InnerPlan`, then a 75-second encounter or 180-second spa
 
 ### 2.4 BCI signal layer
 
-- **BCI-1**: device-agnostic `SignalSource`, LSL-style simulator, event timeline
-- **BCI-2**: localhost-only WebSocket bridge for `hello/sample/samples` JSON
-- No implant, no neural decoding, no clinical claims
-- References open ecosystems: OpenBCI, BrainFlow, LSL, MNE. Neuralink’s public repo is mainly the data platform `datarepo`, not an N1 SDK
+- **BCI-1**: device-agnostic `SignalSource`, LSL-style simulator, local event timeline.
+- **BCI-3**: localhost-only WebSocket bridge with token auth, source provenance
+  (`origin`, `devicePseudonym`, `adapterVersion`), reconnect handling and
+  duplicate/identity checks.
+- No implant, no neural decoding, no clinical claims.
+- References open ecosystems: OpenBCI, BrainFlow, LSL and MNE. Neuralink's public
+  repo is mainly the data platform `datarepo`, not an N1 SDK.
 
-See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md), [BCI-1](docs/vision/bci-1-signal-layer.md) and [BCI-2](docs/vision/bci-2-device-bridge.md).
+See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md),
+[BCI-1](docs/vision/bci-1-signal-layer.md),
+[BCI-3](docs/vision/bci-3-local-bridge.md) and
+[device identity contract](docs/research/device-identity-contract.md).
 
 ### 2.5 Local encryption, app lock and portable backups
 
@@ -153,39 +159,39 @@ See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md), [BCI-
 | v3 voice summary | 8s volume/pause; explicit consent; no raw audio; session summary in SQLite |
 | Field | Fragment juxtaposition, relationship nodes, perspective switch, timeline, drag/zoom, user links, time filter, demo field |
 | BCI-1 | Signal source contract, simulator, local event timeline |
-| BCI-2 | Local WebSocket device bridge contract + token auth |
+| BCI-3 | Local WebSocket bridge: token auth, provenance, reconnect and identity checks; no hardware validation |
 | Desktop shell | Tauri 2 + Rust; SQLite; app-data-only file API (not an OS sandbox) |
 | Theme | Light / dark theme |
-| App lock | Local PIN + AES-GCM encrypted snapshot; configurable idle auto-lock (5 min default), 5-attempt/30s PIN lockout; not system lock |
-| Cross-platform | Windows NSIS / Linux AppImage+DEB builds; current-main CI startup smoke passing |
+| App lock | Local PIN + AES-GCM encrypted snapshot; configurable idle auto-lock, 5-attempt/30s PIN lockout; not system lock |
+| Cross-platform | v0.1.4 Linux AppImage/DEB and Windows NSIS, unsigned; macOS signed build pending |
 | Bilingual | Chinese / English UI switch |
 | Data | Local SQLite or browser localStorage; plaintext/encrypted backup export, import, delete; record provenance and signal-session summaries. Deletion includes legacy keys, local-files and old app-data dirs; SQLite uses secure_delete + VACUUM (not a forensic full-disk guarantee) |
 | Update check | Explicit GitHub Releases check; no auto-download |
 | Accessibility | WCAG A/AA in light/dark themes (structure + contrast) via E2E |
-| Relationship topology | 30/90-day longitudinal comparison of user-authored triggers; no partner inference |
+| Relationship topology | 30/90-day longitudinal comparison of user-authored moments; no partner inference |
 | Signal resilience | Local bridge reconnect/backoff, jitter/gap health, deterministic replay and explicit session retraction |
-| LSM-0 baseline | Offline deterministic evaluation CLI plus local-dataset export; no clinical claims |
+| LSM-0 baseline | Offline deterministic evaluation, dataset export and precision simulation; no empirical data and no clinical claims |
+| Licensing / contribution | Layered AGPL/Apache/CC-BY/brand; CLA 1.0; PRs require the `license/cla` check |
 
 Currently **not** implemented:
 
-- real BCI hardware validation
-- an LSM model
+- real BCI hardware validation and measurement reliability
+- an empirical or trained LSM model
 - automatic relationship inference
 - diagnosis, therapy or memory recovery
 - clinical or human-efficacy evidence
 
 ### 3.1 Engineering status
 
-As of the latest `main`:
+As of v0.1.4 on `main`:
 
-- 141 Vitest unit/integration tests
-- 21 Playwright browser E2E scenarios
-- 6 Rust host tests
+- **177** Vitest unit/integration tests
+- **24** Playwright browser E2E scenarios
+- **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
-- main JS bundle about 312 KB, with heavy views lazy-loaded
-- macOS app bundle about 10.45 MiB before packaging; `pnpm package:macos` strips to about 8.4 MiB / ~3.4 MB zip, ad-hoc signed
-- Linux/Windows release builds plus startup smoke in CI
-- GitHub Actions checks: Symbolic space, Rust operational and Browser E2E
+- main JS bundle about **312 KB**, with heavy views lazy-loaded
+- v0.1.4 release: **unsigned** Linux AppImage/DEB + Windows NSIS; no macOS asset yet
+- CI: Symbolic space, Rust operational, Browser E2E and License checks
 
 The project remains a research prototype; no clinical or real-BCI-hardware claim is made.
 
@@ -214,49 +220,104 @@ WorldRenderer (symbolic today; Genie 4 later)
 - `InnerPlan`: symbolic director layer.
 - `EpisodePlan`: persisted plan envelope.
 - `WorldRenderer`: renderer seam; local symbolic today.
-- `SomaticSignalSource` / `SignalTrace`: device-agnostic signal seam.
+- `SignalSource` / `SignalTrace`: device-agnostic signal seam with source provenance.
 - `CaptureProvenance`: provenance for non-deterministic captures.
 - Tauri Rust host: application-level app-data file API, SQLite, packaging; the frontend uses `invoke`. This is not an OS sandbox.
 
-## 5. BCI and LSM: the aggressive path
+## 5. Vision: from symbolic interface to a measurable pre-verbal layer
 
-Tacitweave is not “a chatbot with a few physiological sensors”. Our long-term claim is more aggressive:
+Tacitweave is not a decoder, a diagnostic tool or a therapist chatbot. It is an
+instrument for holding pre-verbal experience in a form the person can enter,
+leave and interpret for themselves. The long-term ambition is to connect that
+instrument to a rigorous measurement program.
 
-> **The next mental-health infrastructure will not be a better-speaking LLM. It will be a BCI-native interface to the pre-verbal layer.**
+### 5.1 The thesis
 
-BCI is therefore not an optional accessory. It is the long-term core research spine. We have no implant, no neural decoding, and we do not dress experimental signals up as “reading the deep subconscious”. But the roadmap actively moves toward that direction instead of stopping at self-report.
+Language is excellent at explicit knowledge and poor at carrying some bodily,
+imaginal and relational experience. A model trained only on tokens can imitate
+the vocabulary of feeling without access to the structure underneath it.
 
-### 5.1 North Star
+Tacitweave starts one step earlier:
 
-**From BCI to LSM:**
+> Can the body, image and relational moment be given a stable symbolic form —
+> without the system telling the person what it means?
 
-1. build device-agnostic somatic/signal capture;
-2. on consented longitudinal data, learn a cross-modal mapping between signal, imagery and relationship;
-3. drive symbolic-space parameters from that mapping, not from language interpretation;
-4. make relationship topology a first-class product, not a side panel;
-5. end with a **exit-able, deletable, self-interpreted** BCI-native symbolic interface.
+The second question is scientific, not rhetorical:
 
-### 5.2 Stages
+> Can signals recorded under consent be shown to carry reproducible,
+> within-person information about that experience?
 
-| Stage | Goal | Status |
+The interface and the measurement program are related, but they are not the
+same claim. A moving symbolic experience is not evidence of a stable
+pre-verbal psychological structure.
+
+### 5.2 Three layers
+
+1. **Experience layer** — somatic capture, image fragments, relationship
+   moments, a 75s encounter or 180s space. The user remains the interpreter.
+2. **Measurement layer** — local session records, optional signals, timestamps,
+   provenance, quality flags, retraction and deletion. This layer exists to
+   make claims checkable, not to make the experience more impressive.
+3. **Evidence layer** — preregistered within-person analysis, negative and
+   positive controls, measurement reliability, construct validity and
+   independent replication. No layer is allowed to borrow authority from
+   another.
+
+### 5.3 What success would look like
+
+- **As an instrument**: a person can enter, leave, retract and delete without
+  needing to explain themselves; the interface does not diagnose or interpret.
+- **As a measurement system**: signal features and self-report can be shown to
+  be reliable, and their within-person association can be tested against
+  controls that preserve time structure.
+- **As a research program**: a preregistered pilot can be independently
+  replicated, including negative results; construct validity is treated as a
+  separate requirement.
+- **As a product**: only after the evidence survives replication does an
+  adaptive or signal-driven symbolic space become defensible.
+
+### 5.4 Evidence ladder
+
+| Gate | Question | Current status |
 | --- | --- | --- |
-| BCI-0 | Local voice summary + self-report + imagery | Implemented |
-| BCI-1 | Device-agnostic `SignalSource` + LSL simulator + timeline | Implemented |
-| BCI-2 | Local WebSocket device bridge | Contract/UI; no hardware validation |
-| BCI-3 | Local bridge protocol + token auth implemented; real OpenBCI/BrainFlow/LSL capture not validated |
-| LSM-0 | Cross-modal alignment: predict symbolic parameters from somatic/signal data, without emotion diagnosis | Not started; next research target |
-| LSM-1 | Longitudinal fragment + relationship-topology personal model | Not started |
-| LSM-2 | Closed-loop adaptive symbolic space, always overridable and exit-able | Not started |
+| Gate 1 | Can the app be installed, used, exited and deleted credibly? | v0.1.4 released under AGPL; signing/platform QA still incomplete |
+| Gate 2A | Does a real device pipeline preserve time, identity, gaps and recovery? | SIL and bridge tests exist; real-device HIL not done |
+| Gate 2B | Are sensor features and extraction reliable? | No real measurement-reliability evidence |
+| Gate 3A | Does a preregistered pilot show within-person association beyond controls? | Protocol, preregistration skeleton and tooling only; no ethics approval or participants |
+| Gate 3B | Does an independent sample replicate the result? | Not started |
+| Gate 4A | Does a longitudinal model predict out of sample? | Not started |
+| Gate 4B | Can a closed-loop symbolic space be safe and exit-able? | Not started; requires a new ethics and safety gate |
 
-### 5.3 We refuse to stop at prototype
+The scientific boundary is deliberate:
 
-- We will not wait for a Neuralink N1 SDK; we build on OpenBCI, BrainFlow, LSL and the open ecosystem.
-- We will not treat self-report as the endpoint; consented data must test whether signal and self-report correspond stably.
-- We will not leave relationship topology as a static list; it must become a longitudinal structure that can be reviewed, compared and deleted.
-- We will not fake LSM with an LLM; LSM is a somatic–imagery–relationship mapping, not next-token probability.
-- If we cannot show a reproducible signal–self-report correspondence, we must say the path failed instead of marketing “deep-subconscious reading”.
+> **Measurement validity is not construct validity.** A reproducible
+> signal–self-report association would still be only an association between
+> observable variables. It would not by itself prove a “pre-verbal
+> psychological structure”.
 
-**LSM is still a research agenda, not a trained model — but it is the active target of this project, not decorative futurism.**
+### 5.5 Non-negotiable principles
+
+- **No decoder claim**: no reading of the subconscious, no neural decoding, no
+  diagnosis.
+- **Local by default**: no account, no server-side personal data and no sync.
+- **User sovereignty**: enter, leave, retract, export and delete are product
+  primitives, not settings.
+- **Measurement before personalization**: do not adapt the symbolic space from
+  signals until the measurement chain is reliable.
+- **Failure must be publishable**: if the association does not replicate, the
+  project says so rather than renaming the failure as “individual differences”.
+
+### 5.6 What we refuse
+
+- We will not wait for an N1 SDK; we build on OpenBCI, BrainFlow, LSL and the
+  open ecosystem.
+- We will not treat self-report as the endpoint; consented data must test
+  whether signal and self-report correspond stably.
+- We will not leave relationship topology as a static list; it must become a
+  reviewable, comparable, deletable longitudinal structure.
+- We will not fake LSM with an LLM; LSM is a somatic–imagery–relationship
+  measurement program, not next-token probability.
+- We will not dress experimental signals up as “deep-subconscious reading”.
 
 ## 6. How we handle the deep subconscious
 
@@ -284,7 +345,8 @@ Therefore:
 
 ## 8. Run locally
 
-Requirements: Node.js 22+, pnpm 10, Rust toolchain; on macOS, Tauri needs Xcode Command Line Tools.
+Requirements: Node.js 22+, pnpm 10 and a Rust toolchain (the desktop crate
+declares Rust 1.90+). On macOS, Tauri needs Xcode Command Line Tools.
 
 ```sh
 pnpm install
@@ -299,11 +361,15 @@ pnpm test
 pnpm build
 pnpm e2e:install            # first-time Chromium install
 pnpm e2e                    # Playwright browser E2E
-pnpm bci:bridge --origin simulated  # local BCI-3 WebSocket bridge; real adapters use --origin hardware
-pnpm bci:replay --in sample.jsonl  # replay samples with jitter/drop for testing
+pnpm sil:test               # deterministic SIL failure scenarios
+pnpm lsm0:precision --replicates 50 --bootstrap 50
+reuse lint                  # REUSE/SPDX compliance
+pnpm license:js             # JS dependency license check
+pnpm bci:bridge --origin simulated  # local BCI-3 bridge; real adapters use --origin hardware
+pnpm bci:replay --in sample.jsonl   # replay samples with jitter/drop for testing
 pnpm check:symbolic-path
 pnpm rust:test
-cargo test --manifest-path apps/desktop/src-tauri/Cargo.toml
+cargo test --manifest-path apps/desktop/src-tauri/Cargo.toml --locked
 ```
 
 Optional tools:
@@ -318,7 +384,7 @@ Desktop build:
 
 ```sh
 pnpm tauri:build --bundles app
-# or build + strip + ad-hoc sign + zip:
+# or build + strip + ad-hoc sign + zip locally:
 pnpm package:macos
 ```
 
@@ -329,9 +395,10 @@ pnpm tauri:build --bundles appimage,deb   # Linux
 pnpm tauri:build --bundles nsis           # Windows
 ```
 
-The GitHub Actions `Desktop builds` workflow produces Windows NSIS and Linux AppImage/DEB assets and attaches them to the matching tag release. macOS distribution still needs Developer ID signing; Windows/Linux artifacts are unsigned.
-
-The current artifact is ad-hoc signed for local validation; Developer ID signing and notarization need an Apple certificate.
+The GitHub Actions `Desktop builds` workflow produces Windows NSIS and Linux
+AppImage/DEB assets for a release tag. The v0.1.4 release is **unsigned** and
+has no macOS asset; Developer ID signing/notarization remains pending. Do not
+describe an unsigned local build as signed or notarized.
 
 ## Data and research documentation
 
@@ -358,7 +425,11 @@ The current artifact is ad-hoc signed for local validation; Developer ID signing
 - [`src/relationship.ts`](src/relationship.ts) — user-authored relationship moments.
 - [`src/field.ts`](src/field.ts) — field positions, user links and validation.
 - [`src/signal-session.ts`](src/signal-session.ts) — signal sessions with summaries only.
-- [`src/signal-source.ts`](src/signal-source.ts) — BCI signal layer and LSL simulator.
+- [`src/signal-source.ts`](src/signal-source.ts) — BCI signal layer, provenance and LSL simulator.
+- [`src/research-capture.ts`](src/research-capture.ts) — research-only device/clock/consent/retention schema.
+- [`src/lsm0-precision.ts`](src/lsm0-precision.ts) — precision simulation and interval diagnostics.
+- [`src/sil-harness.ts`](src/sil-harness.ts) — deterministic software-in-the-loop failure harness.
+- [`src/source-link.ts`](src/source-link.ts) — AGPL source link with build-time commit.
 - [`src/device-signal-source.ts`](src/device-signal-source.ts) — local device bridge.
 - [`src/local-store.ts`](src/local-store.ts) — SQLite/localStorage snapshot.
 - [`src/desktop-shell.tsx`](src/desktop-shell.tsx) — three-pane workspace.
@@ -369,27 +440,48 @@ The current artifact is ad-hoc signed for local validation; Developer ID signing
 - [`scripts/bci3-bridge.ts`](scripts/bci3-bridge.ts) — local token-authenticated WebSocket bridge.
 - [`docs/desktop-shell.md`](docs/desktop-shell.md) — desktop shell, SQLite and signing.
 
-## 10. Roadmap: from BCI seam to LSM
+## 10. Roadmap
 
-- **Now**: v0–v3 local prototype, BCI-1/2 seams, Tauri shell, SQLite, bilingual UI.
-- **Next main push**: real OpenBCI/BrainFlow/LSL capture; real-device voice validation; move signal summaries into SQLite; visual QA of the Tauri window.
-- **Research stage**: train LSM-0 cross-modal alignment on small, consented, deletable samples; first prove a reproducible signal–imagery–relationship structure, then discuss productisation.
-- **Product stage**: relationship topology becomes a first-class entrance; closed-loop symbolic space adapts from signals, but the user always keeps interpretation and exit.
-- **Long term**: a BCI-native interface to the pre-verbal layer; clinical work only with ethics and clinical partners.
+- **Now**: v0.1.4 is the first AGPL-layered release. The local symbolic
+  instrument, Tauri shell, SQLite lifecycle, BCI-3 local bridge, SIL/research
+  tooling and licensing/CLA gates are in place.
+- **Next engineering**: complete Gate 1 platform/signing work; run the
+  non-human Gate 2A bench (Cyton/BrainFlow or equivalent), with clock,
+  provenance, recovery and identity evidence. No human data.
+- **Next research**: freeze the measurement protocol only after Gate 2B; obtain
+  ethics approval and preregister Gate 3A. Test within-person associations
+  against controls that preserve temporal structure.
+- **Replication**: only after the pilot, run Gate 3B in an independent sample
+  with a stated generalization boundary.
+- **Long term**: LSM-1 longitudinal models and LSM-2 adaptive symbolic space
+  only after replication. Clinical work only with ethics, clinical partners and
+  regulatory review.
 
-**Aggressive is not the same as overclaiming.** This path only holds on real, consented, deletable data; without evidence, LSM is not written up as an existing capability.
+**Aggressive is not the same as overclaiming.** The path holds only on real,
+consented, deletable data; without evidence, LSM is not written up as an
+existing capability.
 
 ## 11. Research questions
 
 1. Can a symbolic space give form to pre-verbal experience without interpreting it?
 2. When people use the body and image choice instead of words, do they get closer to “what cannot be said”?
 3. Does a 75s / 180s boundary make people safer, or more distant?
-4. Is there a stable, reproducible correspondence between multimodal signals and self-report?
-5. Who is this for — and who should not use it?
+4. Are the signal and self-report measures reliable enough to support a within-person test?
+5. Does a preregistered signal–self-report association exceed controls that preserve temporal structure?
+6. Does any symbolic representation add reproducible predictive value beyond the full signal and self-report baseline?
+7. Does the result independently replicate, with a clearly stated generalization boundary?
+8. Who is this for — and who should not use it?
 
 ## 12. License
 
-Tacitweave uses layered licensing: AGPL-3.0-or-later for the application and runtime, CC-BY-4.0 for documentation, and separate terms for brand assets. The only Apache-2.0 file currently is `docs/evaluation/experiment-log.example.json`. Copyright 2026 Inceptless. See [LICENSING.md](LICENSING.md).
+Tacitweave uses layered licensing: AGPL-3.0-or-later for the application and
+runtime, CC-BY-4.0 for documentation, and separate terms for brand assets. The
+only Apache-2.0 file currently is
+`docs/evaluation/experiment-log.example.json`. Copyright 2026 Inceptless. See
+[LICENSING.md](LICENSING.md).
+
+Contributions require the Inceptless CLA 1.0; PRs merge only after the
+`license/cla` check. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Historical large-file and audio audit: [docs/privacy/history-audit-2026-11-01.md](docs/privacy/history-audit-2026-11-01.md).
 
