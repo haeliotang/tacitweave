@@ -73,6 +73,12 @@ Read the full positioning and literature brief:
 - [LSM-0 protocol v1](docs/research/lsm-0-protocol-v1.md)
 - [Preregistration skeleton](docs/research/preregistration-skeleton.md)
 - [Research capture schema](docs/research/research-capture-schema.md)
+- [LSM-0 Public Data & Construct Validation Program](docs/research/lsm0-public-data-program.md)
+- [Representation contract v0.1](docs/research/representation-contract-v0.1.md)
+- [Construct validity matrix](docs/research/construct-validity-matrix.md)
+- [Public data reanalysis protocol](docs/research/public-data-reanalysis.md)
+- [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
+- [Research storage lifecycle](docs/research/research-storage-lifecycle.md)
 
 ## 1. Why BCI, not another chat box
 

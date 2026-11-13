@@ -74,6 +74,12 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [LSM-0 protocol v1](docs/research/lsm-0-protocol-v1.md)
 - [预注册骨架](docs/research/preregistration-skeleton.md)
 - [研究采集 schema](docs/research/research-capture-schema.md)
+- [LSM-0 公开数据与构念效度计划](docs/research/lsm0-public-data-program.md)
+- [表示契约 v0.1](docs/research/representation-contract-v0.1.md)
+- [构念效度矩阵](docs/research/construct-validity-matrix.md)
+- [公开数据复分析协议](docs/research/public-data-reanalysis.md)
+- [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
+- [研究存储生命周期](docs/research/research-storage-lifecycle.md)
 
 ## 1. 为什么是脑机接口，而不是又一个聊天框
 
