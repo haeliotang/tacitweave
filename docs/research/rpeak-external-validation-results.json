@@ -1,0 +1,6206 @@
+{
+  "version": "rpeak-external-validation-v1",
+  "tolerance_seconds": 0.15,
+  "records": {
+    "mitdb:100": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2273,
+      "ts": {
+        "tp": 2264,
+        "fn": 9,
+        "fp": 0,
+        "sensitivity": 0.9960404751429829,
+        "ppv": 1.0,
+        "f1": 0.9980163103372273,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2273,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.9991208791208791,
+        "f1": 0.9995602462620933,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:101": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1865,
+      "ts": {
+        "tp": 1862,
+        "fn": 3,
+        "fp": 4,
+        "sensitivity": 0.9983914209115281,
+        "ppv": 0.9978563772775991,
+        "f1": 0.99812382739212,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 1865,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.9967931587386424,
+        "f1": 0.9983940042826552,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:102": {
+      "lead": "MIT-BIH lead V5",
+      "fs": 360,
+      "annotations": 2187,
+      "ts": {
+        "tp": 1982,
+        "fn": 205,
+        "fp": 0,
+        "sensitivity": 0.9062642889803384,
+        "ppv": 1.0,
+        "f1": 0.9508275365795155,
+        "median_error_s": 0.013888888888888888,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2187,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.03888888888888889,
+        "p95_error_s": 0.1
+      }
+    },
+    "mitdb:103": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2084,
+      "ts": {
+        "tp": 2080,
+        "fn": 4,
+        "fp": 0,
+        "sensitivity": 0.9980806142034548,
+        "ppv": 1.0,
+        "f1": 0.9990393852065321,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2084,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.9990412272291467,
+        "f1": 0.9995203836930455,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:104": {
+      "lead": "MIT-BIH lead V5",
+      "fs": 360,
+      "annotations": 2229,
+      "ts": {
+        "tp": 700,
+        "fn": 1529,
+        "fp": 0,
+        "sensitivity": 0.31404217137729923,
+        "ppv": 1.0,
+        "f1": 0.4779788323659952,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2228,
+        "fn": 1,
+        "fp": 7,
+        "sensitivity": 0.9995513683266039,
+        "ppv": 0.9968680089485459,
+        "f1": 0.9982078853046595,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.10277777777777777
+      }
+    },
+    "mitdb:105": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2572,
+      "ts": {
+        "tp": 65,
+        "fn": 2507,
+        "fp": 10,
+        "sensitivity": 0.025272161741835147,
+        "ppv": 0.8666666666666667,
+        "f1": 0.04911220249338874,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.025
+      },
+      "scipy": {
+        "tp": 2564,
+        "fn": 8,
+        "fp": 86,
+        "sensitivity": 0.9968895800933126,
+        "ppv": 0.9675471698113207,
+        "f1": 0.9819992340099579,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:106": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2027,
+      "ts": {
+        "tp": 1747,
+        "fn": 280,
+        "fp": 1,
+        "sensitivity": 0.8618648248643315,
+        "ppv": 0.9994279176201373,
+        "f1": 0.9255629139072847,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2026,
+        "fn": 1,
+        "fp": 75,
+        "sensitivity": 0.9995066600888012,
+        "ppv": 0.9643027129938124,
+        "f1": 0.9815891472868217,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:107": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2137,
+      "ts": {
+        "tp": 2104,
+        "fn": 33,
+        "fp": 0,
+        "sensitivity": 0.9845577912962097,
+        "ppv": 1.0,
+        "f1": 0.9922188163169063,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2130,
+        "fn": 7,
+        "fp": 1,
+        "sensitivity": 0.9967243799719232,
+        "ppv": 0.999530736743313,
+        "f1": 0.9981255857544518,
+        "median_error_s": 0.005555555555555556,
+        "p95_error_s": 0.008333333333333333
+      }
+    },
+    "mitdb:108": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1763,
+      "ts": {
+        "tp": 1402,
+        "fn": 361,
+        "fp": 0,
+        "sensitivity": 0.7952353942144073,
+        "ppv": 1.0,
+        "f1": 0.8859399684044234,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 1756,
+        "fn": 7,
+        "fp": 25,
+        "sensitivity": 0.9960294951786727,
+        "ppv": 0.9859629421673217,
+        "f1": 0.9909706546275395,
+        "median_error_s": 0.005555555555555556,
+        "p95_error_s": 0.04722222222222222
+      }
+    },
+    "mitdb:109": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2532,
+      "ts": {
+        "tp": 2451,
+        "fn": 81,
+        "fp": 0,
+        "sensitivity": 0.9680094786729858,
+        "ppv": 1.0,
+        "f1": 0.983744732089103,
+        "median_error_s": 0.025,
+        "p95_error_s": 0.027777777777777776
+      },
+      "scipy": {
+        "tp": 2527,
+        "fn": 5,
+        "fp": 0,
+        "sensitivity": 0.9980252764612955,
+        "ppv": 1.0,
+        "f1": 0.9990116623838703,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:111": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2124,
+      "ts": {
+        "tp": 1899,
+        "fn": 225,
+        "fp": 0,
+        "sensitivity": 0.8940677966101694,
+        "ppv": 1.0,
+        "f1": 0.9440715883668904,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2123,
+        "fn": 1,
+        "fp": 1140,
+        "sensitivity": 0.9995291902071564,
+        "ppv": 0.6506282562059454,
+        "f1": 0.7881937998886207,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.03888888888888889
+      }
+    },
+    "mitdb:112": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2539,
+      "ts": {
+        "tp": 2539,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2539,
+        "fn": 0,
+        "fp": 22,
+        "sensitivity": 1.0,
+        "ppv": 0.9914096056228036,
+        "f1": 0.995686274509804,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:113": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1795,
+      "ts": {
+        "tp": 1795,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 1795,
+        "fn": 0,
+        "fp": 1782,
+        "sensitivity": 1.0,
+        "ppv": 0.5018171652222533,
+        "f1": 0.6682799702159344,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:114": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1879,
+      "ts": {
+        "tp": 1877,
+        "fn": 2,
+        "fp": 0,
+        "sensitivity": 0.9989356040447046,
+        "ppv": 1.0,
+        "f1": 0.9994675186368477,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 1879,
+        "fn": 0,
+        "fp": 35,
+        "sensitivity": 1.0,
+        "ppv": 0.9817136886102403,
+        "f1": 0.9907724756129712,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:115": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1953,
+      "ts": {
+        "tp": 1953,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.016666666666666666
+      },
+      "scipy": {
+        "tp": 1953,
+        "fn": 0,
+        "fp": 5,
+        "sensitivity": 1.0,
+        "ppv": 0.9974463738508682,
+        "f1": 0.998721554589619,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:116": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2412,
+      "ts": {
+        "tp": 2369,
+        "fn": 43,
+        "fp": 2,
+        "sensitivity": 0.9821724709784412,
+        "ppv": 0.9991564740615774,
+        "f1": 0.9905916788626385,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2390,
+        "fn": 22,
+        "fp": 3,
+        "sensitivity": 0.9908789386401327,
+        "ppv": 0.9987463435018805,
+        "f1": 0.9947970863683663,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:117": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1535,
+      "ts": {
+        "tp": 1535,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.008333333333333333,
+        "p95_error_s": 0.016666666666666666
+      },
+      "scipy": {
+        "tp": 1535,
+        "fn": 0,
+        "fp": 1493,
+        "sensitivity": 1.0,
+        "ppv": 0.5069352708058125,
+        "f1": 0.6728029804952882,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.03333333333333333
+      }
+    },
+    "mitdb:118": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2278,
+      "ts": {
+        "tp": 2278,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2278,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9995612110574813,
+        "f1": 0.999780557384244,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.044444444444444446
+      }
+    },
+    "mitdb:119": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1987,
+      "ts": {
+        "tp": 1987,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9994969818913481,
+        "f1": 0.999748427672956,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.05555555555555555
+      },
+      "scipy": {
+        "tp": 1987,
+        "fn": 0,
+        "fp": 341,
+        "sensitivity": 1.0,
+        "ppv": 0.8535223367697594,
+        "f1": 0.920973348783314,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.013888888888888888
+      }
+    },
+    "mitdb:121": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1863,
+      "ts": {
+        "tp": 1861,
+        "fn": 2,
+        "fp": 0,
+        "sensitivity": 0.9989264626945786,
+        "ppv": 1.0,
+        "f1": 0.9994629430719656,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.025
+      },
+      "scipy": {
+        "tp": 1862,
+        "fn": 1,
+        "fp": 1,
+        "sensitivity": 0.9994632313472893,
+        "ppv": 0.9994632313472893,
+        "f1": 0.9994632313472893,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:122": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2476,
+      "ts": {
+        "tp": 2476,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2476,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:123": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1518,
+      "ts": {
+        "tp": 1515,
+        "fn": 3,
+        "fp": 0,
+        "sensitivity": 0.9980237154150198,
+        "ppv": 1.0,
+        "f1": 0.9990108803165183,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 1518,
+        "fn": 0,
+        "fp": 1198,
+        "sensitivity": 1.0,
+        "ppv": 0.5589101620029455,
+        "f1": 0.7170524326877658,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:124": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1619,
+      "ts": {
+        "tp": 1600,
+        "fn": 19,
+        "fp": 0,
+        "sensitivity": 0.9882643607164917,
+        "ppv": 1.0,
+        "f1": 0.9940975458216837,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 1619,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.9987661937075879,
+        "f1": 0.9993827160493827,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:200": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2601,
+      "ts": {
+        "tp": 2592,
+        "fn": 9,
+        "fp": 0,
+        "sensitivity": 0.9965397923875432,
+        "ppv": 1.0,
+        "f1": 0.9982668977469671,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2598,
+        "fn": 3,
+        "fp": 2,
+        "sensitivity": 0.9988465974625144,
+        "ppv": 0.9992307692307693,
+        "f1": 0.9990386464141511,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:201": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1963,
+      "ts": {
+        "tp": 1896,
+        "fn": 67,
+        "fp": 0,
+        "sensitivity": 0.9658685685175752,
+        "ppv": 1.0,
+        "f1": 0.9826379891163514,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 1960,
+        "fn": 3,
+        "fp": 204,
+        "sensitivity": 0.9984717269485481,
+        "ppv": 0.9057301293900185,
+        "f1": 0.9498425006057669,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:202": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2136,
+      "ts": {
+        "tp": 2111,
+        "fn": 25,
+        "fp": 0,
+        "sensitivity": 0.9882958801498127,
+        "ppv": 1.0,
+        "f1": 0.9941134918766188,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2135,
+        "fn": 1,
+        "fp": 11,
+        "sensitivity": 0.9995318352059925,
+        "ppv": 0.9948741845293569,
+        "f1": 0.9971975712283979,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:203": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2980,
+      "ts": {
+        "tp": 1280,
+        "fn": 1700,
+        "fp": 7,
+        "sensitivity": 0.42953020134228187,
+        "ppv": 0.9945609945609946,
+        "f1": 0.5999531286618233,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2918,
+        "fn": 62,
+        "fp": 19,
+        "sensitivity": 0.9791946308724833,
+        "ppv": 0.9935308137555329,
+        "f1": 0.9863106303870205,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:205": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2656,
+      "ts": {
+        "tp": 2644,
+        "fn": 12,
+        "fp": 0,
+        "sensitivity": 0.9954819277108434,
+        "ppv": 1.0,
+        "f1": 0.9977358490566037,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2653,
+        "fn": 3,
+        "fp": 0,
+        "sensitivity": 0.9988704819277109,
+        "ppv": 1.0,
+        "f1": 0.9994349218308533,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:207": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1860,
+      "ts": {
+        "tp": 1692,
+        "fn": 168,
+        "fp": 35,
+        "sensitivity": 0.9096774193548387,
+        "ppv": 0.9797336421540244,
+        "f1": 0.9434067465848899,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 1855,
+        "fn": 5,
+        "fp": 306,
+        "sensitivity": 0.9973118279569892,
+        "ppv": 0.8583988894030541,
+        "f1": 0.9226560557075354,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:208": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2955,
+      "ts": {
+        "tp": 2519,
+        "fn": 436,
+        "fp": 2,
+        "sensitivity": 0.8524534686971236,
+        "ppv": 0.9992066640222134,
+        "f1": 0.9200146092037984,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.07222222222222222
+      },
+      "scipy": {
+        "tp": 2936,
+        "fn": 19,
+        "fp": 5,
+        "sensitivity": 0.993570219966159,
+        "ppv": 0.9982998979938796,
+        "f1": 0.9959294436906377,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.09722222222222222
+      }
+    },
+    "mitdb:209": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 3005,
+      "ts": {
+        "tp": 3005,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.016666666666666666
+      },
+      "scipy": {
+        "tp": 3005,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.9966832504145937,
+        "f1": 0.9983388704318937,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:210": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2650,
+      "ts": {
+        "tp": 2344,
+        "fn": 306,
+        "fp": 1,
+        "sensitivity": 0.8845283018867924,
+        "ppv": 0.9995735607675906,
+        "f1": 0.9385385385385385,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2638,
+        "fn": 12,
+        "fp": 7,
+        "sensitivity": 0.9954716981132076,
+        "ppv": 0.9973534971644612,
+        "f1": 0.9964117091595845,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:212": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2748,
+      "ts": {
+        "tp": 2748,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2748,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:213": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 3251,
+      "ts": {
+        "tp": 3243,
+        "fn": 8,
+        "fp": 0,
+        "sensitivity": 0.9975392187019378,
+        "ppv": 1.0,
+        "f1": 0.9987680936248845,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 3249,
+        "fn": 2,
+        "fp": 0,
+        "sensitivity": 0.9993848046754845,
+        "ppv": 1.0,
+        "f1": 0.9996923076923077,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.008333333333333333
+      }
+    },
+    "mitdb:214": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2262,
+      "ts": {
+        "tp": 2218,
+        "fn": 44,
+        "fp": 0,
+        "sensitivity": 0.9805481874447391,
+        "ppv": 1.0,
+        "f1": 0.9901785714285715,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2259,
+        "fn": 3,
+        "fp": 3,
+        "sensitivity": 0.9986737400530504,
+        "ppv": 0.9986737400530504,
+        "f1": 0.9986737400530504,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:215": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 3363,
+      "ts": {
+        "tp": 2986,
+        "fn": 377,
+        "fp": 0,
+        "sensitivity": 0.887897710377639,
+        "ppv": 1.0,
+        "f1": 0.9406205701685305,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 3363,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:217": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2208,
+      "ts": {
+        "tp": 2154,
+        "fn": 54,
+        "fp": 1,
+        "sensitivity": 0.9755434782608695,
+        "ppv": 0.9995359628770302,
+        "f1": 0.9873939949575979,
+        "median_error_s": 0.03333333333333333,
+        "p95_error_s": 0.03888888888888889
+      },
+      "scipy": {
+        "tp": 2202,
+        "fn": 6,
+        "fp": 2,
+        "sensitivity": 0.9972826086956522,
+        "ppv": 0.9990925589836661,
+        "f1": 0.9981867633726201,
+        "median_error_s": 0.011111111111111112,
+        "p95_error_s": 0.016666666666666666
+      }
+    },
+    "mitdb:219": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2154,
+      "ts": {
+        "tp": 2152,
+        "fn": 2,
+        "fp": 0,
+        "sensitivity": 0.9990714948932219,
+        "ppv": 1.0,
+        "f1": 0.9995355318160706,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2154,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.9986091794158554,
+        "f1": 0.9993041057759221,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:220": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2048,
+      "ts": {
+        "tp": 2048,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2048,
+        "fn": 0,
+        "fp": 84,
+        "sensitivity": 1.0,
+        "ppv": 0.9606003752345216,
+        "f1": 0.9799043062200957,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:221": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2427,
+      "ts": {
+        "tp": 2325,
+        "fn": 102,
+        "fp": 0,
+        "sensitivity": 0.957972805933251,
+        "ppv": 1.0,
+        "f1": 0.9785353535353535,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2427,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9995881383855024,
+        "f1": 0.9997940267765191,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:222": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2483,
+      "ts": {
+        "tp": 1390,
+        "fn": 1093,
+        "fp": 0,
+        "sensitivity": 0.5598066854611358,
+        "ppv": 1.0,
+        "f1": 0.7177898270074877,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2470,
+        "fn": 13,
+        "fp": 156,
+        "sensitivity": 0.9947643979057592,
+        "ppv": 0.9405940594059405,
+        "f1": 0.9669211195928753,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:223": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2605,
+      "ts": {
+        "tp": 2435,
+        "fn": 170,
+        "fp": 0,
+        "sensitivity": 0.9347408829174664,
+        "ppv": 1.0,
+        "f1": 0.9662698412698413,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2601,
+        "fn": 4,
+        "fp": 0,
+        "sensitivity": 0.9984644913627639,
+        "ppv": 1.0,
+        "f1": 0.9992316557817903,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:228": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2053,
+      "ts": {
+        "tp": 431,
+        "fn": 1622,
+        "fp": 0,
+        "sensitivity": 0.20993667803214808,
+        "ppv": 1.0,
+        "f1": 0.3470209339774557,
+        "median_error_s": 0.022222222222222223,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 2052,
+        "fn": 1,
+        "fp": 64,
+        "sensitivity": 0.9995129079396006,
+        "ppv": 0.9697542533081286,
+        "f1": 0.984408731110578,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:230": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2256,
+      "ts": {
+        "tp": 2256,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2256,
+        "fn": 0,
+        "fp": 14,
+        "sensitivity": 1.0,
+        "ppv": 0.9938325991189427,
+        "f1": 0.9969067609368095,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.005555555555555556
+      }
+    },
+    "mitdb:231": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1571,
+      "ts": {
+        "tp": 1571,
+        "fn": 0,
+        "fp": 0,
+        "sensitivity": 1.0,
+        "ppv": 1.0,
+        "f1": 1.0,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 1571,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9993638676844784,
+        "f1": 0.9996818326439707,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:232": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 1780,
+      "ts": {
+        "tp": 1772,
+        "fn": 8,
+        "fp": 0,
+        "sensitivity": 0.9955056179775281,
+        "ppv": 1.0,
+        "f1": 0.9977477477477478,
+        "median_error_s": 0.016666666666666666,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 1780,
+        "fn": 0,
+        "fp": 878,
+        "sensitivity": 1.0,
+        "ppv": 0.6696764484574869,
+        "f1": 0.8021631365479945,
+        "median_error_s": 0.002777777777777778,
+        "p95_error_s": 0.002777777777777778
+      }
+    },
+    "mitdb:233": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 3079,
+      "ts": {
+        "tp": 3061,
+        "fn": 18,
+        "fp": 0,
+        "sensitivity": 0.9941539460863917,
+        "ppv": 1.0,
+        "f1": 0.9970684039087948,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.022222222222222223
+      },
+      "scipy": {
+        "tp": 3076,
+        "fn": 3,
+        "fp": 0,
+        "sensitivity": 0.9990256576810653,
+        "ppv": 1.0,
+        "f1": 0.9995125913891145,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.008333333333333333
+      }
+    },
+    "mitdb:234": {
+      "lead": "MIT-BIH lead MLII",
+      "fs": 360,
+      "annotations": 2753,
+      "ts": {
+        "tp": 2750,
+        "fn": 3,
+        "fp": 0,
+        "sensitivity": 0.9989102796948783,
+        "ppv": 1.0,
+        "f1": 0.9994548428130111,
+        "median_error_s": 0.019444444444444445,
+        "p95_error_s": 0.019444444444444445
+      },
+      "scipy": {
+        "tp": 2752,
+        "fn": 1,
+        "fp": 0,
+        "sensitivity": 0.9996367598982928,
+        "ppv": 1.0,
+        "f1": 0.9998183469573115,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.0
+      }
+    },
+    "ludb:1": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 6,
+      "ts": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:2": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.6,
+        "f1": 0.75,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:3": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:4": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.008,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:5": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.3684210526315789,
+        "f1": 0.5384615384615384,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:6": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:7": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 5,
+        "sensitivity": 1.0,
+        "ppv": 0.6153846153846154,
+        "f1": 0.7619047619047619,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.108
+      }
+    },
+    "ludb:8": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.038,
+        "p95_error_s": 0.042
+      }
+    },
+    "ludb:9": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:10": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.4,
+        "f1": 0.5714285714285714,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:11": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.4,
+        "f1": 0.5714285714285714,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:12": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.3888888888888889,
+        "f1": 0.56,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:13": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.04,
+        "p95_error_s": 0.042
+      }
+    },
+    "ludb:14": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:15": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.032
+      }
+    },
+    "ludb:16": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 7,
+        "sensitivity": 1.0,
+        "ppv": 0.5882352941176471,
+        "f1": 0.7407407407407407,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:17": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.01,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 13,
+        "sensitivity": 1.0,
+        "ppv": 0.43478260869565216,
+        "f1": 0.6060606060606061,
+        "median_error_s": 0.01,
+        "p95_error_s": 0.016
+      }
+    },
+    "ludb:18": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7857142857142857,
+        "f1": 0.88,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7857142857142857,
+        "f1": 0.88,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:19": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:20": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:21": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:22": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.7333333333333333,
+        "f1": 0.8461538461538461,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:23": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.098
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.074
+      }
+    },
+    "ludb:24": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.01,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:25": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.3684210526315789,
+        "f1": 0.5384615384615384,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:26": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.008,
+        "p95_error_s": 0.01
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.014
+      }
+    },
+    "ludb:27": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:28": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:29": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:30": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.4117647058823529,
+        "f1": 0.5833333333333334,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:31": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:32": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:33": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:34": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.056
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.038,
+        "p95_error_s": 0.04
+      }
+    },
+    "ludb:35": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 20,
+      "ts": {
+        "tp": 20,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.9090909090909091,
+        "f1": 0.9523809523809523,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 20,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.9090909090909091,
+        "f1": 0.9523809523809523,
+        "median_error_s": 0.008,
+        "p95_error_s": 0.014
+      }
+    },
+    "ludb:36": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.028
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:37": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:38": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 15,
+      "ts": {
+        "tp": 15,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8823529411764706,
+        "f1": 0.9375,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 15,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8823529411764706,
+        "f1": 0.9375,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.044
+      }
+    },
+    "ludb:39": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:40": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:41": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 6,
+      "ts": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.6666666666666666,
+        "f1": 0.8,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.35294117647058826,
+        "f1": 0.5217391304347826,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:42": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:43": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.028
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.4444444444444444,
+        "f1": 0.6153846153846154,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:44": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:45": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.028,
+        "p95_error_s": 0.056
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.052,
+        "p95_error_s": 0.08
+      }
+    },
+    "ludb:46": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:47": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 6,
+      "ts": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.375,
+        "f1": 0.5454545454545454,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:48": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.3684210526315789,
+        "f1": 0.5384615384615384,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:49": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6363636363636364,
+        "f1": 0.7777777777777778,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:50": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.026,
+        "p95_error_s": 0.03
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6923076923076923,
+        "f1": 0.8181818181818182,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:51": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.03,
+        "p95_error_s": 0.034
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.056,
+        "p95_error_s": 0.06
+      }
+    },
+    "ludb:52": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6923076923076923,
+        "f1": 0.8181818181818182,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:53": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:54": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:55": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.008,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:56": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7692307692307693,
+        "f1": 0.8695652173913043,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:57": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:58": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:59": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 6,
+      "ts": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6,
+        "f1": 0.75,
+        "median_error_s": 0.028,
+        "p95_error_s": 0.03
+      },
+      "scipy": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.35294117647058826,
+        "f1": 0.5217391304347826,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:60": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.038,
+        "p95_error_s": 0.04
+      }
+    },
+    "ludb:61": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:62": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:63": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:64": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.47368421052631576,
+        "f1": 0.6428571428571429,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:65": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:66": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 6,
+      "ts": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.375,
+        "f1": 0.5454545454545454,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:67": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:68": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:69": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:70": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:71": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:72": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 13,
+        "sensitivity": 1.0,
+        "ppv": 0.38095238095238093,
+        "f1": 0.5517241379310345,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:73": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:74": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9,
+        "f1": 0.9473684210526315,
+        "median_error_s": 0.028,
+        "p95_error_s": 0.054
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.6,
+        "f1": 0.75,
+        "median_error_s": 0.05,
+        "p95_error_s": 0.072
+      }
+    },
+    "ludb:75": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 7,
+        "sensitivity": 1.0,
+        "ppv": 0.5625,
+        "f1": 0.72,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:76": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9166666666666666,
+        "f1": 0.9565217391304348,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9166666666666666,
+        "f1": 0.9565217391304348,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:77": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:78": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.4444444444444444,
+        "f1": 0.6153846153846154,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:79": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 9,
+        "sensitivity": 1.0,
+        "ppv": 0.47058823529411764,
+        "f1": 0.64,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:80": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:81": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:82": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.05,
+        "p95_error_s": 0.052
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.4117647058823529,
+        "f1": 0.5833333333333334,
+        "median_error_s": 0.03,
+        "p95_error_s": 0.032
+      }
+    },
+    "ludb:83": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 4,
+        "fn": 6,
+        "fp": 1,
+        "sensitivity": 0.4,
+        "ppv": 0.8,
+        "f1": 0.5333333333333333,
+        "median_error_s": 0.03,
+        "p95_error_s": 0.054
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7692307692307693,
+        "f1": 0.8695652173913043,
+        "median_error_s": 0.036,
+        "p95_error_s": 0.04
+      }
+    },
+    "ludb:84": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:85": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:86": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:87": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:88": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.032
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:89": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:90": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.076,
+        "p95_error_s": 0.102
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.05,
+        "p95_error_s": 0.076
+      }
+    },
+    "ludb:91": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7857142857142857,
+        "f1": 0.88,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7857142857142857,
+        "f1": 0.88,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:92": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 14,
+      "ts": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.8235294117647058,
+        "f1": 0.9032258064516129,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.8235294117647058,
+        "f1": 0.9032258064516129,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:93": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.054,
+        "p95_error_s": 0.114
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.06,
+        "p95_error_s": 0.09
+      }
+    },
+    "ludb:94": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.0
+      }
+    },
+    "ludb:95": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 8,
+        "fn": 1,
+        "fp": 2,
+        "sensitivity": 0.8888888888888888,
+        "ppv": 0.8,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.058,
+        "p95_error_s": 0.094
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.088
+      }
+    },
+    "ludb:96": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:97": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.036,
+        "p95_error_s": 0.038
+      }
+    },
+    "ludb:98": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:99": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:100": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 8,
+        "sensitivity": 1.0,
+        "ppv": 0.5294117647058824,
+        "f1": 0.6923076923076923,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:101": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:102": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:103": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 14,
+      "ts": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.875,
+        "f1": 0.9333333333333333,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:104": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.134,
+        "p95_error_s": 0.136
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.11,
+        "p95_error_s": 0.112
+      }
+    },
+    "ludb:105": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.028
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:106": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 8,
+        "fn": 4,
+        "fp": 2,
+        "sensitivity": 0.6666666666666666,
+        "ppv": 0.8,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:107": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6666666666666666,
+        "f1": 0.8,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:108": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 2,
+        "fp": 13,
+        "sensitivity": 0.8181818181818182,
+        "ppv": 0.4090909090909091,
+        "f1": 0.5454545454545454,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.036
+      }
+    },
+    "ludb:109": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 15,
+      "ts": {
+        "tp": 14,
+        "fn": 1,
+        "fp": 2,
+        "sensitivity": 0.9333333333333333,
+        "ppv": 0.875,
+        "f1": 0.9032258064516129,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 15,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8823529411764706,
+        "f1": 0.9375,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:110": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 1,
+        "fn": 12,
+        "fp": 0,
+        "sensitivity": 0.07692307692307693,
+        "ppv": 1.0,
+        "f1": 0.14285714285714285,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 7,
+        "sensitivity": 1.0,
+        "ppv": 0.65,
+        "f1": 0.7878787878787878,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:111": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.032,
+        "p95_error_s": 0.122
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.01,
+        "p95_error_s": 0.074
+      }
+    },
+    "ludb:112": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 14,
+      "ts": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.875,
+        "f1": 0.9333333333333333,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.014
+      },
+      "scipy": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.875,
+        "f1": 0.9333333333333333,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:113": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:114": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:115": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.012
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.01,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:116": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 9,
+        "sensitivity": 1.0,
+        "ppv": 0.5909090909090909,
+        "f1": 0.7428571428571429,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:117": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:118": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:119": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:120": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:121": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 15,
+      "ts": {
+        "tp": 15,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8823529411764706,
+        "f1": 0.9375,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.036
+      },
+      "scipy": {
+        "tp": 15,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8823529411764706,
+        "f1": 0.9375,
+        "median_error_s": 0.01,
+        "p95_error_s": 0.02
+      }
+    },
+    "ludb:122": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 5,
+        "sensitivity": 1.0,
+        "ppv": 0.6153846153846154,
+        "f1": 0.7619047619047619,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:123": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:124": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6363636363636364,
+        "f1": 0.7777777777777778,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6363636363636364,
+        "f1": 0.7777777777777778,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:125": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.06
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.04,
+        "p95_error_s": 0.09
+      }
+    },
+    "ludb:126": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.012
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.03,
+        "p95_error_s": 0.032
+      }
+    },
+    "ludb:127": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 4,
+      "ts": {
+        "tp": 4,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.024,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 4,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:128": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.3888888888888889,
+        "f1": 0.56,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:129": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:130": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.028
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7,
+        "f1": 0.8235294117647058,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:131": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:132": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:133": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:134": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 6,
+      "ts": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.008,
+        "p95_error_s": 0.01
+      },
+      "scipy": {
+        "tp": 6,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.35294117647058826,
+        "f1": 0.5217391304347826,
+        "median_error_s": 0.012,
+        "p95_error_s": 0.012
+      }
+    },
+    "ludb:135": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:136": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:137": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.42857142857142855,
+        "f1": 0.6,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:138": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.01
+      }
+    },
+    "ludb:139": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:140": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:141": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.024
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:142": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:143": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:144": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.006,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:145": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:146": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.42105263157894735,
+        "f1": 0.5925925925925926,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:147": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:148": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.45454545454545453,
+        "f1": 0.625,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:149": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:150": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:151": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:152": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 6,
+        "sensitivity": 1.0,
+        "ppv": 0.6,
+        "f1": 0.75,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:153": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:154": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:155": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.4,
+        "f1": 0.5714285714285714,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:156": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.3888888888888889,
+        "f1": 0.56,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:157": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.3684210526315789,
+        "f1": 0.5384615384615384,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:158": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 4,
+        "sensitivity": 1.0,
+        "ppv": 0.6666666666666666,
+        "f1": 0.8,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:159": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:160": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 5,
+      "ts": {
+        "tp": 5,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7142857142857143,
+        "f1": 0.8333333333333334,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 5,
+        "fn": 0,
+        "fp": 9,
+        "sensitivity": 1.0,
+        "ppv": 0.35714285714285715,
+        "f1": 0.5263157894736842,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:161": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:162": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:163": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:164": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.008,
+        "p95_error_s": 0.008
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.026,
+        "p95_error_s": 0.028
+      }
+    },
+    "ludb:165": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:166": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:167": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 3,
+        "sensitivity": 1.0,
+        "ppv": 0.75,
+        "f1": 0.8571428571428571,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:168": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.4,
+        "f1": 0.5714285714285714,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:169": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.4117647058823529,
+        "f1": 0.5833333333333334,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:170": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 5,
+        "sensitivity": 1.0,
+        "ppv": 0.5833333333333334,
+        "f1": 0.7368421052631579,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:171": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:172": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 7,
+      "ts": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.7777777777777778,
+        "f1": 0.875,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 7,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.3888888888888889,
+        "f1": 0.56,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:173": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:174": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 8,
+        "sensitivity": 1.0,
+        "ppv": 0.5,
+        "f1": 0.6666666666666666,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:175": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.45,
+        "f1": 0.6206896551724138,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:176": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:177": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:178": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:179": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:180": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:181": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:182": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:183": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:184": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.42857142857142855,
+        "f1": 0.6,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:185": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 13,
+      "ts": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 13,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8666666666666667,
+        "f1": 0.9285714285714286,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:186": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:187": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.02
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.45,
+        "f1": 0.6206896551724138,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:188": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 14,
+      "ts": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9333333333333333,
+        "f1": 0.9655172413793104,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 14,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.9333333333333333,
+        "f1": 0.9655172413793104,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:189": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 1,
+        "sensitivity": 1.0,
+        "ppv": 0.8888888888888888,
+        "f1": 0.9411764705882353,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 10,
+        "sensitivity": 1.0,
+        "ppv": 0.4444444444444444,
+        "f1": 0.6153846153846154,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:190": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 12,
+      "ts": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 12,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8571428571428571,
+        "f1": 0.9230769230769231,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:191": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 5,
+        "sensitivity": 1.0,
+        "ppv": 0.6153846153846154,
+        "f1": 0.7619047619047619,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.002
+      }
+    },
+    "ludb:192": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 7,
+        "sensitivity": 1.0,
+        "ppv": 0.5333333333333333,
+        "f1": 0.6956521739130435,
+        "median_error_s": 0.022,
+        "p95_error_s": 0.026
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 12,
+        "sensitivity": 1.0,
+        "ppv": 0.4,
+        "f1": 0.5714285714285714,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:193": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 5,
+        "sensitivity": 1.0,
+        "ppv": 0.6428571428571429,
+        "f1": 0.782608695652174,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:194": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:195": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:196": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 10,
+      "ts": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 10,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8333333333333334,
+        "f1": 0.9090909090909091,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.008
+      }
+    },
+    "ludb:197": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 11,
+      "ts": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.016,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 11,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8461538461538461,
+        "f1": 0.9166666666666666,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:198": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.02,
+        "p95_error_s": 0.022
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 11,
+        "sensitivity": 1.0,
+        "ppv": 0.42105263157894735,
+        "f1": 0.5925925925925926,
+        "median_error_s": 0.002,
+        "p95_error_s": 0.004
+      }
+    },
+    "ludb:199": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 8,
+      "ts": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.014,
+        "p95_error_s": 0.016
+      },
+      "scipy": {
+        "tp": 8,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8,
+        "f1": 0.8888888888888888,
+        "median_error_s": 0.004,
+        "p95_error_s": 0.006
+      }
+    },
+    "ludb:200": {
+      "lead": "LUDB lead ii",
+      "fs": 500,
+      "annotations": 9,
+      "ts": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 2,
+        "sensitivity": 1.0,
+        "ppv": 0.8181818181818182,
+        "f1": 0.9,
+        "median_error_s": 0.018,
+        "p95_error_s": 0.018
+      },
+      "scipy": {
+        "tp": 9,
+        "fn": 0,
+        "fp": 13,
+        "sensitivity": 1.0,
+        "ppv": 0.4090909090909091,
+        "f1": 0.5806451612903226,
+        "median_error_s": 0.0,
+        "p95_error_s": 0.002
+      }
+    }
+  }
+}

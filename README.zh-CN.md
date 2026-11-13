@@ -83,6 +83,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [QoL_Stress 导入检查](docs/research/qol-stress-import-check.md)
 - [QoL_Stress phase 阳性对照](docs/research/qol-phase-positive-control.md)
 - [ECG HRV 管线检查](docs/research/ecg-hrv-pipeline.md)
+- [R-peak 外部验证](docs/research/rpeak-external-validation-report.md)
 - [WESAD adapter 契约](docs/research/wesad-adapter.md)
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 区间方法审查](docs/research/lsm0-method-audit.md)

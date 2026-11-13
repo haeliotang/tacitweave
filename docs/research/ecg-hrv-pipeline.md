@@ -48,6 +48,11 @@ mean_sdnn_ms=107.7
 | EDA mean SCL | 60 | -0.673 | -0.017 | 30 | 30 |
 | STAI state anxiety | 66 | 3.227 | 3.000 | 43 | 12 |
 
+## 外部专家标注验证
+
+MIT-BIH + LUDB 的冻结协议验证已完成，**两套检测器均未通过**；见
+[R-peak external validation](rpeak-external-validation-report.md)。HRV 保持探索性、排除出主要分析。
+
 ## 独立 SciPy 检查
 
 `scripts/qol_hrv_verify.py` 用 SciPy `butter` + `find_peaks` 重新实现：

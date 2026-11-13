@@ -82,6 +82,7 @@ Read the full positioning and literature brief:
 - [QoL_Stress import check](docs/research/qol-stress-import-check.md)
 - [QoL_Stress phase positive control](docs/research/qol-phase-positive-control.md)
 - [ECG HRV pipeline check](docs/research/ecg-hrv-pipeline.md)
+- [R-peak external validation](docs/research/rpeak-external-validation-report.md)
 - [WESAD adapter contract](docs/research/wesad-adapter.md)
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 interval-method audit](docs/research/lsm0-method-audit.md)
