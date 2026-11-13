@@ -61,7 +61,8 @@ SPDX-License-Identifier: CC-BY-4.0
 Vitest: 194 passed
 Playwright E2E: 29 passed
 pnpm build: exit 0, main JS ~330 KB
-reuse lint: 262/262 compliant
+reuse lint: 263/263 compliant
+Rust: 8 desktop + 10 ops tests passed
 light + dark WCAG A/AA on main views
 English UI untranslated-token audit covers continuity/composer
 ```
