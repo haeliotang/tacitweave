@@ -76,4 +76,5 @@ pnpm evidence:verify --manifest bundle/manifest.json --root bundle
 ## 当前状态
 
 - schema + verifier + tests 已实现。
-- 尚未生成 CASE/QoL 正式 bundle manifest；下一步在数据临时目录生成并验证。
+- QoL_Stress bundle 已在本地生成并验证（见 [QoL evidence bundle](qol-evidence-bundle.md)）；原始数据未提交。
+- CASE bundle manifest 尚未生成。

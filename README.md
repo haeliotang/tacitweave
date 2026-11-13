@@ -86,6 +86,7 @@ Read the full positioning and literature brief:
 - [LSM-0 random-effects candidate](docs/research/lsm0-random-effects.md)
 - [Research storage lifecycle](docs/research/research-storage-lifecycle.md)
 - [Evidence manifest v1](docs/research/evidence-manifest.md)
+- [QoL_Stress evidence bundle](docs/research/qol-evidence-bundle.md)
 - [LSM-0 preregistration v0.1 draft](docs/research/lsm0-preregistration-v0.1.md)
 
 ## 1. Why BCI, not another chat box
