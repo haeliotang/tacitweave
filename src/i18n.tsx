@@ -99,6 +99,12 @@ const en: Record<string, string> = {
   '总览': 'Overview',
   '身体': 'Body',
   '意象': 'Imagery',
+  '光线': 'Light',
+  '稳定': 'Steady',
+  '低光': 'Low',
+  '强光': 'Hard',
+  '平光': 'Flat',
+
   '关系': 'Relationship',
   '片段': 'Fragment',
   '进入空间': 'Enter space',

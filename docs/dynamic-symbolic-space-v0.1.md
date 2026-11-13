@@ -45,6 +45,8 @@ Space Composer 还提供：
 
 意象：走廊、门、水、房屋、森林、车站、镜子、田野。
 
+光线：稳定、低光、强光、平光。
+
 形象：
 
 - 不需要形象
@@ -56,6 +58,7 @@ Space Composer 还提供：
 改变会立即反映在空间里，并记录：
 
 ```ts
+{ atSec, action: 'change', change: { field: 'light', value: 'low' } }
 { atSec, action: 'change', change: { field: 'motif', value: 'water' } }
 { atSec, action: 'change', change: { field: 'figure', value: 'animal' } }
 ```

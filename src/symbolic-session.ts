@@ -40,7 +40,7 @@ export function isSymbolicSession(value: unknown): value is SymbolicSession {
       && typeof event.atSec === 'number' && Number.isFinite(event.atSec) && event.atSec >= 0
       && typeof event.action === 'string' && actions.has(event.action)
       && (event.durationSec === undefined || (typeof event.durationSec === 'number' && Number.isFinite(event.durationSec) && event.durationSec > 0))
-      && (event.change === undefined || (event.change && typeof event.change === 'object' && (event.change.field === 'figure' || event.change.field === 'motif') && typeof event.change.value === 'string' && event.change.value.length > 0)))
+      && (event.change === undefined || (event.change && typeof event.change === 'object' && (event.change.field === 'figure' || event.change.field === 'motif' || event.change.field === 'light') && typeof event.change.value === 'string' && event.change.value.length > 0)))
 }
 
 export function createSymbolicSession(encounter: Encounter, now = new Date().toISOString(), id: string = crypto.randomUUID()): SymbolicSession {

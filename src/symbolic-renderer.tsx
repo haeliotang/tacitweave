@@ -32,6 +32,13 @@ export function symbolicPhase(seconds: number, duration = 75, format: 'encounter
   return 'leave'
 }
 
+const lightOptions = [
+  { value: 'steady', label: '稳定' },
+  { value: 'low', label: '低光' },
+  { value: 'hard', label: '强光' },
+  { value: 'flat', label: '平光' },
+]
+
 const motifOptions: Array<{ value: InnerMotif; label: string }> = [
   { value: 'corridor', label: '走廊' },
   { value: 'door', label: '门' },
@@ -60,6 +67,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const [extensionSec, setExtensionSec] = useState(0)
   const [figure, setFigure] = useState<InnerFigure>(plan?.figure ?? 'none')
   const [motif, setMotif] = useState<InnerMotif>(plan?.motifs[0] ?? 'door')
+  const [light, setLight] = useState('steady')
   const durationSec = (plan?.durationSec ?? 75) + extensionSec
   const isOpen = plan?.format === 'open'
   const capSec = isOpen ? Number.POSITIVE_INFINITY : durationSec
@@ -71,6 +79,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
     setExtensionSec(0)
     setFigure(plan?.figure ?? 'none')
     setMotif(plan?.motifs[0] ?? 'door')
+    setLight('steady')
   }, [encounter.id, replay, plan?.figure, plan?.motifs])
 
   useEffect(() => {
@@ -101,7 +110,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const phase = symbolicPhase(seconds, plan.durationSec, plan.format)
   const done = !isOpen && !isSpace && seconds >= durationSec
   return (
-    <div className={`symbolic-episode motif-${motif} phase-${phase} format-${plan.format} figure-${figure}`} role="img" aria-label={t('象征空间')}>
+    <div className={`symbolic-episode motif-${motif} phase-${phase} format-${plan.format} figure-${figure} light-${light}`} role="img" aria-label={t('象征空间')}>
       <div className="symbolic-sky" />
       <div className="symbolic-horizon" />
       <div className="symbolic-water" />
@@ -114,6 +123,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'approach' }); setSeconds(value => Math.min(plan.durationSec, value + 8)) }}>{t('靠近一点')}</button>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: paused ? 'resume' : 'stay' }); setPaused(value => !value) }}>{paused ? t('继续停留') : t('停留')}</button>
         {plan.format === 'space' && <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button>}
+        <label className="symbolic-light-change">{t('光线')}<select value={light} onChange={event => { const next = event.target.value; setLight(next); onAgency?.({ atSec: Math.round(seconds), action: 'change', change: { field: 'light', value: next } }) }}>{lightOptions.map(option => <option key={option.value} value={option.value}>{t(option.label)}</option>)}</select></label>
         <label className="symbolic-motif-change">{t('意象')}<select value={motif} onChange={event => { const next = event.target.value as InnerMotif; setMotif(next); onAgency?.({ atSec: Math.round(seconds), action: 'change', change: { field: 'motif', value: next } }) }}>{motifOptions.map(option => <option key={option.value} value={option.value}>{t(option.label)}</option>)}</select></label>
         <label className="symbolic-figure-change">{t('形象')}<select value={figure} onChange={event => { const next = event.target.value as InnerFigure; setFigure(next); onAgency?.({ atSec: Math.round(seconds), action: 'change', change: { field: 'figure', value: next } }) }}>{figureOptions.map(option => <option key={option.value} value={option.value}>{t(option.label)}</option>)}</select></label>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'leave' }); setLeft(true) }}>{t('离开')}</button>

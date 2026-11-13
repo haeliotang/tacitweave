@@ -469,5 +469,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .scene-workspace { position: relative }
 .scene-toolbar, .scene-footer { position: relative; z-index: 3 }
 .symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
-.symbolic-motif-change, .symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
-.symbolic-motif-change select, .symbolic-figure-change select { background: transparent; color: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 3px 5px; }
+.symbolic-light-change, .symbolic-motif-change, .symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.symbolic-light-change select, .symbolic-motif-change select, .symbolic-figure-change select { background: transparent; color: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 3px 5px; }
+
+.symbolic-episode.light-low .symbolic-sky, .symbolic-episode.light-low .symbolic-water { filter: brightness(.65) }
+.symbolic-episode.light-hard .symbolic-sky { filter: contrast(1.25) brightness(1.2) }
+.symbolic-episode.light-hard .symbolic-water { filter: contrast(1.15) brightness(1.1) }
+.symbolic-episode.light-flat .symbolic-sky, .symbolic-episode.light-flat .symbolic-water { filter: saturate(.35) brightness(1.05) }

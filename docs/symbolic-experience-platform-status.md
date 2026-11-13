@@ -22,7 +22,7 @@ SPDX-License-Identifier: CC-BY-4.0
 - 180 秒空间；
 - 用户 explicit 延长 30 秒；
 - 开放空间：不自动结束，用户主动离开；
-- 空间内改变意象与形象；
+- 空间内改变意象、形象与光线；
 - 所有改变记录 `atSec` 与来源。
 
 ### 纵向经验结构
@@ -60,7 +60,7 @@ SPDX-License-Identifier: CC-BY-4.0
 ```text
 Vitest: 193 passed
 Playwright E2E: 29 passed
-pnpm build: exit 0, main JS ~329 KB
+pnpm build: exit 0, main JS ~330 KB
 reuse lint: 262/262 compliant
 light + dark WCAG A/AA on main views
 English UI untranslated-token audit covers continuity/composer
