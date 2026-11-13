@@ -213,3 +213,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/research/case-evidence-bundle.md"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/research/lsm0-program-status.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

@@ -90,6 +90,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [证据 manifest v1](docs/research/evidence-manifest.md)
 - [QoL_Stress 证据 bundle](docs/research/qol-evidence-bundle.md)
 - [LSM-0 预注册草案 v0.1](docs/research/lsm0-preregistration-v0.1.md)
+- [LSM-0 研究计划状态](docs/research/lsm0-program-status.md)
 
 ## 1. 为什么是脑机接口，而不是又一个聊天框
 

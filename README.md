@@ -89,6 +89,7 @@ Read the full positioning and literature brief:
 - [Evidence manifest v1](docs/research/evidence-manifest.md)
 - [QoL_Stress evidence bundle](docs/research/qol-evidence-bundle.md)
 - [LSM-0 preregistration v0.1 draft](docs/research/lsm0-preregistration-v0.1.md)
+- [LSM-0 program status](docs/research/lsm0-program-status.md)
 
 ## 1. Why BCI, not another chat box
 
