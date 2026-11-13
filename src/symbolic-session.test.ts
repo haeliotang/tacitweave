@@ -50,6 +50,13 @@ describe('symbolic sessions', () => {
     expect(isSymbolicSession(session)).toBe(true)
   })
 
+  it('validates an in-space figure change event', () => {
+    const session = createSymbolicSession({ ...encounter, agency: [{ atSec: 10, action: 'change', change: { field: 'figure', value: 'animal' } }] }, '2026-11-01T00:04:00Z', 'session-change')
+    expect(isSymbolicSession(session)).toBe(true)
+    expect(session.agency[0].change).toEqual({ field: 'figure', value: 'animal' })
+    expect(isSymbolicSession({ ...session, agency: [{ atSec: 1, action: 'change', change: { field: 'figure', value: '' } }] })).toBe(false)
+  })
+
   it('persists, validates and explicitly removes sessions', () => {
     const storage = memoryStorage()
     const session = createSymbolicSession(encounter, '2026-11-01T00:01:00Z', 'session-1')

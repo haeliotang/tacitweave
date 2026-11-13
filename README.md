@@ -173,7 +173,7 @@ See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md),
 | LSM-0 baseline | Offline deterministic evaluation, dataset export and precision simulation; no empirical data and no clinical claims |
 | Licensing / contribution | Layered AGPL/Apache/CC-BY/brand; CLA 1.0; PRs require the `license/cla` check |
 | Continuity v0.1 | Re-enter a past fragment, edit user-authored fields, keep every revision and compare field changes without interpretation |
-| Dynamic space v0.1 | Extend a 75s encounter or 180s space by explicit 30s stays; open-ended mode has no automatic end |
+| Dynamic space v0.1 | Extend a 75s encounter or 180s space by explicit 30s stays; open-ended mode has no automatic end; figure can be changed in-space |
 | Relationship continuity v0.1 | Re-enter a relationship moment, prefill its user fields, preserve the original, record each visit and compare user-field changes |
 | Space Composer v0.1 | Choose 1–3 motifs, figure and 75s/180s format before entering; the system composes, not interprets |
 
@@ -189,11 +189,11 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **190** Vitest unit/integration tests
+- **191** Vitest unit/integration tests
 - **29** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
-- main JS bundle about **326 KB**, with heavy views lazy-loaded
+- main JS bundle about **327 KB**, with heavy views lazy-loaded
 - v0.1.4 release: **unsigned** Linux AppImage/DEB + Windows NSIS; no macOS asset yet
 - CI: Symbolic space, Rust operational, Browser E2E and License checks
 

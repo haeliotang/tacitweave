@@ -20,7 +20,7 @@ export interface SymbolicSession {
 
 export const symbolicSessionStorageKey = 'tacitweave.symbolic-sessions.v1'
 const maxSessions = 100
-const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter', 'extend'])
+const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter', 'extend', 'change'])
 
 export function isSymbolicSession(value: unknown): value is SymbolicSession {
   if (!value || typeof value !== 'object') return false
@@ -39,7 +39,8 @@ export function isSymbolicSession(value: unknown): value is SymbolicSession {
     && session.agency.every(event => event && typeof event === 'object'
       && typeof event.atSec === 'number' && Number.isFinite(event.atSec) && event.atSec >= 0
       && typeof event.action === 'string' && actions.has(event.action)
-      && (event.durationSec === undefined || (typeof event.durationSec === 'number' && Number.isFinite(event.durationSec) && event.durationSec > 0)))
+      && (event.durationSec === undefined || (typeof event.durationSec === 'number' && Number.isFinite(event.durationSec) && event.durationSec > 0))
+      && (event.change === undefined || (event.change && typeof event.change === 'object' && event.change.field === 'figure' && typeof event.change.value === 'string' && event.change.value.length > 0)))
 }
 
 export function createSymbolicSession(encounter: Encounter, now = new Date().toISOString(), id: string = crypto.randomUUID()): SymbolicSession {

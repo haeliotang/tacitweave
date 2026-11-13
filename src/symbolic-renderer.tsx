@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import type { InnerAction } from './inner'
 import type { Encounter } from './encounter'
+import type { InnerFigure } from './inner'
 import type { WorldRendererProps } from './world-renderer'
 import { useLanguage } from './i18n'
 
@@ -31,6 +32,14 @@ export function symbolicPhase(seconds: number, duration = 75, format: 'encounter
   return 'leave'
 }
 
+const figureOptions: Array<{ value: InnerFigure; label: string }> = [
+  { value: 'none', label: '不需要形象' },
+  { value: 'shadow', label: '影子' },
+  { value: 'stranger', label: '陌生人' },
+  { value: 'child', label: '孩子' },
+  { value: 'animal', label: '动物' },
+]
+
 export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererProps) {
   const { t } = useLanguage()
   const plan = encounter.innerPlan
@@ -38,6 +47,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const [paused, setPaused] = useState(false)
   const [left, setLeft] = useState(false)
   const [extensionSec, setExtensionSec] = useState(0)
+  const [figure, setFigure] = useState<InnerFigure>(plan?.figure ?? 'none')
   const durationSec = (plan?.durationSec ?? 75) + extensionSec
   const isOpen = plan?.format === 'open'
   const capSec = isOpen ? Number.POSITIVE_INFINITY : durationSec
@@ -47,7 +57,8 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
     setPaused(false)
     setLeft(false)
     setExtensionSec(0)
-  }, [encounter.id, replay])
+    setFigure(plan?.figure ?? 'none')
+  }, [encounter.id, replay, plan?.figure])
 
   useEffect(() => {
     if (!plan || paused || left) return
@@ -77,7 +88,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const phase = symbolicPhase(seconds, plan.durationSec, plan.format)
   const done = !isOpen && !isSpace && seconds >= durationSec
   return (
-    <div className={`symbolic-episode motif-${plan.motifs[0]} phase-${phase} format-${plan.format}`} role="img" aria-label={t('象征空间')}>
+    <div className={`symbolic-episode motif-${plan.motifs[0]} phase-${phase} format-${plan.format} figure-${figure}`} role="img" aria-label={t('象征空间')}>
       <div className="symbolic-sky" />
       <div className="symbolic-horizon" />
       <div className="symbolic-water" />
@@ -90,6 +101,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'approach' }); setSeconds(value => Math.min(plan.durationSec, value + 8)) }}>{t('靠近一点')}</button>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: paused ? 'resume' : 'stay' }); setPaused(value => !value) }}>{paused ? t('继续停留') : t('停留')}</button>
         {plan.format === 'space' && <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button>}
+        <label className="symbolic-figure-change">{t('形象')}<select value={figure} onChange={event => { const next = event.target.value as InnerFigure; setFigure(next); onAgency?.({ atSec: Math.round(seconds), action: 'change', change: { field: 'figure', value: next } }) }}>{figureOptions.map(option => <option key={option.value} value={option.value}>{t(option.label)}</option>)}</select></label>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'leave' }); setLeft(true) }}>{t('离开')}</button>
       </div>
       {done && <div className="symbolic-end" role="status"><p>{t('这段空间结束了。')}</p><button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button><button className="quiet" onClick={() => { onAgency?.({ atSec: 0, action: 'reenter' }); setSeconds(0); setPaused(false); setExtensionSec(0) }}>{t('再进入一次')}</button></div>}

@@ -39,6 +39,24 @@ Space Composer 还提供：
 - `durationSec` 在 session 中只作 nominal（180 秒）记录，不表示结束边界；
 - `SymbolicSession.openEnded = true`。
 
+## 空间内部形象改变
+
+空间运行期间，用户可以通过控制栏的「形象」选择：
+
+- 不需要形象
+- 影子
+- 陌生人
+- 孩子
+- 动物
+
+改变会立即反映在空间里，并记录：
+
+```ts
+{ atSec, action: 'change', change: { field: 'figure', value: 'animal' } }
+```
+
+这不是系统自动生成或心理推断，只是用户在空间内的显式选择。
+
 ## 用户体验
 
 - 进度条和时间显示实际选择的时长；

@@ -17,6 +17,8 @@ test('a user can shape a space before entering it', async ({ page }) => {
   await expect(page.locator('.symbolic-episode')).toBeVisible()
   await expect(page.getByText('This space')).toBeVisible()
   await expect(page.getByRole('button', { name: 'Stay 30 more seconds' })).toBeVisible()
+  await page.locator('.symbolic-figure-change select').selectOption('animal')
+  await expect(page.locator('.symbolic-episode')).toHaveClass(/figure-animal/)
 })
 
 

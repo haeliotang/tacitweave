@@ -77,6 +77,12 @@ const en: Record<string, string> = {
   '75 秒相遇': '75s encounter',
   '180 秒空间': '180s space',
   '开放空间': 'Open space',
+  '不需要形象': 'No figure',
+  '影子': 'Shadow',
+  '陌生人': 'Stranger',
+  '孩子': 'Child',
+  '动物': 'Animal',
+
   '感觉（可选）': 'Feeling (optional)',
   '不选择': 'None',
   '说不清的不安': 'Unclear unease',
