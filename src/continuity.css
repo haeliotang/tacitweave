@@ -33,3 +33,5 @@
 .revisit-fragments > div { display: flex; flex-wrap: wrap; gap: 6px; }
 .continuity-empty { max-width: 620px; padding: 40px 0; }
 @media (max-width: 760px) { .continuity-layout { grid-template-columns: 1fr; } .revisit-grid { grid-template-columns: 1fr; } .continuity-detail-head { flex-direction: column; } }
+.relationship-continuity-panel { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 12px; margin: 14px 0; }
+.relationship-continuity-panel h3 { margin: 3px 0 5px; }

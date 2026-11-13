@@ -435,6 +435,14 @@ const en: Record<string, string> = {
   '保存为新的进入': 'Save as a new visit',
   '这次再次进入的说明（可选）': 'Note for this relationship re-entry (optional)',
   '原关系瞬间保留，不会被覆盖。': 'The original relationship moment is preserved; it will not be overwritten.',
+  '关系轨迹': 'Relationship trails',
+  '同一个瞬间，之后的再次进入': 'The same moment, revisited later',
+  '只比较你写下的字段；不推断对方、依恋类型或关系变化。': 'Compare only fields you wrote; do not infer the other person, attachment style or relationship change.',
+  '选择关系轨迹': 'Choose a relationship trail',
+  '角色': 'Role',
+  '场景': 'Situation',
+  '这次没有字段变化。': 'No field changed in this visit.',
+
   '第': 'Visit',
 
 }

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { breaths, regions, sensations, type BreathState, type SomaticRegion, type SomaticSensation } from './somatic'
 import { exportRelationshipTriggers, responses, summarizeRelationshipTriggers, type RelationshipInput, type RelationshipResponse, type RelationshipSummary, type RelationshipTrigger } from './relationship'
-import type { RelationshipRevisitInput } from './relationship-continuity'
+import { buildRelationshipTrails, compareRelationshipContinuity, localizedRelationshipField, type RelationshipRevisitInput } from './relationship-continuity'
 import { useLanguage, type Language } from './i18n'
 import { RelationshipTopologyView } from './relationship-topology.jsx'
 
@@ -44,6 +44,39 @@ function TriggerMap({ entries, lang, t }: { entries: RelationshipTrigger[]; lang
     })}
     {entries.length > 8 && <text x="180" y="288" textAnchor="middle" className="trigger-more">{t('还有')} {entries.length - 8} {t('条')}</text>}
   </svg>
+}
+
+function RelationshipContinuityPanel({ entries, lang, t }: { entries: RelationshipTrigger[]; lang: Language; t: (zh: string) => string }) {
+  const trails = buildRelationshipTrails(entries).filter(trail => trail.visits.length >= 2)
+  const [rootId, setRootId] = useState<string | null>(trails[0]?.rootId ?? null)
+  const selected = trails.find(trail => trail.rootId === rootId) ?? trails[0] ?? null
+  const [beforeId, setBeforeId] = useState<string | null>(null)
+  const [afterId, setAfterId] = useState<string | null>(null)
+  if (!selected) return null
+  const before = selected.visits.find(entry => entry.id === beforeId) ?? selected.visits[0]
+  const after = selected.visits.find(entry => entry.id === afterId) ?? selected.latest
+  const changes = compareRelationshipContinuity(before, after)
+  return <section className="relationship-continuity-panel">
+    <div className="journal-header">
+      <div><p className="eyebrow">{t('关系轨迹')}</p><h3>{t('同一个瞬间，之后的再次进入')}</h3><p className="note">{t('只比较你写下的字段；不推断对方、依恋类型或关系变化。')}</p></div>
+      <select aria-label={t('选择关系轨迹')} value={selected.rootId} onChange={event => { setRootId(event.target.value); setBeforeId(null); setAfterId(null) }}>
+        {trails.map(trail => <option key={trail.rootId} value={trail.rootId}>{trail.root.role || trail.root.situation || trail.root.cue || t('未命名')}</option>)}
+      </select>
+    </div>
+    <div className="compare-pickers">
+      <label>{t('较早')}<select value={before.id} onChange={event => setBeforeId(event.target.value)}>{selected.visits.map(entry => <option key={entry.id} value={entry.id}>{new Date(entry.createdAt).toLocaleDateString(lang === 'en' ? 'en-US' : 'zh-CN')} · #{entry.continuity?.visit ?? 1}</option>)}</select></label>
+      <label>{t('较晚')}<select value={after.id} onChange={event => setAfterId(event.target.value)}>{selected.visits.map(entry => <option key={entry.id} value={entry.id}>{new Date(entry.createdAt).toLocaleDateString(lang === 'en' ? 'en-US' : 'zh-CN')} · #{entry.continuity?.visit ?? 1}</option>)}</select></label>
+    </div>
+    <div className="compare-table">
+      {changes.filter(change => change.changed).map(change => <div key={change.field} className="compare-row changed">
+        <span className="compare-field">{t(change.field === 'role' ? '角色' : change.field === 'situation' ? '场景' : change.field === 'cue' ? '那个瞬间' : change.field === 'region' ? '位置' : change.field === 'sensation' ? '感觉' : change.field === 'intensity' ? '强度' : change.field === 'breath' ? '呼吸' : '身体的第一反应')}</span>
+        <span>{localizedRelationshipField(change.field, change.before, lang)}</span>
+        <span className="compare-arrow">→</span>
+        <span>{localizedRelationshipField(change.field, change.after, lang)}</span>
+      </div>)}
+      {!changes.some(change => change.changed) && <p className="muted">{t('这次没有字段变化。')}</p>}
+    </div>
+  </section>
 }
 
 export function RelationshipJournal({ entries, onAdd, onRevisit, onRemove, onClear }: { entries: RelationshipTrigger[]; onAdd: (input: RelationshipInput) => void; onRevisit: (sourceId: string, input: RelationshipRevisitInput) => void; onRemove: (id: string) => void; onClear: () => void }) {
@@ -122,6 +155,7 @@ export function RelationshipJournal({ entries, onAdd, onRevisit, onRemove, onCle
       : <>
         <TriggerMap entries={entries} lang={lang} t={t} />
         <TriggerSummary summary={summary} lang={lang} t={t} />
+        <RelationshipContinuityPanel entries={entries} lang={lang} t={t} />
         <RelationshipTopologyView entries={entries} />
         <ul className="motif-list">
           {entries.map(entry => <li key={entry.id} className="motif-item">
