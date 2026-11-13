@@ -48,6 +48,24 @@ mean_sdnn_ms=107.7
 | EDA mean SCL | 60 | -0.673 | -0.017 | 30 | 30 |
 | STAI state anxiety | 66 | 3.227 | 3.000 | 43 | 12 |
 
+## 独立 SciPy 检查
+
+`scripts/qol_hrv_verify.py` 用 SciPy `butter` + `find_peaks` 重新实现：
+
+```text
+records=132 detected=132
+mean_abs_hr_error=16.21 bpm
+within_10_bpm=55/132
+mean_sdnn_ms=162.5
+```
+
+与简单 TS 检测器的 `2.79 bpm / 117/120` 不一致。这说明：
+
+- 至少一个检测器不适用于 QoL 的短 ECG；
+- 两种实现都没有与参考标注比对；
+- 不能把任一 HRV 数值当作可靠测量；
+- TS 检测器的“接近记录心率”不足以证明 R-peak 正确。
+
 ## 解释边界
 
 - 30 秒短记录不足以稳定估计 HRV；SDNN/RMSSD 对记录长度敏感。
@@ -55,9 +73,14 @@ mean_sdnn_ms=107.7
 - 12 条记录无可用 HRV；缺失不是随机。
 - HRV 方向变化弱且不一致，不能称为压力效应。
 - 没有 p 值、因果、临床或构念效度结论。
-- 这个管线只说明“可以从公开 ECG 提取候选 HRV 特征”，不说明这些特征可靠。
+- 这个管线只说明“可以从公开 ECG 提取候选 HRV 特征”，不说明这些特征可靠；
+- 独立 SciPy 检查未通过一致性，因此 HRV 结果只能标记为探索性。
 
 ## 复现
+
+```bash
+python3 scripts/qol_hrv_verify.py --in <QoL_Stress/data>/ecg.csv
+```
 
 ```bash
 pnpm qol:hrv-check --in <QoL_Stress/data>/ecg.csv

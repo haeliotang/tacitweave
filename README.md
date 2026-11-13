@@ -392,6 +392,7 @@ pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
 pnpm qol:phase-control --in /tmp/qol.jsonl
 pnpm qol:hrv-check --in <QoL_Stress/data>/ecg.csv
+python3 scripts/qol_hrv_verify.py --in <QoL_Stress/data>/ecg.csv
 python3 scripts/wesad_adapter.py --root <WESAD> --out /tmp/wesad-canonical.jsonl
 reuse lint                  # REUSE/SPDX compliance
 pnpm license:js             # JS dependency license check
