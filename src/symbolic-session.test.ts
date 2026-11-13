@@ -42,6 +42,14 @@ describe('symbolic sessions', () => {
     expect(isSymbolicSession(session)).toBe(true)
   })
 
+  it('accepts an open-ended session format', () => {
+    const open = { ...encounter, innerPlan: { ...encounter.innerPlan!, format: 'open' as const } }
+    const session = createSymbolicSession(open, '2026-11-01T00:03:00Z', 'session-open')
+    expect(session.format).toBe('open')
+    expect(session.openEnded).toBe(true)
+    expect(isSymbolicSession(session)).toBe(true)
+  })
+
   it('persists, validates and explicitly removes sessions', () => {
     const storage = memoryStorage()
     const session = createSymbolicSession(encounter, '2026-11-01T00:01:00Z', 'session-1')

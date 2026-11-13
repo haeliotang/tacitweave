@@ -9,7 +9,9 @@ export interface SymbolicSession {
   encounterId: string
   /** Optional source motif, when the user entered from a stored fragment. */
   motifId?: string
-  format: 'encounter' | 'space'
+  format: 'encounter' | 'space' | 'open'
+  /** True when the user chose an open-ended space; durationSec is only nominal. */
+  openEnded?: boolean
   durationSec: number
   completed: boolean
   leftEarly: boolean
@@ -28,7 +30,8 @@ export function isSymbolicSession(value: unknown): value is SymbolicSession {
     && typeof session.createdAt === 'string' && !Number.isNaN(Date.parse(session.createdAt))
     && typeof session.encounterId === 'string' && session.encounterId.length > 0
     && (session.motifId === undefined || (typeof session.motifId === 'string' && session.motifId.length > 0))
-    && (session.format === 'encounter' || session.format === 'space')
+    && (session.format === 'encounter' || session.format === 'space' || session.format === 'open')
+    && (session.openEnded === undefined || typeof session.openEnded === 'boolean')
     && typeof session.durationSec === 'number' && Number.isFinite(session.durationSec) && session.durationSec > 0
     && typeof session.completed === 'boolean'
     && typeof session.leftEarly === 'boolean'
@@ -50,6 +53,7 @@ export function createSymbolicSession(encounter: Encounter, now = new Date().toI
     encounterId: encounter.id,
     ...(encounter.motifId ? { motifId: encounter.motifId } : {}),
     format,
+    ...(format === 'open' ? { openEnded: true } : {}),
     durationSec,
     completed: agency.some(event => event.action === 'leave' && event.atSec >= durationSec),
     leftEarly: agency.some(event => event.action === 'leave' && event.atSec < durationSec),

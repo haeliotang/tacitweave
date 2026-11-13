@@ -25,6 +25,20 @@ SPDX-License-Identifier: CC-BY-4.0
 - 重新进入会清空本次延长，回到原计划时长；
 - 不自动延长，不根据停留时间推断心理状态。
 
+## 开放空间
+
+Space Composer 还提供：
+
+> **开放空间（不自动结束）**
+
+- `format: 'open'`
+- 计时只向上累计，不触发自动结束；
+- 不显示固定进度条；
+- 不显示 30 秒延长按钮；
+- 用户通过「离开」结束；
+- `durationSec` 在 session 中只作 nominal（180 秒）记录，不表示结束边界；
+- `SymbolicSession.openEnded = true`。
+
 ## 用户体验
 
 - 进度条和时间显示实际选择的时长；

@@ -9,7 +9,7 @@ import { useLanguage } from './i18n'
 export function validateSymbolic(encounter: Encounter) {
   const plan = encounter.innerPlan
   if (!plan) return '这次相遇没有内在景观计划，暂时无法进入。'
-  if (plan.format !== 'encounter' && plan.format !== 'space') return '这次内在景观的形式暂不支持。'
+  if (plan.format !== 'encounter' && plan.format !== 'space' && plan.format !== 'open') return '这次内在景观的形式暂不支持。'
   if (!Number.isFinite(plan.durationSec) || plan.durationSec <= 0) return '这次内在景观的时长无效。'
   return undefined
 }
@@ -19,8 +19,8 @@ function formatClock(totalSeconds: number) {
   return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, '0')}`
 }
 
-export function symbolicPhase(seconds: number, duration = 75, format: 'encounter' | 'space' = 'encounter'): InnerAction {
-  if (format === 'space') return 'pause'
+export function symbolicPhase(seconds: number, duration = 75, format: 'encounter' | 'space' | 'open' = 'encounter'): InnerAction {
+  if (format === 'space' || format === 'open') return 'pause'
   const t = Math.max(0, Math.min(duration, seconds))
   const at = (secondsAt75: number) => duration * secondsAt75 / 75
   if (t < at(12)) return 'arrive'
@@ -39,6 +39,8 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const [left, setLeft] = useState(false)
   const [extensionSec, setExtensionSec] = useState(0)
   const durationSec = (plan?.durationSec ?? 75) + extensionSec
+  const isOpen = plan?.format === 'open'
+  const capSec = isOpen ? Number.POSITIVE_INFINITY : durationSec
 
   useEffect(() => {
     setSeconds(0)
@@ -51,12 +53,12 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
     if (!plan || paused || left) return
     const timer = window.setInterval(() => {
       setSeconds(value => {
-        if (value >= durationSec) return durationSec
-        return Math.min(durationSec, value + 0.1)
+        if (value >= capSec) return capSec
+        return Math.min(capSec, value + 0.1)
       })
     }, 100)
     return () => window.clearInterval(timer)
-  }, [plan, paused, left, durationSec])
+  }, [plan, paused, left, durationSec, capSec])
 
   if (!plan) return <div className="scene-placeholder" role="alert">{t('这次相遇没有内在景观计划，暂时无法进入。')}</div>
 
@@ -71,9 +73,9 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
     )
   }
 
-  const isSpace = plan.format === 'space'
+  const isSpace = plan.format === 'space' || isOpen
   const phase = symbolicPhase(seconds, plan.durationSec, plan.format)
-  const done = !isSpace && seconds >= durationSec
+  const done = !isOpen && !isSpace && seconds >= durationSec
   return (
     <div className={`symbolic-episode motif-${plan.motifs[0]} phase-${phase} format-${plan.format}`} role="img" aria-label={t('象征空间')}>
       <div className="symbolic-sky" />
@@ -82,12 +84,12 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
       <div className="symbolic-door" />
       <div className={`symbolic-figure figure-${plan.figure}`} />
       <div className="symbolic-fog" />
-      {!isSpace && <div className="symbolic-progress" role="progressbar" aria-label={t('空间进度')} aria-valuemin={0} aria-valuemax={durationSec} aria-valuenow={Math.floor(seconds)}><span style={{ width: `${Math.min(100, seconds / durationSec * 100)}%` }} /></div>}
-      {!isSpace && <span className="symbolic-time" aria-live="off">{formatClock(seconds)} / {formatClock(durationSec)}</span>}
+      {!isSpace && !isOpen && <div className="symbolic-progress" role="progressbar" aria-label={t('空间进度')} aria-valuemin={0} aria-valuemax={durationSec} aria-valuenow={Math.floor(seconds)}><span style={{ width: `${Math.min(100, seconds / durationSec * 100)}%` }} /></div>}
+      {!isSpace && !isOpen && <span className="symbolic-time" aria-live="off">{formatClock(seconds)} / {formatClock(durationSec)}</span>}
       <div className="symbolic-controls">
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'approach' }); setSeconds(value => Math.min(plan.durationSec, value + 8)) }}>{t('靠近一点')}</button>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: paused ? 'resume' : 'stay' }); setPaused(value => !value) }}>{paused ? t('继续停留') : t('停留')}</button>
-        {isSpace && <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button>}
+        {plan.format === 'space' && <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button>}
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'leave' }); setLeft(true) }}>{t('离开')}</button>
       </div>
       {done && <div className="symbolic-end" role="status"><p>{t('这段空间结束了。')}</p><button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button><button className="quiet" onClick={() => { onAgency?.({ atSec: 0, action: 'reenter' }); setSeconds(0); setPaused(false); setExtensionSec(0) }}>{t('再进入一次')}</button></div>}

@@ -153,7 +153,7 @@ function ContextPanel({ motif, encounter, onEnter, onBack, onDetail }: { motif: 
       <button className="primary-button wide" onClick={onBack}>{t('返回工作台')}</button>
       <div className="context-section">
         <p className="card-label">{t('这次的空间')}</p>
-        <p className="muted">{encounter.innerPlan?.format === 'space' ? t('180 秒空间') : t('75 秒相遇')} · {t('无声')} · symbolic</p>
+        <p className="muted">{encounter.innerPlan?.format === 'open' ? t('开放空间') : encounter.innerPlan?.format === 'space' ? t('180 秒空间') : t('75 秒相遇')} · {t('无声')} · symbolic</p>
       </div>
       <div className="context-note">
         <p className="card-label">{t('不解释')}</p>
@@ -556,7 +556,7 @@ export function DesktopShell() {
           <div className="workspace-tabs" {...(topTabs.length ? { role: 'tablist' } : {})}>
             {topTabs.length
               ? topTabs.map(tab => <button key={tab.id} role="tab" aria-selected={tab.active} className={tab.active ? 'active' : ''} onClick={tab.onClick}>{tab.label}</button>)
-              : <span className="top-label">{view === 'space' ? (encounter?.innerPlan?.format === 'space' ? '空间' : '相遇') : view === 'research' ? t('研究工具') : t(navItems.find(item => item.id === navView)?.label ?? '')}</span>}
+              : <span className="top-label">{view === 'space' ? (encounter?.innerPlan?.format === 'space' || encounter?.innerPlan?.format === 'open' ? '空间' : '相遇') : view === 'research' ? t('研究工具') : t(navItems.find(item => item.id === navView)?.label ?? '')}</span>}
           </div>
           <div className="ui-controls">
             {lockRecord && <button className="ui-toggle" onClick={lockNow} aria-label={t('立即锁定')} title={t('立即锁定')}>🔒</button>}
@@ -568,7 +568,7 @@ export function DesktopShell() {
         <div className="workspace-scroll">
           {view === 'space' && encounter
             ? <div className="scene-workspace">
-              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button><span>{encounter.innerPlan?.format === 'space' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
+              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button><span>{encounter.innerPlan?.format === 'space' || encounter.innerPlan?.format === 'open' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
               <SceneView encounter={encounter} replay={replay} onAgency={recordAgency} />
               <div className="scene-footer"><span>{t('不解释、不诊断；离开随时可用。')}</span><button className="quiet-button" onClick={() => setReplay(value => value + 1)}>{t('重新进入')}</button></div>
             </div>

@@ -33,7 +33,7 @@ export function SpaceComposer({ capture, motifId, onStart, onCancel }: { capture
   const base = innerPlanFromCapture(capture)
   const [motifs, setMotifs] = useState<InnerMotif[]>(base.motifs)
   const [figure, setFigure] = useState<InnerFigure>(base.figure)
-  const [durationSec, setDurationSec] = useState<75 | 180>(75)
+  const [durationSec, setDurationSec] = useState<75 | 180 | 'open'>(75)
 
   const toggleMotif = (motif: InnerMotif) => {
     setMotifs(current => current.includes(motif)
@@ -56,7 +56,7 @@ export function SpaceComposer({ capture, motifId, onStart, onCancel }: { capture
       <p className="card-label">{t('形象')}</p>
       <div className="chip-row">{figureOptions.map(item => <button type="button" key={item.value} className={`chip ${figure === item.value ? 'selected' : ''}`} aria-pressed={figure === item.value} onClick={() => setFigure(item.value)}>{item[lang === 'en' ? 'labelEn' : 'label']}</button>)}</div>
     </div>
-    <label className="field-line">{t('形式')}<select value={durationSec} onChange={event => setDurationSec(Number(event.target.value) as 75 | 180)}><option value={75}>{t('75 秒相遇')}</option><option value={180}>{t('180 秒空间')}</option></select></label>
+    <label className="field-line">{t('形式')}<select value={durationSec} onChange={event => setDurationSec(event.target.value === 'open' ? 'open' : Number(event.target.value) as 75 | 180)}><option value={75}>{t('75 秒相遇')}</option><option value={180}>{t('180 秒空间')}</option><option value={'open'}>{t('开放空间（不自动结束）')}</option></select></label>
     <div className="actions"><button type="submit" className="primary-button" disabled={!motifs.length}>{t('进入这个空间')}</button><span className="note">{t('不解释、不诊断、不上传；随时可以离开。')}</span></div>
   </form>
 }

@@ -76,6 +76,7 @@ const en: Record<string, string> = {
   '形式': 'Format',
   '75 秒相遇': '75s encounter',
   '180 秒空间': '180s space',
+  '开放空间': 'Open space',
   '感觉（可选）': 'Feeling (optional)',
   '不选择': 'None',
   '说不清的不安': 'Unclear unease',
@@ -449,6 +450,7 @@ const en: Record<string, string> = {
   '意象（1–3 块）': 'Imagery (1–3 fragments)',
   '形象': 'Figure',
   '进入这个空间': 'Enter this space',
+  '开放空间（不自动结束）': 'Open space (no automatic end)',
   '关闭': 'Close',
 
   '选择关系轨迹': 'Choose a relationship trail',

@@ -19,6 +19,13 @@ describe('space composer', () => {
     expect(plan.prompts.negative).toContain('no diagnosis or psychological interpretation')
   })
 
+  it('supports an open-ended space without changing the content semantics', () => {
+    const plan = composeInnerPlan(innerPlanFromCapture(capture), { motifs: ['door'], figure: 'none', durationSec: 'open' })
+    expect(plan.format).toBe('open')
+    expect(plan.durationSec).toBe(180)
+    expect(plan.beats[0]).toMatchObject({ startSec: 0, endSec: 180, action: 'pause' })
+  })
+
   it('rejects empty motifs and invalid durations without interpreting the input', () => {
     const base = innerPlanFromCapture(capture)
     expect(() => composeInnerPlan(base, { motifs: [], figure: 'none', durationSec: 75 })).toThrow('choose_at_least_one_motif')

@@ -4,7 +4,7 @@ import { isSomaticCapture, type SomaticCapture } from './somatic'
 import { isSignalConsent, isVoiceTrace, type MotifSignals } from './somatic-signal'
 
 export interface MotifSymbolic {
-  format: 'encounter' | 'space'
+  format: 'encounter' | 'space' | 'open'
   motifs: string[]
   figure: string
 }
@@ -47,7 +47,7 @@ function normalizeName(name: string) {
 function isMotifSymbolic(value: unknown): value is MotifSymbolic {
   if (!value || typeof value !== 'object') return false
   const symbolic = value as Partial<MotifSymbolic>
-  return (symbolic.format === 'encounter' || symbolic.format === 'space')
+  return (symbolic.format === 'encounter' || symbolic.format === 'space' || symbolic.format === 'open')
     && Array.isArray(symbolic.motifs) && symbolic.motifs.length > 0 && symbolic.motifs.length <= 3
     && symbolic.motifs.every(motif => typeof motif === 'string' && motif.trim().length > 0 && motif.length <= 120)
     && typeof symbolic.figure === 'string' && symbolic.figure.trim().length > 0 && symbolic.figure.length <= 120

@@ -5,14 +5,15 @@ import type { InnerFigure, InnerFormat, InnerMotif, InnerPlan } from './inner'
 export interface SpaceComposition {
   motifs: InnerMotif[]
   figure: InnerFigure
-  durationSec: 75 | 180
+  durationSec: 75 | 180 | 'open'
 }
 
 export function composeInnerPlan(base: InnerPlan, composition: SpaceComposition): InnerPlan {
   const motifs = [...new Set(composition.motifs)].slice(0, 3)
   if (!motifs.length) throw new Error('choose_at_least_one_motif')
-  if (composition.durationSec !== 75 && composition.durationSec !== 180) throw new Error('invalid_duration')
-  const format: InnerFormat = composition.durationSec === 180 ? 'space' : 'encounter'
+  if (composition.durationSec !== 75 && composition.durationSec !== 180 && composition.durationSec !== 'open') throw new Error('invalid_duration')
+  const format: InnerFormat = composition.durationSec === 'open' ? 'open' : composition.durationSec === 180 ? 'space' : 'encounter'
+  const totalSeconds = composition.durationSec === 'open' ? 180 : composition.durationSec
   const figure = composition.figure
   const figurePrompt = figure === 'none'
     ? 'No figure is required. The space can stay empty of figures; no presence is implied.'
@@ -20,7 +21,7 @@ export function composeInnerPlan(base: InnerPlan, composition: SpaceComposition)
   return {
     ...base,
     format,
-    durationSec: composition.durationSec,
+    durationSec: totalSeconds,
     motifs,
     figure,
     prompts: {
@@ -28,8 +29,8 @@ export function composeInnerPlan(base: InnerPlan, composition: SpaceComposition)
       space: `A symbolic, dreamlike space built from: ${motifs.join(', ')}. Not a literal location; no readable text, no maps, no labels.`,
       figure: figurePrompt,
     },
-    beats: format === 'space'
-      ? [{ startSec: 0, endSec: composition.durationSec, action: 'pause', intent: '可以待着；没有必须发生的事' }]
+    beats: format === 'space' || format === 'open'
+      ? [{ startSec: 0, endSec: totalSeconds, action: 'pause', intent: '可以待着；没有必须发生的事' }]
       : base.beats.map(beat => ({ ...beat })),
   }
 }
