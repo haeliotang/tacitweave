@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
 import { createMotif, type MotifEntry } from './motif-journal'
-import { buildContinuityTrails, compareContinuity, createRevisit } from './continuity'
+import { buildContinuityTrails, compareContinuity, createRevisit, symbolicFromSpaceChanges } from './continuity'
 
 function motif(name: string, capture: Partial<MotifEntry['capture']> = {}, now = '2026-11-14T00:00:00.000Z'): MotifEntry {
   return createMotif({
@@ -29,6 +29,11 @@ describe('symbolic continuity', () => {
     const revised = createRevisit([root], root.id, { name: '旧门之后', now: '2026-11-02T00:00:00Z' })
     expect(revised.symbolic).toEqual({ format: 'space', motifs: ['door', 'water'], figure: 'animal' })
     expect(root.symbolic).toEqual({ format: 'space', motifs: ['door', 'water'], figure: 'animal' })
+  })
+
+  it('derives the latest motif and figure from explicit space changes', () => {
+    const next = symbolicFromSpaceChanges({ format: 'space', motifs: ['door'], figure: 'shadow' }, [{ atSec: 3, action: 'change', change: { field: 'motif', value: 'water' } }, { atSec: 5, action: 'change', change: { field: 'figure', value: 'animal' } }])
+    expect(next).toEqual({ format: 'space', motifs: ['water', 'door'], figure: 'animal' })
   })
 
   it('groups full history and exposes the latest visit', () => {

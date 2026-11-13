@@ -21,6 +21,9 @@ test('a user can shape a space before entering it', async ({ page }) => {
   await expect(page.locator('.symbolic-episode')).toHaveClass(/motif-water/)
   await page.locator('.symbolic-figure-change select').selectOption('animal')
   await expect(page.locator('.symbolic-episode')).toHaveClass(/figure-animal/)
+  await page.getByRole('button', { name: 'Save as a new visit' }).click()
+  await expect(page.getByRole('heading', { name: 'Past fragments can be re-entered' })).toBeVisible()
+  await expect(page.locator('.continuity-visit')).toHaveCount(2)
 })
 
 

@@ -451,6 +451,7 @@ const en: Record<string, string> = {
   '这次进入的说明（可选）': 'Note for this visit (optional)',
   '只记录你愿意留下的说明；系统不解释它。': 'Only write what you want to keep; the system does not interpret it.',
   '保存为新的进入': 'Save as a new visit',
+  '从空间保存的调整': 'Adjustments saved from a space',
   '这次再次进入的说明（可选）': 'Note for this relationship re-entry (optional)',
   '原关系瞬间保留，不会被覆盖。': 'The original relationship moment is preserved; it will not be overwritten.',
   '关系轨迹': 'Relationship trails',

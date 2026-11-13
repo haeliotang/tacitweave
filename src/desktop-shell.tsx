@@ -6,7 +6,7 @@ import { createInnerCaptureEncounter } from './inner-encounter'
 import { innerPlanFromCapture } from './inner'
 import { SceneView } from './scene-loader'
 import { createMotif, loadMotifs, type MotifEntry } from './motif-journal'
-import { createRevisit, type RevisitInput } from './continuity'
+import { createRevisit, symbolicFromSpaceChanges, type RevisitInput } from './continuity'
 import { SpaceComposer } from './space-composer'
 import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipInput, type RelationshipTrigger } from './relationship'
 import { createRelationshipRevisit, type RelationshipRevisitInput } from './relationship-continuity'
@@ -273,6 +273,22 @@ export function DesktopShell() {
     }
     setEncounter(null)
     setView(selected ? 'field' : 'new')
+  }
+  const saveSpaceRevision = () => {
+    if (!encounter?.motifId || !encounter.innerPlan) return
+    const source = motifs.find(entry => entry.id === encounter.motifId)
+    if (!source) return
+    const plan = encounter.innerPlan
+    const symbolic = symbolicFromSpaceChanges({ format: plan.format, motifs: plan.motifs, figure: plan.figure }, encounter.agency ?? [])
+    const entry = createRevisit(motifs, source.id, { symbolic, note: t('从空间保存的调整') })
+    const next = [entry, ...motifs]
+    const nextField = attachFieldNode(fieldLayout, fieldNodeKey('motif', source.id), fieldNodeKey('motif', entry.id))
+    setMotifs(next)
+    setFieldLayout(nextField)
+    setSelectedId(entry.id)
+    setEncounter(null)
+    setView('continuity')
+    persist(next, relationships, nextField, signalSessions, captures)
   }
   const persist = (nextMotifs: MotifEntry[], nextRelationships: RelationshipTrigger[], nextField = fieldLayout, nextSignals = signalSessions, nextCaptures = captures, nextSymbolicSessions = symbolicSessions) => {
     void saveLocalSnapshot({ motifs: nextMotifs, relationships: nextRelationships, field: nextField, signals: nextSignals, captures: nextCaptures, symbolicSessions: nextSymbolicSessions })
@@ -568,7 +584,7 @@ export function DesktopShell() {
         <div className="workspace-scroll">
           {view === 'space' && encounter
             ? <div className="scene-workspace">
-              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button><span>{encounter.innerPlan?.format === 'space' || encounter.innerPlan?.format === 'open' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
+              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button>{encounter.motifId && encounter.agency?.some(event => event.action === 'change') && <button type="button" className="quiet small" onClick={saveSpaceRevision}>{t('保存为新的进入')}</button>}<span>{encounter.innerPlan?.format === 'space' || encounter.innerPlan?.format === 'open' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
               <SceneView encounter={encounter} replay={replay} onAgency={recordAgency} />
               <div className="scene-footer"><span>{t('不解释、不诊断；离开随时可用。')}</span><button className="quiet-button" onClick={() => setReplay(value => value + 1)}>{t('重新进入')}</button></div>
             </div>

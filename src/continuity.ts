@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { createMotif, type ContinuityRef, type MotifEntry, type MotifSymbolic } from './motif-journal'
 import type { SomaticCapture } from './somatic'
+import type { SymbolicAgencyEvent } from './encounter'
 
 export interface ContinuityTrail {
   rootId: string
@@ -46,6 +47,16 @@ export function buildContinuityTrails(motifs: readonly MotifEntry[]): Continuity
     const root = visits.find(entry => entry.id === rootId) ?? visits[0]
     return { rootId, root, visits, latest: visits[visits.length - 1] }
   }).sort((left, right) => Date.parse(right.latest.createdAt) - Date.parse(left.latest.createdAt))
+}
+
+export function symbolicFromSpaceChanges(base: MotifSymbolic, events: readonly SymbolicAgencyEvent[]): MotifSymbolic {
+  const next: MotifSymbolic = { format: base.format, motifs: [...base.motifs], figure: base.figure }
+  for (const event of events) {
+    if (event.action !== 'change' || !event.change) continue
+    if (event.change.field === 'motif') next.motifs = [event.change.value, ...next.motifs.filter(motif => motif !== event.change!.value)].slice(0, 3)
+    if (event.change.field === 'figure') next.figure = event.change.value
+  }
+  return next
 }
 
 export interface RevisitInput {
