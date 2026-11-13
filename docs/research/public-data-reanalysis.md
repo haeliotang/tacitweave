@@ -113,5 +113,10 @@ public-data-<dataset>-<date>/
 
 ## 当前状态
 
-- 协议完成；未下载数据、未写 adapter、未产生结果。
-- 下一步：选择 CASE 的一个可访问子集，建立 canonical adapter 和固定 fixture。
+- 协议完成。
+- Canonical feature-level harness 实现：`pnpm lsm0:public --in <jsonl>`。
+- 合成 fixture/测试覆盖解析、缺失、quality 排除、个体内估计、circular-shift/shuffled 对照。
+- 尚未写 CASE/WESAD/QoL_Stress 原始数据 adapter，未下载数据，未产生结果。
+- Harness 只验证分析路径；不验证 Tacitweave 前语言假设。
+
+下一步：选择 CASE 的一个可访问子集，建立 canonical adapter 和固定 fixture，再接入 harness。
