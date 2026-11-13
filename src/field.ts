@@ -87,6 +87,14 @@ export function removeFieldNode(layout: FieldLayout, key: string): FieldLayout {
   return { ...layout, positions, links: layout.links.filter(link => link.from !== key && link.to !== key) }
 }
 
+export function attachFieldNode(layout: FieldLayout, sourceKey: string, targetKey: string, now = new Date().toISOString()): FieldLayout {
+  if (sourceKey === targetKey) return layout
+  const source = layout.positions[sourceKey] ?? { x: 0.5, y: 0.5 }
+  const offset = 0.06 + (targetKey.length % 3) * 0.01
+  const next = setFieldPosition(layout, targetKey, { x: source.x + offset, y: source.y + offset })
+  return addFieldLink(next, sourceKey, targetKey, now)
+}
+
 export function resetFieldPositions(layout: FieldLayout): FieldLayout {
   return { ...layout, positions: {} }
 }

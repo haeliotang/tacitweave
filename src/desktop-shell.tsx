@@ -19,7 +19,7 @@ import { appLockStorageKey, createAppLockRecord, loadAppLockRecord, loadLockout,
 
 import { getDbStatus, getHostInfo, isTauriRuntime, type DbStatus, type HostInfo } from './host'
 import { fragments, regions, sensations, breaths } from './somatic'
-import { addFieldLink, emptyFieldLayout, fieldNodeKey, loadFieldLayout, removeFieldNode, type FieldLayout, type FieldLens, type FieldRange } from './field'
+import { addFieldLink, attachFieldNode, emptyFieldLayout, fieldNodeKey, loadFieldLayout, removeFieldNode, type FieldLayout, type FieldLens, type FieldRange } from './field'
 import { createSignalSession, loadSignalSessions, removeSignalSession, type SignalSession } from './signal-session'
 import type { CaptureProvenance } from './capture'
 import { addCaptureProvenance, removeCaptureProvenance } from './capture-ledger'
@@ -301,15 +301,19 @@ export function DesktopShell() {
   const revisit = (sourceId: string, input: RevisitInput) => {
     const entry = createRevisit(motifs, sourceId, input)
     const next = [entry, ...motifs]
+    const nextField = attachFieldNode(fieldLayout, fieldNodeKey('motif', sourceId), fieldNodeKey('motif', entry.id))
     setMotifs(next)
+    setFieldLayout(nextField)
     setSelectedId(entry.id)
-    persist(next, relationships, fieldLayout, signalSessions)
+    persist(next, relationships, nextField, signalSessions)
   }
   const revisitRelationship = (sourceId: string, input: RelationshipRevisitInput) => {
     const entry = createRelationshipRevisit(relationships, sourceId, input)
     const next = [entry, ...relationships]
+    const nextField = attachFieldNode(fieldLayout, fieldNodeKey('relationship', sourceId), fieldNodeKey('relationship', entry.id))
     setRelationships(next)
-    persist(motifs, next, fieldLayout, signalSessions)
+    setFieldLayout(nextField)
+    persist(motifs, next, nextField, signalSessions)
   }
   const removeRelationship = (id: string) => {
     const next = relationships.filter(entry => entry.id !== id)

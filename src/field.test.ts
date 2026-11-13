@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
-import { addFieldLink, clampFieldPosition, emptyFieldLayout, fieldNodeKey, isFieldLayout, removeFieldLink, removeFieldNode, setFieldPosition } from './field'
+import { addFieldLink, attachFieldNode, clampFieldPosition, emptyFieldLayout, fieldNodeKey, isFieldLayout, removeFieldLink, removeFieldNode, setFieldPosition } from './field'
 
 describe('field layout', () => {
   it('validates and clamps normalized positions', () => {
@@ -27,6 +27,16 @@ describe('field layout', () => {
     expect(next.positions[from]).toBeUndefined()
     expect(next.positions[to]).toEqual({ x: 0.7, y: 0.8 })
     expect(next.links).toHaveLength(0)
+  })
+
+  it('attaches a new continuity node near its source and links it', () => {
+    const source = fieldNodeKey('motif', 'root')
+    const target = fieldNodeKey('motif', 'revision')
+    const layout = setFieldPosition(emptyFieldLayout(), source, { x: 0.4, y: 0.4 })
+    const next = attachFieldNode(layout, source, target, '2026-11-14T00:00:00Z')
+    expect(next.positions[target]).toEqual({ x: 0.48000000000000004, y: 0.48000000000000004 })
+    expect(next.links).toHaveLength(1)
+    expect(next.links[0]).toMatchObject({ from: source, to: target })
   })
 
   it('rejects malformed layout data', () => {
