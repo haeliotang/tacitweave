@@ -188,7 +188,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 - **194** 项 Vitest 单元/集成测试
 - **29** 项 Playwright 浏览器 E2E
-- **8** 项 Rust 桌面测试；ops crate 也会构建与测试
+- **8** 项 Rust 桌面测试与 **10** 项 Rust ops 测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
 - 主 JS 约 **330 KB**，重组件 lazy load
 - v0.1.4 Release：**未签名**的 Linux AppImage/DEB 与 Windows NSIS；尚无 macOS 资产
