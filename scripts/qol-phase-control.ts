@@ -14,7 +14,7 @@ if (!input) {
   process.exit(2)
 }
 const parsed = parsePublicDataText(await readFile(resolve(input), 'utf8'))
-const features = ['ecgHeartRateBpm', 'edaMeanSclMicroSiemens', 'stateAnxietyScore']
+const features = ['ecgHeartRateBpm', 'ecgHrvSdnnMs', 'ecgHrvRmssdMs', 'edaMeanSclMicroSiemens', 'stateAnxietyScore']
 console.log('feature | paired | missing relax | missing stress | mean delta | median delta | increased | decreased | unchanged')
 for (const feature of features) {
   const summary = summarizePhaseChange(parsed.sessions, feature)

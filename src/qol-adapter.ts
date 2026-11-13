@@ -13,6 +13,7 @@ import { createReadStream } from 'node:fs'
 import { createInterface } from 'node:readline'
 import { join } from 'node:path'
 import type { PublicDataSession } from './lsm0-public-data'
+import { computeEcgHrv } from './ecg-hrv'
 
 export interface QolSessionPaths {
   root: string
@@ -97,6 +98,21 @@ export async function buildQolSessions(paths: QolSessionPaths): Promise<PublicDa
     aggregate.count += 1
     ecgByKey.set(key, aggregate)
   }
+  const hrvByKey = new Map<string, { sdnn: number; rmssd: number; peaks: number; count: number }>()
+  for (const row of ecg) {
+    const waveform = row.waveform_samples?.trim()
+    if (!waveform) continue
+    const samples = waveform.split(/\s+/).filter(Boolean).map(Number).filter(Number.isFinite)
+    const hrv = computeEcgHrv(samples, 250)
+    if (hrv.sdnnMs === null || hrv.rmssdMs === null) continue
+    const key = `${row.username}\u0000${phaseIndex(row.phase)}`
+    const aggregate = hrvByKey.get(key) ?? { sdnn: 0, rmssd: 0, peaks: 0, count: 0 }
+    aggregate.sdnn += hrv.sdnnMs
+    aggregate.rmssd += hrv.rmssdMs
+    aggregate.peaks += hrv.peaks.length
+    aggregate.count += 1
+    hrvByKey.set(key, aggregate)
+  }
   const edaByKey = new Map<string, { sum: number; count: number; invalid: number }>()
   for (const row of eda) {
     const key = `${row.username}\u0000${phaseIndex(row.phase)}`
@@ -124,6 +140,12 @@ export async function buildQolSessions(paths: QolSessionPaths): Promise<PublicDa
       signals.edaMeanSclMicroSiemens = electrodermal.sum / electrodermal.count
       signals.edaValidSamples = electrodermal.count
       signals.edaInvalidSamples = electrodermal.invalid
+    }
+    const hrv = hrvByKey.get(key)
+    if (hrv?.count) {
+      signals.ecgHrvSdnnMs = hrv.sdnn / hrv.count
+      signals.ecgHrvRmssdMs = hrv.rmssd / hrv.count
+      signals.ecgRPeakCount = hrv.peaks / hrv.count
     }
     if (!Object.keys(signals).length) continue
     const selfReport: PublicDataSession['selfReport'] = {}

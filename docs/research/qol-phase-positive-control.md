@@ -32,6 +32,17 @@ d16fe9c5f319eb9dff8cf9089399f18eef68fa8cdb1085f6032f5750814d1362
 | EDA mean SCL (µS) | 60 | 2 | 6 | -0.673 | -0.017 | 30 | 30 | 0 |
 | STAI state anxiety | 66 | 0 | 0 | 3.227 | 3.000 | 43 | 12 | 11 |
 
+## HRV 补充
+
+加入简单 ECG R-peak/HRV 管线后（见 [ECG HRV pipeline](ecg-hrv-pipeline.md)）：
+
+| 变量 | paired | mean delta | median delta | increased | decreased |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| HRV SDNN | 56 | 20.396 ms | 13.405 | 33 | 23 |
+| HRV RMSSD | 56 | 8.658 ms | 12.437 | 34 | 22 |
+
+这仍不是压力效应：30 秒记录、简单检测器、12 条无可用 HRV、缺失非随机。
+
 ## 解释
 
 - **STAI** 显示了方向一致的 phase 差异（43 增加 / 12 减少），符合 stress induction 的预期；这是自报问卷的阳性对照。

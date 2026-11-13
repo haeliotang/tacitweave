@@ -82,6 +82,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [CASE 证据 bundle](docs/research/case-evidence-bundle.md)
 - [QoL_Stress 导入检查](docs/research/qol-stress-import-check.md)
 - [QoL_Stress phase 阳性对照](docs/research/qol-phase-positive-control.md)
+- [ECG HRV 管线检查](docs/research/ecg-hrv-pipeline.md)
 - [WESAD adapter 契约](docs/research/wesad-adapter.md)
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 区间方法审查](docs/research/lsm0-method-audit.md)
@@ -200,7 +201,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **224** 项 Vitest 单元/集成测试
+- **226** 项 Vitest 单元/集成测试
 - **24** 项 Playwright 浏览器 E2E
 - **8** 项 Rust 桌面测试；ops crate 也会构建与测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
@@ -359,6 +360,7 @@ pnpm evidence:verify --manifest <manifest.json> --root <bundle>
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
 pnpm qol:phase-control --in /tmp/qol.jsonl
+pnpm qol:hrv-check --in <QoL_Stress/data>/ecg.csv
 python3 scripts/wesad_adapter.py --root <WESAD> --out /tmp/wesad-canonical.jsonl
 reuse lint                  # REUSE/SPDX 合规
 pnpm license:js             # JS 依赖许可检查

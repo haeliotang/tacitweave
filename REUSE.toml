@@ -223,3 +223,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/research/qol-phase-positive-control.md"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/research/ecg-hrv-pipeline.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

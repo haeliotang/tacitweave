@@ -81,6 +81,7 @@ Read the full positioning and literature brief:
 - [CASE evidence bundle](docs/research/case-evidence-bundle.md)
 - [QoL_Stress import check](docs/research/qol-stress-import-check.md)
 - [QoL_Stress phase positive control](docs/research/qol-phase-positive-control.md)
+- [ECG HRV pipeline check](docs/research/ecg-hrv-pipeline.md)
 - [WESAD adapter contract](docs/research/wesad-adapter.md)
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 interval-method audit](docs/research/lsm0-method-audit.md)
@@ -203,7 +204,7 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **224** Vitest unit/integration tests
+- **226** Vitest unit/integration tests
 - **24** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
@@ -390,6 +391,7 @@ pnpm evidence:verify --manifest <manifest.json> --root <bundle>
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
 pnpm qol:phase-control --in /tmp/qol.jsonl
+pnpm qol:hrv-check --in <QoL_Stress/data>/ecg.csv
 python3 scripts/wesad_adapter.py --root <WESAD> --out /tmp/wesad-canonical.jsonl
 reuse lint                  # REUSE/SPDX compliance
 pnpm license:js             # JS dependency license check
