@@ -6,6 +6,9 @@ import { captureStorageKey } from './capture-ledger'
 import { addMotif, motifStorageKey } from './motif-journal'
 import { addRelationshipTrigger, relationshipStorageKey } from './relationship'
 import type { SomaticCapture } from './somatic'
+import { createRevisit } from './continuity'
+import { attachFieldNode, fieldNodeKey, setFieldPosition } from './field'
+import { createSymbolicSession } from './symbolic-session'
 
 function memoryStorage() {
   const values = new Map<string, string>()
@@ -23,6 +26,19 @@ describe('local dataset import/export', () => {
     const parsed = parseLocalDataset(JSON.stringify(localDatasetFromSnapshot(snapshot, '2026-11-01T00:00:00Z')))
     expect(parsed.motifs[0].name).toBe('旧门')
     expect(parsed.relationships[0].situation).toBe('很久没回复')
+  })
+
+  it('round-trips continuity, field links and session source ids', () => {
+    const storage = memoryStorage()
+    const root = addMotif(storage, { name: '旧门', capture, now: '2026-11-01T00:00:00Z' })[0]
+    const revised = createRevisit([root], root.id, { name: '旧门之后', note: '再次进入', now: '2026-11-02T00:00:00Z' })
+    const layout = attachFieldNode(setFieldPosition({ version: 'field-layout-v1', positions: {}, links: [] }, fieldNodeKey('motif', root.id), { x: 0.4, y: 0.4 }), fieldNodeKey('motif', root.id), fieldNodeKey('motif', revised.id), '2026-11-02T00:00:00Z')
+    const session = createSymbolicSession({ id: 'e1', seed: 1, durationSec: 75, createdAt: '2026-11-02T00:00:00Z', rendererKind: 'symbolic', motifId: revised.id, innerPlan: { version: 'inner-v1', format: 'encounter', durationSec: 75, motifs: ['door'], figure: 'none', beats: [], prompts: { space: '', figure: '', sound: '', light: '', camera: '', negative: [] }, safety: { notDiagnosis: true, noInterpretation: true, userOwnsMeaning: true, exitAlwaysAvailable: true, noMemoriesClaimed: true } }, agency: [{ atSec: 4, action: 'approach' }] }, '2026-11-02T00:01:00Z', 's1')
+    const snapshot = parseLocalDataset(JSON.stringify({ version: 'local-dataset-v2', motifs: [revised, root], relationships: [], field: layout, symbolicSessions: [session] }))
+    expect(snapshot.motifs[0].continuity).toMatchObject({ rootId: root.id, visit: 2, note: '再次进入' })
+    expect(snapshot.field?.links).toHaveLength(1)
+    expect(snapshot.symbolicSessions?.[0].motifId).toBe(revised.id)
+    expect(JSON.stringify(snapshot)).not.toMatch(/diagnos|score|unconscious/i)
   })
 
   it('rejects a dataset with the wrong version or malformed records', () => {

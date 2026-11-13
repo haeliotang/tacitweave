@@ -20,4 +20,10 @@ test('a past fragment can be re-entered without overwriting the original', async
   await expect(page.locator('.continuity-detail-head').getByText(/2 visits/)).toBeVisible()
   const motifCount = await page.evaluate(() => JSON.parse(localStorage.getItem('tacitweave.motifs.v1') ?? '[]').length)
   expect(motifCount).toBe(3)
+
+  await page.reload()
+  await page.getByRole('button', { name: /Continuity$/ }).click()
+  await expect(page.locator('.continuity-visit')).toHaveCount(2)
+  const linkCount = await page.evaluate(() => JSON.parse(localStorage.getItem('tacitweave.field-layout.v1') ?? '{"links":[]}').links.length)
+  expect(linkCount).toBeGreaterThanOrEqual(1)
 })
