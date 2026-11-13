@@ -118,3 +118,21 @@ pnpm test src/representation-contract.test.ts
 - 关系瞬间的“场景/反应/身体反应”是否应拆成多条记录；当前建议拆分。
 - 跨 session 的同一记录身份：当前要求 `id` 全局唯一，不允许复用。
 - 研究对象退出后如何标记删除：由独立研究存储生命周期处理，不在本契约内发明软删除语义。
+
+## Executable stability metrics
+
+`src/representation-stability.ts` adds descriptive metrics for repeated probes:
+
+- exact kind/value agreement
+- mean Jaccard agreement per kind
+- revision rate
+- source mix (`user_input`, `user_confirmed`, `system_generated`, `system_inferred`)
+
+```bash
+pnpm test src/representation-stability.test.ts
+```
+
+These metrics do not estimate test-retest reliability by themselves. Probe order,
+prompt/layout and missingness must be reported. A stable record can still be a
+prompt artifact; a changing record can still be meaningful. No p-values or
+psychological-structure claim is produced.

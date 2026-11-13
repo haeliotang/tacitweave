@@ -28,7 +28,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 | # | 工作流 | 交付物 | 状态 |
 | --- | --- | --- | --- |
-| 1 | 表示契约 | [Representation Contract v0.1](representation-contract-v0.1.md) + 反例 + 不变量测试 | v0.1 完成 |
+| 1 | 表示契约 | [Representation Contract v0.1](representation-contract-v0.1.md) + 反例 + 不变量/稳定性指标测试 | v0.1 + 稳定性工具完成；无实证数据 |
 | 2 | 公开数据复分析 | [Public data protocol](public-data-reanalysis.md) + canonical harness + CASE/QoL adapters + evidence | CASE/QoL 导入通过；WESAD 未接入；无假设检验 |
 | 3 | 构念效度 | [Construct Validity Matrix](construct-validity-matrix.md) + `src/construct-validity.ts` | 文档 + 可执行 registry 完成；无实证支持 |
 | 4 | LSM-1 评估 | [LSM-1 evaluation contract](lsm1-evaluation-contract.md) + 合成数据反例 | 契约 + 合成测试完成；无真实模型/数据 |
