@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { readFile } from 'node:fs/promises'
 import { expect, test } from '@playwright/test'
 
 test('a past fragment can be re-entered without overwriting the original', async ({ page }) => {
@@ -26,4 +27,14 @@ test('a past fragment can be re-entered without overwriting the original', async
   await expect(page.locator('.continuity-visit')).toHaveCount(2)
   const linkCount = await page.evaluate(() => JSON.parse(localStorage.getItem('tacitweave.field-layout.v1') ?? '{"links":[]}').links.length)
   expect(linkCount).toBeGreaterThanOrEqual(1)
+
+  await page.getByRole('button', { name: /Settings$/ }).click()
+  const downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Export all local data' }).click()
+  const download = await downloadPromise
+  const filePath = await download.path()
+  expect(filePath).not.toBeNull()
+  const dataset = JSON.parse(await readFile(filePath!, 'utf8')) as { motifs: Array<{ continuity?: { rootId: string; visit: number } }>; field?: { links: unknown[] } }
+  expect(dataset.motifs.some(motif => motif.continuity?.visit === 2)).toBe(true)
+  expect(dataset.field?.links.length).toBeGreaterThanOrEqual(1)
 })
