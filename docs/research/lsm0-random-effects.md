@@ -25,36 +25,36 @@ SPDX-License-Identifier: CC-BY-4.0
 pnpm lsm0:random-effects
 ```
 
-## 结果
+## 结果（AR-adjusted effective sample size）
 
+在原始版本上加入显式 `effectivePairs`：用每个参与者的 lag-1 AR 估计
+`n_eff = max(4, n * (1 - |AR|) / (1 + |AR|))`，而不是把 session 数当作独立样本。
 80 replications，名义 95% 区间：
 
-| 场景 | coverage | width | bias | tau2 | I2 |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| AR=0 | 0.950 | 0.383 | 0.014 | 0.0321 | 0.155 |
-| AR=0.5 | 0.950 | 0.396 | -0.017 | 0.0377 | 0.175 |
-| AR=0.8 | 0.912 | 0.408 | -0.078 | 0.0388 | 0.184 |
-| missing=0.4 | 0.938 | 0.501 | -0.010 | 0.1377 | 0.464 |
-| heterogeneity SD=0.2 | 0.975 | 0.414 | -0.014 | 0.0537 | 0.238 |
-| 12×8 sessions | 0.938 | 0.557 | -0.049 | 0.0994 | 0.252 |
-| 24×12 participants | 0.950 | 0.276 | -0.018 | 0.0281 | 0.158 |
+| 场景 | coverage | width | bias |
+| --- | ---: | ---: | ---: |
+| AR=0 | 0.963 | 0.491 | 0.003 |
+| AR=0.5 | 0.988 | 0.485 | -0.027 |
+| AR=0.8 | 0.938 | 0.503 | -0.092 |
+| missing=0.4 | 1.000 | 0.698 | -0.016 |
+| heterogeneity SD=0.2 | 0.975 | 0.490 | -0.029 |
+| 12×8 sessions | 0.988 | 0.715 | -0.058 |
+| 24×12 participants | 0.975 | 0.344 | -0.030 |
 
-## 第二实现
-
-`scripts/random_effects_verify.py` 用 Python 标准库重新实现 Fisher-z + DL，读取
-`[{rho, pairs}]` JSON：
-
-```bash
-python3 scripts/random_effects_verify.py --in estimates.json
-python3 scripts/test_random_effects_verify.py
-```
-
-对固定估计 `[0.2, 0.5, 0.35]`（各 12 sessions），Node 与 Python 的
-`meanRho=0.3561713920`、`tau2=0`、`q=0.5411806999` 在 1e-12 内一致。
-
-这证明**实现可重复**，不等于独立数据验证，也不等于方法已校准。
+与未调整版本相比，覆盖率改善，但区间更宽，部分场景出现 over-coverage；AR=0.8
+仍有明显 bias。不能把“覆盖率达到 0.95”单独当作方法有效。
 
 ## 判断
+
+这是目前最值得继续验证的候选，但仍不是批准方法：
+
+- AR-adjusted 版本在模拟中接近/超过名义覆盖，但更保守、区间更宽；
+- AR=0.8 的 bias 仍约 -0.09；
+- `n_eff` 公式是近似，必须用真实数据评估；
+- 仍需第二分析者复核与 Gate 2B 真实特征校准。
+
+原未调整版本（覆盖不足）保留为负面基线。
+
 
 这是目前表现最好的候选：
 

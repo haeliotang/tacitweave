@@ -4,6 +4,7 @@
 import { analyticPopulationSpearman } from '../src/lsm0-precision'
 import { randomEffectsMean } from '../src/lsm0-random-effects'
 import { spearmanRho } from '../src/lsm0-eval'
+import { lagOneAutocorrelation } from '../src/lsm0-autocorrelation'
 
 interface Scenario {
   participants: number
@@ -31,7 +32,9 @@ function normal(random: () => number) {
 }
 function mean(values: readonly number[]): number | null { return values.length ? values.reduce((a, b) => a + b, 0) / values.length : null }
 
-function participantRho(scenario: Scenario, coupling: number, random: () => number): number | null {
+interface ParticipantEstimate { rho: number; pairs: number; effectivePairs: number }
+
+function participantEstimate(scenario: Scenario, coupling: number, random: () => number): ParticipantEstimate | null {
   let latent = normal(random)
   const xs: number[] = []
   const ys: number[] = []
@@ -41,7 +44,13 @@ function participantRho(scenario: Scenario, coupling: number, random: () => numb
     const y = coupling * latent + Math.sqrt(Math.max(0, 1 - coupling ** 2)) * normal(random) + scenario.reportNoise * normal(random)
     if (random() >= scenario.missingRate) { xs.push(x); ys.push(y) }
   }
-  return xs.length >= 4 ? spearmanRho(xs, ys) : null
+  if (xs.length < 4) return null
+  const rho = spearmanRho(xs, ys)
+  if (rho === null) return null
+  const ars = [lagOneAutocorrelation(xs), lagOneAutocorrelation(ys)].filter((value): value is number => value !== null)
+  const ar = ars.length ? Math.abs(ars.reduce((sum, value) => sum + value, 0) / ars.length) : 0
+  const effectivePairs = Math.max(4, xs.length * (1 - ar) / (1 + ar))
+  return { rho, pairs: xs.length, effectivePairs }
 }
 
 function audit(label: string, scenario: Scenario) {
@@ -58,9 +67,9 @@ function audit(label: string, scenario: Scenario) {
     const targets: number[] = []
     for (let participant = 0; participant < scenario.participants; participant += 1) {
       const coupling = Math.max(-0.95, Math.min(0.95, scenario.latentCoupling + scenario.participantEffectSd * normal(random)))
-      const rho = participantRho(scenario, coupling, random)
-      if (rho === null) continue
-      estimates.push({ rho, pairs: scenario.sessions })
+      const estimate = participantEstimate(scenario, coupling, random)
+      if (estimate === null) continue
+      estimates.push(estimate)
       targets.push(analyticPopulationSpearman(coupling, scenario))
     }
     const result = randomEffectsMean(estimates)

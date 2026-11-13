@@ -15,6 +15,14 @@ describe('Fisher-z random-effects estimator', () => {
     expect(result!.ciLowRho).toBeLessThan(result!.ciHighRho)
   })
 
+
+  it('uses an explicit effective sample size instead of silently treating sessions as independent', () => {
+    const estimates = [{ rho: 0.2, pairs: 12 }, { rho: 0.5, pairs: 12 }, { rho: 0.35, pairs: 12 }]
+    const base = randomEffectsMean(estimates)!
+    const adjusted = randomEffectsMean(estimates.map(item => ({ ...item, effectivePairs: 4 })))!
+    expect(adjusted.ciHighRho - adjusted.ciLowRho).toBeGreaterThan(base.ciHighRho - base.ciLowRho)
+  })
+
   it('returns null for insufficient or invalid estimates', () => {
     expect(randomEffectsMean([])).toBeNull()
     expect(randomEffectsMean([{ rho: 0.2, pairs: 2 }])).toBeNull()

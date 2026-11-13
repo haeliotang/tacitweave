@@ -112,7 +112,7 @@ SPDX-License-Identifier: CC-BY-4.0
 - moving-block bootstrap 更差；
 - participant-cluster bootstrap 也未通过覆盖审查。
 
-因此本草案**不批准**上述任一区间方法。Fisher-z 随机效应候选（`lsm0-random-effects.md`）在 AR≤0.5 时接近名义覆盖，但 AR=0.8 时仍失败，仍需独立校准。
+因此本草案**不批准**上述任一区间方法。Fisher-z 随机效应候选加入显式 effectivePairs（AR-adjusted）后，在模拟中接近/超过名义覆盖，但区间更宽、AR=0.8 仍有 bias；仍不是批准方法，需真实特征与第二分析者校准。
 
 **暂定 AR 门槛（未冻结）**：
 

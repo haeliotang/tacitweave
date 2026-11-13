@@ -56,7 +56,7 @@ pnpm lsm0:method-audit
 
 ## 随机效应候选
 
-Fisher-z random-effects 候选见 [lsm0-random-effects.md](lsm0-random-effects.md)。它在 AR≤0.5 时接近名义覆盖，但 AR=0.8 时仍覆盖不足；不能无条件批准。
+Fisher-z random-effects 候选见 [lsm0-random-effects.md](lsm0-random-effects.md)。AR-adjusted effectivePairs 版本在模拟中接近/超过名义覆盖，但更保守、AR=0.8 仍有 bias；不能无条件批准。
 
 ## 组均值后续
 

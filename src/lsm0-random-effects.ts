@@ -10,6 +10,8 @@
 export interface ParticipantCorrelationEstimate {
   rho: number
   pairs: number
+  /** Optional autocorrelation-adjusted effective sample size; not imputed silently. */
+  effectivePairs?: number
 }
 
 export interface RandomEffectsResult {
@@ -36,7 +38,8 @@ export function inverseFisherZ(z: number): number {
 }
 
 function variance(estimate: ParticipantCorrelationEstimate): number | null {
-  return estimate.pairs > 3 ? 1 / (estimate.pairs - 3) : null
+  const n = estimate.effectivePairs ?? estimate.pairs
+  return n > 3 ? 1 / (n - 3) : null
 }
 
 /**

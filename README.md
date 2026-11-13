@@ -202,7 +202,7 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **221** Vitest unit/integration tests
+- **222** Vitest unit/integration tests
 - **24** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
