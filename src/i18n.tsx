@@ -420,6 +420,9 @@ const en: Record<string, string> = {
   '原记录保留': 'original preserved',
   '查看最新片段': 'Open latest fragment',
   '进入最新空间': 'Enter latest space',
+  '次空间': 'sessions',
+  '靠近': 'approach',
+
   '再次进入': 'Re-enter',
   '没有额外说明': 'No extra note',
   '修订': 'Revision',

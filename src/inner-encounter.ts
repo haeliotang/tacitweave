@@ -47,7 +47,7 @@ export function createInnerEncounter(input: { fragment: string; feeling?: InnerF
   }
 }
 
-export function createInnerCaptureEncounter(capture: SomaticCapture): Encounter {
+export function createInnerCaptureEncounter(capture: SomaticCapture, motifId?: string): Encounter {
   const inner = innerPlanFromCapture(capture)
   return {
     id: `demo-inner-${crypto.randomUUID()}`,
@@ -56,11 +56,12 @@ export function createInnerCaptureEncounter(capture: SomaticCapture): Encounter 
     createdAt: new Date().toISOString(),
     rendererKind: 'symbolic',
     innerPlan: inner,
+    ...(motifId ? { motifId } : {}),
     plan: { version: 'episode-plan-v1', kind: 'inner', rendererKind: 'symbolic', inner },
   }
 }
 
-export function createComposedCaptureEncounter(capture: SomaticCapture, inner: InnerPlan): Encounter {
+export function createComposedCaptureEncounter(capture: SomaticCapture, inner: InnerPlan, motifId?: string): Encounter {
   return {
     id: `demo-inner-${crypto.randomUUID()}`,
     seed: Math.floor(Math.random() * 0xffffffff),
@@ -68,6 +69,7 @@ export function createComposedCaptureEncounter(capture: SomaticCapture, inner: I
     createdAt: new Date().toISOString(),
     rendererKind: 'symbolic',
     innerPlan: inner,
+    ...(motifId ? { motifId } : {}),
     plan: { version: 'episode-plan-v1', kind: 'inner', rendererKind: 'symbolic', inner },
   }
 }

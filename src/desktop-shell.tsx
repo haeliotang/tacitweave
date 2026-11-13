@@ -94,7 +94,7 @@ function MotifDetail({ motif, tab, setTab, onEnter, onStart }: { motif: MotifEnt
       meta={`${dateLabel(motif.createdAt, lang)} · ${t('本机保存')} · ${motif.capture.fragments.length} ${t('块意象')}`}
       action={<div className="actions"><button className="primary-button" onClick={onEnter}>{t('进入空间')}</button><button className="quiet" onClick={() => setComposing(value => !value)}>{composing ? t('关闭自定义') : t('自定义空间')}</button></div>}
     />
-    {composing && <SpaceComposer capture={motif.capture} onStart={onStart} onCancel={() => setComposing(false)} />}
+    {composing && <SpaceComposer capture={motif.capture} motifId={motif.id} onStart={onStart} onCancel={() => setComposing(false)} />}
     {tab === 'overview' && <div className="detail-grid">
       <section className="paper-card span-2">
         <p className="card-label">{t('身体线索')}</p>
@@ -257,12 +257,12 @@ export function DesktopShell() {
       void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: nextCaptures, symbolicSessions })
     }
   }
-  const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture)) }
+  const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture, selected.id)) }
   const enterMotif = (id: string) => {
     const motif = motifs.find(entry => entry.id === id)
     if (!motif) return
     setSelectedId(motif.id)
-    start(createInnerCaptureEncounter(motif.capture))
+    start(createInnerCaptureEncounter(motif.capture, motif.id))
   }
   const backFromSpace = () => {
     if (encounter) {
@@ -587,7 +587,7 @@ export function DesktopShell() {
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
               </>}
               {view === 'continuity' && <>
-                <Suspense fallback={null}><ContinuityView motifs={motifs} onRevisit={revisit} onOpen={openMotif} onEnter={enterMotif} /></Suspense>
+                <Suspense fallback={null}><ContinuityView motifs={motifs} sessions={symbolicSessions} onRevisit={revisit} onOpen={openMotif} onEnter={enterMotif} /></Suspense>
               </>}
               {view === 'relationship' && <>
                 <WorkspaceHeader eyebrow={t('关系瞬间')} title={t('只画你自己的地图。')} meta={t('不推断对方，不做匹配，也不把关系变成评分。')} />

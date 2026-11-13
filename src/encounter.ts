@@ -28,4 +28,6 @@ export interface Encounter {
   plan?: EpisodePlan
   /** User-authored agency events from the symbolic renderer. */
   agency?: SymbolicAgencyEvent[]
+  /** Optional local motif this encounter was opened from; not a psychological link. */
+  motifId?: string
 }

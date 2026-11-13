@@ -28,7 +28,7 @@ const figureOptions: Array<{ value: InnerFigure; label: string; labelEn: string 
   { value: 'animal', label: '动物', labelEn: 'Animal' },
 ]
 
-export function SpaceComposer({ capture, onStart, onCancel }: { capture: SomaticCapture; onStart: (encounter: Encounter) => void; onCancel: () => void }) {
+export function SpaceComposer({ capture, motifId, onStart, onCancel }: { capture: SomaticCapture; motifId?: string; onStart: (encounter: Encounter) => void; onCancel: () => void }) {
   const { lang, t } = useLanguage()
   const base = innerPlanFromCapture(capture)
   const [motifs, setMotifs] = useState<InnerMotif[]>(base.motifs)
@@ -45,7 +45,7 @@ export function SpaceComposer({ capture, onStart, onCancel }: { capture: Somatic
     event.preventDefault()
     if (!motifs.length) return
     const plan = composeInnerPlan(base, { motifs, figure, durationSec })
-    onStart(createComposedCaptureEncounter(capture, plan))
+    onStart(createComposedCaptureEncounter(capture, plan, motifId))
   }}>
     <div className="composer-head"><div><p className="eyebrow">{t('自定义空间')}</p><h3>{t('你决定这个空间里有什么')}</h3><p className="note">{t('只从少量非语言输入出发；系统不解释你的选择。')}</p></div><button type="button" className="quiet small" onClick={onCancel}>{t('关闭')}</button></div>
     <div className="composer-section">

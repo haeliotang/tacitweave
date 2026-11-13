@@ -28,6 +28,12 @@ describe('symbolic sessions', () => {
     expect(JSON.stringify(session)).not.toMatch(/score|diagnos|interpretation/i)
   })
 
+  it('preserves the optional source motif on a session', () => {
+    const session = createSymbolicSession({ ...encounter, motifId: 'motif-1' }, '2026-11-01T00:01:00Z', 'session-m')
+    expect(session.motifId).toBe('motif-1')
+    expect(isSymbolicSession(session)).toBe(true)
+  })
+
   it('records an explicit extension without rewriting the original plan', () => {
     const extended = { ...encounter, durationSec: 105, agency: [...(encounter.agency ?? []), { atSec: 75, action: 'extend' as const, durationSec: 105 }] }
     const session = createSymbolicSession(extended, '2026-11-01T00:02:00Z', 'session-2')

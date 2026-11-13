@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { breaths, certainties, fragments, regions, sensations, type AssociativeFragmentId, type SomaticCapture, type SomaticCertainty, type SomaticRegion, type SomaticSensation } from './somatic'
 import { buildContinuityTrails, compareContinuity, type ContinuityTrail, type RevisitInput } from './continuity'
 import type { MotifEntry } from './motif-journal'
+import type { SymbolicSession } from './symbolic-session'
 import { useLanguage, type Language } from './i18n'
 import './continuity.css'
 
@@ -24,7 +25,7 @@ function fieldValue(field: string, value: string, lang: Language) {
   return value
 }
 
-export function ContinuityView({ motifs, onRevisit, onOpen, onEnter }: { motifs: MotifEntry[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void }) {
+export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter }: { motifs: MotifEntry[]; sessions: SymbolicSession[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void }) {
   const { lang, t } = useLanguage()
   const trails = useMemo(() => buildContinuityTrails(motifs), [motifs])
   const [selectedRoot, setSelectedRoot] = useState<string | null>(trails[0]?.rootId ?? null)
@@ -85,13 +86,17 @@ export function ContinuityView({ motifs, onRevisit, onOpen, onEnter }: { motifs:
         </div>
 
         <ol className="continuity-visits">
-          {selected.visits.map((entry, index) => <li key={entry.id} className={`continuity-visit ${entry.id === selected.latest.id ? 'latest' : ''}`}>
-            <button type="button" className="visit-main" onClick={() => onOpen(entry.id)}>
-              <span className="visit-index">{entry.continuity?.visit ?? index + 1}</span>
-              <span><strong>{dateLabel(entry.createdAt, lang)}</strong><small>{entry.continuity?.note || t('没有额外说明')}</small></span>
-            </button>
-            <span className="visit-kind">{entry.continuity?.action === 'revise' ? t('修订') : t('重新进入')}</span>
-          </li>)}
+          {selected.visits.map((entry, index) => {
+            const entered = sessions.filter(session => session.motifId === entry.id)
+            const actionCount = (action: string) => sessions.filter(session => session.motifId === entry.id).reduce((sum, session) => sum + session.agency.filter(event => event.action === action).length, 0)
+            return <li key={entry.id} className={`continuity-visit ${entry.id === selected.latest.id ? 'latest' : ''}`}>
+              <button type="button" className="visit-main" onClick={() => onOpen(entry.id)}>
+                <span className="visit-index">{entry.continuity?.visit ?? index + 1}</span>
+                <span><strong>{dateLabel(entry.createdAt, lang)}</strong><small>{entry.continuity?.note || t('没有额外说明')}{entered.length > 0 ? ` · ${entered.length} ${t('次空间')} · ${t('靠近')} ${actionCount('approach')} · ${t('停留')} ${actionCount('stay')} · ${t('离开')} ${actionCount('leave')}` : ''}</small></span>
+              </button>
+              <span className="visit-kind">{entry.continuity?.action === 'revise' ? t('修订') : t('重新进入')}</span>
+            </li>
+          })}
         </ol>
 
         {editing && <RevisitEditor source={latest} onCancel={() => setEditing(false)} onSave={input => { onRevisit(latest.id, input); setEditing(false) }} />}
