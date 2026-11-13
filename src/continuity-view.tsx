@@ -132,7 +132,7 @@ export function ContinuityView({ motifs, sessions, focusId, onRevisit, onOpen, o
           </div>
           {comparison && <div className="compare-table">
             {comparison.changes.map(change => <div key={change.field} className={`compare-row ${change.changed ? 'changed' : ''}`}>
-              <span className="compare-field">{t(change.field === 'name' ? '名字' : change.field === 'region' ? '位置' : change.field === 'sensation' ? '感觉' : change.field === 'intensity' ? '强度' : change.field === 'breath' ? '呼吸' : change.field === 'certainty' ? '确定程度' : '意象碎片')}</span>
+              <span className="compare-field">{t(change.field === 'name' ? '名字' : change.field === 'region' ? '位置' : change.field === 'sensation' ? '感觉' : change.field === 'intensity' ? '强度' : change.field === 'breath' ? '呼吸' : change.field === 'certainty' ? '确定程度' : change.field === 'symbolic' ? '空间配置' : '意象碎片')}</span>
               <span>{fieldValue(change.field, change.before, lang) || t('空')}</span>
               <span className="compare-arrow">→</span>
               <span>{fieldValue(change.field, change.after, lang) || t('空')}</span>

@@ -12,7 +12,7 @@ export interface ContinuityTrail {
 }
 
 export interface ContinuityFieldChange {
-  field: 'name' | 'region' | 'sensation' | 'intensity' | 'breath' | 'certainty' | 'fragments'
+  field: 'name' | 'region' | 'sensation' | 'intensity' | 'breath' | 'certainty' | 'fragments' | 'symbolic'
   before: string
   after: string
   changed: boolean
@@ -27,6 +27,11 @@ export interface ContinuityComparison {
 
 export function continuityRootId(entry: MotifEntry): string {
   return entry.continuity?.rootId ?? entry.id
+}
+
+function symbolicLabel(symbolic: MotifEntry['symbolic']): string {
+  if (!symbolic) return ''
+  return `${symbolic.format} · ${symbolic.motifs.join(' / ')} · ${symbolic.figure}`
 }
 
 function compareStrings(left: readonly string[], right: readonly string[]): [string, string] {
@@ -102,6 +107,7 @@ export function compareContinuity(before: MotifEntry, after: MotifEntry): Contin
     { field: 'breath', before: before.capture.breath, after: after.capture.breath, changed: before.capture.breath !== after.capture.breath },
     { field: 'certainty', before: before.capture.certainty ?? '', after: after.capture.certainty ?? '', changed: before.capture.certainty !== after.capture.certainty },
     { field: 'fragments', before: beforeFragments, after: afterFragments, changed: beforeFragments !== afterFragments },
+    { field: 'symbolic', before: symbolicLabel(before.symbolic), after: symbolicLabel(after.symbolic), changed: symbolicLabel(before.symbolic) !== symbolicLabel(after.symbolic) },
   ]
   return { beforeId: before.id, afterId: after.id, changes, changedCount: changes.filter(change => change.changed).length }
 }

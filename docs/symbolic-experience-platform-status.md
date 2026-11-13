@@ -58,7 +58,7 @@ SPDX-License-Identifier: CC-BY-4.0
 ## 验证证据
 
 ```text
-Vitest: 193 passed
+Vitest: 194 passed
 Playwright E2E: 29 passed
 pnpm build: exit 0, main JS ~330 KB
 reuse lint: 262/262 compliant

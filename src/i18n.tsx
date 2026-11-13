@@ -184,6 +184,7 @@ const en: Record<string, string> = {
   '导入失败：需要 tacitweave 导出的 local-dataset-v1/v2 JSON。': 'Import failed: use a local-dataset-v1/v2 JSON exported by Tacitweave.',
   '删除本机全部数据？此操作不可撤销。': 'Delete all local data? This cannot be undone.',
   '身体的第一反应': 'First body response',
+  '空间配置': 'Space configuration',
   '共': 'Total',
   '条。下面只是按你选过的字段计数，不是解释，也不代表因果。': 'records. These are counts of fields you chose, not interpretation or causation.',
   '关系瞬间地图，节点由用户自己命名': 'Relationship moment map; nodes are named by you',

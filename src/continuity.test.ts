@@ -46,6 +46,13 @@ describe('symbolic continuity', () => {
     expect(trails[0].latest.id).toBe(second.id)
   })
 
+  it('reports a symbolic configuration change', () => {
+    const before = createMotif({ name: '门', capture: { region: 'chest', sensation: 'pressure', intensity: 3, breath: 'even', fragments: ['wet-corridor'], certainty: 'clear' }, symbolic: { format: 'space', motifs: ['door'], figure: 'shadow' }, now: '2026-11-01T00:00:00Z' })
+    const after = createRevisit([before], before.id, { symbolic: { format: 'space', motifs: ['door', 'water'], figure: 'animal' }, now: '2026-11-02T00:00:00Z' })
+    const comparison = compareContinuity(before, after)
+    expect(comparison.changes.find(change => change.field === 'symbolic')?.changed).toBe(true)
+  })
+
   it('compares user-authored fields without inferring meaning', () => {
     const before = motif('第一版')
     const after = createRevisit([before], before.id, {

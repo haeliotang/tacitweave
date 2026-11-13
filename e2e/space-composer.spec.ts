@@ -26,6 +26,7 @@ test('a user can shape a space before entering it', async ({ page }) => {
   await page.getByRole('button', { name: 'Save as a new visit' }).click()
   await expect(page.getByRole('heading', { name: 'Past fragments can be re-entered' })).toBeVisible()
   await expect(page.locator('.continuity-visit')).toHaveCount(2)
+  await expect(page.getByText('Space configuration')).toBeVisible()
 })
 
 
