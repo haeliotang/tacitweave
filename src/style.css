@@ -148,8 +148,8 @@ textarea { display: block; width: 100%; min-height: 130px; padding: 18px; border
 .motif-item { padding: 12px 14px; border: 1px solid #deded3; border-radius: 12px; background: #f4f1e8 }
 .motif-main { display: flex; align-items: baseline; justify-content: space-between; gap: 10px }
 .motif-name { font-weight: 600; color: #292d29 }
-.motif-date { color: #8a9186; font-size: 12px }
-.motif-meta { margin: 6px 0 8px; color: #71786d; font-size: 12px; line-height: 1.6 }
+.motif-date { color: #5b6258; font-size: 12px }
+.motif-meta { margin: 6px 0 8px; color: #5b6258; font-size: 12px; line-height: 1.6 }
 .motif-item .small { padding: 4px 8px; font-size: 12px }
 /* v2 user-authored relationship trigger map; no inference or matching. */
 .relationship-journal { margin-top: 32px; padding-top: 22px; border-top: 1px solid #deded3 }
@@ -174,7 +174,7 @@ textarea { display: block; width: 100%; min-height: 130px; padding: 18px; border
 .trigger-summary .note { margin-top: 0 }
 .trigger-summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
 .trigger-summary-grid h3 { margin: 0 0 4px; font: 600 13px/1.4 Georgia, serif; color: #596158 }
-.trigger-summary-grid p { margin: 2px 0; color: #71786d; font-size: 12px }
+.trigger-summary-grid p { margin: 2px 0; color: #5b6258; font-size: 12px }
 @media (max-width: 720px) { .trigger-summary-grid { grid-template-columns: 1fr } }
 .local-data-panel { margin-top: 28px; padding-top: 20px; border-top: 1px solid #deded3 }
 .local-data-panel h2 { margin: 0 0 4px; font: 600 16px/1.4 Georgia, serif; color: #292d29 }
