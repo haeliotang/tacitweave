@@ -430,6 +430,12 @@ const en: Record<string, string> = {
   '进入最新空间': 'Enter latest space',
   '次空间': 'sessions',
   '次调整': 'changes',
+  '这次片段的主动交互': 'Interactions in this fragment',
+  '个事件': 'events',
+  '继续': 'resume',
+  '延长': 'extend',
+  '调整': 'change',
+
   '靠近': 'approach',
 
   '再次进入': 'Re-enter',

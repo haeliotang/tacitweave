@@ -17,4 +17,7 @@ test('continuity shows the user actions from a linked space session', async ({ p
   await expect(page.getByText(/approach 1/)).toBeVisible()
   await expect(page.getByText(/leave 1/i)).toBeVisible()
   await expect(page.getByText(/1 changes/)).toBeVisible()
+  await expect(page.locator('.continuity-sessions')).toBeVisible()
+  await page.locator('.continuity-sessions summary').first().click()
+  await expect(page.locator('.continuity-sessions li').first()).toBeVisible()
 })

@@ -25,11 +25,27 @@ function fieldValue(field: string, value: string, lang: Language) {
   return value
 }
 
+function clockLabel(seconds: number) {
+  const safe = Math.max(0, Math.floor(seconds))
+  return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, '0')}`
+}
+
+const actionLabel: Record<string, string> = {
+  approach: '靠近',
+  stay: '停留',
+  resume: '继续',
+  leave: '离开',
+  reenter: '重新进入',
+  extend: '延长',
+  change: '调整',
+}
+
 export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter }: { motifs: MotifEntry[]; sessions: SymbolicSession[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void }) {
   const { lang, t } = useLanguage()
   const trails = useMemo(() => buildContinuityTrails(motifs), [motifs])
   const [selectedRoot, setSelectedRoot] = useState<string | null>(trails[0]?.rootId ?? null)
   const selected = trails.find(trail => trail.rootId === selectedRoot) ?? trails[0] ?? null
+  const selectedSessions = selected ? sessions.filter(session => session.motifId === selected.latest.id) : []
   const [beforeId, setBeforeId] = useState<string | null>(null)
   const [afterId, setAfterId] = useState<string | null>(null)
   const [editing, setEditing] = useState(false)
@@ -83,6 +99,7 @@ export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter }:
             <button type="button" className="quiet" onClick={() => onEnter(selected.latest.id)}>{t('进入最新空间')}</button>
             <button type="button" className="primary-button" onClick={() => setEditing(value => !value)}>{editing ? t('取消') : t('再次进入')}</button>
           </div>
+          {selectedSessions.length > 0 && <div className="continuity-sessions"><p className="card-label">{t('这次片段的主动交互')}</p>{selectedSessions.map(session => <details key={session.id}><summary>{dateLabel(session.createdAt, lang)} · {session.agency.length} {t('个事件')}</summary><ul>{session.agency.map((event, index) => <li key={`${session.id}-${index}`}><span>{clockLabel(event.atSec)}</span><span>{t(actionLabel[event.action] ?? event.action)}</span>{event.change ? <span>{event.change.field}: {event.change.value}</span> : null}{event.durationSec ? <span>{event.durationSec}{t('秒')}</span> : null}</li>)}</ul></details>)}</div>}
         </div>
 
         <ol className="continuity-visits">
