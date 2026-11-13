@@ -2,6 +2,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { breaths, regions, sensations, type BreathState, type SomaticRegion, type SomaticSensation } from './somatic'
 
+export interface RelationshipContinuityRef {
+  version: 'relationship-continuity-v1'
+  rootId: string
+  parentId: string | null
+  visit: number
+  action: 're-enter' | 'revise'
+  note?: string
+}
+
 export type RelationshipResponse = 'approach' | 'freeze' | 'fawn' | 'flee' | 'fight' | 'numb'
 
 export interface RelationshipTrigger {
@@ -16,6 +25,8 @@ export interface RelationshipTrigger {
   intensity: 1 | 2 | 3 | 4 | 5
   breath: BreathState
   response: RelationshipResponse
+  /** Optional trace when this moment was created by revisiting an earlier one. */
+  continuity?: RelationshipContinuityRef
 }
 
 export interface RelationshipStorageLike {
@@ -38,6 +49,17 @@ export const responses: Array<{ value: RelationshipResponse; label: string; labe
 
 export const responseLabels: Record<RelationshipResponse, string> = Object.fromEntries(responses.map(item => [item.value, item.label])) as Record<RelationshipResponse, string>
 
+export function isRelationshipContinuityRef(value: unknown): value is RelationshipContinuityRef {
+  if (!value || typeof value !== 'object') return false
+  const ref = value as Partial<RelationshipContinuityRef>
+  return ref.version === 'relationship-continuity-v1'
+    && typeof ref.rootId === 'string' && ref.rootId.length > 0
+    && (ref.parentId === null || typeof ref.parentId === 'string')
+    && Number.isInteger(ref.visit) && (ref.visit as number) >= 2
+    && (ref.action === 're-enter' || ref.action === 'revise')
+    && (ref.note === undefined || (typeof ref.note === 'string' && ref.note.length <= 200))
+}
+
 function trim(value: string, max: number) {
   return value.trim().slice(0, max)
 }
@@ -54,6 +76,7 @@ export function isRelationshipTrigger(value: unknown): value is RelationshipTrig
     && Number.isInteger(entry.intensity) && entry.intensity! >= 1 && entry.intensity! <= 5
     && breaths.some(item => item.value === entry.breath)
     && responses.some(item => item.value === entry.response)
+    && (entry.continuity === undefined || isRelationshipContinuityRef(entry.continuity))
 }
 
 export function loadRelationshipTriggers(storage: RelationshipStorageLike): RelationshipTrigger[] {
@@ -80,11 +103,13 @@ export interface RelationshipInput {
   intensity: 1 | 2 | 3 | 4 | 5
   breath: BreathState
   response: RelationshipResponse
+  continuity?: RelationshipContinuityRef
   now?: string
 }
 
 export function createRelationshipTrigger(input: RelationshipInput): RelationshipTrigger {
   if (!input.situation.trim() && !input.cue.trim()) throw new Error('请至少写下一个触发瞬间')
+  if (input.continuity && !isRelationshipContinuityRef(input.continuity)) throw new Error('continuity is incomplete')
   return {
     version: 'relationship-trigger-v1',
     id: crypto.randomUUID(),
@@ -97,6 +122,7 @@ export function createRelationshipTrigger(input: RelationshipInput): Relationshi
     intensity: input.intensity,
     breath: input.breath,
     response: input.response,
+    ...(input.continuity ? { continuity: { ...input.continuity } } : {}),
   }
 }
 

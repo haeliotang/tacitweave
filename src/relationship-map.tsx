@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { breaths, regions, sensations, type BreathState, type SomaticRegion, type SomaticSensation } from './somatic'
 import { exportRelationshipTriggers, responses, summarizeRelationshipTriggers, type RelationshipInput, type RelationshipResponse, type RelationshipSummary, type RelationshipTrigger } from './relationship'
+import type { RelationshipRevisitInput } from './relationship-continuity'
 import { useLanguage, type Language } from './i18n'
 import { RelationshipTopologyView } from './relationship-topology.jsx'
 
@@ -45,7 +46,7 @@ function TriggerMap({ entries, lang, t }: { entries: RelationshipTrigger[]; lang
   </svg>
 }
 
-export function RelationshipJournal({ entries, onAdd, onRemove, onClear }: { entries: RelationshipTrigger[]; onAdd: (input: RelationshipInput) => void; onRemove: (id: string) => void; onClear: () => void }) {
+export function RelationshipJournal({ entries, onAdd, onRevisit, onRemove, onClear }: { entries: RelationshipTrigger[]; onAdd: (input: RelationshipInput) => void; onRevisit: (sourceId: string, input: RelationshipRevisitInput) => void; onRemove: (id: string) => void; onClear: () => void }) {
   const { lang, t } = useLanguage()
   const [open, setOpen] = useState(false)
   const [role, setRole] = useState('')
@@ -56,13 +57,23 @@ export function RelationshipJournal({ entries, onAdd, onRemove, onClear }: { ent
   const [intensity, setIntensity] = useState<1 | 2 | 3 | 4 | 5>(3)
   const [breath, setBreath] = useState<BreathState>('shallow')
   const [response, setResponse] = useState<RelationshipResponse>('freeze')
+  const [revisitSource, setRevisitSource] = useState<RelationshipTrigger | null>(null)
+  const [note, setNote] = useState('')
   const canSave = Boolean(situation.trim() || cue.trim())
   const summary = summarizeRelationshipTriggers(entries)
 
   const save = () => {
     if (!canSave) return
-    onAdd({ role, situation, cue, region, sensation, intensity, breath, response })
-    setRole(''); setSituation(''); setCue(''); setOpen(false)
+    if (revisitSource) {
+      onRevisit(revisitSource.id, { role, situation, cue, region, sensation, intensity, breath, response, note })
+    } else {
+      onAdd({ role, situation, cue, region, sensation, intensity, breath, response })
+    }
+    setRole(''); setSituation(''); setCue(''); setNote(''); setRevisitSource(null); setOpen(false)
+  }
+  const startRevisit = (entry: RelationshipTrigger) => {
+    setRole(entry.role); setSituation(entry.situation); setCue(entry.cue); setRegion(entry.region); setSensation(entry.sensation); setIntensity(entry.intensity); setBreath(entry.breath); setResponse(entry.response)
+    setNote(''); setRevisitSource(entry); setOpen(true)
   }
   const exportAll = () => {
     if (!entries.length) return
@@ -102,7 +113,8 @@ export function RelationshipJournal({ entries, onAdd, onRemove, onClear }: { ent
       <div className="chip-row" role="group" aria-label={t('身体的第一反应')}>
         {responses.map(item => <button type="button" key={item.value} className={`chip ${response === item.value ? 'selected' : ''}`} aria-pressed={response === item.value} onClick={() => setResponse(item.value)}>{item[lang === 'en' ? 'labelEn' : 'label']}</button>)}
       </div>
-      <div className="actions"><button type="button" disabled={!canSave} onClick={save}>{t('保存到本机')}</button><span className="note">{t('不解释、不评分、不推断。')}</span></div>
+      {revisitSource && <label>{t('这次再次进入的说明（可选）')}<input value={note} maxLength={200} onChange={event => setNote(event.target.value)} placeholder={t('只记录你愿意留下的说明；系统不解释它。')} /></label>}
+      <div className="actions"><button type="button" disabled={!canSave} onClick={save}>{revisitSource ? t('保存为新的进入') : t('保存到本机')}</button><span className="note">{revisitSource ? t('原关系瞬间保留，不会被覆盖。') : t('不解释、不评分、不推断。')}</span></div>
     </div>}
 
     {entries.length === 0
@@ -115,7 +127,11 @@ export function RelationshipJournal({ entries, onAdd, onRemove, onClear }: { ent
           {entries.map(entry => <li key={entry.id} className="motif-item">
             <div className="motif-main"><span className="motif-name">{entry.role || t('未命名的角色')}</span><span className="motif-date">{new Date(entry.createdAt).toLocaleDateString(lang === 'en' ? 'en-US' : 'zh-CN')}</span></div>
             <p className="motif-meta">{entry.situation || t('未写场景')} · {entry.cue || t('未写瞬间')}<br />{regions.find(item => item.value === entry.region)?.[lang === 'en' ? 'labelEn' : 'label']} · {sensations.find(item => item.value === entry.sensation)?.[lang === 'en' ? 'labelEn' : 'label']} · {t('强度')} {entry.intensity}/5 · {responses.find(item => item.value === entry.response)?.[lang === 'en' ? 'labelEn' : 'label']}</p>
-            <button type="button" className="quiet small" onClick={() => onRemove(entry.id)}>{t('删除这条')}</button>
+            {entry.continuity && <p className="motif-meta">{t('第')} {entry.continuity.visit} {t('次进入')}{entry.continuity.note ? ` · ${entry.continuity.note}` : ''}</p>}
+            <div className="actions">
+              <button type="button" className="quiet small" onClick={() => startRevisit(entry)}>{t('再次进入')}</button>
+              <button type="button" className="quiet small" onClick={() => onRemove(entry.id)}>{t('删除这条')}</button>
+            </div>
           </li>)}
         </ul>
       </>}

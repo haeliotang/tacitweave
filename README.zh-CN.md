@@ -171,6 +171,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 | 许可与贡献 | 分层 AGPL/Apache/CC-BY/品牌；CLA 1.0；PR 需通过 `license/cla` |
 | 连续性 v0.1 | 可再次进入过去的片段、修改用户字段、保留每次修订并比较字段变化；不做解释 |
 | 动态空间 v0.1 | 75 秒结束后可由用户明确选择每次延长 30 秒；每次延长都记录，原计划时长不变 |
+| 关系瞬间连续性 v0.1 | 可再次进入关系瞬间、预填用户字段、保留原记录并记录每次进入 |
 
 当前**没有**：
 
@@ -184,11 +185,11 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **181** 项 Vitest 单元/集成测试
-- **25** 项 Playwright 浏览器 E2E
+- **183** 项 Vitest 单元/集成测试
+- **26** 项 Playwright 浏览器 E2E
 - **8** 项 Rust 桌面测试；ops crate 也会构建与测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
-- 主 JS 约 **318 KB**，重组件 lazy load
+- 主 JS 约 **319 KB**，重组件 lazy load
 - v0.1.4 Release：**未签名**的 Linux AppImage/DEB 与 Windows NSIS；尚无 macOS 资产
 - CI：Symbolic space、Rust operational、Browser E2E 与 License checks
 

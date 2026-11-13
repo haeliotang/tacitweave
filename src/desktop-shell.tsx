@@ -8,6 +8,7 @@ import { SceneView } from './scene-loader'
 import { createMotif, loadMotifs, type MotifEntry } from './motif-journal'
 import { createRevisit, type RevisitInput } from './continuity'
 import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipInput, type RelationshipTrigger } from './relationship'
+import { createRelationshipRevisit, type RelationshipRevisitInput } from './relationship-continuity'
 import { clearActiveEncryption, clearLocalSnapshot, disableLocalEncryption, enableLocalEncryption, hasEncryptedLocalState, loadLocalSnapshot, recoverEncryptedSnapshot, saveLocalSnapshot, unlockLocalSnapshot } from './local-store'
 import type { LocalSnapshot } from './local-dataset'
 import { useLanguage, type Language } from './i18n'
@@ -301,6 +302,12 @@ export function DesktopShell() {
     setSelectedId(entry.id)
     persist(next, relationships, fieldLayout, signalSessions)
   }
+  const revisitRelationship = (sourceId: string, input: RelationshipRevisitInput) => {
+    const entry = createRelationshipRevisit(relationships, sourceId, input)
+    const next = [entry, ...relationships]
+    setRelationships(next)
+    persist(motifs, next, fieldLayout, signalSessions)
+  }
   const removeRelationship = (id: string) => {
     const next = relationships.filter(entry => entry.id !== id)
     setRelationships(next)
@@ -577,7 +584,7 @@ export function DesktopShell() {
               </>}
               {view === 'relationship' && <>
                 <WorkspaceHeader eyebrow={t('关系瞬间')} title={t('只画你自己的地图。')} meta={t('不推断对方，不做匹配，也不把关系变成评分。')} />
-                <Suspense fallback={null}><RelationshipJournal entries={relationships} onAdd={addRelationship} onRemove={removeRelationship} onClear={() => { setRelationships([]); persist(motifs, []) }} /></Suspense>
+                <Suspense fallback={null}><RelationshipJournal entries={relationships} onAdd={addRelationship} onRevisit={revisitRelationship} onRemove={removeRelationship} onClear={() => { setRelationships([]); persist(motifs, []) }} /></Suspense>
               </>}
               {view === 'research' && <>
                 <WorkspaceHeader eyebrow={t('研究工具')} title={t('可选信号')} meta={t('模拟数据和设备桥接都明确标注；没有真实神经数据。')} action={<button type="button" className="quiet-button" onClick={() => setView('settings')}>← {t('返回设置')}</button>} />
