@@ -80,6 +80,7 @@ Read the full positioning and literature brief:
 - [CASE snippet pipeline evidence](docs/research/case-snippet-reanalysis.md)
 - [QoL_Stress import check](docs/research/qol-stress-import-check.md)
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
+- [LSM-0 interval-method audit](docs/research/lsm0-method-audit.md)
 - [Research storage lifecycle](docs/research/research-storage-lifecycle.md)
 
 ## 1. Why BCI, not another chat box
@@ -373,6 +374,7 @@ pnpm sil:test               # deterministic SIL failure scenarios
 pnpm lsm0:precision --replicates 50 --bootstrap 50
 pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
 pnpm lsm1:synthetic
+pnpm lsm0:method-audit
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
 reuse lint                  # REUSE/SPDX compliance

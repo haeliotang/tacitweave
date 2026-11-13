@@ -81,6 +81,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [CASE snippet 管线证据](docs/research/case-snippet-reanalysis.md)
 - [QoL_Stress 导入检查](docs/research/qol-stress-import-check.md)
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
+- [LSM-0 区间方法审查](docs/research/lsm0-method-audit.md)
 - [研究存储生命周期](docs/research/research-storage-lifecycle.md)
 
 ## 1. 为什么是脑机接口，而不是又一个聊天框
@@ -342,6 +343,7 @@ pnpm sil:test               # 确定性 SIL 故障场景
 pnpm lsm0:precision --replicates 50 --bootstrap 50
 pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
 pnpm lsm1:synthetic
+pnpm lsm0:method-audit
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
 reuse lint                  # REUSE/SPDX 合规

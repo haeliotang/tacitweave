@@ -33,6 +33,7 @@ SPDX-License-Identifier: CC-BY-4.0
 | 3 | 构念效度 | [Construct Validity Matrix](construct-validity-matrix.md) | v0.1 完成 |
 | 4 | LSM-1 评估 | [LSM-1 evaluation contract](lsm1-evaluation-contract.md) + 合成数据反例 | 契约 + 合成测试完成；无真实模型/数据 |
 | 5 | 研究存储生命周期 | [Research storage lifecycle contract](research-storage-lifecycle.md)；撤回即停采、密钥删除、重启无残留、备份删除边界 | 合成存储 + 测试完成；生产存储未实现 |
+| 6 | 统计方法审查 | [LSM-0 interval-method audit](lsm0-method-audit.md) | 模拟完成；bootstrap 区间未通过覆盖审查 |
 
 ## 公开数据
 
