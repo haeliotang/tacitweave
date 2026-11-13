@@ -54,6 +54,10 @@ pnpm lsm0:method-audit
 4. 不报告 p 值，不把区间跨零当作支持/不支持。
 5. 如果无法得到可校准区间，研究设计应改为描述性/预注册估计，而不是假装有推断。
 
+## 组均值后续
+
+组均值 + participant-cluster bootstrap 的后续审计见 [LSM-0 group-mean inference audit](lsm0-mean-inference.md)。它同样未通过覆盖审查；不能把 cluster bootstrap 当作默认补救。
+
 ## 限制
 
 - 这些是生成模型假设下的模拟，不是 CASE/QoL/WESAD 的实证结果。

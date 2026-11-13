@@ -173,3 +173,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/research/lsm0-method-audit.md"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/research/lsm0-mean-inference.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"
