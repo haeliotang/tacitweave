@@ -49,6 +49,10 @@ SPDX-License-Identifier: CC-BY-4.0
 - 不把原始数据重新打包进 AGPL 发行版。
 - 公开数据证据包只证明分析工具可复算，不证明 Tacitweave 假设。
 
+## 预注册草案
+
+[LSM-0 preregistration v0.1 draft](lsm0-preregistration-v0.1.md) 已把当前方法学否定结果写进分析决策门；它尚未注册或获伦理批准。
+
 ## 四周顺序（建议）
 
 ### 第 1 周：表示与构念

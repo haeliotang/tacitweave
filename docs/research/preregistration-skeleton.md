@@ -6,6 +6,8 @@ SPDX-License-Identifier: CC-BY-4.0
 
 日期：2026-11-07。状态：骨架；**尚未提交任何注册平台**。
 
+更完整的草案见 [`lsm0-preregistration-v0.1.md`](lsm0-preregistration-v0.1.md)；它同样未注册、未获伦理批准。
+
 ## 1. 标题与版本
 
 - 标题：

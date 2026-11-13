@@ -86,6 +86,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [LSM-0 组均值推断审查](docs/research/lsm0-mean-inference.md)
 - [研究存储生命周期](docs/research/research-storage-lifecycle.md)
 - [证据 manifest v1](docs/research/evidence-manifest.md)
+- [LSM-0 预注册草案 v0.1](docs/research/lsm0-preregistration-v0.1.md)
 
 ## 1. 为什么是脑机接口，而不是又一个聊天框
 

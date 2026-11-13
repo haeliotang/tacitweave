@@ -85,6 +85,7 @@ Read the full positioning and literature brief:
 - [LSM-0 group-mean inference audit](docs/research/lsm0-mean-inference.md)
 - [Research storage lifecycle](docs/research/research-storage-lifecycle.md)
 - [Evidence manifest v1](docs/research/evidence-manifest.md)
+- [LSM-0 preregistration v0.1 draft](docs/research/lsm0-preregistration-v0.1.md)
 
 ## 1. Why BCI, not another chat box
 
