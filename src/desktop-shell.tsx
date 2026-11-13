@@ -6,6 +6,7 @@ import { createInnerCaptureEncounter } from './inner-encounter'
 import { innerPlanFromCapture } from './inner'
 import { SceneView } from './scene-loader'
 import { createMotif, loadMotifs, type MotifEntry } from './motif-journal'
+import { createRevisit, type RevisitInput } from './continuity'
 import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipInput, type RelationshipTrigger } from './relationship'
 import { clearActiveEncryption, clearLocalSnapshot, disableLocalEncryption, enableLocalEncryption, hasEncryptedLocalState, loadLocalSnapshot, recoverEncryptedSnapshot, saveLocalSnapshot, unlockLocalSnapshot } from './local-store'
 import type { LocalSnapshot } from './local-dataset'
@@ -29,18 +30,20 @@ const AppLockSettings = lazy(() => import('./app-lock-view').then(module => ({ d
 const SomaticEntry = lazy(() => import('./somatic-entry').then(module => ({ default: module.SomaticEntry })))
 const InnerEntry = lazy(() => import('./inner-entry').then(module => ({ default: module.InnerEntry })))
 const MotifJournal = lazy(() => import('./motif-journal-view').then(module => ({ default: module.MotifJournal })))
+const ContinuityView = lazy(() => import('./continuity-view').then(module => ({ default: module.ContinuityView })))
 const RelationshipJournal = lazy(() => import('./relationship-map').then(module => ({ default: module.RelationshipJournal })))
 const SignalSimulator = lazy(() => import('./signal-simulator').then(module => ({ default: module.SignalSimulator })))
 const DeviceSignalPanel = lazy(() => import('./device-signal-panel').then(module => ({ default: module.DeviceSignalPanel })))
 const LocalDataPanel = lazy(() => import('./local-data-panel').then(module => ({ default: module.LocalDataPanel })))
 const UpdatePanel = lazy(() => import('./update-panel').then(module => ({ default: module.UpdatePanel })))
 
-type View = 'field' | 'new' | 'motif' | 'journal' | 'relationship' | 'settings' | 'research' | 'space'
+type View = 'field' | 'new' | 'motif' | 'journal' | 'continuity' | 'relationship' | 'settings' | 'research' | 'space'
 type DetailTab = 'overview' | 'body' | 'imagery' | 'relationship'
 
 const navItems: Array<{ id: Exclude<View, 'motif' | 'space' | 'research'>; label: string; icon: string }> = [
   { id: 'field', label: '场域', icon: '◌' },
   { id: 'journal', label: '片段', icon: '◫' },
+  { id: 'continuity', label: '连续性', icon: '⟲' },
   { id: 'relationship', label: '关系', icon: '◇' },
   { id: 'settings', label: '设置', icon: '⚙' },
 ]
@@ -284,6 +287,13 @@ export function DesktopShell() {
     const next = [createRelationshipTrigger(input), ...relationships]
     setRelationships(next)
     persist(motifs, next, fieldLayout, signalSessions)
+  }
+  const revisit = (sourceId: string, input: RevisitInput) => {
+    const entry = createRevisit(motifs, sourceId, input)
+    const next = [entry, ...motifs]
+    setMotifs(next)
+    setSelectedId(entry.id)
+    persist(next, relationships, fieldLayout, signalSessions)
   }
   const removeRelationship = (id: string) => {
     const next = relationships.filter(entry => entry.id !== id)
@@ -555,6 +565,9 @@ export function DesktopShell() {
               {view === 'journal' && <>
                 <WorkspaceHeader eyebrow={t('本机片段日记')} title={t('反复出现的东西，先放在一起。')} meta={t('不推断因果，只做并列、回看与导出。')} />
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
+              </>}
+              {view === 'continuity' && <>
+                <Suspense fallback={null}><ContinuityView motifs={motifs} onRevisit={revisit} onOpen={openMotif} /></Suspense>
               </>}
               {view === 'relationship' && <>
                 <WorkspaceHeader eyebrow={t('关系瞬间')} title={t('只画你自己的地图。')} meta={t('不推断对方，不做匹配，也不把关系变成评分。')} />

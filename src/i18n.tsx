@@ -408,6 +408,31 @@ const en: Record<string, string> = {
   '次选择': 'choices',
   '提前离开': 'left early',
 
+  '连续性': 'Continuity',
+  '过去的感觉可以再次进入，而不是被覆盖。': 'Past experience can be re-entered, not overwritten.',
+  '先留下一个片段；之后可以从这里重新进入，并保留每次变化。': 'Leave a fragment first; later you can re-enter from here and keep each change.',
+  '过去的片段，可以再次进入': 'Past fragments can be re-entered',
+  '每次重新进入都会留下新的一版；原记录不被覆盖，也不替你解释变化。': 'Each re-entry adds a new revision; the original is not overwritten and the system does not interpret the change for you.',
+  '只在本机': 'Local only',
+  '经验轨迹': 'Experience trails',
+  '次进入': 'visits',
+  '当前轨迹': 'Current trail',
+  '原记录保留': 'original preserved',
+  '查看最新片段': 'Open latest fragment',
+  '再次进入': 'Re-enter',
+  '没有额外说明': 'No extra note',
+  '修订': 'Revision',
+  '比较两次进入': 'Compare two visits',
+  '较早': 'Earlier',
+  '较晚': 'Later',
+  '名字': 'Name',
+  '空': 'empty',
+  '这次没有字段变化；地点本身保持稳定。': 'No field changed in this visit; the place itself stayed stable.',
+  '再次进入：本次可以改变字段，原记录保留': 'Re-enter: change fields here; the original is preserved',
+  '这次进入的说明（可选）': 'Note for this visit (optional)',
+  '只记录你愿意留下的说明；系统不解释它。': 'Only write what you want to keep; the system does not interpret it.',
+  '保存为新的进入': 'Save as a new visit',
+
 }
 
 type LanguageContextValue = {

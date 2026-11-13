@@ -143,3 +143,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/vision/bci-3-local-bridge.md"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/symbolic-continuity-v0.1.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

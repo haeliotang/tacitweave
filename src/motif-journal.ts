@@ -9,6 +9,15 @@ export interface MotifSymbolic {
   figure: string
 }
 
+export interface ContinuityRef {
+  version: 'continuity-v1'
+  rootId: string
+  parentId: string | null
+  visit: number
+  action: 're-enter' | 'revise'
+  note?: string
+}
+
 export interface MotifEntry {
   version: 'motif-v1'
   id: string
@@ -18,6 +27,8 @@ export interface MotifEntry {
   signals?: MotifSignals
   /** Derived symbolic-space parameters kept with the motif for local evaluation. */
   symbolic?: MotifSymbolic
+  /** Optional trace when this entry was created by revisiting an earlier motif. */
+  continuity?: ContinuityRef
 }
 
 export interface StorageLike {
@@ -42,6 +53,17 @@ function isMotifSymbolic(value: unknown): value is MotifSymbolic {
     && typeof symbolic.figure === 'string' && symbolic.figure.trim().length > 0 && symbolic.figure.length <= 120
 }
 
+function isContinuityRef(value: unknown): value is ContinuityRef {
+  if (!value || typeof value !== 'object') return false
+  const ref = value as Partial<ContinuityRef>
+  return ref.version === 'continuity-v1'
+    && typeof ref.rootId === 'string' && ref.rootId.length > 0
+    && (ref.parentId === null || typeof ref.parentId === 'string')
+    && Number.isInteger(ref.visit) && (ref.visit as number) >= 2
+    && (ref.action === 're-enter' || ref.action === 'revise')
+    && (ref.note === undefined || (typeof ref.note === 'string' && ref.note.length <= 200))
+}
+
 export function isMotifEntry(value: unknown): value is MotifEntry {
   if (!value || typeof value !== 'object') return false
   const entry = value as Partial<MotifEntry>
@@ -52,6 +74,7 @@ export function isMotifEntry(value: unknown): value is MotifEntry {
     && isSomaticCapture(entry.capture)
     && (entry.signals === undefined || (isSignalConsent(entry.signals.consent) && (entry.signals.voice === undefined || isVoiceTrace(entry.signals.voice))))
     && (entry.symbolic === undefined || isMotifSymbolic(entry.symbolic))
+    && (entry.continuity === undefined || isContinuityRef(entry.continuity))
 }
 
 export function loadMotifs(storage: StorageLike): MotifEntry[] {
@@ -69,10 +92,11 @@ export function saveMotifs(storage: StorageLike, entries: MotifEntry[]) {
   storage.setItem(motifStorageKey, JSON.stringify(entries.slice(0, maxEntries)))
 }
 
-export function createMotif(input: { name?: string; capture: SomaticCapture; signals?: MotifSignals; symbolic?: MotifSymbolic; now?: string }): MotifEntry {
+export function createMotif(input: { name?: string; capture: SomaticCapture; signals?: MotifSignals; symbolic?: MotifSymbolic; continuity?: ContinuityRef; now?: string }): MotifEntry {
   if (!isSomaticCapture(input.capture)) throw new Error('capture is incomplete')
   if (input.signals && (!isSignalConsent(input.signals.consent) || (input.signals.voice && !isVoiceTrace(input.signals.voice)))) throw new Error('signals are incomplete')
   if (input.symbolic && !isMotifSymbolic(input.symbolic)) throw new Error('symbolic is incomplete')
+  if (input.continuity && !isContinuityRef(input.continuity)) throw new Error('continuity is incomplete')
   return {
     version: 'motif-v1',
     id: crypto.randomUUID(),
@@ -81,6 +105,7 @@ export function createMotif(input: { name?: string; capture: SomaticCapture; sig
     capture: input.capture,
     ...(input.signals ? { signals: input.signals } : {}),
     ...(input.symbolic ? { symbolic: { format: input.symbolic.format, motifs: [...input.symbolic.motifs], figure: input.symbolic.figure } } : {}),
+    ...(input.continuity ? { continuity: { ...input.continuity } } : {}),
   }
 }
 
