@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { createMotif, type ContinuityRef, type MotifEntry } from './motif-journal'
+import { createMotif, type ContinuityRef, type MotifEntry, type MotifSymbolic } from './motif-journal'
 import type { SomaticCapture } from './somatic'
 
 export interface ContinuityTrail {
@@ -51,6 +51,7 @@ export function buildContinuityTrails(motifs: readonly MotifEntry[]): Continuity
 export interface RevisitInput {
   capture?: SomaticCapture
   name?: string
+  symbolic?: MotifSymbolic
   note?: string
   now?: string
 }
@@ -73,6 +74,7 @@ export function createRevisit(motifs: readonly MotifEntry[], sourceId: string, i
   return createMotif({
     name: input.name ?? source.name,
     capture: input.capture ?? source.capture,
+    ...(input.symbolic ?? source.symbolic ? { symbolic: input.symbolic ?? source.symbolic } : {}),
     continuity,
     ...(input.now ? { now: input.now } : {}),
   })

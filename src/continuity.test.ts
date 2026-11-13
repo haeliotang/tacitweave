@@ -24,6 +24,13 @@ describe('symbolic continuity', () => {
     expect(root.continuity).toBeUndefined()
   })
 
+  it('keeps the source symbolic configuration on a revision', () => {
+    const root = createMotif({ name: '旧门', capture: { region: 'chest', sensation: 'pressure', intensity: 3, breath: 'even', fragments: ['wet-corridor'], certainty: 'clear' }, symbolic: { format: 'space', motifs: ['door', 'water'], figure: 'animal' }, now: '2026-11-01T00:00:00Z' })
+    const revised = createRevisit([root], root.id, { name: '旧门之后', now: '2026-11-02T00:00:00Z' })
+    expect(revised.symbolic).toEqual({ format: 'space', motifs: ['door', 'water'], figure: 'animal' })
+    expect(root.symbolic).toEqual({ format: 'space', motifs: ['door', 'water'], figure: 'animal' })
+  })
+
   it('groups full history and exposes the latest visit', () => {
     const root = motif('第一版')
     const second = createRevisit([root], root.id, { now: '2026-11-14T01:00:00.000Z' })

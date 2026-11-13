@@ -28,7 +28,7 @@ SPDX-License-Identifier: CC-BY-4.0
   - 确定程度
   - 意象碎片
   - 本次说明（可选）
-- 保存后生成**新的片段记录**，原记录不被覆盖；
+- 保存后生成**新的片段记录**，原记录不被覆盖；如果原片段带有 symbolic 空间参数，修订会保留该配置；
 - 新记录带 `continuity` metadata：
   - `rootId`
   - `parentId`
