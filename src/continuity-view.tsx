@@ -40,7 +40,7 @@ const actionLabel: Record<string, string> = {
   change: '调整',
 }
 
-export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter }: { motifs: MotifEntry[]; sessions: SymbolicSession[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void }) {
+export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter, onNew }: { motifs: MotifEntry[]; sessions: SymbolicSession[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void; onNew: () => void }) {
   const { lang, t } = useLanguage()
   const trails = useMemo(() => buildContinuityTrails(motifs), [motifs])
   const [selectedRoot, setSelectedRoot] = useState<string | null>(trails[0]?.rootId ?? null)
@@ -61,6 +61,7 @@ export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter }:
     <p className="eyebrow">{t('连续性')}</p>
     <h2>{t('过去的感觉可以再次进入，而不是被覆盖。')}</h2>
     <p>{t('先留下一个片段；之后可以从这里重新进入，并保留每次变化。')}</p>
+    <button type="button" className="primary-button" onClick={onNew}>{t('新建片段')}</button>
   </section>
 
   const before = selected?.visits.find(entry => entry.id === beforeId) ?? null

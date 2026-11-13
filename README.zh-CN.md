@@ -198,7 +198,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 ### 3.2 象征经验连续性 v0.1
 
-本机产品现在有明确的连续性层：过去的片段可以再次进入、修改和比较，原记录与每次修订都保留。它只记录用户自己填写的字段和说明，不推断好转、诊断或心理意义。见 [象征经验连续性 v0.1](docs/symbolic-continuity-v0.1.md)。
+本机产品现在有明确的连续性层：过去的片段可以再次进入、修改和比较，原记录与每次修订都保留。它只记录用户自己填写的字段和说明，不推断好转、诊断或心理意义。见 [象征经验连续性 v0.1](docs/symbolic-continuity-v0.1.md) 与 [Symbolic Experience Platform 状态](docs/symbolic-experience-platform-status.md)。
 
 ## 4. 架构
 

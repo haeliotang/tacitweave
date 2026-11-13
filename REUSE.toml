@@ -158,3 +158,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/space-composer-v0.1.md"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/symbolic-experience-platform-status.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

@@ -201,7 +201,7 @@ The project remains a research prototype; no clinical or real-BCI-hardware claim
 
 ### 3.2 Symbolic Continuity v0.1
 
-The local product now has an explicit continuity layer: a past fragment can be re-entered, edited and compared, while the original record and every revision remain intact. It records only user-authored fields and a user-written note; it does not infer improvement, diagnosis or psychological meaning. See [Symbolic Continuity v0.1](docs/symbolic-continuity-v0.1.md).
+The local product now has an explicit continuity layer: a past fragment can be re-entered, edited and compared, while the original record and every revision remain intact. It records only user-authored fields and a user-written note; it does not infer improvement, diagnosis or psychological meaning. See [Symbolic Continuity v0.1](docs/symbolic-continuity-v0.1.md) and the [Symbolic Experience Platform status](docs/symbolic-experience-platform-status.md).
 
 ## 4. Architecture
 

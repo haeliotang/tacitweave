@@ -587,7 +587,7 @@ export function DesktopShell() {
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
               </>}
               {view === 'continuity' && <>
-                <Suspense fallback={null}><ContinuityView motifs={motifs} sessions={symbolicSessions} onRevisit={revisit} onOpen={openMotif} onEnter={enterMotif} /></Suspense>
+                <Suspense fallback={null}><ContinuityView motifs={motifs} sessions={symbolicSessions} onRevisit={revisit} onOpen={openMotif} onEnter={enterMotif} onNew={openNew} /></Suspense>
               </>}
               {view === 'relationship' && <>
                 <WorkspaceHeader eyebrow={t('关系瞬间')} title={t('只画你自己的地图。')} meta={t('不推断对方，不做匹配，也不把关系变成评分。')} />
