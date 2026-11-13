@@ -24,7 +24,7 @@ function fieldValue(field: string, value: string, lang: Language) {
   return value
 }
 
-export function ContinuityView({ motifs, onRevisit, onOpen }: { motifs: MotifEntry[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void }) {
+export function ContinuityView({ motifs, onRevisit, onOpen, onEnter }: { motifs: MotifEntry[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void }) {
   const { lang, t } = useLanguage()
   const trails = useMemo(() => buildContinuityTrails(motifs), [motifs])
   const [selectedRoot, setSelectedRoot] = useState<string | null>(trails[0]?.rootId ?? null)
@@ -79,6 +79,7 @@ export function ContinuityView({ motifs, onRevisit, onOpen }: { motifs: MotifEnt
           </div>
           <div className="actions">
             <button type="button" className="quiet" onClick={() => onOpen(selected.latest.id)}>{t('查看最新片段')}</button>
+            <button type="button" className="quiet" onClick={() => onEnter(selected.latest.id)}>{t('进入最新空间')}</button>
             <button type="button" className="primary-button" onClick={() => setEditing(value => !value)}>{editing ? t('取消') : t('再次进入')}</button>
           </div>
         </div>

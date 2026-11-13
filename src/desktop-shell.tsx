@@ -241,7 +241,7 @@ export function DesktopShell() {
   const openNew = () => { setEncounter(null); setSelectedId(null); setView('new'); setDetailTab('overview') }
   const openMotif = (id: string) => { setSelectedId(id); setEncounter(null); setView('field'); setDetailTab('overview') }
   const recordAgency = (event: SymbolicAgencyEvent) => {
-    setEncounter(current => current ? { ...current, agency: [...(current.agency ?? []), event] } : current)
+    setEncounter(current => current ? { ...current, durationSec: event.durationSec ?? current.durationSec, agency: [...(current.agency ?? []), event] } : current)
   }
 
   const start = (next: Encounter) => {
@@ -254,6 +254,12 @@ export function DesktopShell() {
     }
   }
   const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture)) }
+  const enterMotif = (id: string) => {
+    const motif = motifs.find(entry => entry.id === id)
+    if (!motif) return
+    setSelectedId(motif.id)
+    start(createInnerCaptureEncounter(motif.capture))
+  }
   const backFromSpace = () => {
     if (encounter) {
       const session = createSymbolicSession(encounter)
@@ -567,7 +573,7 @@ export function DesktopShell() {
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
               </>}
               {view === 'continuity' && <>
-                <Suspense fallback={null}><ContinuityView motifs={motifs} onRevisit={revisit} onOpen={openMotif} /></Suspense>
+                <Suspense fallback={null}><ContinuityView motifs={motifs} onRevisit={revisit} onOpen={openMotif} onEnter={enterMotif} /></Suspense>
               </>}
               {view === 'relationship' && <>
                 <WorkspaceHeader eyebrow={t('关系瞬间')} title={t('只画你自己的地图。')} meta={t('不推断对方，不做匹配，也不把关系变成评分。')} />

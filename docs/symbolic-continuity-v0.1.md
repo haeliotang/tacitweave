@@ -81,3 +81,5 @@ SPDX-License-Identifier: CC-BY-4.0
 - 增加“靠近/停留/离开/重新进入”的行为记录，但明确其来源与时间边界；
 - 动态空间的持续进入与返回；
 - 以上均不改变 LSM 研究的 blocked 状态。
+
+动态时长见 [Dynamic symbolic space v0.1](dynamic-symbolic-space-v0.1.md)。

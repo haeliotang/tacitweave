@@ -16,7 +16,7 @@ export interface SymbolicSession {
 
 export const symbolicSessionStorageKey = 'tacitweave.symbolic-sessions.v1'
 const maxSessions = 100
-const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter'])
+const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter', 'extend'])
 
 export function isSymbolicSession(value: unknown): value is SymbolicSession {
   if (!value || typeof value !== 'object') return false
@@ -32,12 +32,13 @@ export function isSymbolicSession(value: unknown): value is SymbolicSession {
     && Array.isArray(session.agency)
     && session.agency.every(event => event && typeof event === 'object'
       && typeof event.atSec === 'number' && Number.isFinite(event.atSec) && event.atSec >= 0
-      && typeof event.action === 'string' && actions.has(event.action))
+      && typeof event.action === 'string' && actions.has(event.action)
+      && (event.durationSec === undefined || (typeof event.durationSec === 'number' && Number.isFinite(event.durationSec) && event.durationSec > 0)))
 }
 
 export function createSymbolicSession(encounter: Encounter, now = new Date().toISOString(), id: string = crypto.randomUUID()): SymbolicSession {
   const format = encounter.innerPlan?.format ?? 'encounter'
-  const durationSec = encounter.innerPlan?.durationSec ?? encounter.durationSec ?? 75
+  const durationSec = encounter.durationSec ?? encounter.innerPlan?.durationSec ?? 75
   const agency = [...(encounter.agency ?? [])]
   return {
     version: 'symbolic-session-v1',

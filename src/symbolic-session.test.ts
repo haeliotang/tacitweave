@@ -28,6 +28,14 @@ describe('symbolic sessions', () => {
     expect(JSON.stringify(session)).not.toMatch(/score|diagnos|interpretation/i)
   })
 
+  it('records an explicit extension without rewriting the original plan', () => {
+    const extended = { ...encounter, durationSec: 105, agency: [...(encounter.agency ?? []), { atSec: 75, action: 'extend' as const, durationSec: 105 }] }
+    const session = createSymbolicSession(extended, '2026-11-01T00:02:00Z', 'session-2')
+    expect(session.durationSec).toBe(105)
+    expect(session.agency).toContainEqual({ atSec: 75, action: 'extend', durationSec: 105 })
+    expect(isSymbolicSession(session)).toBe(true)
+  })
+
   it('persists, validates and explicitly removes sessions', () => {
     const storage = memoryStorage()
     const session = createSymbolicSession(encounter, '2026-11-01T00:01:00Z', 'session-1')

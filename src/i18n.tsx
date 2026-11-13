@@ -419,6 +419,7 @@ const en: Record<string, string> = {
   '当前轨迹': 'Current trail',
   '原记录保留': 'original preserved',
   '查看最新片段': 'Open latest fragment',
+  '进入最新空间': 'Enter latest space',
   '再次进入': 'Re-enter',
   '没有额外说明': 'No extra note',
   '修订': 'Revision',
