@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { useEffect, useMemo, useState } from 'react'
 import { breaths, certainties, fragments, regions, sensations, type AssociativeFragmentId, type SomaticCapture, type SomaticCertainty, type SomaticRegion, type SomaticSensation } from './somatic'
-import { buildContinuityTrails, compareContinuity, type ContinuityTrail, type RevisitInput } from './continuity'
+import { buildContinuityTrails, compareContinuity, continuityRootId, type ContinuityTrail, type RevisitInput } from './continuity'
 import type { MotifEntry } from './motif-journal'
 import type { SymbolicSession } from './symbolic-session'
 import { useLanguage, type Language } from './i18n'
@@ -40,10 +40,14 @@ const actionLabel: Record<string, string> = {
   change: '调整',
 }
 
-export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter, onNew }: { motifs: MotifEntry[]; sessions: SymbolicSession[]; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void; onNew: () => void }) {
+export function ContinuityView({ motifs, sessions, focusId, onRevisit, onOpen, onEnter, onNew }: { motifs: MotifEntry[]; sessions: SymbolicSession[]; focusId?: string | null; onRevisit: (sourceId: string, input: RevisitInput) => void; onOpen: (id: string) => void; onEnter: (id: string) => void; onNew: () => void }) {
   const { lang, t } = useLanguage()
   const trails = useMemo(() => buildContinuityTrails(motifs), [motifs])
-  const [selectedRoot, setSelectedRoot] = useState<string | null>(trails[0]?.rootId ?? null)
+  const [selectedRoot, setSelectedRoot] = useState<string | null>(() => {
+    const focus = focusId ? motifs.find(motif => motif.id === focusId) : null
+    const focusRootId = focus ? continuityRootId(focus) : null
+    return trails.find(trail => trail.rootId === focusRootId)?.rootId ?? trails[0]?.rootId ?? null
+  })
   const selected = trails.find(trail => trail.rootId === selectedRoot) ?? trails[0] ?? null
   const selectedSessions = selected ? sessions.filter(session => session.motifId === selected.latest.id) : []
   const [beforeId, setBeforeId] = useState<string | null>(null)

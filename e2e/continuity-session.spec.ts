@@ -15,7 +15,6 @@ test('continuity shows the user actions from a linked space session', async ({ p
   await page.getByRole('button', { name: 'Back to workspace', exact: true }).click()
   await page.waitForFunction(() => JSON.parse(localStorage.getItem('tacitweave.symbolic-sessions.v1') ?? '[]').length > 0)
   await page.getByRole('button', { name: /Continuity$/ }).click()
-  await page.locator('.continuity-view').getByRole('button', { name: /Demo · door in the chest/ }).first().click()
   await expect(page.getByText(/1 sessions/)).toBeVisible()
   await expect(page.getByText(/approach 1/)).toBeVisible()
   await expect(page.getByText(/leave 1/i)).toBeVisible()
