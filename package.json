@@ -38,7 +38,8 @@
     "case:canonical": "tsx scripts/case-adapter.ts",
     "qol:canonical": "tsx scripts/qol-adapter.ts",
     "lsm0:method-audit": "tsx scripts/lsm0-method-audit.ts",
-    "lsm0:mean-audit": "tsx scripts/lsm0-mean-audit.ts"
+    "lsm0:mean-audit": "tsx scripts/lsm0-mean-audit.ts",
+    "evidence:verify": "tsx scripts/evidence-verify.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.4",
