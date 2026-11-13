@@ -469,4 +469,5 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .scene-workspace { position: relative }
 .scene-toolbar, .scene-footer { position: relative; z-index: 3 }
 .symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
-.symbolic-figure-change select { background: transparent; color: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 3px 5px; }
+.symbolic-motif-change, .symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.symbolic-motif-change select, .symbolic-figure-change select { background: transparent; color: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 3px 5px; }

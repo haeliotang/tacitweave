@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import type { InnerAction } from './inner'
 import type { Encounter } from './encounter'
-import type { InnerFigure } from './inner'
+import type { InnerFigure, InnerMotif } from './inner'
 import type { WorldRendererProps } from './world-renderer'
 import { useLanguage } from './i18n'
 
@@ -32,6 +32,17 @@ export function symbolicPhase(seconds: number, duration = 75, format: 'encounter
   return 'leave'
 }
 
+const motifOptions: Array<{ value: InnerMotif; label: string }> = [
+  { value: 'corridor', label: '走廊' },
+  { value: 'door', label: '门' },
+  { value: 'water', label: '水' },
+  { value: 'house', label: '房屋' },
+  { value: 'forest', label: '森林' },
+  { value: 'station', label: '车站' },
+  { value: 'mirror', label: '镜子' },
+  { value: 'field', label: '田野' },
+]
+
 const figureOptions: Array<{ value: InnerFigure; label: string }> = [
   { value: 'none', label: '不需要形象' },
   { value: 'shadow', label: '影子' },
@@ -48,6 +59,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const [left, setLeft] = useState(false)
   const [extensionSec, setExtensionSec] = useState(0)
   const [figure, setFigure] = useState<InnerFigure>(plan?.figure ?? 'none')
+  const [motif, setMotif] = useState<InnerMotif>(plan?.motifs[0] ?? 'door')
   const durationSec = (plan?.durationSec ?? 75) + extensionSec
   const isOpen = plan?.format === 'open'
   const capSec = isOpen ? Number.POSITIVE_INFINITY : durationSec
@@ -58,7 +70,8 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
     setLeft(false)
     setExtensionSec(0)
     setFigure(plan?.figure ?? 'none')
-  }, [encounter.id, replay, plan?.figure])
+    setMotif(plan?.motifs[0] ?? 'door')
+  }, [encounter.id, replay, plan?.figure, plan?.motifs])
 
   useEffect(() => {
     if (!plan || paused || left) return
@@ -88,7 +101,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const phase = symbolicPhase(seconds, plan.durationSec, plan.format)
   const done = !isOpen && !isSpace && seconds >= durationSec
   return (
-    <div className={`symbolic-episode motif-${plan.motifs[0]} phase-${phase} format-${plan.format} figure-${figure}`} role="img" aria-label={t('象征空间')}>
+    <div className={`symbolic-episode motif-${motif} phase-${phase} format-${plan.format} figure-${figure}`} role="img" aria-label={t('象征空间')}>
       <div className="symbolic-sky" />
       <div className="symbolic-horizon" />
       <div className="symbolic-water" />
@@ -101,6 +114,7 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'approach' }); setSeconds(value => Math.min(plan.durationSec, value + 8)) }}>{t('靠近一点')}</button>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: paused ? 'resume' : 'stay' }); setPaused(value => !value) }}>{paused ? t('继续停留') : t('停留')}</button>
         {plan.format === 'space' && <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'extend', durationSec: durationSec + 30 }); setExtensionSec(value => value + 30) }}>{t('继续停留 30 秒')}</button>}
+        <label className="symbolic-motif-change">{t('意象')}<select value={motif} onChange={event => { const next = event.target.value as InnerMotif; setMotif(next); onAgency?.({ atSec: Math.round(seconds), action: 'change', change: { field: 'motif', value: next } }) }}>{motifOptions.map(option => <option key={option.value} value={option.value}>{t(option.label)}</option>)}</select></label>
         <label className="symbolic-figure-change">{t('形象')}<select value={figure} onChange={event => { const next = event.target.value as InnerFigure; setFigure(next); onAgency?.({ atSec: Math.round(seconds), action: 'change', change: { field: 'figure', value: next } }) }}>{figureOptions.map(option => <option key={option.value} value={option.value}>{t(option.label)}</option>)}</select></label>
         <button className="quiet" onClick={() => { onAgency?.({ atSec: Math.round(seconds), action: 'leave' }); setLeft(true) }}>{t('离开')}</button>
       </div>

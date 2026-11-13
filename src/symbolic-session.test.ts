@@ -55,6 +55,7 @@ describe('symbolic sessions', () => {
     expect(isSymbolicSession(session)).toBe(true)
     expect(session.agency[0].change).toEqual({ field: 'figure', value: 'animal' })
     expect(isSymbolicSession({ ...session, agency: [{ atSec: 1, action: 'change', change: { field: 'figure', value: '' } }] })).toBe(false)
+    expect(isSymbolicSession({ ...session, agency: [{ atSec: 2, action: 'change', change: { field: 'motif', value: 'water' } }] })).toBe(true)
   })
 
   it('persists, validates and explicitly removes sessions', () => {

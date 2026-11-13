@@ -41,7 +41,11 @@ Space Composer 还提供：
 
 ## 空间内部形象改变
 
-空间运行期间，用户可以通过控制栏的「形象」选择：
+空间运行期间，用户可以通过控制栏的「意象」与「形象」选择：
+
+意象：走廊、门、水、房屋、森林、车站、镜子、田野。
+
+形象：
 
 - 不需要形象
 - 影子
@@ -52,6 +56,7 @@ Space Composer 还提供：
 改变会立即反映在空间里，并记录：
 
 ```ts
+{ atSec, action: 'change', change: { field: 'motif', value: 'water' } }
 { atSec, action: 'change', change: { field: 'figure', value: 'animal' } }
 ```
 

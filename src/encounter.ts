@@ -14,7 +14,7 @@ export interface SymbolicAgencyEvent {
   /** For `extend`, the new total duration chosen by the user. */
   durationSec?: number
   /** For `change`, the user-selected in-space parameter and its value. */
-  change?: { field: 'figure'; value: string }
+  change?: { field: 'figure' | 'motif'; value: string }
 }
 
 export interface Encounter {
