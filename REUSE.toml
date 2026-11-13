@@ -198,3 +198,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/research/preregistration-skeleton.md"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/research/lsm0-random-effects.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

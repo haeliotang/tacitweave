@@ -83,6 +83,7 @@ Read the full positioning and literature brief:
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 interval-method audit](docs/research/lsm0-method-audit.md)
 - [LSM-0 group-mean inference audit](docs/research/lsm0-mean-inference.md)
+- [LSM-0 random-effects candidate](docs/research/lsm0-random-effects.md)
 - [Research storage lifecycle](docs/research/research-storage-lifecycle.md)
 - [Evidence manifest v1](docs/research/evidence-manifest.md)
 - [LSM-0 preregistration v0.1 draft](docs/research/lsm0-preregistration-v0.1.md)
@@ -198,7 +199,7 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **215** Vitest unit/integration tests
+- **218** Vitest unit/integration tests
 - **24** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
@@ -380,6 +381,7 @@ pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
 pnpm lsm1:synthetic
 pnpm lsm0:method-audit
 pnpm lsm0:mean-audit
+pnpm lsm0:random-effects
 pnpm evidence:verify --manifest <manifest.json> --root <bundle>
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>

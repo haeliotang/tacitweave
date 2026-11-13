@@ -33,7 +33,7 @@ SPDX-License-Identifier: CC-BY-4.0
 | 3 | 构念效度 | [Construct Validity Matrix](construct-validity-matrix.md) + `src/construct-validity.ts` | 文档 + 可执行 registry 完成；无实证支持 |
 | 4 | LSM-1 评估 | [LSM-1 evaluation contract](lsm1-evaluation-contract.md) + 合成数据反例 | 契约 + 合成测试完成；无真实模型/数据 |
 | 5 | 研究存储生命周期 | [Research storage lifecycle contract](research-storage-lifecycle.md)；撤回即停采、密钥删除、重启无残留、备份删除边界 | 合成存储 + 测试完成；生产存储未实现 |
-| 6 | 统计方法审查 | [interval audit](lsm0-method-audit.md) + [group-mean audit](lsm0-mean-inference.md) | 模拟完成；participant/block/cluster 区间均未通过覆盖审查 |
+| 6 | 统计方法审查 | [interval audit](lsm0-method-audit.md) + [group-mean audit](lsm0-mean-inference.md) + [random-effects candidate](lsm0-random-effects.md) | 随机效应候选在 AR≤0.5 可用；AR=0.8 仍失败，未批准 |
 
 ## 公开数据
 

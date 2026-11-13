@@ -84,6 +84,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 区间方法审查](docs/research/lsm0-method-audit.md)
 - [LSM-0 组均值推断审查](docs/research/lsm0-mean-inference.md)
+- [LSM-0 随机效应候选](docs/research/lsm0-random-effects.md)
 - [研究存储生命周期](docs/research/research-storage-lifecycle.md)
 - [证据 manifest v1](docs/research/evidence-manifest.md)
 - [LSM-0 预注册草案 v0.1](docs/research/lsm0-preregistration-v0.1.md)
@@ -195,7 +196,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **215** 项 Vitest 单元/集成测试
+- **218** 项 Vitest 单元/集成测试
 - **24** 项 Playwright 浏览器 E2E
 - **8** 项 Rust 桌面测试；ops crate 也会构建与测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
@@ -349,6 +350,7 @@ pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
 pnpm lsm1:synthetic
 pnpm lsm0:method-audit
 pnpm lsm0:mean-audit
+pnpm lsm0:random-effects
 pnpm evidence:verify --manifest <manifest.json> --root <bundle>
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>

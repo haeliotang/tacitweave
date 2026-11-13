@@ -112,7 +112,7 @@ SPDX-License-Identifier: CC-BY-4.0
 - moving-block bootstrap 更差；
 - participant-cluster bootstrap 也未通过覆盖审查。
 
-因此本草案**不批准**上述任一区间方法。分析计划必须包含：
+因此本草案**不批准**上述任一区间方法。Fisher-z 随机效应候选（`lsm0-random-effects.md`）在 AR≤0.5 时接近名义覆盖，但 AR=0.8 时仍失败，仍需独立校准。分析计划必须包含：
 
 1. 估计量的偏差（observed vs simulation target）；
 2. 区间覆盖率校准；
