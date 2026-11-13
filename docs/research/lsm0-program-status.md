@@ -84,7 +84,7 @@ SPDX-License-Identifier: CC-BY-4.0
 | 数据集 | 角色 | 结论 |
 | --- | --- | --- |
 | CASE snippet | 连续自报 + 生理管线 | 22 sessions；2 人；仅管线检查 |
-| QoL_Stress | 导入/缺失/联动 | 132 sessions；2 phase/人；harness 拒绝 rho |
+| QoL_Stress | 导入/缺失/联动 + phase 检查 | 132 sessions；STAI phase 差异；HR/EDA 均值无简单变化；harness 拒绝 rho |
 | WESAD | 多设备/活动混杂 | adapter 契约 + 合成 fixture；未运行真实数据 |
 
 两个正式 bundle 的 hash 和验证命令见：

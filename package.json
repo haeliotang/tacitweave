@@ -41,7 +41,8 @@
     "lsm0:mean-audit": "tsx scripts/lsm0-mean-audit.ts",
     "evidence:verify": "tsx scripts/evidence-verify.ts",
     "wesad:canonical": "python3 scripts/wesad_adapter.py",
-    "lsm0:random-effects": "tsx scripts/lsm0-random-effects-audit.ts"
+    "lsm0:random-effects": "tsx scripts/lsm0-random-effects-audit.ts",
+    "qol:phase-control": "tsx scripts/qol-phase-control.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.4",
