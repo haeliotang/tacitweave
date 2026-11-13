@@ -305,7 +305,7 @@ body, .desktop-shell { background: #f3f3f0; color: #252825 }
 [data-theme='dark'] .note { color: #9b9da0 }
 [data-theme='dark'] .error, [data-theme='dark'] .error-inline { color: #e0a79c }
 [data-theme='dark'] .actions button:not(.quiet):not(.primary-button) { background: #e7e7e3; color: #1d1e20 }
-[data-theme='dark'] .motif-item .small, [data-theme='dark'] .quiet.small { border-color: #3a3c41; color: #b8babc }
+[data-theme='dark'] .motif-item .small, [data-theme='dark'] .quiet.small { background: transparent; border-color: #3a3c41; color: #c4c5c3 }
 [data-theme='dark'] .host-dot { background: #6a6c70 }
 [data-theme='dark'] .host-dot.native { background: #7f9d83 }
 /* Tacitweave field: a spatial field, not a document editor. */

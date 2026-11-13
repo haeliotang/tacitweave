@@ -3,7 +3,7 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-test('all main views pass WCAG A/AA in the light theme', async ({ page }) => {
+test('all main views pass WCAG A/AA in light and dark themes', async ({ page }) => {
   await page.goto('/')
   const audit = async () => {
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()
@@ -41,5 +41,15 @@ test('all main views pass WCAG A/AA in the light theme', async ({ page }) => {
   await page.getByRole('button', { name: /Settings$/ }).click()
   await page.getByRole('button', { name: 'Open research tools' }).click()
   await expect(page.getByRole('heading', { name: 'Optional signals (simulation & device)' })).toBeVisible()
+  await audit()
+
+  await page.getByRole('button', { name: 'Switch to dark' }).click()
+  await page.getByRole('button', { name: /Continuity$/ }).click()
+  await expect(page.getByRole('heading', { name: 'Past fragments can be re-entered' })).toBeVisible()
+  await audit()
+  await page.getByRole('button', { name: /Field$/ }).click()
+  await page.locator('.recent-item').first().click()
+  await page.getByRole('button', { name: 'Open fragment details' }).click()
+  await page.getByRole('button', { name: 'Customize space' }).click()
   await audit()
 })
