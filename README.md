@@ -191,7 +191,7 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **187** Vitest unit/integration tests
+- **192** Vitest unit/integration tests
 - **24** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
@@ -370,6 +370,7 @@ pnpm e2e                    # Playwright browser E2E
 pnpm sil:test               # deterministic SIL failure scenarios
 pnpm lsm0:precision --replicates 50 --bootstrap 50
 pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
+pnpm lsm1:synthetic
 reuse lint                  # REUSE/SPDX compliance
 pnpm license:js             # JS dependency license check
 pnpm bci:bridge --origin simulated  # local BCI-3 bridge; real adapters use --origin hardware

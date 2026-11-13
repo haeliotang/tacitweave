@@ -31,7 +31,7 @@ SPDX-License-Identifier: CC-BY-4.0
 | 1 | 表示契约 | [Representation Contract v0.1](representation-contract-v0.1.md) + 反例 + 不变量测试 | v0.1 完成 |
 | 2 | 公开数据复分析 | [Public data protocol](public-data-reanalysis.md) + canonical feature-level harness + 合成 fixture/测试 | harness 完成；raw adapter 与实际数据未接入 |
 | 3 | 构念效度 | [Construct Validity Matrix](construct-validity-matrix.md) | v0.1 完成 |
-| 4 | LSM-1 评估 | [LSM-1 evaluation contract](lsm1-evaluation-contract.md) + 合成数据反例 | 契约设计完成；测试待实现 |
+| 4 | LSM-1 评估 | [LSM-1 evaluation contract](lsm1-evaluation-contract.md) + 合成数据反例 | 契约 + 合成测试完成；无真实模型/数据 |
 | 5 | 研究存储生命周期 | [Research storage lifecycle contract](research-storage-lifecycle.md)；撤回即停采、密钥删除、重启无残留、备份删除边界 | 设计契约完成；实现待落库 |
 
 ## 公开数据

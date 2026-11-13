@@ -95,5 +95,13 @@ A 必须满足：
 
 ## 当前状态
 
-- 契约设计完成；合成数据评估器待实现。
+- 契约完成。
+- 合成数据评估器实现：`src/lsm1-eval.ts` / `src/lsm1-eval.test.ts`。
+- 覆盖：植入效应、零效应、派生行为、时间泄漏、确定性。
+- 评估器拒绝 `system_inferred` / `derived_from_inputs` 行为，并使用固定时间切分。
 - 没有 LSM-1 训练、没有真实纵向数据、没有模型性能声明。
+
+```bash
+pnpm test src/lsm1-eval.test.ts
+pnpm lsm1:synthetic
+```
