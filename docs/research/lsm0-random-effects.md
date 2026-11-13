@@ -39,6 +39,21 @@ pnpm lsm0:random-effects
 | 12×8 sessions | 0.938 | 0.557 | -0.049 | 0.0994 | 0.252 |
 | 24×12 participants | 0.950 | 0.276 | -0.018 | 0.0281 | 0.158 |
 
+## 第二实现
+
+`scripts/random_effects_verify.py` 用 Python 标准库重新实现 Fisher-z + DL，读取
+`[{rho, pairs}]` JSON：
+
+```bash
+python3 scripts/random_effects_verify.py --in estimates.json
+python3 scripts/test_random_effects_verify.py
+```
+
+对固定估计 `[0.2, 0.5, 0.35]`（各 12 sessions），Node 与 Python 的
+`meanRho=0.3561713920`、`tau2=0`、`q=0.5411806999` 在 1e-12 内一致。
+
+这证明**实现可重复**，不等于独立数据验证，也不等于方法已校准。
+
 ## 判断
 
 这是目前表现最好的候选：
