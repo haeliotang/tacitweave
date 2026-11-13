@@ -173,7 +173,7 @@ See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md),
 | LSM-0 baseline | Offline deterministic evaluation, dataset export and precision simulation; no empirical data and no clinical claims |
 | Licensing / contribution | Layered AGPL/Apache/CC-BY/brand; CLA 1.0; PRs require the `license/cla` check |
 | Continuity v0.1 | Re-enter a past fragment, edit user-authored fields, keep every revision and compare field changes without interpretation |
-| Dynamic space v0.1 | Extend a 75s encounter by explicit 30s stays; every extension is recorded and the original plan stays unchanged |
+| Dynamic space v0.1 | Extend a 75s encounter or 180s space by explicit 30s stays; every extension is recorded and the original plan stays unchanged |
 | Relationship continuity v0.1 | Re-enter a relationship moment, prefill its user fields, preserve the original, record each visit and compare user-field changes |
 | Space Composer v0.1 | Choose 1–3 motifs, figure and 75s/180s format before entering; the system composes, not interprets |
 

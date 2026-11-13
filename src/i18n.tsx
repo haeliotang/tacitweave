@@ -229,6 +229,7 @@ const en: Record<string, string> = {
   '继续停留': 'Keep staying',
   '停留': 'Stay',
   '离开': 'Leave',
+  '继续停留 30 秒': 'Stay 30 more seconds',
   '这段空间结束了。': 'This space has ended.',
   '再进入一次': 'Enter once more',
   '关系瞬间地图': 'Relationship moment map',
