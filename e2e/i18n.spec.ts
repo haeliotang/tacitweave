@@ -27,6 +27,18 @@ test('English UI has no untranslated shell/capture/research strings', async ({ p
     await expect(page.getByRole('heading', { name: heading })).toBeVisible()
     expect(chineseTokens(await page.locator('.workspace-scroll').innerText()), label).toEqual([])
   }
+  await page.getByRole('button', { name: /Field$/ }).click()
+  await page.getByRole('button', { name: 'Load demo field' }).click()
+  await page.getByRole('button', { name: /Continuity$/ }).click()
+  await expect(page.getByRole('heading', { name: 'Past fragments can be re-entered' })).toBeVisible()
+  expect(chineseTokens(await page.locator('.workspace-scroll').innerText()), 'continuity').toEqual([])
+  await page.getByRole('button', { name: /Field$/ }).click()
+  await page.locator('.recent-item').first().click()
+  await page.getByRole('button', { name: 'Open fragment details' }).click()
+  await page.getByRole('button', { name: 'Customize space' }).click()
+  expect(chineseTokens(await page.locator('.workspace-scroll').innerText()), 'composer').toEqual([])
+
+  await page.getByRole('button', { name: /Settings$/ }).click()
   await page.getByRole('button', { name: 'Open research tools' }).click()
   await expect(page.getByRole('heading', { name: 'Optional signals (simulation & device)' })).toBeVisible()
   expect(chineseTokens(await page.locator('.workspace-scroll').innerText())).toEqual([])
