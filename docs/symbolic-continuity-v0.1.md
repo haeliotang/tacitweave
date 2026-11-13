@@ -90,8 +90,10 @@ SPDX-License-Identifier: CC-BY-4.0
 从片段进入空间后，`SymbolicSession.motifId` 记录来源片段（可选字段）。连续性视图会把该片段的会话数以及靠近/停留/离开次数显示在对应进入下：
 
 ```text
-1 sessions · approach 1 · stay 0 · leave 1
+1 sessions · approach 1 · stay 0 · leave 1 · 1 changes
 ```
+
+空间内改变意象或形象也会作为 change 计数显示，仅说明用户做过显式调整，不解释其含义。
 
 这些是用户主动操作的事件计数，不是心理测量或潜意识推断。
 

@@ -89,10 +89,11 @@ export function ContinuityView({ motifs, sessions, onRevisit, onOpen, onEnter }:
           {selected.visits.map((entry, index) => {
             const entered = sessions.filter(session => session.motifId === entry.id)
             const actionCount = (action: string) => sessions.filter(session => session.motifId === entry.id).reduce((sum, session) => sum + session.agency.filter(event => event.action === action).length, 0)
+            const changeCount = actionCount('change')
             return <li key={entry.id} className={`continuity-visit ${entry.id === selected.latest.id ? 'latest' : ''}`}>
               <button type="button" className="visit-main" onClick={() => onOpen(entry.id)}>
                 <span className="visit-index">{entry.continuity?.visit ?? index + 1}</span>
-                <span><strong>{dateLabel(entry.createdAt, lang)}</strong><small>{entry.continuity?.note || t('没有额外说明')}{entered.length > 0 ? ` · ${entered.length} ${t('次空间')} · ${t('靠近')} ${actionCount('approach')} · ${t('停留')} ${actionCount('stay')} · ${t('离开')} ${actionCount('leave')}` : ''}</small></span>
+                <span><strong>{dateLabel(entry.createdAt, lang)}</strong><small>{entry.continuity?.note || t('没有额外说明')}{entered.length > 0 ? ` · ${entered.length} ${t('次空间')} · ${t('靠近')} ${actionCount('approach')} · ${t('停留')} ${actionCount('stay')} · ${t('离开')} ${actionCount('leave')}${changeCount > 0 ? ` · ${changeCount} ${t('次调整')}` : ''}` : ''}</small></span>
               </button>
               <span className="visit-kind">{entry.continuity?.action === 'revise' ? t('修订') : t('重新进入')}</span>
             </li>

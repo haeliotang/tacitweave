@@ -429,6 +429,7 @@ const en: Record<string, string> = {
   '查看最新片段': 'Open latest fragment',
   '进入最新空间': 'Enter latest space',
   '次空间': 'sessions',
+  '次调整': 'changes',
   '靠近': 'approach',
 
   '再次进入': 'Re-enter',
