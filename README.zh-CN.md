@@ -79,6 +79,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [构念效度矩阵](docs/research/construct-validity-matrix.md)
 - [公开数据复分析协议](docs/research/public-data-reanalysis.md)
 - [CASE snippet 管线证据](docs/research/case-snippet-reanalysis.md)
+- [CASE 证据 bundle](docs/research/case-evidence-bundle.md)
 - [QoL_Stress 导入检查](docs/research/qol-stress-import-check.md)
 - [WESAD adapter 契约](docs/research/wesad-adapter.md)
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)

@@ -55,6 +55,8 @@ P2: paired=11 rho=0.872727
 
 与 Node harness 的 `-0.218` / `0.873` 一致（四舍五入）。
 
+Bundle 验证记录：[CASE evidence bundle](case-evidence-bundle.md)。
+
 ## 解释边界
 
 - **不证明** Tacitweave 的前语言假设。

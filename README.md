@@ -78,6 +78,7 @@ Read the full positioning and literature brief:
 - [Construct validity matrix](docs/research/construct-validity-matrix.md)
 - [Public data reanalysis protocol](docs/research/public-data-reanalysis.md)
 - [CASE snippet pipeline evidence](docs/research/case-snippet-reanalysis.md)
+- [CASE evidence bundle](docs/research/case-evidence-bundle.md)
 - [QoL_Stress import check](docs/research/qol-stress-import-check.md)
 - [WESAD adapter contract](docs/research/wesad-adapter.md)
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
