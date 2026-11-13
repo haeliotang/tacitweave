@@ -70,6 +70,15 @@ python3 scripts/test_random_effects_verify.py
 - 尚未做独立实现/第二环境复算；
 - 尚未在 Gate 2B 的真实特征上检查。
 
+## 暂定 AR 门槛
+
+辅助实现：`src/lsm0-autocorrelation.ts`（lag-1 自相关与中位数摘要）。它只计算描述值，不自行执行门槛。
+
+
+预注册草案暂定：median |lag-1 AR| > 0.5 时停止随机效应推断，只保留描述性
+结果；≤0.5 仍需在实际 session 数下重跑校准模拟。该门槛尚未冻结，必须在
+Gate 2B 后用真实特征重新评估，不能把本页模拟当作已批准阈值。
+
 ## 决策
 
 1. 将 Fisher-z 随机效应列为候选主要方法。

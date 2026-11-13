@@ -112,7 +112,16 @@ SPDX-License-Identifier: CC-BY-4.0
 - moving-block bootstrap 更差；
 - participant-cluster bootstrap 也未通过覆盖审查。
 
-因此本草案**不批准**上述任一区间方法。Fisher-z 随机效应候选（`lsm0-random-effects.md`）在 AR≤0.5 时接近名义覆盖，但 AR=0.8 时仍失败，仍需独立校准。分析计划必须包含：
+因此本草案**不批准**上述任一区间方法。Fisher-z 随机效应候选（`lsm0-random-effects.md`）在 AR≤0.5 时接近名义覆盖，但 AR=0.8 时仍失败，仍需独立校准。
+
+**暂定 AR 门槛（未冻结）**：
+
+- 对每个参与者的 primary signal 和 self-report 分别估计 lag-1 自相关；
+- 若 median |AR| > 0.5，停止使用随机效应推断，只报告描述性估计与敏感性；
+- 若 median |AR| ≤ 0.5，仍须在实际 session 数下重跑 coverage 模拟，才可使用候选区间；
+- 门槛必须在 Gate 2B 后用真实特征重新校准，不能因为本模拟好看就固定 0.5。
+
+分析计划必须包含：
 
 1. 估计量的偏差（observed vs simulation target）；
 2. 区间覆盖率校准；
