@@ -163,3 +163,8 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "docs/research/case-snippet-evidence.json"
 SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "docs/research/qol-stress-import-check.md"
+SPDX-FileCopyrightText = "2026 Inceptless <support@inceptless.com>"
+SPDX-License-Identifier = "CC-BY-4.0"

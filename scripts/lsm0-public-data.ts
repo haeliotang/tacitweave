@@ -15,7 +15,7 @@ if (!input) {
 try {
   const parsed = parsePublicDataText(await readFile(resolve(input), 'utf8'))
   if (parsed.rejected.length) console.error(`ignored ${parsed.rejected.length} invalid line(s)`)
-  const report = evaluatePublicData(parsed.sessions, { feature: valueAfter('--feature') ?? 'heartRateBpm' })
+  const report = evaluatePublicData(parsed.sessions, { feature: valueAfter('--feature') ?? 'heartRateBpm', outcome: valueAfter('--outcome') ?? 'intensity' })
   process.stdout.write(`${formatPublicDataReport(report)}\n`)
   if (valueAfter('--out')) {
     const path = resolve(valueAfter('--out')!)

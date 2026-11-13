@@ -19,7 +19,7 @@ export interface PublicDataSession {
   sessionId: string
   capturedAt: string
   signals: Record<string, number>
-  selfReport: { intensity?: number }
+  selfReport: { intensity?: number; stateAnxietyScore?: number; pss14Score?: number; [key: string]: number | undefined }
   quality?: { usable?: boolean; maxGapMs?: number; gapsOverOneSecond?: number }
   source?: { dataset?: string; adapterVersion?: string; fileSha256?: string }
 }
@@ -111,10 +111,15 @@ export function parsePublicDataText(text: string): PublicDataParseResult {
       signals[key] = value
     }
     if (Object.keys(signals).length !== Object.keys(parsed.signals).length) continue
-    if (parsed.selfReport.intensity !== undefined && !isFiniteNumber(parsed.selfReport.intensity)) {
-      rejected.push({ line: lineNumber, reason: 'non_finite_intensity' })
-      continue
+    const selfReport: Record<string, number> = {}
+    for (const [key, value] of Object.entries(parsed.selfReport)) {
+      if (!isFiniteNumber(value)) {
+        rejected.push({ line: lineNumber, reason: `non_finite_self_report:${key}` })
+        break
+      }
+      selfReport[key] = value
     }
+    if (Object.keys(selfReport).length !== Object.keys(parsed.selfReport).length) continue
     if (parsed.quality !== undefined && !isObject(parsed.quality)) {
       rejected.push({ line: lineNumber, reason: 'invalid_quality' })
       continue
@@ -131,7 +136,7 @@ export function parsePublicDataText(text: string): PublicDataParseResult {
       sessionId: parsed.sessionId,
       capturedAt: parsed.capturedAt,
       signals,
-      selfReport: parsed.selfReport.intensity === undefined ? {} : { intensity: parsed.selfReport.intensity },
+      selfReport,
       ...(isObject(parsed.quality) ? { quality: parsed.quality as PublicDataSession['quality'] } : {}),
       ...(isObject(parsed.source) ? { source: parsed.source as PublicDataSession['source'] } : {}),
     })
@@ -198,7 +203,7 @@ export function evaluatePublicData(sessions: readonly PublicDataSession[], optio
         continue
       }
       const x = session.signals[feature]
-      const y = session.selfReport.intensity
+      const y = session.selfReport[outcome]
       if (!isFiniteNumber(x)) missingFeature += 1
       if (!isFiniteNumber(y)) missingOutcome += 1
       if (isFiniteNumber(x) && isFiniteNumber(y)) {

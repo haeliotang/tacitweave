@@ -37,6 +37,20 @@ describe('LSM-0 public-data reanalysis harness', () => {
     expect(JSON.stringify(report)).not.toMatch(/"pValue"|"p_value"/)
   })
 
+
+  it('selects a named self-report outcome without changing the feature', () => {
+    const parsed = parsePublicDataText([
+      JSON.stringify({ version: 'lsm0-public-session-v1', participantCode: 'P1', sessionId: 's0', capturedAt: '2026-11-01T00:00:00.000Z', signals: { x: 1 }, selfReport: { stateAnxietyScore: 10 } }),
+      JSON.stringify({ version: 'lsm0-public-session-v1', participantCode: 'P1', sessionId: 's1', capturedAt: '2026-11-02T00:00:00.000Z', signals: { x: 2 }, selfReport: { stateAnxietyScore: 20 } }),
+      JSON.stringify({ version: 'lsm0-public-session-v1', participantCode: 'P1', sessionId: 's2', capturedAt: '2026-11-03T00:00:00.000Z', signals: { x: 3 }, selfReport: { stateAnxietyScore: 30 } }),
+      JSON.stringify({ version: 'lsm0-public-session-v1', participantCode: 'P1', sessionId: 's3', capturedAt: '2026-11-04T00:00:00.000Z', signals: { x: 4 }, selfReport: { stateAnxietyScore: 40 } }),
+    ].join('\n'))
+    const report = evaluatePublicData(parsed.sessions, { feature: 'x', outcome: 'stateAnxietyScore' })
+    expect(report.outcome).toBe('stateAnxietyScore')
+    expect(report.participants[0].paired).toBe(4)
+    expect(report.participants[0].rho).toBeCloseTo(1, 6)
+  })
+
   it('excludes quality-rejected sessions and reports missing fields', () => {
     const parsed = parsePublicDataText([
       line('P1', 's0', 60, 1), line('P1', 's1', 62, undefined), line('P1', 's2', 64, 3),

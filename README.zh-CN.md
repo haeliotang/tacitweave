@@ -79,6 +79,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [构念效度矩阵](docs/research/construct-validity-matrix.md)
 - [公开数据复分析协议](docs/research/public-data-reanalysis.md)
 - [CASE snippet 管线证据](docs/research/case-snippet-reanalysis.md)
+- [QoL_Stress 导入检查](docs/research/qol-stress-import-check.md)
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
 - [研究存储生命周期](docs/research/research-storage-lifecycle.md)
 
@@ -189,7 +190,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **199** 项 Vitest 单元/集成测试
+- **202** 项 Vitest 单元/集成测试
 - **24** 项 Playwright 浏览器 E2E
 - **8** 项 Rust 桌面测试；ops crate 也会构建与测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
@@ -342,6 +343,7 @@ pnpm lsm0:precision --replicates 50 --bootstrap 50
 pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
 pnpm lsm1:synthetic
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
+pnpm qol:canonical --root <QoL_Stress/data>
 reuse lint                  # REUSE/SPDX 合规
 pnpm license:js             # JS 依赖许可检查
 pnpm bci:bridge --origin simulated  # 本机 BCI-3 bridge；真实适配器用 --origin hardware

@@ -78,6 +78,7 @@ Read the full positioning and literature brief:
 - [Construct validity matrix](docs/research/construct-validity-matrix.md)
 - [Public data reanalysis protocol](docs/research/public-data-reanalysis.md)
 - [CASE snippet pipeline evidence](docs/research/case-snippet-reanalysis.md)
+- [QoL_Stress import check](docs/research/qol-stress-import-check.md)
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
 - [Research storage lifecycle](docs/research/research-storage-lifecycle.md)
 
@@ -192,7 +193,7 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **199** Vitest unit/integration tests
+- **202** Vitest unit/integration tests
 - **24** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
@@ -373,6 +374,7 @@ pnpm lsm0:precision --replicates 50 --bootstrap 50
 pnpm lsm0:public --in public-data.jsonl --feature heartRateBpm
 pnpm lsm1:synthetic
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
+pnpm qol:canonical --root <QoL_Stress/data>
 reuse lint                  # REUSE/SPDX compliance
 pnpm license:js             # JS dependency license check
 pnpm bci:bridge --origin simulated  # local BCI-3 bridge; real adapters use --origin hardware
