@@ -1,0 +1,29 @@
+{
+  "version": "case-snippet-evidence-v1",
+  "dataset": "CASE",
+  "doi": "10.6084/m9.figshare.8869160.v1",
+  "license": "CC0-1.0",
+  "snippetMd5": "f99baa69e5c6e37332c308d59f8bdcef",
+  "participants": 2,
+  "sessions": 22,
+  "adapter": "case-canonical-v1",
+  "feature": "gsrMeanMicroSiemens",
+  "outcome": "intensity",
+  "note": "arousal mean is mapped to selfReport.intensity; this is a pipeline check, not a construct-validity result",
+  "node": {
+    "P1": { "paired": 11, "rho": -0.218, "circularShiftRho": -0.109, "shuffledRho": 0.3 },
+    "P2": { "paired": 11, "rho": 0.873, "circularShiftRho": 0.609, "shuffledRho": 0.073 }
+  },
+  "secondEnvironment": {
+    "language": "python-stdlib",
+    "P1": { "paired": 11, "rho": -0.218182 },
+    "P2": { "paired": 11, "rho": 0.872727 }
+  },
+  "limitations": [
+    "two participants only",
+    "video segments are not Tacitweave sessions",
+    "CASE has no imagery or relationship labels",
+    "no p-values or population inference",
+    "circular-shift control does not remove all temporal dependence"
+  ]
+}

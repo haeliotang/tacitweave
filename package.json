@@ -34,7 +34,8 @@
     "lsm0:precision": "tsx scripts/lsm0-precision.ts",
     "license:js": "node scripts/check-js-licenses.mjs",
     "lsm0:public": "tsx scripts/lsm0-public-data.ts",
-    "lsm1:synthetic": "tsx scripts/lsm1-synthetic.ts"
+    "lsm1:synthetic": "tsx scripts/lsm1-synthetic.ts",
+    "case:canonical": "tsx scripts/case-adapter.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.4",
