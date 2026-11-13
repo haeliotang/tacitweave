@@ -79,6 +79,7 @@ Read the full positioning and literature brief:
 - [Public data reanalysis protocol](docs/research/public-data-reanalysis.md)
 - [CASE snippet pipeline evidence](docs/research/case-snippet-reanalysis.md)
 - [QoL_Stress import check](docs/research/qol-stress-import-check.md)
+- [WESAD adapter contract](docs/research/wesad-adapter.md)
 - [LSM-1 evaluation contract](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 interval-method audit](docs/research/lsm0-method-audit.md)
 - [LSM-0 group-mean inference audit](docs/research/lsm0-mean-inference.md)
@@ -381,6 +382,7 @@ pnpm lsm0:mean-audit
 pnpm evidence:verify --manifest <manifest.json> --root <bundle>
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
+python3 scripts/wesad_adapter.py --root <WESAD> --out /tmp/wesad-canonical.jsonl
 reuse lint                  # REUSE/SPDX compliance
 pnpm license:js             # JS dependency license check
 pnpm bci:bridge --origin simulated  # local BCI-3 bridge; real adapters use --origin hardware

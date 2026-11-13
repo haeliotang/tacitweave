@@ -80,6 +80,7 @@ Tacitweave 研究的是一个比“读取深层潜意识”更窄、更可检验
 - [公开数据复分析协议](docs/research/public-data-reanalysis.md)
 - [CASE snippet 管线证据](docs/research/case-snippet-reanalysis.md)
 - [QoL_Stress 导入检查](docs/research/qol-stress-import-check.md)
+- [WESAD adapter 契约](docs/research/wesad-adapter.md)
 - [LSM-1 评估契约](docs/research/lsm1-evaluation-contract.md)
 - [LSM-0 区间方法审查](docs/research/lsm0-method-audit.md)
 - [LSM-0 组均值推断审查](docs/research/lsm0-mean-inference.md)
@@ -350,6 +351,7 @@ pnpm lsm0:mean-audit
 pnpm evidence:verify --manifest <manifest.json> --root <bundle>
 pnpm case:canonical --root <CASE_snippet> --participants 1,2
 pnpm qol:canonical --root <QoL_Stress/data>
+python3 scripts/wesad_adapter.py --root <WESAD> --out /tmp/wesad-canonical.jsonl
 reuse lint                  # REUSE/SPDX 合规
 pnpm license:js             # JS 依赖许可检查
 pnpm bci:bridge --origin simulated  # 本机 BCI-3 bridge；真实适配器用 --origin hardware

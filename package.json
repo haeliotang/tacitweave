@@ -39,7 +39,8 @@
     "qol:canonical": "tsx scripts/qol-adapter.ts",
     "lsm0:method-audit": "tsx scripts/lsm0-method-audit.ts",
     "lsm0:mean-audit": "tsx scripts/lsm0-mean-audit.ts",
-    "evidence:verify": "tsx scripts/evidence-verify.ts"
+    "evidence:verify": "tsx scripts/evidence-verify.ts",
+    "wesad:canonical": "python3 scripts/wesad_adapter.py"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.4",
