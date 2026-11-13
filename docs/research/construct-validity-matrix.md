@@ -50,3 +50,19 @@ SPDX-License-Identifier: CC-BY-4.0
 - B：没有真实设备或公开数据复分析证据；不能声称。
 - C：没有评估结果；不能声称。
 - 临床价值：不在当前范围。
+
+## Executable registry
+
+`src/construct-validity.ts` makes the matrix machine-checkable:
+
+- each claim has an operationalization, at least one competitor, and at least one test;
+- each test must have an explicit failure condition;
+- a claim cannot be `supported` without listed evidence;
+- current statuses are `tooling_only` (A/C) and `not_tested` (B), not supported.
+
+```bash
+pnpm test src/construct-validity.test.ts
+```
+
+This prevents the README or a future analysis from silently upgrading a tooling
+artifact into an empirical finding.
