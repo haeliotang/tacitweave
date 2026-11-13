@@ -35,3 +35,8 @@
 @media (max-width: 760px) { .continuity-layout { grid-template-columns: 1fr; } .revisit-grid { grid-template-columns: 1fr; } .continuity-detail-head { flex-direction: column; } }
 .relationship-continuity-panel { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 12px; margin: 14px 0; }
 .relationship-continuity-panel h3 { margin: 3px 0 5px; }
+.space-composer { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 12px; margin: 14px 0; }
+.composer-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.composer-head h3 { margin: 3px 0 5px; }
+.composer-section { display: grid; gap: 7px; }
+.space-composer .field-line select { max-width: 220px; }

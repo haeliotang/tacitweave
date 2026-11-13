@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Encounter } from './encounter'
-import { innerPlan, innerPlanFromCapture, innerSpace, type InnerFeeling, type InnerFormat } from './inner'
+import { innerPlan, innerPlanFromCapture, innerSpace, type InnerFeeling, type InnerFormat, type InnerPlan } from './inner'
 import type { SomaticCapture } from './somatic'
 
 // Local, synthetic entry points for the symbolic-space prototype. They never
@@ -49,6 +49,18 @@ export function createInnerEncounter(input: { fragment: string; feeling?: InnerF
 
 export function createInnerCaptureEncounter(capture: SomaticCapture): Encounter {
   const inner = innerPlanFromCapture(capture)
+  return {
+    id: `demo-inner-${crypto.randomUUID()}`,
+    seed: Math.floor(Math.random() * 0xffffffff),
+    durationSec: inner.durationSec,
+    createdAt: new Date().toISOString(),
+    rendererKind: 'symbolic',
+    innerPlan: inner,
+    plan: { version: 'episode-plan-v1', kind: 'inner', rendererKind: 'symbolic', inner },
+  }
+}
+
+export function createComposedCaptureEncounter(capture: SomaticCapture, inner: InnerPlan): Encounter {
   return {
     id: `demo-inner-${crypto.randomUUID()}`,
     seed: Math.floor(Math.random() * 0xffffffff),

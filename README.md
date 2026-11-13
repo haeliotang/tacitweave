@@ -175,6 +175,7 @@ See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md),
 | Continuity v0.1 | Re-enter a past fragment, edit user-authored fields, keep every revision and compare field changes without interpretation |
 | Dynamic space v0.1 | Extend a 75s encounter by explicit 30s stays; every extension is recorded and the original plan stays unchanged |
 | Relationship continuity v0.1 | Re-enter a relationship moment, prefill its user fields, preserve the original, record each visit and compare user-field changes |
+| Space Composer v0.1 | Choose 1–3 motifs, figure and 75s/180s format before entering; the system composes, not interprets |
 
 Currently **not** implemented:
 
@@ -188,11 +189,11 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **183** Vitest unit/integration tests
-- **26** Playwright browser E2E scenarios
+- **185** Vitest unit/integration tests
+- **27** Playwright browser E2E scenarios
 - **8** Rust desktop tests; the ops crate also builds and tests
 - WCAG A/AA structural and contrast checks in light/dark themes
-- main JS bundle about **321 KB**, with heavy views lazy-loaded
+- main JS bundle about **325 KB**, with heavy views lazy-loaded
 - v0.1.4 release: **unsigned** Linux AppImage/DEB + Windows NSIS; no macOS asset yet
 - CI: Symbolic space, Rust operational, Browser E2E and License checks
 

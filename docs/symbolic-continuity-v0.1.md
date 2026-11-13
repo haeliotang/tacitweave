@@ -99,4 +99,6 @@ SPDX-License-Identifier: CC-BY-4.0
 - 动态空间的持续进入与返回；
 - 以上均不改变 LSM 研究的 blocked 状态。
 
+用户主导的空间组合见 [Space Composer v0.1](space-composer-v0.1.md)。
+
 动态时长见 [Dynamic symbolic space v0.1](dynamic-symbolic-space-v0.1.md)。

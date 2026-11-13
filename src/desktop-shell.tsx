@@ -7,6 +7,7 @@ import { innerPlanFromCapture } from './inner'
 import { SceneView } from './scene-loader'
 import { createMotif, loadMotifs, type MotifEntry } from './motif-journal'
 import { createRevisit, type RevisitInput } from './continuity'
+import { SpaceComposer } from './space-composer'
 import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipInput, type RelationshipTrigger } from './relationship'
 import { createRelationshipRevisit, type RelationshipRevisitInput } from './relationship-continuity'
 import { clearActiveEncryption, clearLocalSnapshot, disableLocalEncryption, enableLocalEncryption, hasEncryptedLocalState, loadLocalSnapshot, recoverEncryptedSnapshot, saveLocalSnapshot, unlockLocalSnapshot } from './local-store'
@@ -82,16 +83,18 @@ function WorkspaceHeader({ eyebrow, title, meta, action }: { eyebrow: string; ti
   </header>
 }
 
-function MotifDetail({ motif, tab, setTab, onEnter }: { motif: MotifEntry; tab: DetailTab; setTab: (tab: DetailTab) => void; onEnter: () => void }) {
+function MotifDetail({ motif, tab, setTab, onEnter, onStart }: { motif: MotifEntry; tab: DetailTab; setTab: (tab: DetailTab) => void; onEnter: () => void; onStart: (encounter: Encounter) => void }) {
   const { lang, t } = useLanguage()
+  const [composing, setComposing] = useState(false)
   const voice = motif.signals?.voice
   return <>
     <WorkspaceHeader
       eyebrow={t('片段')}
       title={motif.name || t('未命名')}
       meta={`${dateLabel(motif.createdAt, lang)} · ${t('本机保存')} · ${motif.capture.fragments.length} ${t('块意象')}`}
-      action={<button className="primary-button" onClick={onEnter}>{t('进入空间')}</button>}
+      action={<div className="actions"><button className="primary-button" onClick={onEnter}>{t('进入空间')}</button><button className="quiet" onClick={() => setComposing(value => !value)}>{composing ? t('关闭自定义') : t('自定义空间')}</button></div>}
     />
+    {composing && <SpaceComposer capture={motif.capture} onStart={onStart} onCancel={() => setComposing(false)} />}
     {tab === 'overview' && <div className="detail-grid">
       <section className="paper-card span-2">
         <p className="card-label">{t('身体线索')}</p>
@@ -572,7 +575,7 @@ export function DesktopShell() {
                 {view === 'new' && (textMode
                   ? <div className="capture-wrap"><Suspense fallback={null}><InnerEntry onStart={start} /></Suspense></div>
                   : <div className="capture-wrap"><Suspense fallback={null}><SomaticEntry onStart={start} onRemember={remember} /></Suspense></div>)}
-                {view === 'motif' && selected && <MotifDetail motif={selected} tab={detailTab} setTab={setDetailTab} onEnter={enterSelected} />}
+                {view === 'motif' && selected && <MotifDetail motif={selected} tab={detailTab} setTab={setDetailTab} onEnter={enterSelected} onStart={start} />}
                 {view === 'motif' && !selected && <div className="empty-state"><h2>{t('这个片段不在了')}</h2><p>{t('它可能已被删除。可以从左侧新建一个片段。')}</p><button className="primary-button" onClick={openNew}>新建片段</button></div>}
               </>}
               {view === 'journal' && <>
