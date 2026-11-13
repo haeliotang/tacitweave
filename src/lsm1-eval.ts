@@ -32,12 +32,19 @@ export interface Lsm1EvaluationOptions {
 
 export type Lsm1Decision = 'supports_incremental' | 'no_incremental' | 'invalid'
 
+export interface Lsm1BaselineScores {
+  constant: number | null
+  lastHistory: number | null
+  xPlusH: number | null
+}
+
 export interface Lsm1Evaluation {
   status: 'evaluated' | 'invalid'
   reason?: 'no_rows' | 'invalid_row' | 'action_not_independent' | 'action_after_outcome' | 'temporal_split_unavailable' | 'singular_fit'
   trainRows: number
   testRows: number
   baselineMse: number | null
+  baselines: Lsm1BaselineScores
   fullMse: number | null
   relativeImprovement: number | null
   decision: Lsm1Decision
@@ -50,6 +57,10 @@ function isFiniteNumber(value: number): boolean {
 
 function timestamp(value: string): number {
   return Date.parse(value)
+}
+
+function mean(values: readonly number[]): number | null {
+  return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null
 }
 
 function fit(rows: readonly Lsm1Row[], withAction: boolean): number[] | null {
@@ -108,47 +119,57 @@ export function evaluateLsm1(rows: readonly Lsm1Row[], options: Lsm1EvaluationOp
     'A direct user action is required; system-inferred and derived actions are rejected.',
     'No p-values or clinical claims are produced.',
   ]
-  if (!rows.length) return { status: 'invalid', reason: 'no_rows', trainRows: 0, testRows: 0, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+  if (!rows.length) return { status: 'invalid', reason: 'no_rows', trainRows: 0, testRows: 0, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
   for (const row of rows) {
     if (!Number.isInteger(row.sessionIndex) || row.sessionIndex < 0 || !isFiniteNumber(row.y) || !isFiniteNumber(row.action)) {
-      return { status: 'invalid', reason: 'invalid_row', trainRows: 0, testRows: 0, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+      return { status: 'invalid', reason: 'invalid_row', trainRows: 0, testRows: 0, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
     }
     if (row.actionSource !== 'user_input') {
-      return { status: 'invalid', reason: 'action_not_independent', trainRows: 0, testRows: 0, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+      return { status: 'invalid', reason: 'action_not_independent', trainRows: 0, testRows: 0, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
     }
     const inputAt = timestamp(row.inputAt)
     const actionAt = timestamp(row.actionObservedAt)
     const outcomeAt = timestamp(row.outcomeAt)
     if ([inputAt, actionAt, outcomeAt].some(value => Number.isNaN(value))) {
-      return { status: 'invalid', reason: 'invalid_row', trainRows: 0, testRows: 0, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+      return { status: 'invalid', reason: 'invalid_row', trainRows: 0, testRows: 0, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
     }
     if (actionAt < inputAt || outcomeAt <= actionAt) {
-      return { status: 'invalid', reason: 'action_after_outcome', trainRows: 0, testRows: 0, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+      return { status: 'invalid', reason: 'action_after_outcome', trainRows: 0, testRows: 0, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
     }
   }
   const sorted = [...rows].sort((left, right) => timestamp(left.outcomeAt) - timestamp(right.outcomeAt))
   const split = Math.floor(sorted.length * trainRatio)
   if (split < 2 || sorted.length - split < 2) {
-    return { status: 'invalid', reason: 'temporal_split_unavailable', trainRows: split, testRows: sorted.length - split, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+    return { status: 'invalid', reason: 'temporal_split_unavailable', trainRows: split, testRows: sorted.length - split, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
   }
   const train = sorted.slice(0, split)
   const test = sorted.slice(split)
   if (timestamp(train[train.length - 1].outcomeAt) >= timestamp(test[0].outcomeAt)) {
-    return { status: 'invalid', reason: 'temporal_split_unavailable', trainRows: train.length, testRows: test.length, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+    return { status: 'invalid', reason: 'temporal_split_unavailable', trainRows: train.length, testRows: test.length, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
   }
   const baselineWeights = fit(train, false)
   const fullWeights = fit(train, true)
   if (!baselineWeights || !fullWeights) {
-    return { status: 'invalid', reason: 'singular_fit', trainRows: train.length, testRows: test.length, baselineMse: null, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
+    return { status: 'invalid', reason: 'singular_fit', trainRows: train.length, testRows: test.length, baselineMse: null, baselines: { constant: null, lastHistory: null, xPlusH: null }, fullMse: null, relativeImprovement: null, decision: 'invalid', limitations }
   }
-  const baselineMse = mse(test, baselineWeights, false)
+  const constant = mean(train.map(row => row.y))
+  const constantMse = constant === null ? null : mean(test.map(row => (row.y - constant) ** 2))
+  const lastHistoryMse = mean(test.map(row => {
+    const last = row.history[row.history.length - 1]
+    const prediction = Number.isFinite(last) ? last : (constant ?? 0)
+    return (row.y - prediction) ** 2
+  }))
+  const xPlusHMse = mse(test, baselineWeights, false)
   const fullMse = mse(test, fullWeights, true)
-  const relativeImprovement = baselineMse > 0 ? (baselineMse - fullMse) / baselineMse : null
+  const baselines: Lsm1BaselineScores = { constant: constantMse, lastHistory: lastHistoryMse, xPlusH: xPlusHMse }
+  const bestBaseline = Math.min(...Object.values(baselines).filter((value): value is number => value !== null))
+  const relativeImprovement = Number.isFinite(bestBaseline) && bestBaseline > 0 ? (bestBaseline - fullMse) / bestBaseline : null
   return {
     status: 'evaluated',
     trainRows: train.length,
     testRows: test.length,
-    baselineMse,
+    baselineMse: xPlusHMse,
+    baselines,
     fullMse,
     relativeImprovement,
     decision: relativeImprovement !== null && relativeImprovement >= minRelativeImprovement ? 'supports_incremental' : 'no_incremental',

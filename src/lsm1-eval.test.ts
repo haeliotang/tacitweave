@@ -9,6 +9,9 @@ describe('LSM-1 synthetic evaluation contract', () => {
     expect(result.status).toBe('evaluated')
     expect(result.decision).toBe('supports_incremental')
     expect(result.relativeImprovement).toBeGreaterThan(0.1)
+    expect(result.baselines.constant).not.toBeNull()
+    expect(result.baselines.lastHistory).not.toBeNull()
+    expect(result.baselines.xPlusH).not.toBeNull()
   })
 
   it('does not turn a null effect into incremental evidence', () => {
