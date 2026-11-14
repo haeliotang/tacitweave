@@ -11,7 +11,8 @@ SPDX-License-Identifier: CC-BY-4.0
 | 方向 | 状态 | 说明 |
 | --- | --- | --- |
 | LSM Research | BLOCKED | 等待真实设备、可靠参考标注与伦理条件；保留失败证据，不增加检测器/模拟器 |
-| Symbolic Experience Platform | ACTIVE | 无需 BCI 硬件，继续做可运行体验与用户控制 |
+| Symbolic Exploration v0.2 | FROZEN | 已合并 `main`（`c412613`）；产品候选基线，不再追加功能 |
+| Symbolic Experience Platform | ACTIVE | v0.2 之后的工作需单独评估与立项 |
 | 实证准备 | 按需 | 设备、研究合作、伦理作为独立工作流 |
 
 ## 已实现的产品能力
@@ -78,25 +79,30 @@ English UI untranslated-token audit covers continuity/composer
 - 删除全部本机数据：实际点击 UI → 二次确认 → 数据库 local_state 清空 → 退出/重启 → 空状态确认。
 - 因此 Tauri 7/7 手工验收完成。
 
-## Symbolic Exploration v0.2
+## Symbolic Exploration v0.2（已冻结）
 
-P0/P1 纵向切片已建立：
+状态：`ACCEPTED / MERGED / FROZEN`
 
-- 无标签进入（身体/意象/空白）；
-- 直接放置、拖动、远近、大小、显隐、边界；
-- 撤销、保存、重访；
-- 新 `ExperienceSpaceV2` 契约，不改变旧 `motif-v1` / LSM-0。
+- 功能验收、数据生命周期验收、代码复审、CI/CLA 均通过；
+- PR #2 以 Squash and merge 进入 `main`，merge commit `c412613`；
+- PR #1 已先合并到 `main`，merge commit `9a56ffe`；
+- 未创建 Release，未打 Tag。
+
+已实现范围：
+
+- 无标签进入：身体、意象、空白、关系空间；
+- 直接放置、拖动、远近、大小、显隐、边界、视角；
+- 撤销、保存、重启后重访、删除；
+- 空间版本、分支、配置对照、半透明叠加；
+- 关系空间：抽象存在、距离、边界、显式连接/断开、区域包含；
+- `ExperienceSpaceV2` 独立契约，不改变旧 `motif-v1` / LSM-0；
+- 探索空间进入统一 `LocalSnapshot`、SQLite、导出与加密路径；
+- 已保存版本不可覆盖；容量 500 拒绝静默截断；删除父空间阻止悬空引用；
+- Tauri 应用锁、加密恢复、删除全部数据后重启无残留已手工验收。
 
 文档：[`symbolic-exploration-v0.2.md`](symbolic-exploration-v0.2.md)。
 
-## Symbolic Exploration v0.2
-
-P0/P1 纵向切片已建立并被实际 Tauri release 手工验证：
-
-- 无标签进入（身体/意象/空白）；
-- 直接放置、拖动、远近、大小、显隐、边界；
-- 撤销、保存、重启后重访；
-- 新 `ExperienceSpaceV2` 契约，不改变旧 `motif-v1` / LSM-0。
+这是工程里程碑，不是“前语言表达有效性”的用户研究结论。v0.2 之后不再向该基线追加功能；下一阶段若评估空间表达能力、交互质量或用户需求，应单独立项。
 
 ## 明确不是
 
@@ -108,12 +114,12 @@ P0/P1 纵向切片已建立并被实际 Tauri release 手工验证：
 
 要声称这些，需要适当的人类参与者研究、伦理审查与独立证据。
 
-## 产品层下一步（非科学）
+## v0.2 之后（不在本次冻结范围）
 
-1. 空间内更多显式参数（光、声音）；
-2. 更丰富的轨迹/关系拓扑规则；
-3. 首次使用引导与空状态路径；
-4. 更长时程的本地性能与数据规模验证。
+- 空间体验的表达能力与交互质量评估；
+- 真实用户需求与可用性研究；
+- 更长时程的本地性能与数据规模验证；
+- 这些工作需要单独的范围、伦理与验收标准，不应回填到已冻结的 v0.2 合并条件。
 
 ## 明确不做
 
