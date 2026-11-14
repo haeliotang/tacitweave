@@ -9,6 +9,7 @@ import {
   buildSpaceTrails,
   compareExperienceSpaces,
   createExperienceSpace,
+  experienceSpaceCapacity,
   moveObject,
   placeObject,
   removeObject,
@@ -22,6 +23,11 @@ import {
 } from './experience-space'
 import { useLanguage } from './i18n'
 import './exploration.css'
+
+function descendantsOf(spaces: ExperienceSpaceV2[], id: string): string[] {
+  const children = spaces.filter(space => space.parentId === id).map(space => space.id)
+  return children.flatMap(child => [child, ...descendantsOf(spaces, child)])
+}
 
 const kinds: Array<{ value: SpatialObjectKind; label: string; labelEn: string }> = [
   { value: 'door', label: '门', labelEn: 'Door' },
@@ -76,6 +82,7 @@ export function ExplorationView({ spaces, onChange, onExit }: { spaces: Experien
   const [compareBefore, setCompareBefore] = useState<string>('')
   const [compareAfter, setCompareAfter] = useState<string>('')
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [deleteError, setDeleteError] = useState('')
   const [overlay, setOverlay] = useState(false)
   const [drag, setDrag] = useState<{ id: string; startX: number; startY: number; originX: number; originY: number; rect: DOMRect } | null>(null)
   const [preview, setPreview] = useState<{ id: string; x: number; y: number } | null>(null)
@@ -101,7 +108,11 @@ export function ExplorationView({ spaces, onChange, onExit }: { spaces: Experien
     if (!space) return
     const existing = spaces.some(item => item.id === space.id)
     const saved = existing ? branchExperienceSpace(space) : space
-    const next = [saved, ...spaces].slice(0, 500)
+    const next = [saved, ...spaces]
+    if (next.length > experienceSpaceCapacity) {
+      setStatus(t('已有 500 个空间，导出或清理后再保存。'))
+      return
+    }
     onChange(next)
     setSpace(saved)
     setStatus(existing ? t('已保存为新版本。') : t('已保存到本机。'))
@@ -116,8 +127,14 @@ export function ExplorationView({ spaces, onChange, onExit }: { spaces: Experien
   }
 
   const deleteSpace = (id: string) => {
+    if (descendantsOf(spaces, id).length > 0) {
+      setDeleteError(t('这个空间仍有子版本。请先删除子版本，或整条轨迹另行确认删除。'))
+      setDeleteId(null)
+      return
+    }
     const next = spaces.filter(item => item.id !== id)
     onChange(next)
+    setDeleteError('')
     setDeleteId(null)
     if (space?.id === id) setSpace(null)
   }
@@ -219,6 +236,7 @@ export function ExplorationView({ spaces, onChange, onExit }: { spaces: Experien
 
       {spaces.length > 0 && <div className="saved-spaces">
         <p className="card-label">{t('回访已保存的空间')}</p>
+        {deleteError && <p className="note" role="alert">{deleteError}</p>}
         {buildSpaceTrails(spaces).map(trail => <div key={trail.rootId} className="saved-trail">
           <p className="note">{trail.visits.length} {t('个版本')} · {new Date(trail.root.createdAt).toLocaleString()}</p>
           {trail.visits.map(saved => <div key={saved.id} className="saved-space-row">

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
-import { adjustObject, branchExperienceSpace, buildSpaceTrails, compareExperienceSpaces, connectObjects, createExperienceSpace, disconnectRelation, isExperienceSpace, loadExperienceSpaces, moveObject, placeObject, removeObject, saveExperienceSpaces, setObjectVisibility, setViewpoint, undoLastAction } from './experience-space'
+import { adjustObject, branchExperienceSpace, buildSpaceTrails, compareExperienceSpaces, connectObjects, createExperienceSpace, disconnectRelation, experienceSpaceCapacity, isExperienceSpace, isExperienceSpaceCollection, loadExperienceSpaces, moveObject, placeObject, removeObject, saveExperienceSpaces, setObjectVisibility, setViewpoint, undoLastAction } from './experience-space'
 
 function storage() {
   const values = new Map<string, string>()
@@ -101,6 +101,21 @@ describe('experience space v2', () => {
     expect(isExperienceSpace({ ...space, objects: [...space.objects, { ...space.objects[0] }] })).toBe(false)
     expect(isExperienceSpace({ ...space, relations: [{ id: 'r', type: 'connection', fromId: 'missing', toId: space.objects[0].id, source: 'user_input' }] })).toBe(false)
     expect(isExperienceSpace({ ...space, actions: [{ id: 'a', type: 'move', source: 'user_input', elapsedMs: -1 }] })).toBe(false)
+  })
+
+  it('rejects cross-root, cyclic and malformed action collections', () => {
+    const root = createExperienceSpace('blank')
+    const child = branchExperienceSpace(root)
+    expect(isExperienceSpaceCollection([root, child])).toBe(true)
+    expect(isExperienceSpaceCollection([root, { ...child, rootId: 'other' }])).toBe(false)
+    expect(isExperienceSpaceCollection([{ ...root, parentId: child.id }, child])).toBe(false)
+    expect(isExperienceSpace({ ...root, actions: [{ id: 'a', type: 'move', targetId: 'x', before: null, after: null, source: 'user_input' }] })).toBe(false)
+  })
+
+  it('refuses to persist beyond the explicit capacity', () => {
+    const spaces = Array.from({ length: experienceSpaceCapacity + 1 }, () => createExperienceSpace('blank'))
+    const store = storage()
+    expect(() => saveExperienceSpaces(store, spaces)).toThrow('experience_space_capacity_exceeded')
   })
 
   it('groups snapshots into trails', () => {

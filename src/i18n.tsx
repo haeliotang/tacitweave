@@ -552,6 +552,8 @@ const en: Record<string, string> = {
   '关闭叠加': 'Close overlay',
   '两个空间的叠加对照': 'Overlay of two spaces',
   '已保存为新版本。': 'Saved as a new version.',
+  '已有 500 个空间，导出或清理后再保存。': 'There are already 500 spaces; export or remove some before saving.',
+  '这个空间仍有子版本。请先删除子版本，或整条轨迹另行确认删除。': 'This space still has child versions. Remove the children first, or explicitly delete the whole trail later.',
 }
 
 type LanguageContextValue = {

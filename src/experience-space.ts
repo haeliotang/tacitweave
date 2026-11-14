@@ -98,6 +98,57 @@ export function createExperienceSpace(start: ExperienceStart, point?: { x: numbe
   return { version: 'experience-space-v2', id, rootId: id, start, objects, relations: [], viewpoint: { distance: 0.5 }, actions: [], createdAt: at, updatedAt: at }
 }
 
+function isSpatialObject(value: unknown): value is SpatialObject {
+  if (!value || typeof value !== 'object') return false
+  const object = value as Partial<SpatialObject>
+  return typeof object.id === 'string' && object.id.length > 0
+    && kinds.has(object.kind as SpatialObjectKind)
+    && [object.x, object.y, object.depth, object.scale, object.opacity].every(number => typeof number === 'number' && Number.isFinite(number))
+    && (object.x as number) >= 0 && (object.x as number) <= 1
+    && (object.y as number) >= 0 && (object.y as number) <= 1
+    && (object.depth as number) >= 0 && (object.depth as number) <= 1
+    && (object.scale as number) >= 0.25 && (object.scale as number) <= 3
+    && (object.opacity as number) >= 0 && (object.opacity as number) <= 1
+    && typeof object.visible === 'boolean'
+    && (object.source === 'user_input' || object.source === 'system_generated')
+}
+
+function isViewpoint(value: unknown): value is Viewpoint {
+  if (!value || typeof value !== 'object') return false
+  const viewpoint = value as Partial<Viewpoint>
+  return typeof viewpoint.distance === 'number' && Number.isFinite(viewpoint.distance) && viewpoint.distance >= 0 && viewpoint.distance <= 1
+}
+
+function isRelationSchema(value: unknown): value is SpatialRelation {
+  if (!value || typeof value !== 'object') return false
+  const relation = value as Partial<SpatialRelation>
+  return typeof relation.id === 'string' && relation.id.length > 0
+    && (relation.type === 'connection' || relation.type === 'containment')
+    && typeof relation.fromId === 'string' && relation.fromId.length > 0
+    && typeof relation.toId === 'string' && relation.toId.length > 0
+    && relation.fromId !== relation.toId
+    && relation.source === 'user_input'
+}
+
+function isActionSchema(value: unknown): value is UserSpatialAction {
+  if (!value || typeof value !== 'object') return false
+  const item = value as Partial<UserSpatialAction>
+  if (typeof item.id !== 'string' || item.id.length === 0 || item.source !== 'user_input') return false
+  if (item.elapsedMs !== undefined && (typeof item.elapsedMs !== 'number' || !Number.isFinite(item.elapsedMs) || item.elapsedMs < 0)) return false
+  const validTarget = item.targetId === undefined || (typeof item.targetId === 'string' && item.targetId.length > 0)
+  if (!validTarget) return false
+  if (item.type === 'place') return Boolean(item.targetId && isSpatialObject(item.after) && item.after.id === item.targetId && item.before === null)
+  if (item.type === 'move' || item.type === 'adjust' || item.type === 'visibility') {
+    return Boolean(item.targetId && isSpatialObject(item.before) && isSpatialObject(item.after)
+      && item.before.id === item.targetId && item.after.id === item.targetId)
+  }
+  if (item.type === 'remove') return Boolean(item.targetId && isSpatialObject(item.before) && item.after === null)
+  if (item.type === 'connect') return Boolean(item.targetId && item.before === null && isRelationSchema(item.after) && item.after.toId === item.targetId)
+  if (item.type === 'disconnect') return Boolean(item.targetId && item.after === null && isRelationSchema(item.before) && item.before.toId === item.targetId)
+  if (item.type === 'viewpoint') return item.targetId === undefined && isViewpoint(item.before) && isViewpoint(item.after)
+  return false
+}
+
 export function isExperienceSpace(value: unknown): value is ExperienceSpaceV2 {
   if (!value || typeof value !== 'object') return false
   const space = value as Partial<ExperienceSpaceV2>
@@ -109,39 +160,51 @@ export function isExperienceSpace(value: unknown): value is ExperienceSpaceV2 {
   if (typeof space.createdAt !== 'string' || Number.isNaN(Date.parse(space.createdAt))) return false
   if (typeof space.updatedAt !== 'string' || Number.isNaN(Date.parse(space.updatedAt))) return false
   const objectIds = new Set<string>()
-  if (!space.objects.every(object => object && typeof object.id === 'string' && object.id.length > 0
-    && !objectIds.has(object.id) && objectIds.add(object.id)
-    && kinds.has(object.kind)
-    && [object.x, object.y, object.depth, object.scale, object.opacity].every(number => typeof number === 'number' && Number.isFinite(number))
-    && object.x >= 0 && object.x <= 1 && object.y >= 0 && object.y <= 1
-    && object.depth >= 0 && object.depth <= 1
-    && object.scale >= 0.25 && object.scale <= 3
-    && object.opacity >= 0 && object.opacity <= 1
-    && typeof object.visible === 'boolean'
-    && (object.source === 'user_input' || object.source === 'system_generated'))) return false
-  if (space.relations !== undefined && (!Array.isArray(space.relations) || !space.relations.every(relation => relation && typeof relation.id === 'string' && relation.id.length > 0
-    && (relation.type === 'connection' || relation.type === 'containment')
-    && typeof relation.fromId === 'string' && typeof relation.toId === 'string'
-    && relation.fromId !== relation.toId
-    && objectIds.has(relation.fromId) && objectIds.has(relation.toId)
-    && relation.source === 'user_input'))) return false
+  if (!space.objects.every(object => {
+    if (!isSpatialObject(object) || objectIds.has(object.id)) return false
+    objectIds.add(object.id)
+    return true
+  })) return false
   const relationIds = new Set<string>()
-  if (space.relations !== undefined && !space.relations.every(relation => !relationIds.has(relation.id) && relationIds.add(relation.id))) return false
+  if (space.relations !== undefined && !space.relations.every(relation => {
+    if (!isRelationSchema(relation) || relationIds.has(relation.id)) return false
+    if (!objectIds.has(relation.fromId) || !objectIds.has(relation.toId)) return false
+    relationIds.add(relation.id)
+    return true
+  })) return false
   const actionIds = new Set<string>()
-  const types = new Set<SpatialActionType>(['place', 'move', 'adjust', 'visibility', 'remove', 'viewpoint', 'connect', 'disconnect'])
-  return space.actions.every(item => item && typeof item.id === 'string' && item.id.length > 0 && !actionIds.has(item.id) && actionIds.add(item.id)
-    && types.has(item.type)
-    && (item.targetId === undefined || (typeof item.targetId === 'string' && item.targetId.length > 0))
-    && (item.elapsedMs === undefined || (typeof item.elapsedMs === 'number' && Number.isFinite(item.elapsedMs) && item.elapsedMs >= 0))
-    && item.source === 'user_input')
+  return space.actions.every(item => {
+    if (!isActionSchema(item) || actionIds.has(item.id)) return false
+    actionIds.add(item.id)
+    return true
+  })
+
 }
 
 /** Validate a saved collection, including parent/root references. */
 export function isExperienceSpaceCollection(value: unknown): value is ExperienceSpaceV2[] {
-  if (!Array.isArray(value) || !value.every(isExperienceSpace)) return false
+  if (!Array.isArray(value) || value.length > experienceSpaceCapacity || !value.every(isExperienceSpace)) return false
   const ids = new Set(value.map(space => space.id))
   if (ids.size !== value.length) return false
-  return value.every(space => ids.has(space.rootId) && (space.parentId === undefined || ids.has(space.parentId)))
+  const byId = new Map(value.map(space => [space.id, space]))
+  for (const space of value) {
+    if (!ids.has(space.rootId)) return false
+    if (space.parentId === undefined) {
+      if (space.id !== space.rootId) return false
+      continue
+    }
+    const seen = new Set<string>([space.id])
+    let cursor: ExperienceSpaceV2 | undefined = space
+    while (cursor?.parentId) {
+      if (seen.has(cursor.parentId)) return false
+      seen.add(cursor.parentId)
+      const parent = byId.get(cursor.parentId)
+      if (!parent || parent.rootId !== space.rootId) return false
+      cursor = parent
+    }
+    if (!cursor || cursor.id !== space.rootId) return false
+  }
+  return true
 }
 
 export function placeObject(space: ExperienceSpaceV2, kind: SpatialObjectKind, x = 0.5, y = 0.5, at = now()): ExperienceSpaceV2 {
@@ -246,7 +309,8 @@ export function loadExperienceSpaces(storage: ExperienceStorageLike): Experience
 }
 
 export function saveExperienceSpaces(storage: ExperienceStorageLike, spaces: ExperienceSpaceV2[]) {
-  storage.setItem(experienceSpaceStorageKey, JSON.stringify(spaces.slice(0, experienceSpaceCapacity)))
+  if (spaces.length > experienceSpaceCapacity) throw new Error('experience_space_capacity_exceeded')
+  storage.setItem(experienceSpaceStorageKey, JSON.stringify(spaces))
 }
 
 export interface SpaceDifference {

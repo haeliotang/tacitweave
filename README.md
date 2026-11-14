@@ -190,11 +190,11 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **211** Vitest unit/integration tests
+- **213** Vitest unit/integration tests
 - **38** Playwright browser E2E scenarios
 - **8** Rust desktop tests and **10** Rust ops tests
 - WCAG A/AA structural and contrast checks in light/dark themes
-- main JS bundle about **344 KB**, with heavy views lazy-loaded
+- main JS bundle about **346 KB**, with heavy views lazy-loaded
 - v0.1.4 release: **unsigned** Linux AppImage/DEB + Windows NSIS; no macOS asset yet
 - CI: Symbolic space, Rust operational, Browser E2E and License checks
 
