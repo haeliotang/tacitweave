@@ -111,7 +111,7 @@ E2E 覆盖：
 - 已保存空间可按版本重新进入；
 - 两个已保存空间可比较显式配置差异：添加/移除、位置、远近、大小、透明度、可见性、视角距离；
 - 比较只显示场景字段，不推断心理意义；
-- 目前快照仍保存在 WebView 本地存储，尚未接入 Tauri SQLite / local dataset 导出。
+- 快照已进入 Tauri SQLite 的 `experience_spaces` key，并进入 local dataset 导出/导入。
 
 ## P2 浏览器验证
 
@@ -122,9 +122,9 @@ E2E 已覆盖：
 - 刷新后同一 root 显示 2 个版本；
 - 选择两个空间进行显式配置对照。
 
-Tauri 内的分支手工验收尚未单独完成；P0/P1 的 Tauri 保存/重启/重访已完成。
+Tauri 内的分支闭环已手工完成：原始空间保存 → 另存为新分支 → 保存 → 退出/重启 → 探索页显示 2 个版本；SQLite `experience_spaces` 保留 parent/root 关系。
 
-## Tauri 验收
+## Tauri 验收（P2）
 
 实际 release 二进制已验证：
 

@@ -8,6 +8,7 @@ import { SceneView } from './scene-loader'
 import { createMotif, loadMotifs, type MotifEntry } from './motif-journal'
 import { createRevisit, symbolicFromSpaceChanges, type RevisitInput } from './continuity'
 import { SpaceComposer } from './space-composer'
+import { loadExperienceSpaces, saveExperienceSpaces } from './experience-space'
 import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipInput, type RelationshipTrigger } from './relationship'
 import { createRelationshipRevisit, type RelationshipRevisitInput } from './relationship-continuity'
 import { clearActiveEncryption, clearLocalSnapshot, disableLocalEncryption, enableLocalEncryption, hasEncryptedLocalState, loadLocalSnapshot, recoverEncryptedSnapshot, saveLocalSnapshot, unlockLocalSnapshot } from './local-store'
@@ -344,6 +345,7 @@ export function DesktopShell() {
     persist(motifs, next, nextField, signalSessions)
   }
   const importSnapshot = (snapshot: LocalSnapshot) => {
+    saveExperienceSpaces(window.localStorage, snapshot.spaces ?? [])
     setMotifs(snapshot.motifs)
     setRelationships(snapshot.relationships)
     setFieldLayout(snapshot.field ?? emptyFieldLayout())
@@ -360,6 +362,7 @@ export function DesktopShell() {
     setSignalSessions([])
     setCaptures([])
     setSymbolicSessions([])
+    saveExperienceSpaces(window.localStorage, [])
     setSelectedId(null)
     window.localStorage.removeItem(appLockStorageKey)
     window.localStorage.removeItem('tacitweave.app-lock-lockout.v1')
@@ -604,7 +607,7 @@ export function DesktopShell() {
                 {view === 'motif' && !selected && <div className="empty-state"><h2>{t('这个片段不在了')}</h2><p>{t('它可能已被删除。可以从左侧新建一个片段。')}</p><button className="primary-button" onClick={openNew}>新建片段</button></div>}
               </>}
               {view === 'explore' && <>
-                <Suspense fallback={<div className="field-empty"><p>{t('正在打开探索空间…')}</p></div>}><ExplorationView /></Suspense>
+                <Suspense fallback={<div className="field-empty"><p>{t('正在打开探索空间…')}</p></div>}><ExplorationView onSaved={() => persist(motifs, relationships)} /></Suspense>
               </>}
               {view === 'journal' && <>
                 <WorkspaceHeader eyebrow={t('本机片段日记')} title={t('反复出现的东西，先放在一起。')} meta={t('不推断因果，只做并列、回看与导出。')} />
@@ -642,7 +645,7 @@ export function DesktopShell() {
                 </div>
                 <Suspense fallback={null}><UpdatePanel currentVersion={host?.app_version ?? '0.1.3'} /></Suspense>
                 <Suspense fallback={null}><AppLockSettings enabled={Boolean(lockRecord)} autoLockMs={autoLockMs} onAutoLockChange={updateAutoLock} onEnable={enableAppLock} onDisable={disableAppLock} onLock={lockNow} /></Suspense>
-                <Suspense fallback={null}><LocalDataPanel snapshot={{ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions }} onImport={importSnapshot} onClear={clearAll} onRetractSignal={retractSignalSession} onRetractCapture={retractCapture} onRetractSymbolic={retractSymbolicSession} /></Suspense>
+                <Suspense fallback={null}><LocalDataPanel snapshot={{ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions, spaces: loadExperienceSpaces(window.localStorage) }} onImport={importSnapshot} onClear={clearAll} onRetractSignal={retractSignalSession} onRetractCapture={retractCapture} onRetractSymbolic={retractSymbolicSession} /></Suspense>
               </>}
             </>}
         </div>

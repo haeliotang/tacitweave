@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
+import { readFile } from 'node:fs/promises'
 import { expect, test } from '@playwright/test'
 
 test('a blank space can be built and directly manipulated without text labels', async ({ page }) => {
@@ -26,6 +27,12 @@ test('a blank space can be built and directly manipulated without text labels', 
 
   await page.getByRole('button', { name: 'Save', exact: true }).click()
   await expect(page.getByText('Saved locally.')).toBeVisible()
+  await page.getByRole('button', { name: /Settings$/ }).click()
+  const downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Export all local data' }).click()
+  const download = await downloadPromise
+  const dataset = JSON.parse(await readFile((await download.path())!, 'utf8')) as { spaces?: unknown[] }
+  expect(dataset.spaces).toHaveLength(1)
   await page.reload()
   await page.getByRole('button', { name: /Explore$/ }).click()
   await page.getByRole('button', { name: /objects$/ }).first().click()

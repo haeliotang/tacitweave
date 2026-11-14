@@ -64,7 +64,7 @@ function SpatialShape({ kind }: { kind: SpatialObjectKind }) {
   return <span className="spatial-shape" />
 }
 
-export function ExplorationView({ onExit }: { onExit?: () => void }) {
+export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSaved?: () => void }) {
   const { lang, t } = useLanguage()
   const [spaces, setSpaces] = useState<ExperienceSpaceV2[]>(() => typeof window === 'undefined' ? [] : loadExperienceSpaces(window.localStorage))
   const [space, setSpace] = useState<ExperienceSpaceV2 | null>(null)
@@ -100,6 +100,7 @@ export function ExplorationView({ onExit }: { onExit?: () => void }) {
     setSpaces(next)
     saveExperienceSpaces(window.localStorage, next)
     setStatus(t('已保存到本机。'))
+    onSaved?.()
   }
 
   const branch = () => {
