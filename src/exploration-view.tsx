@@ -39,12 +39,13 @@ function depthScale(object: SpatialObject) {
   return Math.max(0.35, 0.7 + object.depth * 0.7)
 }
 
-function objectStyle(object: SpatialObject): React.CSSProperties {
+function objectStyle(object: SpatialObject, viewDistance: number): React.CSSProperties {
+  const viewScale = 1.18 - viewDistance * 0.36
   return {
     left: `${object.x * 100}%`,
     top: `${object.y * 100}%`,
     opacity: object.visible ? object.opacity : 0,
-    transform: `translate(-50%, -50%) scale(${object.scale * depthScale(object)})`,
+    transform: `translate(-50%, -50%) scale(${object.scale * depthScale(object) * viewScale})`,
     zIndex: 10 + Math.round(object.depth * 80),
   }
 }
@@ -206,7 +207,7 @@ export function ExplorationView({ onExit }: { onExit?: () => void }) {
         {renderedObjects.map(object => <div
           key={object.id}
           className={`spatial-object kind-${object.kind} ${selectedId === object.id ? 'selected' : ''}`}
-          style={objectStyle(object)}
+          style={objectStyle(object, space.viewpoint.distance)}
           role="button"
           tabIndex={0}
           aria-label={`${t('对象')} ${kindLabel(object.kind, lang)}`}

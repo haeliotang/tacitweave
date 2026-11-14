@@ -61,7 +61,7 @@ SPDX-License-Identifier: CC-BY-4.0
 Vitest: 203 passed
 Playwright E2E: 32 passed
 pnpm build: exit 0, main JS ~334 KB
-reuse lint: 264/264 compliant
+reuse lint: 270/270 compliant
 Rust: 8 desktop + 10 ops tests passed
 Tauri release build: pnpm tauri:build --no-bundle passed
 Retention: 1000 motifs + 1000 symbolic sessions (explicit, tested)
