@@ -89,6 +89,15 @@ P0/P1 纵向切片已建立：
 
 文档：[`symbolic-exploration-v0.2.md`](symbolic-exploration-v0.2.md)。
 
+## Symbolic Exploration v0.2
+
+P0/P1 纵向切片已建立并被实际 Tauri release 手工验证：
+
+- 无标签进入（身体/意象/空白）；
+- 直接放置、拖动、远近、大小、显隐、边界；
+- 撤销、保存、重启后重访；
+- 新 `ExperienceSpaceV2` 契约，不改变旧 `motif-v1` / LSM-0。
+
 ## 明确不是
 
 - 不是临床工具；
