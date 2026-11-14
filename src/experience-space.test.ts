@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
-import { adjustObject, branchExperienceSpace, buildSpaceTrails, compareExperienceSpaces, createExperienceSpace, isExperienceSpace, loadExperienceSpaces, moveObject, placeObject, removeObject, saveExperienceSpaces, setObjectVisibility, setViewpoint, undoLastAction } from './experience-space'
+import { adjustObject, branchExperienceSpace, buildSpaceTrails, compareExperienceSpaces, connectObjects, createExperienceSpace, disconnectRelation, isExperienceSpace, loadExperienceSpaces, moveObject, placeObject, removeObject, saveExperienceSpaces, setObjectVisibility, setViewpoint, undoLastAction } from './experience-space'
 
 function storage() {
   const values = new Map<string, string>()
@@ -61,6 +61,21 @@ describe('experience space v2', () => {
     const moved = moveObject(child, childDoor.id, 0.8, 0.7)
     expect(compareExperienceSpaces(parent, moved).map(change => change.field)).toEqual(['position'])
     expect(parent.objects[0]).toMatchObject({ x: 0.5, y: 0.5 })
+  })
+
+  it('creates a relationship space with two presences and an explicit connection', () => {
+    let space = createExperienceSpace('relationship')
+    expect(space.objects.map(object => object.kind)).toEqual(['presence', 'presence'])
+    space = connectObjects(space, space.objects[0].id, space.objects[1].id)
+    expect(space.relations).toHaveLength(1)
+    expect(space.relations?.[0].type).toBe('connection')
+    const relationId = space.relations![0].id
+    space = undoLastAction(space)
+    expect(space.relations).toEqual([])
+    space = connectObjects(space, space.objects[0].id, space.objects[1].id)
+    space = disconnectRelation(space, space.relations![0].id)
+    expect(space.relations).toEqual([])
+    expect(relationId).toBeTruthy()
   })
 
   it('groups snapshots into trails', () => {

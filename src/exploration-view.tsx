@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import {
   adjustObject,
   branchExperienceSpace,
+  connectObjects,
+  disconnectRelation,
   buildSpaceTrails,
   compareExperienceSpaces,
   createExperienceSpace,
@@ -163,6 +165,14 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
         <p className="workspace-meta">{t('你可以从身体、一个画面，或一片空白开始。所有对象、位置和距离都由你改变；系统不替你解释。')}</p>
       </header>
 
+      <div className="relationship-start-card">
+        <button type="button" className="start-card relationship-card" onClick={() => start('relationship')}>
+          <span className="start-symbol">◌ ◌</span>
+          <strong>{t('关系空间')}</strong>
+          <span>{t('放置两个抽象存在，直接改变距离、边界和显式连接；不需要填写人物信息。')}</span>
+        </button>
+      </div>
+
       <div className="start-grid">
         <button type="button" className="start-card" onClick={() => setBodyPick(true)}>
           <span className="start-symbol">◌</span>
@@ -233,6 +243,12 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
     <div className="canvas-layout">
       <div ref={stage} className="symbolic-canvas" role="application" aria-label={t('可操作的象征空间')} style={{ '--view-distance': space.viewpoint.distance } as React.CSSProperties}>
         <svg className="canvas-horizon" viewBox="0 0 100 55" preserveAspectRatio="none" aria-hidden="true"><path d="M0 42 L100 34" /><path d="M0 48 L100 43" /></svg>
+        {(space.relations ?? []).map(relation => {
+          const from = space.objects.find(object => object.id === relation.fromId)
+          const to = space.objects.find(object => object.id === relation.toId)
+          if (!from || !to) return null
+          return <svg key={relation.id} className="relation-layer" aria-hidden="true"><line x1={`${from.x * 100}%`} y1={`${from.y * 100}%`} x2={`${to.x * 100}%`} y2={`${to.y * 100}%`} /></svg>
+        })}
         {renderedObjects.map(object => <div
           key={object.id}
           className={`spatial-object kind-${object.kind} ${selectedId === object.id ? 'selected' : ''}`}
@@ -258,6 +274,12 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
       </div>
 
       <aside className="canvas-panel">
+        {space.start === 'relationship' && <div className="canvas-panel-section">
+          <p className="card-label">{t('关系')}</p>
+          <p className="note">{t('距离由两个存在的位置决定；连接需要你明确建立。')}</p>
+          <button type="button" className="quiet small" disabled={space.objects.filter(object => object.kind === 'presence').length < 2 || (space.relations?.length ?? 0) > 0} onClick={() => { const presences = space.objects.filter(object => object.kind === 'presence'); if (presences.length >= 2) update(connectObjects(space, presences[0].id, presences[1].id)) }}>{t('连接两个存在')}</button>
+          {(space.relations ?? []).map(relation => <div key={relation.id} className="relation-row"><span>{relation.type === 'connection' ? t('显式连接') : t('包含')}</span><button type="button" className="quiet small" onClick={() => update(disconnectRelation(space, relation.id))}>{t('断开')}</button></div>)}
+        </div>}
         <div className="canvas-panel-section">
           <p className="card-label">{t('放置')}</p>
           <div className="object-palette">{kinds.map(kind => <button key={kind.value} type="button" className="chip" onClick={() => update(placeObject(space, kind.value))}>{kindLabel(kind.value, lang)}</button>)}</div>

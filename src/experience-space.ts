@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-export type ExperienceStart = 'body' | 'imagery' | 'blank'
+export type ExperienceStart = 'body' | 'imagery' | 'blank' | 'relationship'
 
 export type SpatialObjectKind = 'body' | 'door' | 'water' | 'forest' | 'shape' | 'light' | 'boundary' | 'presence'
 
-export type SpatialActionType = 'place' | 'move' | 'adjust' | 'visibility' | 'remove' | 'viewpoint'
+export type SpatialActionType = 'place' | 'move' | 'adjust' | 'visibility' | 'remove' | 'viewpoint' | 'connect' | 'disconnect'
 
 export interface SpatialObject {
   id: string
@@ -23,13 +23,21 @@ export interface Viewpoint {
   distance: number
 }
 
+export interface SpatialRelation {
+  id: string
+  type: 'connection' | 'containment'
+  fromId: string
+  toId: string
+  source: 'user_input'
+}
+
 export interface UserSpatialAction {
   id: string
   type: SpatialActionType
   targetId?: string
   elapsedMs: number
-  before?: SpatialObject | Viewpoint | null
-  after?: SpatialObject | Viewpoint | null
+  before?: SpatialObject | Viewpoint | SpatialRelation | null
+  after?: SpatialObject | Viewpoint | SpatialRelation | null
   source: 'user_input'
 }
 
@@ -40,6 +48,7 @@ export interface ExperienceSpaceV2 {
   parentId?: string
   start: ExperienceStart
   objects: SpatialObject[]
+  relations?: SpatialRelation[]
   viewpoint: Viewpoint
   actions: UserSpatialAction[]
   createdAt: string
@@ -58,7 +67,7 @@ const uuid = () => crypto.randomUUID()
 const now = () => new Date().toISOString()
 
 const kinds = new Set<SpatialObjectKind>(['body', 'door', 'water', 'forest', 'shape', 'light', 'boundary', 'presence'])
-const starts = new Set<ExperienceStart>(['body', 'imagery', 'blank'])
+const starts = new Set<ExperienceStart>(['body', 'imagery', 'blank', 'relationship'])
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, Number.isFinite(value) ? value : (min + max) / 2))
@@ -72,13 +81,20 @@ function action(type: SpatialActionType, targetId: string | undefined, before: U
   return { id: uuid(), type, ...(targetId ? { targetId } : {}), elapsedMs: 0, before: before ?? null, after: after ?? null, source: 'user_input' }
 }
 
+function isSpatialRelation(value: UserSpatialAction['before'] | UserSpatialAction['after']): value is SpatialRelation {
+  return Boolean(value && typeof value === 'object' && 'fromId' in value && 'toId' in value && 'type' in value)
+}
+
 export function createExperienceSpace(start: ExperienceStart, point?: { x: number; y: number }, initialKind?: SpatialObjectKind, at = now()): ExperienceSpaceV2 {
   if (!starts.has(start)) throw new Error('invalid_start')
   const objects: SpatialObject[] = []
   if (start === 'body') objects.push(makeObject('body', point?.x ?? 0.5, point?.y ?? 0.5))
   if (start === 'imagery') objects.push(makeObject(initialKind && initialKind !== 'body' && initialKind !== 'boundary' ? initialKind : 'shape'))
+  if (start === 'relationship') {
+    objects.push(makeObject('presence', 0.32, 0.52), makeObject('presence', 0.68, 0.52))
+  }
   const id = uuid()
-  return { version: 'experience-space-v2', id, rootId: id, start, objects, viewpoint: { distance: 0.5 }, actions: [], createdAt: at, updatedAt: at }
+  return { version: 'experience-space-v2', id, rootId: id, start, objects, relations: [], viewpoint: { distance: 0.5 }, actions: [], createdAt: at, updatedAt: at }
 }
 
 export function isExperienceSpace(value: unknown): value is ExperienceSpaceV2 {
@@ -88,6 +104,11 @@ export function isExperienceSpace(value: unknown): value is ExperienceSpaceV2 {
   if (!starts.has(space.start as ExperienceStart) || !Array.isArray(space.objects) || !Array.isArray(space.actions)) return false
   if (!space.viewpoint || typeof space.viewpoint.distance !== 'number' || !Number.isFinite(space.viewpoint.distance)) return false
   if (typeof space.createdAt !== 'string' || Number.isNaN(Date.parse(space.createdAt))) return false
+  if (space.relations !== undefined && (!Array.isArray(space.relations) || !space.relations.every(relation => relation && typeof relation.id === 'string'
+    && (relation.type === 'connection' || relation.type === 'containment')
+    && typeof relation.fromId === 'string' && typeof relation.toId === 'string'
+    && relation.fromId !== relation.toId
+    && relation.source === 'user_input'))) return false
   return space.objects.every(object => object && typeof object.id === 'string'
     && kinds.has(object.kind)
     && [object.x, object.y, object.depth, object.scale, object.opacity].every(number => typeof number === 'number' && Number.isFinite(number))
@@ -142,6 +163,23 @@ export function setViewpoint(space: ExperienceSpaceV2, distance: number, at = no
   return { ...space, viewpoint: after, actions: [...space.actions, action('viewpoint', undefined, before, after)], updatedAt: at }
 }
 
+export function connectObjects(space: ExperienceSpaceV2, fromId: string, toId: string, type: SpatialRelation['type'] = 'connection', at = now()): ExperienceSpaceV2 {
+  if (fromId === toId) throw new Error('cannot_connect_to_self')
+  const from = space.objects.find(object => object.id === fromId)
+  const to = space.objects.find(object => object.id === toId)
+  if (!from || !to) throw new Error('object_not_found')
+  const relation: SpatialRelation = { id: uuid(), type, fromId, toId, source: 'user_input' }
+  const relations = space.relations ?? []
+  if (relations.some(item => item.fromId === fromId && item.toId === toId && item.type === type)) return space
+  return { ...space, relations: [...relations, relation], actions: [...space.actions, action('connect', toId, null, relation)], updatedAt: at }
+}
+
+export function disconnectRelation(space: ExperienceSpaceV2, relationId: string, at = now()): ExperienceSpaceV2 {
+  const relation = space.relations?.find(item => item.id === relationId)
+  if (!relation) throw new Error('relation_not_found')
+  return { ...space, relations: (space.relations ?? []).filter(item => item.id !== relationId), actions: [...space.actions, action('disconnect', relation.toId, relation, null)], updatedAt: at }
+}
+
 /** Restore the object/viewpoint state before the latest explicit user action. */
 export function undoLastAction(space: ExperienceSpaceV2, at = now()): ExperienceSpaceV2 {
   const last = space.actions.at(-1)
@@ -154,7 +192,16 @@ export function undoLastAction(space: ExperienceSpaceV2, at = now()): Experience
     objects = objects.map(object => object.id === last.targetId ? last.before as SpatialObject : object)
   }
   if (last.type === 'viewpoint' && last.before && 'distance' in last.before) viewpoint = last.before
-  return { ...space, objects, viewpoint, actions: space.actions.slice(0, -1), updatedAt: at }
+  let relations = space.relations ?? []
+  if (last.type === 'connect' && isSpatialRelation(last.after)) {
+    const relation = last.after
+    relations = relations.filter(item => item.id !== relation.id)
+  }
+  if (last.type === 'disconnect' && isSpatialRelation(last.before)) {
+    const relation = last.before
+    relations = [...relations, relation]
+  }
+  return { ...space, objects, relations, viewpoint, actions: space.actions.slice(0, -1), updatedAt: at }
 }
 
 export function loadExperienceSpaces(storage: ExperienceStorageLike): ExperienceSpaceV2[] {
@@ -193,6 +240,7 @@ export function branchExperienceSpace(space: ExperienceSpaceV2, at = now()): Exp
     rootId: space.rootId,
     parentId: space.id,
     objects: space.objects.map(object => ({ ...object })),
+    relations: (space.relations ?? []).map(relation => ({ ...relation })),
     viewpoint: { ...space.viewpoint },
     actions: [],
     createdAt: at,

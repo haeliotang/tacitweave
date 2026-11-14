@@ -538,6 +538,12 @@ const en: Record<string, string> = {
   '两个空间没有显式配置差异。': 'The two spaces have no explicit configuration differences.',
   '选择两个已保存空间进行比较。': 'Choose two saved spaces to compare.',
   '另存为新分支': 'Save as new branch',
+  '关系空间': 'Relationship space',
+  '放置两个抽象存在，直接改变距离、边界和显式连接；不需要填写人物信息。': 'Place two abstract presences and directly change distance, boundaries and explicit connections; no person details are required.',
+  '距离由两个存在的位置决定；连接需要你明确建立。': 'Distance is determined by the two positions; connections are created explicitly.',
+  '连接两个存在': 'Connect the two presences',
+  '显式连接': 'Explicit connection',
+  '包含': 'Containment',
 }
 
 type LanguageContextValue = {

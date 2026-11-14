@@ -73,3 +73,19 @@ test('a saved space can branch and compare its explicit configuration', async ({
   await selects.nth(1).selectOption({ index: 2 })
   await expect(page.locator('.space-diff')).toContainText('position')
 })
+
+
+test('a relationship space connects abstract presences without person details', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Explore$/ }).click()
+  await page.getByRole('button', { name: 'Relationship space' }).click()
+  await expect(page.locator('.spatial-object.kind-presence')).toHaveCount(2)
+  await page.getByRole('button', { name: 'Connect the two presences' }).click()
+  await expect(page.locator('.relation-layer')).toHaveCount(1)
+  await expect(page.locator('.relation-row')).toContainText('Explicit connection')
+  await page.getByRole('button', { name: 'Save', exact: true }).click()
+  await page.reload()
+  await page.getByRole('button', { name: /Explore$/ }).click()
+  await page.getByRole('button', { name: /objects$/ }).first().click()
+  await expect(page.locator('.relation-layer')).toHaveCount(1)
+})
