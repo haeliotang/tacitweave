@@ -1,11 +1,20 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { InnerFigure, InnerFormat, InnerMotif, InnerPlan } from './inner'
+import type { MotifSymbolic } from './motif-journal'
 
 export interface SpaceComposition {
   motifs: InnerMotif[]
   figure: InnerFigure
   durationSec: 75 | 180 | 'open'
+}
+
+export function compositionFromSymbolic(symbolic: MotifSymbolic): SpaceComposition {
+  return {
+    motifs: symbolic.motifs as InnerMotif[],
+    figure: symbolic.figure as InnerFigure,
+    durationSec: symbolic.format === 'open' ? 'open' : symbolic.format === 'space' ? 180 : 75,
+  }
 }
 
 export function composeInnerPlan(base: InnerPlan, composition: SpaceComposition): InnerPlan {

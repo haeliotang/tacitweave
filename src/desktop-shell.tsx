@@ -23,7 +23,7 @@ import { addFieldLink, attachFieldNode, emptyFieldLayout, fieldNodeKey, loadFiel
 import { createSignalSession, loadSignalSessions, removeSignalSession, type SignalSession } from './signal-session'
 import type { CaptureProvenance } from './capture'
 import { addCaptureProvenance, removeCaptureProvenance } from './capture-ledger'
-import { createSymbolicSession, loadSymbolicSessions, removeSymbolicSession, type SymbolicSession } from './symbolic-session'
+import { createSymbolicSession, loadSymbolicSessions, removeSymbolicSession, symbolicSessionCapacity, type SymbolicSession } from './symbolic-session'
 
 const FieldView = lazy(() => import('./field-view').then(module => ({ default: module.FieldView })))
 const TimelineRail = lazy(() => import('./field-view').then(module => ({ default: module.TimelineRail })))
@@ -94,7 +94,7 @@ function MotifDetail({ motif, tab, setTab, onEnter, onStart }: { motif: MotifEnt
       meta={`${dateLabel(motif.createdAt, lang)} · ${t('本机保存')} · ${motif.capture.fragments.length} ${t('块意象')}`}
       action={<div className="actions"><button className="primary-button" onClick={onEnter}>{t('进入空间')}</button><button className="quiet" onClick={() => setComposing(value => !value)}>{composing ? t('关闭自定义') : t('自定义空间')}</button></div>}
     />
-    {composing && <SpaceComposer capture={motif.capture} motifId={motif.id} onStart={onStart} onCancel={() => setComposing(false)} />}
+    {composing && <SpaceComposer capture={motif.capture} motifId={motif.id} initial={motif.symbolic} onStart={onStart} onCancel={() => setComposing(false)} />}
     {tab === 'overview' && <div className="detail-grid">
       <section className="paper-card span-2">
         <p className="card-label">{t('身体线索')}</p>
@@ -257,17 +257,17 @@ export function DesktopShell() {
       void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: nextCaptures, symbolicSessions })
     }
   }
-  const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture, selected.id)) }
+  const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture, selected.id, selected.symbolic)) }
   const enterMotif = (id: string) => {
     const motif = motifs.find(entry => entry.id === id)
     if (!motif) return
     setSelectedId(motif.id)
-    start(createInnerCaptureEncounter(motif.capture, motif.id))
+    start(createInnerCaptureEncounter(motif.capture, motif.id, motif.symbolic))
   }
   const backFromSpace = () => {
     if (encounter) {
       const session = createSymbolicSession(encounter)
-      const next = [session, ...symbolicSessions].slice(0, 100)
+      const next = [session, ...symbolicSessions].slice(0, symbolicSessionCapacity)
       setSymbolicSessions(next)
       void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions: next })
     }
@@ -283,12 +283,15 @@ export function DesktopShell() {
     const entry = createRevisit(motifs, source.id, { symbolic, note: t('从空间保存的调整') })
     const next = [entry, ...motifs]
     const nextField = attachFieldNode(fieldLayout, fieldNodeKey('motif', source.id), fieldNodeKey('motif', entry.id))
+    const session = createSymbolicSession({ ...encounter, motifId: entry.id })
+    const nextSessions = [session, ...symbolicSessions].slice(0, symbolicSessionCapacity)
     setMotifs(next)
     setFieldLayout(nextField)
+    setSymbolicSessions(nextSessions)
     setSelectedId(entry.id)
     setEncounter(null)
     setView('continuity')
-    persist(next, relationships, nextField, signalSessions, captures)
+    persist(next, relationships, nextField, signalSessions, captures, nextSessions)
   }
   const persist = (nextMotifs: MotifEntry[], nextRelationships: RelationshipTrigger[], nextField = fieldLayout, nextSignals = signalSessions, nextCaptures = captures, nextSymbolicSessions = symbolicSessions) => {
     void saveLocalSnapshot({ motifs: nextMotifs, relationships: nextRelationships, field: nextField, signals: nextSignals, captures: nextCaptures, symbolicSessions: nextSymbolicSessions })

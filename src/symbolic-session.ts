@@ -19,7 +19,8 @@ export interface SymbolicSession {
 }
 
 export const symbolicSessionStorageKey = 'tacitweave.symbolic-sessions.v1'
-const maxSessions = 100
+export const symbolicSessionCapacity = 1000
+const maxSessions = symbolicSessionCapacity
 const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter', 'extend', 'change'])
 
 export function isSymbolicSession(value: unknown): value is SymbolicSession {

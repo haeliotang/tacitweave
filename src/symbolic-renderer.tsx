@@ -110,12 +110,12 @@ export function SymbolicRenderer({ encounter, replay, onAgency }: WorldRendererP
   const phase = symbolicPhase(seconds, plan.durationSec, plan.format)
   const done = !isOpen && !isSpace && seconds >= durationSec
   return (
-    <div className={`symbolic-episode motif-${motif} phase-${phase} format-${plan.format} figure-${figure} light-${light}`} role="img" aria-label={t('象征空间')}>
+    <div className={`symbolic-episode motif-${motif} phase-${phase} format-${plan.format} light-${light}`} role="img" aria-label={t('象征空间')}>
       <div className="symbolic-sky" />
       <div className="symbolic-horizon" />
       <div className="symbolic-water" />
       <div className="symbolic-door" />
-      <div className={`symbolic-figure figure-${plan.figure}`} />
+      <div className={`symbolic-figure figure-${figure}`} />
       <div className="symbolic-fog" />
       {!isSpace && !isOpen && <div className="symbolic-progress" role="progressbar" aria-label={t('空间进度')} aria-valuemin={0} aria-valuemax={durationSec} aria-valuenow={Math.floor(seconds)}><span style={{ width: `${Math.min(100, seconds / durationSec * 100)}%` }} /></div>}
       {!isSpace && !isOpen && <span className="symbolic-time" aria-live="off">{formatClock(seconds)} / {formatClock(durationSec)}</span>}

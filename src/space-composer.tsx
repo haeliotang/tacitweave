@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import type { Encounter } from './encounter'
 import { innerPlanFromCapture, type InnerFigure, type InnerMotif } from './inner'
+import type { MotifSymbolic } from './motif-journal'
 import { createComposedCaptureEncounter } from './inner-encounter'
-import { composeInnerPlan } from './space-composition'
+import { composeInnerPlan, compositionFromSymbolic } from './space-composition'
 import type { SomaticCapture } from './somatic'
 import { useLanguage } from './i18n'
 import './continuity.css'
@@ -28,12 +29,13 @@ const figureOptions: Array<{ value: InnerFigure; label: string; labelEn: string 
   { value: 'animal', label: '动物', labelEn: 'Animal' },
 ]
 
-export function SpaceComposer({ capture, motifId, onStart, onCancel }: { capture: SomaticCapture; motifId?: string; onStart: (encounter: Encounter) => void; onCancel: () => void }) {
+export function SpaceComposer({ capture, motifId, initial, onStart, onCancel }: { capture: SomaticCapture; motifId?: string; initial?: MotifSymbolic; onStart: (encounter: Encounter) => void; onCancel: () => void }) {
   const { lang, t } = useLanguage()
   const base = innerPlanFromCapture(capture)
-  const [motifs, setMotifs] = useState<InnerMotif[]>(base.motifs)
-  const [figure, setFigure] = useState<InnerFigure>(base.figure)
-  const [durationSec, setDurationSec] = useState<75 | 180 | 'open'>(75)
+  const initialComposition = initial ? compositionFromSymbolic(initial) : null
+  const [motifs, setMotifs] = useState<InnerMotif[]>(initialComposition?.motifs ?? base.motifs)
+  const [figure, setFigure] = useState<InnerFigure>(initialComposition?.figure ?? base.figure)
+  const [durationSec, setDurationSec] = useState<75 | 180 | 'open'>(initialComposition?.durationSec ?? 75)
 
   const toggleMotif = (motif: InnerMotif) => {
     setMotifs(current => current.includes(motif)

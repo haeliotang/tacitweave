@@ -38,7 +38,8 @@ export interface StorageLike {
 }
 
 export const motifStorageKey = 'tacitweave.motifs.v1'
-const maxEntries = 200
+export const motifCapacity = 1000
+const maxEntries = motifCapacity
 
 function normalizeName(name: string) {
   return name.trim().slice(0, 60)

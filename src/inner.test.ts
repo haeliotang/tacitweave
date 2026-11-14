@@ -53,6 +53,13 @@ describe('inner plan', () => {
   })
 })
 
+it('restores a saved symbolic configuration when re-entering a motif', async () => {
+  const { createInnerCaptureEncounter } = await import('./inner-encounter')
+  const encounter = createInnerCaptureEncounter({ region: 'chest', sensation: 'pressure', intensity: 3, breath: 'held', fragments: ['wet-corridor'] }, 'motif-1', { format: 'space', motifs: ['water'], figure: 'animal' })
+  expect(encounter.motifId).toBe('motif-1')
+  expect(encounter.innerPlan).toMatchObject({ format: 'space', durationSec: 180, motifs: ['water'], figure: 'animal' })
+})
+
 it('creates a local inner encounter from the default entry without a server round trip', async () => {
   const { createInnerEncounter } = await import('./inner-encounter')
   const encounter = createInnerEncounter({ fragment: '一条走廊尽头有一扇门', feeling: 'unease' })
