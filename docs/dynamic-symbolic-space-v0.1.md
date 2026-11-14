@@ -37,7 +37,8 @@ Space Composer 还提供：
 - 不显示 30 秒延长按钮；
 - 用户通过「离开」结束；
 - `durationSec` 在 session 中只作 nominal（180 秒）记录，不表示结束边界；
-- `SymbolicSession.openEnded = true`。
+- `SymbolicSession.openEnded = true`；
+- `completed` 与 `leftEarly` 对开放空间都不根据 180 秒名义时长推断，保留实际 leave 事件即可。
 
 ## 空间内部形象改变
 

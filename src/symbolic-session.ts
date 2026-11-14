@@ -57,8 +57,8 @@ export function createSymbolicSession(encounter: Encounter, now = new Date().toI
     format,
     ...(format === 'open' ? { openEnded: true } : {}),
     durationSec,
-    completed: agency.some(event => event.action === 'leave' && event.atSec >= durationSec),
-    leftEarly: agency.some(event => event.action === 'leave' && event.atSec < durationSec),
+    completed: format !== 'open' && agency.some(event => event.action === 'leave' && event.atSec >= durationSec),
+    leftEarly: format !== 'open' && agency.some(event => event.action === 'leave' && event.atSec < durationSec),
     agency,
   }
 }

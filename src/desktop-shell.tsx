@@ -587,7 +587,7 @@ export function DesktopShell() {
         <div className="workspace-scroll">
           {view === 'space' && encounter
             ? <div className="scene-workspace">
-              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button>{encounter.motifId && encounter.agency?.some(event => event.action === 'change') && <button type="button" className="quiet small" onClick={saveSpaceRevision}>{t('保存为新的进入')}</button>}<span>{encounter.innerPlan?.format === 'space' || encounter.innerPlan?.format === 'open' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
+              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button>{encounter.motifId && <button type="button" className="quiet small" onClick={saveSpaceRevision}>{t('保存为新的进入')}</button>}<span>{encounter.innerPlan?.format === 'space' || encounter.innerPlan?.format === 'open' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
               <SceneView encounter={encounter} replay={replay} onAgency={recordAgency} />
               <div className="scene-footer"><span>{t('不解释、不诊断；离开随时可用。')}</span><button className="quiet-button" onClick={() => setReplay(value => value + 1)}>{t('重新进入')}</button></div>
             </div>

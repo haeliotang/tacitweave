@@ -67,6 +67,14 @@ describe('symbolic sessions', () => {
     expect(symbolicSessionCapacity).toBe(1000)
   })
 
+  it('does not classify open-space exits by the nominal duration', () => {
+    const open = { ...encounter, innerPlan: { ...encounter.innerPlan!, format: 'open' as const } }
+    const at60 = createSymbolicSession({ ...open, agency: [{ atSec: 60, action: 'leave' }] }, '2026-11-01T00:05:00Z', 'open-60')
+    const at240 = createSymbolicSession({ ...open, agency: [{ atSec: 240, action: 'leave' }] }, '2026-11-01T00:06:00Z', 'open-240')
+    expect(at60).toMatchObject({ openEnded: true, completed: false, leftEarly: false })
+    expect(at240).toMatchObject({ openEnded: true, completed: false, leftEarly: false })
+  })
+
   it('persists, validates and explicitly removes sessions', () => {
     const storage = memoryStorage()
     const session = createSymbolicSession(encounter, '2026-11-01T00:01:00Z', 'session-1')

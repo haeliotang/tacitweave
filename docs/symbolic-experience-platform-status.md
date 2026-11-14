@@ -58,7 +58,7 @@ SPDX-License-Identifier: CC-BY-4.0
 ## 验证证据
 
 ```text
-Vitest: 197 passed
+Vitest: 198 passed
 Playwright E2E: 29 passed
 pnpm build: exit 0, main JS ~330 KB
 reuse lint: 263/263 compliant
@@ -73,7 +73,9 @@ English UI untranslated-token audit covers continuity/composer
 
 - 真实 release 二进制已构建成功；
 - 浏览器 E2E 已验证保存、刷新与恢复；
-- **Tauri WebView 内的保存/退出/重启/恢复尚未完成自动化验收**；在合并审查前应手工完成一次。
+- Tauri release 二进制已手工验证：建立 demo 数据 → Composer 调整 → 保存为新修订 → 退出进程 → 重启 → 修订链、symbolic 配置、session 与 field link 均恢复；
+- 本地导出 JSON 已检查：3 motifs、1 session、3 field links，修订 symbolic 为 `encounter · water / house / door · animal`；
+- 删除全部本机数据的 UI 操作尚未完成自动化验证。
 
 ## 明确不是
 
