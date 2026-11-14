@@ -38,6 +38,12 @@ test('English UI has no untranslated shell/capture/research strings', async ({ p
   await page.getByRole('button', { name: 'Customize space' }).click()
   expect(chineseTokens(await page.locator('.workspace-scroll').innerText()), 'composer').toEqual([])
 
+  await page.getByRole('button', { name: /Explore$/ }).click()
+  await expect(page.getByRole('heading', { name: 'No need to name it first; enter a space.' })).toBeVisible()
+  expect(chineseTokens(await page.locator('.workspace-scroll').innerText()), 'explore').toEqual([])
+  await page.getByRole('button', { name: 'Start blank' }).click()
+  expect(chineseTokens(await page.locator('.workspace-scroll').innerText()), 'exploration canvas').toEqual([])
+
   await page.getByRole('button', { name: /Settings$/ }).click()
   await page.getByRole('button', { name: 'Open research tools' }).click()
   await expect(page.getByRole('heading', { name: 'Optional signals (simulation & device)' })).toBeVisible()

@@ -38,12 +38,14 @@ const SignalSimulator = lazy(() => import('./signal-simulator').then(module => (
 const DeviceSignalPanel = lazy(() => import('./device-signal-panel').then(module => ({ default: module.DeviceSignalPanel })))
 const LocalDataPanel = lazy(() => import('./local-data-panel').then(module => ({ default: module.LocalDataPanel })))
 const UpdatePanel = lazy(() => import('./update-panel').then(module => ({ default: module.UpdatePanel })))
+const ExplorationView = lazy(() => import('./exploration-view').then(module => ({ default: module.ExplorationView })))
 
-type View = 'field' | 'new' | 'motif' | 'journal' | 'continuity' | 'relationship' | 'settings' | 'research' | 'space'
+type View = 'field' | 'explore' | 'new' | 'motif' | 'journal' | 'continuity' | 'relationship' | 'settings' | 'research' | 'space'
 type DetailTab = 'overview' | 'body' | 'imagery' | 'relationship'
 
 const navItems: Array<{ id: Exclude<View, 'motif' | 'space' | 'research'>; label: string; icon: string }> = [
   { id: 'field', label: '场域', icon: '◌' },
+  { id: 'explore', label: '探索', icon: '✦' },
   { id: 'journal', label: '片段', icon: '◫' },
   { id: 'continuity', label: '连续性', icon: '⟲' },
   { id: 'relationship', label: '关系', icon: '◇' },
@@ -601,6 +603,9 @@ export function DesktopShell() {
                 {view === 'motif' && selected && <MotifDetail motif={selected} tab={detailTab} setTab={setDetailTab} onEnter={enterSelected} onStart={start} />}
                 {view === 'motif' && !selected && <div className="empty-state"><h2>{t('这个片段不在了')}</h2><p>{t('它可能已被删除。可以从左侧新建一个片段。')}</p><button className="primary-button" onClick={openNew}>新建片段</button></div>}
               </>}
+              {view === 'explore' && <>
+                <Suspense fallback={<div className="field-empty"><p>{t('正在打开探索空间…')}</p></div>}><ExplorationView /></Suspense>
+              </>}
               {view === 'journal' && <>
                 <WorkspaceHeader eyebrow={t('本机片段日记')} title={t('反复出现的东西，先放在一起。')} meta={t('不推断因果，只做并列、回看与导出。')} />
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
@@ -644,7 +649,13 @@ export function DesktopShell() {
         {view !== 'space' && view !== 'settings' && view !== 'research' && <Suspense fallback={null}><TimelineRail motifs={visibleMotifs} relationships={visibleRelationships} onSelect={openMotif} /></Suspense>}
       </main>
 
-      {view === 'settings' || view === 'research'
+      {view === 'explore'
+        ? <aside className="context-panel">
+          <div className="context-heading"><span>{t('探索空间')}</span><span className="local-badge">{t('本地')}</span></div>
+          <p className="context-lead">{t('对象、位置和距离都由你改变；系统不解释它们的含义。')}</p>
+          <div className="context-note"><p className="card-label">{t('边界')}</p><p>{t('这里只记录你做的操作，不推断心理意义。')}</p></div>
+        </aside>
+        : view === 'settings' || view === 'research'
         ? <aside className="context-panel">
           <div className="context-heading"><span>{t(view === 'research' ? '研究工具' : '本机设置')}</span><span className="local-badge">{t('本地')}</span></div>
           <p className="context-lead">{view === 'research' ? t('可选信号与设备桥接是研究工具，不会进入象征空间。') : t('数据、应用锁与研究工具都在这里；所有记录默认留在本机。')}</p>
