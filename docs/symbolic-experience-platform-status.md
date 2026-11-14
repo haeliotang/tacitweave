@@ -58,8 +58,8 @@ SPDX-License-Identifier: CC-BY-4.0
 ## 验证证据
 
 ```text
-Vitest: 203 passed
-Playwright E2E: 32 passed
+Vitest: 205 passed
+Playwright E2E: 33 passed
 pnpm build: exit 0, main JS ~334 KB
 reuse lint: 270/270 compliant
 Rust: 8 desktop + 10 ops tests passed

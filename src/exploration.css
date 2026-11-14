@@ -48,3 +48,9 @@
 .action-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; color: var(--muted); font-size: 12px; }
 .action-list li { display: flex; justify-content: space-between; gap: 10px; }
 @media (max-width: 900px) { .start-grid { grid-template-columns: 1fr; } .canvas-layout { grid-template-columns: 1fr; } }
+.saved-trail { display: grid; gap: 4px; margin-bottom: 10px; }
+.saved-trail > .note { margin: 0; }
+.space-compare { margin-top: 14px; border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.space-compare summary { cursor: pointer; }
+.space-diff { margin-top: 10px; display: grid; gap: 4px; font-size: 12px; }
+.space-diff-row { display: grid; grid-template-columns: 80px 70px 1fr 18px 1fr; gap: 6px; color: var(--muted); }

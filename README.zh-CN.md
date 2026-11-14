@@ -187,8 +187,8 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **203** 项 Vitest 单元/集成测试
-- **32** 项 Playwright 浏览器 E2E
+- **205** 项 Vitest 单元/集成测试
+- **33** 项 Playwright 浏览器 E2E
 - **8** 项 Rust 桌面测试与 **10** 项 Rust ops 测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
 - 主 JS 约 **334 KB**，重组件 lazy load

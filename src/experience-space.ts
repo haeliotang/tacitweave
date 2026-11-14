@@ -169,3 +169,68 @@ export function loadExperienceSpaces(storage: ExperienceStorageLike): Experience
 export function saveExperienceSpaces(storage: ExperienceStorageLike, spaces: ExperienceSpaceV2[]) {
   storage.setItem(experienceSpaceStorageKey, JSON.stringify(spaces.slice(0, experienceSpaceCapacity)))
 }
+
+export interface SpaceDifference {
+  objectId?: string
+  kind: SpatialObjectKind
+  field: 'added' | 'removed' | 'position' | 'depth' | 'scale' | 'opacity' | 'visibility' | 'viewpoint'
+  before: string
+  after: string
+}
+
+export interface SpaceTrail {
+  rootId: string
+  root: ExperienceSpaceV2
+  visits: ExperienceSpaceV2[]
+  latest: ExperienceSpaceV2
+}
+
+/** Copy the current scene into a new child snapshot; the parent stays immutable. */
+export function branchExperienceSpace(space: ExperienceSpaceV2, at = now()): ExperienceSpaceV2 {
+  return {
+    ...space,
+    id: uuid(),
+    rootId: space.rootId,
+    parentId: space.id,
+    objects: space.objects.map(object => ({ ...object })),
+    viewpoint: { ...space.viewpoint },
+    actions: [],
+    createdAt: at,
+    updatedAt: at,
+  }
+}
+
+export function buildSpaceTrails(spaces: readonly ExperienceSpaceV2[]): SpaceTrail[] {
+  const groups = new Map<string, ExperienceSpaceV2[]>()
+  for (const space of spaces) {
+    const group = groups.get(space.rootId) ?? []
+    group.push(space)
+    groups.set(space.rootId, group)
+  }
+  return [...groups.entries()].map(([rootId, group]) => {
+    const visits = [...group].sort((left, right) => Date.parse(left.createdAt) - Date.parse(right.createdAt) || left.id.localeCompare(right.id))
+    const root = visits.find(space => space.id === rootId) ?? visits[0]
+    return { rootId, root, visits, latest: visits[visits.length - 1] }
+  }).sort((left, right) => Date.parse(right.latest.updatedAt) - Date.parse(left.latest.updatedAt))
+}
+
+/** Compare only explicit scene configuration; never interpret the difference. */
+export function compareExperienceSpaces(before: ExperienceSpaceV2, after: ExperienceSpaceV2): SpaceDifference[] {
+  const differences: SpaceDifference[] = []
+  const beforeObjects = new Map(before.objects.map(object => [object.id, object]))
+  const afterObjects = new Map(after.objects.map(object => [object.id, object]))
+  for (const object of before.objects) {
+    if (!afterObjects.has(object.id)) differences.push({ objectId: object.id, kind: object.kind, field: 'removed', before: object.kind, after: '—' })
+  }
+  for (const object of after.objects) {
+    const old = beforeObjects.get(object.id)
+    if (!old) { differences.push({ objectId: object.id, kind: object.kind, field: 'added', before: '—', after: object.kind }); continue }
+    if (old.x !== object.x || old.y !== object.y) differences.push({ objectId: object.id, kind: object.kind, field: 'position', before: `${old.x.toFixed(2)},${old.y.toFixed(2)}`, after: `${object.x.toFixed(2)},${object.y.toFixed(2)}` })
+    if (old.depth !== object.depth) differences.push({ objectId: object.id, kind: object.kind, field: 'depth', before: old.depth.toFixed(2), after: object.depth.toFixed(2) })
+    if (old.scale !== object.scale) differences.push({ objectId: object.id, kind: object.kind, field: 'scale', before: old.scale.toFixed(2), after: object.scale.toFixed(2) })
+    if (old.opacity !== object.opacity) differences.push({ objectId: object.id, kind: object.kind, field: 'opacity', before: old.opacity.toFixed(2), after: object.opacity.toFixed(2) })
+    if (old.visible !== object.visible) differences.push({ objectId: object.id, kind: object.kind, field: 'visibility', before: String(old.visible), after: String(object.visible) })
+  }
+  if (before.viewpoint.distance !== after.viewpoint.distance) differences.push({ kind: 'shape', field: 'viewpoint', before: before.viewpoint.distance.toFixed(2), after: after.viewpoint.distance.toFixed(2) })
+  return differences
+}

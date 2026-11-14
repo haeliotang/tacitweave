@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   adjustObject,
+  branchExperienceSpace,
+  buildSpaceTrails,
+  compareExperienceSpaces,
   createExperienceSpace,
   loadExperienceSpaces,
   moveObject,
@@ -69,6 +72,8 @@ export function ExplorationView({ onExit }: { onExit?: () => void }) {
   const [imageryPick, setImageryPick] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [status, setStatus] = useState('')
+  const [compareBefore, setCompareBefore] = useState<string>('')
+  const [compareAfter, setCompareAfter] = useState<string>('')
   const [drag, setDrag] = useState<{ id: string; startX: number; startY: number; originX: number; originY: number; rect: DOMRect } | null>(null)
   const [preview, setPreview] = useState<{ id: string; x: number; y: number } | null>(null)
   const stage = useRef<HTMLDivElement>(null)
@@ -95,6 +100,14 @@ export function ExplorationView({ onExit }: { onExit?: () => void }) {
     setSpaces(next)
     saveExperienceSpaces(window.localStorage, next)
     setStatus(t('已保存到本机。'))
+  }
+
+  const branch = () => {
+    if (!space) return
+    const child = branchExperienceSpace(space)
+    setSpace(child)
+    setSelectedId(child.objects.at(-1)?.id ?? null)
+    setStatus(t('已创建新分支；保存后写入本机。'))
   }
 
   const leave = () => {
@@ -183,9 +196,23 @@ export function ExplorationView({ onExit }: { onExit?: () => void }) {
 
       {spaces.length > 0 && <div className="saved-spaces">
         <p className="card-label">{t('回访已保存的空间')}</p>
-        {spaces.map(saved => <button key={saved.id} type="button" className="saved-space" onClick={() => { setSpace(saved); setSelectedId(saved.objects.at(-1)?.id ?? null) }}>
-          <span>{new Date(saved.createdAt).toLocaleString()}</span><span>{saved.objects.length} {t('个对象')}</span>
-        </button>)}
+        {buildSpaceTrails(spaces).map(trail => <div key={trail.rootId} className="saved-trail">
+          <p className="note">{trail.visits.length} {t('个版本')} · {new Date(trail.root.createdAt).toLocaleString()}</p>
+          {trail.visits.map(saved => <button key={saved.id} type="button" className="saved-space" onClick={() => { setSpace(saved); setSelectedId(saved.objects.at(-1)?.id ?? null) }}>
+            <span>{saved.parentId ? t('分支') : t('原始空间')} · {new Date(saved.createdAt).toLocaleString()}</span><span>{saved.objects.length} {t('个对象')}</span>
+          </button>)}
+        </div>)}
+        <details className="space-compare">
+          <summary>{t('对照两个空间')}</summary>
+          <div className="compare-pickers">
+            <label>{t('较早')}<select value={compareBefore} onChange={event => setCompareBefore(event.target.value)}><option value="">{t('选择')}</option>{spaces.map(saved => <option key={saved.id} value={saved.id}>{new Date(saved.createdAt).toLocaleString()} · {saved.objects.length} {t('个对象')}</option>)}</select></label>
+            <label>{t('较晚')}<select value={compareAfter} onChange={event => setCompareAfter(event.target.value)}><option value="">{t('选择')}</option>{spaces.map(saved => <option key={saved.id} value={saved.id}>{new Date(saved.createdAt).toLocaleString()} · {saved.objects.length} {t('个对象')}</option>)}</select></label>
+          </div>
+          {compareBefore && compareAfter && compareBefore !== compareAfter ? <div className="space-diff">
+            {compareExperienceSpaces(spaces.find(saved => saved.id === compareBefore)!, spaces.find(saved => saved.id === compareAfter)!).map((change, index) => <div key={`${change.objectId ?? 'view'}-${change.field}-${index}`} className="space-diff-row"><span>{change.field}</span><span>{change.kind}</span><span>{change.before}</span><span>→</span><span>{change.after}</span></div>)}
+            {compareExperienceSpaces(spaces.find(saved => saved.id === compareBefore)!, spaces.find(saved => saved.id === compareAfter)!).length === 0 && <p className="note">{t('两个空间没有显式配置差异。')}</p>}
+          </div> : <p className="note">{t('选择两个已保存空间进行比较。')}</p>}
+        </details>
       </div>}
     </section>
   }
@@ -197,6 +224,7 @@ export function ExplorationView({ onExit }: { onExit?: () => void }) {
       <span className="canvas-title">{t('未命名的空间')}</span>
       <span className="canvas-count">{space.objects.length} {t('个对象')}</span>
       <button type="button" className="quiet small" onClick={() => update(undoLastAction(space))} disabled={!space.actions.length}>{t('撤销')}</button>
+      <button type="button" className="quiet small" onClick={branch}>{t('另存为新分支')}</button>
       <button type="button" className="quiet small" onClick={save}>{t('保存')}</button>
       {status && <span className="note" role="status">{status}</span>}
     </header>

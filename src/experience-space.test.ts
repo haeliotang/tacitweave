@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
-import { adjustObject, createExperienceSpace, isExperienceSpace, loadExperienceSpaces, moveObject, placeObject, removeObject, saveExperienceSpaces, setObjectVisibility, setViewpoint, undoLastAction } from './experience-space'
+import { adjustObject, branchExperienceSpace, buildSpaceTrails, compareExperienceSpaces, createExperienceSpace, isExperienceSpace, loadExperienceSpaces, moveObject, placeObject, removeObject, saveExperienceSpaces, setObjectVisibility, setViewpoint, undoLastAction } from './experience-space'
 
 function storage() {
   const values = new Map<string, string>()
@@ -48,6 +48,26 @@ describe('experience space v2', () => {
     expect(loadExperienceSpaces(store)).toEqual([space])
     store.setItem('tacitweave.experience-spaces.v2', JSON.stringify([{ version: 'experience-space-v2', objects: 'bad' }]))
     expect(loadExperienceSpaces(store)).toEqual([])
+  })
+
+  it('branches without mutating the parent and compares explicit scene changes', () => {
+    let parent = placeObject(createExperienceSpace('blank'), 'door')
+    const child = branchExperienceSpace(parent, '2026-11-14T00:02:00Z')
+    expect(child.id).not.toBe(parent.id)
+    expect(child.parentId).toBe(parent.id)
+    expect(child.rootId).toBe(parent.rootId)
+    expect(child.actions).toEqual([])
+    const childDoor = child.objects[0]
+    const moved = moveObject(child, childDoor.id, 0.8, 0.7)
+    expect(compareExperienceSpaces(parent, moved).map(change => change.field)).toEqual(['position'])
+    expect(parent.objects[0]).toMatchObject({ x: 0.5, y: 0.5 })
+  })
+
+  it('groups snapshots into trails', () => {
+    const root = createExperienceSpace('blank', undefined, undefined, '2026-11-14T00:00:00Z')
+    const child = branchExperienceSpace(root, '2026-11-14T00:01:00Z')
+    const trails = buildSpaceTrails([child, root])
+    expect(trails[0].visits.map(space => space.id)).toEqual([root.id, child.id])
   })
 
   it('stores viewpoint distance as an explicit action', () => {

@@ -529,6 +529,15 @@ const en: Record<string, string> = {
   '存在': 'Presence',
   '对象、位置和距离都由你改变；系统不解释它们的含义。': 'You change objects, position and distance; the system does not interpret their meaning.',
   '这里只记录你做的操作，不推断心理意义。': 'Only your actions are recorded; no psychological meaning is inferred.',
+  '已创建新分支；保存后写入本机。': 'New branch created; save it locally.',
+  '个版本': 'versions',
+  '分支': 'Branch',
+  '原始空间': 'Original space',
+  '对照两个空间': 'Compare two spaces',
+  '选择': 'Choose',
+  '两个空间没有显式配置差异。': 'The two spaces have no explicit configuration differences.',
+  '选择两个已保存空间进行比较。': 'Choose two saved spaces to compare.',
+  '另存为新分支': 'Save as new branch',
 }
 
 type LanguageContextValue = {

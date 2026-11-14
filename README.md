@@ -190,8 +190,8 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **203** Vitest unit/integration tests
-- **32** Playwright browser E2E scenarios
+- **205** Vitest unit/integration tests
+- **33** Playwright browser E2E scenarios
 - **8** Rust desktop tests and **10** Rust ops tests
 - WCAG A/AA structural and contrast checks in light/dark themes
 - main JS bundle about **334 KB**, with heavy views lazy-loaded
