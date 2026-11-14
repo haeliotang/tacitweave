@@ -551,6 +551,7 @@ const en: Record<string, string> = {
   '叠加对照': 'Overlay comparison',
   '关闭叠加': 'Close overlay',
   '两个空间的叠加对照': 'Overlay of two spaces',
+  '已保存为新版本。': 'Saved as a new version.',
 }
 
 type LanguageContextValue = {

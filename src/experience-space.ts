@@ -35,7 +35,8 @@ export interface UserSpatialAction {
   id: string
   type: SpatialActionType
   targetId?: string
-  elapsedMs: number
+  /** Not collected in v0.2; kept optional rather than emitting a false zero. */
+  elapsedMs?: number
   before?: SpatialObject | Viewpoint | SpatialRelation | null
   after?: SpatialObject | Viewpoint | SpatialRelation | null
   source: 'user_input'
@@ -78,7 +79,7 @@ function makeObject(kind: SpatialObjectKind, x = 0.5, y = 0.5, source: SpatialOb
 }
 
 function action(type: SpatialActionType, targetId: string | undefined, before: UserSpatialAction['before'], after: UserSpatialAction['after']): UserSpatialAction {
-  return { id: uuid(), type, ...(targetId ? { targetId } : {}), elapsedMs: 0, before: before ?? null, after: after ?? null, source: 'user_input' }
+  return { id: uuid(), type, ...(targetId ? { targetId } : {}), before: before ?? null, after: after ?? null, source: 'user_input' }
 }
 
 function isSpatialRelation(value: UserSpatialAction['before'] | UserSpatialAction['after']): value is SpatialRelation {
@@ -100,16 +101,16 @@ export function createExperienceSpace(start: ExperienceStart, point?: { x: numbe
 export function isExperienceSpace(value: unknown): value is ExperienceSpaceV2 {
   if (!value || typeof value !== 'object') return false
   const space = value as Partial<ExperienceSpaceV2>
-  if (space.version !== 'experience-space-v2' || typeof space.id !== 'string' || typeof space.rootId !== 'string') return false
+  if (space.version !== 'experience-space-v2' || typeof space.id !== 'string' || space.id.length === 0) return false
+  if (typeof space.rootId !== 'string' || space.rootId.length === 0) return false
+  if (space.parentId !== undefined && (typeof space.parentId !== 'string' || space.parentId.length === 0 || space.parentId === space.id)) return false
   if (!starts.has(space.start as ExperienceStart) || !Array.isArray(space.objects) || !Array.isArray(space.actions)) return false
-  if (!space.viewpoint || typeof space.viewpoint.distance !== 'number' || !Number.isFinite(space.viewpoint.distance)) return false
+  if (!space.viewpoint || typeof space.viewpoint.distance !== 'number' || !Number.isFinite(space.viewpoint.distance) || space.viewpoint.distance < 0 || space.viewpoint.distance > 1) return false
   if (typeof space.createdAt !== 'string' || Number.isNaN(Date.parse(space.createdAt))) return false
-  if (space.relations !== undefined && (!Array.isArray(space.relations) || !space.relations.every(relation => relation && typeof relation.id === 'string'
-    && (relation.type === 'connection' || relation.type === 'containment')
-    && typeof relation.fromId === 'string' && typeof relation.toId === 'string'
-    && relation.fromId !== relation.toId
-    && relation.source === 'user_input'))) return false
-  return space.objects.every(object => object && typeof object.id === 'string'
+  if (typeof space.updatedAt !== 'string' || Number.isNaN(Date.parse(space.updatedAt))) return false
+  const objectIds = new Set<string>()
+  if (!space.objects.every(object => object && typeof object.id === 'string' && object.id.length > 0
+    && !objectIds.has(object.id) && objectIds.add(object.id)
     && kinds.has(object.kind)
     && [object.x, object.y, object.depth, object.scale, object.opacity].every(number => typeof number === 'number' && Number.isFinite(number))
     && object.x >= 0 && object.x <= 1 && object.y >= 0 && object.y <= 1
@@ -117,7 +118,30 @@ export function isExperienceSpace(value: unknown): value is ExperienceSpaceV2 {
     && object.scale >= 0.25 && object.scale <= 3
     && object.opacity >= 0 && object.opacity <= 1
     && typeof object.visible === 'boolean'
-    && (object.source === 'user_input' || object.source === 'system_generated'))
+    && (object.source === 'user_input' || object.source === 'system_generated'))) return false
+  if (space.relations !== undefined && (!Array.isArray(space.relations) || !space.relations.every(relation => relation && typeof relation.id === 'string' && relation.id.length > 0
+    && (relation.type === 'connection' || relation.type === 'containment')
+    && typeof relation.fromId === 'string' && typeof relation.toId === 'string'
+    && relation.fromId !== relation.toId
+    && objectIds.has(relation.fromId) && objectIds.has(relation.toId)
+    && relation.source === 'user_input'))) return false
+  const relationIds = new Set<string>()
+  if (space.relations !== undefined && !space.relations.every(relation => !relationIds.has(relation.id) && relationIds.add(relation.id))) return false
+  const actionIds = new Set<string>()
+  const types = new Set<SpatialActionType>(['place', 'move', 'adjust', 'visibility', 'remove', 'viewpoint', 'connect', 'disconnect'])
+  return space.actions.every(item => item && typeof item.id === 'string' && item.id.length > 0 && !actionIds.has(item.id) && actionIds.add(item.id)
+    && types.has(item.type)
+    && (item.targetId === undefined || (typeof item.targetId === 'string' && item.targetId.length > 0))
+    && (item.elapsedMs === undefined || (typeof item.elapsedMs === 'number' && Number.isFinite(item.elapsedMs) && item.elapsedMs >= 0))
+    && item.source === 'user_input')
+}
+
+/** Validate a saved collection, including parent/root references. */
+export function isExperienceSpaceCollection(value: unknown): value is ExperienceSpaceV2[] {
+  if (!Array.isArray(value) || !value.every(isExperienceSpace)) return false
+  const ids = new Set(value.map(space => space.id))
+  if (ids.size !== value.length) return false
+  return value.every(space => ids.has(space.rootId) && (space.parentId === undefined || ids.has(space.parentId)))
 }
 
 export function placeObject(space: ExperienceSpaceV2, kind: SpatialObjectKind, x = 0.5, y = 0.5, at = now()): ExperienceSpaceV2 {
@@ -154,7 +178,15 @@ export function setObjectVisibility(space: ExperienceSpaceV2, targetId: string, 
 export function removeObject(space: ExperienceSpaceV2, targetId: string, at = now()): ExperienceSpaceV2 {
   const before = space.objects.find(object => object.id === targetId)
   if (!before) throw new Error('object_not_found')
-  return { ...space, objects: space.objects.filter(object => object.id !== targetId), actions: [...space.actions, action('remove', targetId, before, null)], updatedAt: at }
+  const affected = (space.relations ?? []).filter(relation => relation.fromId === targetId || relation.toId === targetId)
+  const actions = affected.map(relation => action('disconnect', relation.toId, relation, null))
+  return {
+    ...space,
+    objects: space.objects.filter(object => object.id !== targetId),
+    relations: (space.relations ?? []).filter(relation => relation.fromId !== targetId && relation.toId !== targetId),
+    actions: [...space.actions, ...actions, action('remove', targetId, before, null)],
+    updatedAt: at,
+  }
 }
 
 export function setViewpoint(space: ExperienceSpaceV2, distance: number, at = now()): ExperienceSpaceV2 {
@@ -209,7 +241,7 @@ export function loadExperienceSpaces(storage: ExperienceStorageLike): Experience
     const raw = storage.getItem(experienceSpaceStorageKey)
     if (!raw) return []
     const parsed: unknown = JSON.parse(raw)
-    return Array.isArray(parsed) ? parsed.filter(isExperienceSpace).slice(0, experienceSpaceCapacity) : []
+    return isExperienceSpaceCollection(parsed) ? parsed.slice(0, experienceSpaceCapacity) : []
   } catch { return [] }
 }
 

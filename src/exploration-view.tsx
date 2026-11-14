@@ -9,11 +9,9 @@ import {
   buildSpaceTrails,
   compareExperienceSpaces,
   createExperienceSpace,
-  loadExperienceSpaces,
   moveObject,
   placeObject,
   removeObject,
-  saveExperienceSpaces,
   setObjectVisibility,
   setViewpoint,
   undoLastAction,
@@ -68,9 +66,8 @@ function SpatialShape({ kind }: { kind: SpatialObjectKind }) {
   return <span className="spatial-shape" />
 }
 
-export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSaved?: () => void }) {
+export function ExplorationView({ spaces, onChange, onExit }: { spaces: ExperienceSpaceV2[]; onChange: (next: ExperienceSpaceV2[]) => void; onExit?: () => void }) {
   const { lang, t } = useLanguage()
-  const [spaces, setSpaces] = useState<ExperienceSpaceV2[]>(() => typeof window === 'undefined' ? [] : loadExperienceSpaces(window.localStorage))
   const [space, setSpace] = useState<ExperienceSpaceV2 | null>(null)
   const [bodyPick, setBodyPick] = useState(false)
   const [imageryPick, setImageryPick] = useState(false)
@@ -102,11 +99,12 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
 
   const save = () => {
     if (!space) return
-    const next = [space, ...spaces.filter(item => item.id !== space.id)].slice(0, 500)
-    setSpaces(next)
-    saveExperienceSpaces(window.localStorage, next)
-    setStatus(t('已保存到本机。'))
-    onSaved?.()
+    const existing = spaces.some(item => item.id === space.id)
+    const saved = existing ? branchExperienceSpace(space) : space
+    const next = [saved, ...spaces].slice(0, 500)
+    onChange(next)
+    setSpace(saved)
+    setStatus(existing ? t('已保存为新版本。') : t('已保存到本机。'))
   }
 
   const branch = () => {
@@ -119,11 +117,9 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
 
   const deleteSpace = (id: string) => {
     const next = spaces.filter(item => item.id !== id)
-    setSpaces(next)
-    saveExperienceSpaces(window.localStorage, next)
+    onChange(next)
     setDeleteId(null)
     if (space?.id === id) setSpace(null)
-    onSaved?.()
   }
 
   const leave = () => {

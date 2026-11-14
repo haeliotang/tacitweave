@@ -58,9 +58,9 @@ SPDX-License-Identifier: CC-BY-4.0
 ## 验证证据
 
 ```text
-Vitest: 208 passed
-Playwright E2E: 36 passed
-pnpm build: exit 0, main JS ~343 KB
+Vitest: 211 passed
+Playwright E2E: 38 passed
+pnpm build: exit 0, main JS ~344 KB
 reuse lint: 270/270 compliant
 Rust: 8 desktop + 10 ops tests passed
 Tauri release build: pnpm tauri:build --no-bundle passed

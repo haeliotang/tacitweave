@@ -10,7 +10,7 @@ import { clearFieldLayout, emptyFieldLayout, fieldStorageKey, isFieldLayout, loa
 import { clearSignalSessions, isSignalSession, loadSignalSessions, saveSignalSessions, signalSessionStorageKey } from './signal-session'
 import { captureStorageKey, isCaptureLedger, loadCaptureProvenance, saveCaptureProvenance } from './capture-ledger'
 import { isSymbolicSession, loadSymbolicSessions, saveSymbolicSessions, symbolicSessionStorageKey } from './symbolic-session'
-import { experienceSpaceStorageKey, isExperienceSpace, loadExperienceSpaces, saveExperienceSpaces } from './experience-space'
+import { experienceSpaceStorageKey, isExperienceSpaceCollection, loadExperienceSpaces, saveExperienceSpaces } from './experience-space'
 import { removeLegacyLocalStorage } from './storage-migration'
 import { createAppLockRecord, type AppLockRecord } from './app-lock'
 import { decryptLocalSnapshot, deriveDataKey, encryptLocalSnapshot, isEncryptedLocalState, type EncryptedLocalState } from './encrypted-store'
@@ -64,7 +64,7 @@ export function normalizeSnapshot(value: unknown): LocalSnapshot {
   if (snapshot.signals !== undefined && (!Array.isArray(snapshot.signals) || !snapshot.signals.every(isSignalSession))) throw new Error('invalid_local_state')
   if (snapshot.captures !== undefined && !isCaptureLedger(snapshot.captures)) throw new Error('invalid_local_state')
   if (snapshot.symbolicSessions !== undefined && (!Array.isArray(snapshot.symbolicSessions) || !snapshot.symbolicSessions.every(isSymbolicSession))) throw new Error('invalid_local_state')
-  if (snapshot.spaces !== undefined && (!Array.isArray(snapshot.spaces) || !snapshot.spaces.every(isExperienceSpace))) throw new Error('invalid_local_state')
+  if (snapshot.spaces !== undefined && (!Array.isArray(snapshot.spaces) || !isExperienceSpaceCollection(snapshot.spaces))) throw new Error('invalid_local_state')
   return {
     motifs: snapshot.motifs as LocalSnapshot['motifs'],
     relationships: snapshot.relationships as LocalSnapshot['relationships'],
@@ -175,7 +175,10 @@ export async function loadLocalSnapshot(): Promise<LocalSnapshot> {
   }
 }
 
-export async function saveLocalSnapshot(snapshot: LocalSnapshot): Promise<void> {
+export async function saveLocalSnapshot(input: LocalSnapshot): Promise<void> {
+  const storage = webStorage()
+  // Older callers may not know about spaces yet; never omit them from an encrypted write.
+  const snapshot: LocalSnapshot = { ...input, spaces: input.spaces ?? (storage ? loadExperienceSpaces(storage) : []) }
   if (activeEncryption) {
     const payload = await encryptLocalSnapshot(snapshot, activeEncryption.record, activeEncryption.key)
     await writeEncryptedPayload(payload)
@@ -183,7 +186,6 @@ export async function saveLocalSnapshot(snapshot: LocalSnapshot): Promise<void> 
   }
   // A missing lock record must not cause plaintext writes over encrypted data.
   if (await hasEncryptedLocalState()) return
-  const storage = webStorage()
   storage?.removeItem(encryptedStorageKey)
   if (storage) {
     saveMotifs(storage, snapshot.motifs)

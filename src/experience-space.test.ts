@@ -89,6 +89,20 @@ describe('experience space v2', () => {
     expect(compareExperienceSpaces(space, child)).toEqual([])
   })
 
+  it('removes relations that point at a deleted object', () => {
+    let space = createExperienceSpace('relationship')
+    space = connectObjects(space, space.objects[0].id, space.objects[1].id)
+    space = removeObject(space, space.objects[0].id)
+    expect(space.relations).toEqual([])
+  })
+
+  it('rejects malformed objects, relations and action records on import', () => {
+    const space = createExperienceSpace('relationship')
+    expect(isExperienceSpace({ ...space, objects: [...space.objects, { ...space.objects[0] }] })).toBe(false)
+    expect(isExperienceSpace({ ...space, relations: [{ id: 'r', type: 'connection', fromId: 'missing', toId: space.objects[0].id, source: 'user_input' }] })).toBe(false)
+    expect(isExperienceSpace({ ...space, actions: [{ id: 'a', type: 'move', source: 'user_input', elapsedMs: -1 }] })).toBe(false)
+  })
+
   it('groups snapshots into trails', () => {
     const root = createExperienceSpace('blank', undefined, undefined, '2026-11-14T00:00:00Z')
     const child = branchExperienceSpace(root, '2026-11-14T00:01:00Z')

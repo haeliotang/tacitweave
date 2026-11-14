@@ -7,7 +7,7 @@ import { clearSignalSessions, isSignalSession, loadSignalSessions, saveSignalSes
 import { captureStorageKey, clearCaptureProvenance, isCaptureLedger, loadCaptureProvenance } from './capture-ledger'
 import type { CaptureProvenance } from './capture'
 import { isSymbolicSession, loadSymbolicSessions, symbolicSessionStorageKey, type SymbolicSession } from './symbolic-session'
-import { experienceSpaceStorageKey, isExperienceSpace, loadExperienceSpaces, saveExperienceSpaces, type ExperienceSpaceV2 } from './experience-space'
+import { experienceSpaceStorageKey, isExperienceSpaceCollection, loadExperienceSpaces, saveExperienceSpaces, type ExperienceSpaceV2 } from './experience-space'
 
 export interface LocalDataset {
   version: 'local-dataset-v1' | 'local-dataset-v2'
@@ -76,6 +76,6 @@ export function parseLocalDataset(text: string): LocalSnapshot {
   if (data.signals !== undefined && (!Array.isArray(data.signals) || !data.signals.every(isSignalSession))) throw new Error('invalid_local_dataset')
   if (data.captures !== undefined && !isCaptureLedger(data.captures)) throw new Error('invalid_local_dataset')
   if (data.symbolicSessions !== undefined && (!Array.isArray(data.symbolicSessions) || !data.symbolicSessions.every(isSymbolicSession))) throw new Error('invalid_local_dataset')
-  if (data.spaces !== undefined && (!Array.isArray(data.spaces) || !data.spaces.every(isExperienceSpace))) throw new Error('invalid_local_dataset')
+  if (data.spaces !== undefined && (!Array.isArray(data.spaces) || !isExperienceSpaceCollection(data.spaces))) throw new Error('invalid_local_dataset')
   return { motifs: data.motifs, relationships: data.relationships, ...(data.field ? { field: data.field } : {}), ...(data.signals ? { signals: data.signals } : {}), ...(data.captures ? { captures: data.captures } : {}), ...(data.symbolicSessions ? { symbolicSessions: data.symbolicSessions } : {}), ...(data.spaces ? { spaces: data.spaces } : {}) }
 }

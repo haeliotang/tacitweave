@@ -56,3 +56,22 @@ describe('encrypted payload reconciliation', () => {
     expect(reconcileEncryptedPayload(null, null)).toEqual({ raw: null, action: 'none' })
   })
 })
+
+describe('encrypted experience spaces', () => {
+  it('includes spaces in the encrypted payload and removes plaintext copies', async () => {
+    const { createExperienceSpace, placeObject } = await import('./experience-space')
+    const { createAppLockRecord } = await import('./app-lock')
+    const { deriveDataKey } = await import('./encrypted-store')
+    const { enableLocalEncryption, unlockLocalSnapshot } = await import('./local-store')
+    const space = placeObject(createExperienceSpace('blank'), 'door')
+    const snapshot = { ...empty(), spaces: [space] }
+    const values = new Map<string, string>()
+    ;(globalThis as { window?: unknown }).window = { localStorage: { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => { values.set(key, value) }, removeItem: (key: string) => { values.delete(key) } } }
+    const record = await createAppLockRecord('2468')
+    await enableLocalEncryption(snapshot, '2468', record)
+    expect(values.get('tacitweave.experience-spaces.v2')).toBeUndefined()
+    const unlocked = await unlockLocalSnapshot('2468', record)
+    expect(unlocked?.spaces?.[0].objects[0].kind).toBe('door')
+    expect(deriveDataKey).toBeTypeOf('function')
+  })
+})
