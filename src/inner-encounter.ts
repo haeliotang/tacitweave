@@ -1,7 +1,9 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Encounter } from './encounter'
-import { innerPlan, innerPlanFromCapture, innerSpace, type InnerFeeling, type InnerFormat } from './inner'
+import { innerPlan, innerPlanFromCapture, innerSpace, type InnerFeeling, type InnerFormat, type InnerPlan } from './inner'
+import { composeInnerPlan, compositionFromSymbolic } from './space-composition'
+import type { MotifSymbolic } from './motif-journal'
 import type { SomaticCapture } from './somatic'
 
 // Local, synthetic entry points for the symbolic-space prototype. They never
@@ -47,8 +49,9 @@ export function createInnerEncounter(input: { fragment: string; feeling?: InnerF
   }
 }
 
-export function createInnerCaptureEncounter(capture: SomaticCapture): Encounter {
-  const inner = innerPlanFromCapture(capture)
+export function createInnerCaptureEncounter(capture: SomaticCapture, motifId?: string, symbolic?: MotifSymbolic): Encounter {
+  const base = innerPlanFromCapture(capture)
+  const inner = symbolic ? composeInnerPlan(base, compositionFromSymbolic(symbolic)) : base
   return {
     id: `demo-inner-${crypto.randomUUID()}`,
     seed: Math.floor(Math.random() * 0xffffffff),
@@ -56,6 +59,20 @@ export function createInnerCaptureEncounter(capture: SomaticCapture): Encounter 
     createdAt: new Date().toISOString(),
     rendererKind: 'symbolic',
     innerPlan: inner,
+    ...(motifId ? { motifId } : {}),
+    plan: { version: 'episode-plan-v1', kind: 'inner', rendererKind: 'symbolic', inner },
+  }
+}
+
+export function createComposedCaptureEncounter(capture: SomaticCapture, inner: InnerPlan, motifId?: string): Encounter {
+  return {
+    id: `demo-inner-${crypto.randomUUID()}`,
+    seed: Math.floor(Math.random() * 0xffffffff),
+    durationSec: inner.durationSec,
+    createdAt: new Date().toISOString(),
+    rendererKind: 'symbolic',
+    innerPlan: inner,
+    ...(motifId ? { motifId } : {}),
     plan: { version: 'episode-plan-v1', kind: 'inner', rendererKind: 'symbolic', inner },
   }
 }

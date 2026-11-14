@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
-import { createSymbolicSession, isSymbolicSession, loadSymbolicSessions, removeSymbolicSession, saveSymbolicSessions } from './symbolic-session'
+import { createSymbolicSession, isSymbolicSession, loadSymbolicSessions, removeSymbolicSession, saveSymbolicSessions, symbolicSessionCapacity } from './symbolic-session'
 import type { Encounter } from './encounter'
 
 const encounter: Encounter = {
@@ -26,6 +26,53 @@ describe('symbolic sessions', () => {
     expect(session.agency).toEqual(encounter.agency)
     expect(isSymbolicSession(session)).toBe(true)
     expect(JSON.stringify(session)).not.toMatch(/score|diagnos|interpretation/i)
+  })
+
+  it('preserves the optional source motif on a session', () => {
+    const session = createSymbolicSession({ ...encounter, motifId: 'motif-1' }, '2026-11-01T00:01:00Z', 'session-m')
+    expect(session.motifId).toBe('motif-1')
+    expect(isSymbolicSession(session)).toBe(true)
+  })
+
+  it('records an explicit extension without rewriting the original plan', () => {
+    const extended = { ...encounter, durationSec: 105, agency: [...(encounter.agency ?? []), { atSec: 75, action: 'extend' as const, durationSec: 105 }] }
+    const session = createSymbolicSession(extended, '2026-11-01T00:02:00Z', 'session-2')
+    expect(session.durationSec).toBe(105)
+    expect(session.agency).toContainEqual({ atSec: 75, action: 'extend', durationSec: 105 })
+    expect(isSymbolicSession(session)).toBe(true)
+  })
+
+  it('accepts an open-ended session format', () => {
+    const open = { ...encounter, innerPlan: { ...encounter.innerPlan!, format: 'open' as const } }
+    const session = createSymbolicSession(open, '2026-11-01T00:03:00Z', 'session-open')
+    expect(session.format).toBe('open')
+    expect(session.openEnded).toBe(true)
+    expect(isSymbolicSession(session)).toBe(true)
+  })
+
+  it('validates an in-space figure change event', () => {
+    const session = createSymbolicSession({ ...encounter, agency: [{ atSec: 10, action: 'change', change: { field: 'figure', value: 'animal' } }] }, '2026-11-01T00:04:00Z', 'session-change')
+    expect(isSymbolicSession(session)).toBe(true)
+    expect(session.agency[0].change).toEqual({ field: 'figure', value: 'animal' })
+    expect(isSymbolicSession({ ...session, agency: [{ atSec: 1, action: 'change', change: { field: 'figure', value: '' } }] })).toBe(false)
+    expect(isSymbolicSession({ ...session, agency: [{ atSec: 2, action: 'change', change: { field: 'motif', value: 'water' } }] })).toBe(true)
+    expect(isSymbolicSession({ ...session, agency: [{ atSec: 3, action: 'change', change: { field: 'light', value: 'low' } }] })).toBe(true)
+  })
+
+  it('exposes and enforces an explicit session retention ceiling', () => {
+    const storage = memoryStorage()
+    const sessions = Array.from({ length: symbolicSessionCapacity + 1 }, (_, index) => createSymbolicSession(encounter, '2026-11-01T00:00:00Z', `session-${index}`))
+    saveSymbolicSessions(storage, sessions)
+    expect(JSON.parse(storage.getItem('tacitweave.symbolic-sessions.v1') ?? '[]')).toHaveLength(symbolicSessionCapacity)
+    expect(symbolicSessionCapacity).toBe(1000)
+  })
+
+  it('does not classify open-space exits by the nominal duration', () => {
+    const open = { ...encounter, innerPlan: { ...encounter.innerPlan!, format: 'open' as const } }
+    const at60 = createSymbolicSession({ ...open, agency: [{ atSec: 60, action: 'leave' }] }, '2026-11-01T00:05:00Z', 'open-60')
+    const at240 = createSymbolicSession({ ...open, agency: [{ atSec: 240, action: 'leave' }] }, '2026-11-01T00:06:00Z', 'open-240')
+    expect(at60).toMatchObject({ openEnded: true, completed: false, leftEarly: false })
+    expect(at240).toMatchObject({ openEnded: true, completed: false, leftEarly: false })
   })
 
   it('persists, validates and explicitly removes sessions', () => {

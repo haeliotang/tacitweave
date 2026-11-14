@@ -172,6 +172,10 @@ See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md),
 | Signal resilience | Local bridge reconnect/backoff, jitter/gap health, deterministic replay and explicit session retraction |
 | LSM-0 baseline | Offline deterministic evaluation, dataset export and precision simulation; no empirical data and no clinical claims |
 | Licensing / contribution | Layered AGPL/Apache/CC-BY/brand; CLA 1.0; PRs require the `license/cla` check |
+| Continuity v0.1 | Re-enter a past fragment, edit user-authored fields, keep every revision, compare field changes, and save explicit in-space adjustments as a new revision |
+| Dynamic space v0.1 | Extend a 75s encounter or 180s space by explicit 30s stays; open-ended mode has no automatic end; motif, figure and light can be changed in-space |
+| Relationship continuity v0.1 | Re-enter a relationship moment, prefill its user fields, preserve the original, record each visit and compare user-field changes |
+| Space Composer v0.1 | Choose 1–3 motifs, figure and 75s/180s format before entering; the system composes, not interprets |
 
 Currently **not** implemented:
 
@@ -185,15 +189,19 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **177** Vitest unit/integration tests
-- **24** Playwright browser E2E scenarios
-- **8** Rust desktop tests; the ops crate also builds and tests
+- **198** Vitest unit/integration tests
+- **30** Playwright browser E2E scenarios
+- **8** Rust desktop tests and **10** Rust ops tests
 - WCAG A/AA structural and contrast checks in light/dark themes
-- main JS bundle about **312 KB**, with heavy views lazy-loaded
+- main JS bundle about **330 KB**, with heavy views lazy-loaded
 - v0.1.4 release: **unsigned** Linux AppImage/DEB + Windows NSIS; no macOS asset yet
 - CI: Symbolic space, Rust operational, Browser E2E and License checks
 
 The project remains a research prototype; no clinical or real-BCI-hardware claim is made.
+
+### 3.2 Symbolic Continuity v0.1
+
+The local product now has an explicit continuity layer: a past fragment can be re-entered, edited and compared, while the original record and every revision remain intact. It records only user-authored fields and a user-written note; it does not infer improvement, diagnosis or psychological meaning. See [Symbolic Continuity v0.1](docs/symbolic-continuity-v0.1.md) and the [Symbolic Experience Platform status](docs/symbolic-experience-platform-status.md).
 
 ## 4. Architecture
 

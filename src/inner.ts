@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { breaths, fragments, isSomaticCapture, regions, sensations, type SomaticCapture } from './somatic'
 
-export type InnerFormat = 'encounter' | 'space'
+export type InnerFormat = 'encounter' | 'space' | 'open'
 
 export type InnerMotif = 'corridor' | 'door' | 'water' | 'house' | 'forest' | 'station' | 'mirror' | 'field'
 

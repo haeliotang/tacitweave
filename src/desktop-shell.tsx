@@ -6,7 +6,10 @@ import { createInnerCaptureEncounter } from './inner-encounter'
 import { innerPlanFromCapture } from './inner'
 import { SceneView } from './scene-loader'
 import { createMotif, loadMotifs, type MotifEntry } from './motif-journal'
+import { createRevisit, symbolicFromSpaceChanges, type RevisitInput } from './continuity'
+import { SpaceComposer } from './space-composer'
 import { createRelationshipTrigger, loadRelationshipTriggers, type RelationshipInput, type RelationshipTrigger } from './relationship'
+import { createRelationshipRevisit, type RelationshipRevisitInput } from './relationship-continuity'
 import { clearActiveEncryption, clearLocalSnapshot, disableLocalEncryption, enableLocalEncryption, hasEncryptedLocalState, loadLocalSnapshot, recoverEncryptedSnapshot, saveLocalSnapshot, unlockLocalSnapshot } from './local-store'
 import type { LocalSnapshot } from './local-dataset'
 import { useLanguage, type Language } from './i18n'
@@ -16,11 +19,11 @@ import { appLockStorageKey, createAppLockRecord, loadAppLockRecord, loadLockout,
 
 import { getDbStatus, getHostInfo, isTauriRuntime, type DbStatus, type HostInfo } from './host'
 import { fragments, regions, sensations, breaths } from './somatic'
-import { addFieldLink, emptyFieldLayout, fieldNodeKey, loadFieldLayout, removeFieldNode, type FieldLayout, type FieldLens, type FieldRange } from './field'
+import { addFieldLink, attachFieldNode, emptyFieldLayout, fieldNodeKey, loadFieldLayout, removeFieldNode, type FieldLayout, type FieldLens, type FieldRange } from './field'
 import { createSignalSession, loadSignalSessions, removeSignalSession, type SignalSession } from './signal-session'
 import type { CaptureProvenance } from './capture'
 import { addCaptureProvenance, removeCaptureProvenance } from './capture-ledger'
-import { createSymbolicSession, loadSymbolicSessions, removeSymbolicSession, type SymbolicSession } from './symbolic-session'
+import { createSymbolicSession, loadSymbolicSessions, removeSymbolicSession, symbolicSessionCapacity, type SymbolicSession } from './symbolic-session'
 
 const FieldView = lazy(() => import('./field-view').then(module => ({ default: module.FieldView })))
 const TimelineRail = lazy(() => import('./field-view').then(module => ({ default: module.TimelineRail })))
@@ -29,18 +32,20 @@ const AppLockSettings = lazy(() => import('./app-lock-view').then(module => ({ d
 const SomaticEntry = lazy(() => import('./somatic-entry').then(module => ({ default: module.SomaticEntry })))
 const InnerEntry = lazy(() => import('./inner-entry').then(module => ({ default: module.InnerEntry })))
 const MotifJournal = lazy(() => import('./motif-journal-view').then(module => ({ default: module.MotifJournal })))
+const ContinuityView = lazy(() => import('./continuity-view').then(module => ({ default: module.ContinuityView })))
 const RelationshipJournal = lazy(() => import('./relationship-map').then(module => ({ default: module.RelationshipJournal })))
 const SignalSimulator = lazy(() => import('./signal-simulator').then(module => ({ default: module.SignalSimulator })))
 const DeviceSignalPanel = lazy(() => import('./device-signal-panel').then(module => ({ default: module.DeviceSignalPanel })))
 const LocalDataPanel = lazy(() => import('./local-data-panel').then(module => ({ default: module.LocalDataPanel })))
 const UpdatePanel = lazy(() => import('./update-panel').then(module => ({ default: module.UpdatePanel })))
 
-type View = 'field' | 'new' | 'motif' | 'journal' | 'relationship' | 'settings' | 'research' | 'space'
+type View = 'field' | 'new' | 'motif' | 'journal' | 'continuity' | 'relationship' | 'settings' | 'research' | 'space'
 type DetailTab = 'overview' | 'body' | 'imagery' | 'relationship'
 
 const navItems: Array<{ id: Exclude<View, 'motif' | 'space' | 'research'>; label: string; icon: string }> = [
   { id: 'field', label: '场域', icon: '◌' },
   { id: 'journal', label: '片段', icon: '◫' },
+  { id: 'continuity', label: '连续性', icon: '⟲' },
   { id: 'relationship', label: '关系', icon: '◇' },
   { id: 'settings', label: '设置', icon: '⚙' },
 ]
@@ -78,16 +83,18 @@ function WorkspaceHeader({ eyebrow, title, meta, action }: { eyebrow: string; ti
   </header>
 }
 
-function MotifDetail({ motif, tab, setTab, onEnter }: { motif: MotifEntry; tab: DetailTab; setTab: (tab: DetailTab) => void; onEnter: () => void }) {
+function MotifDetail({ motif, tab, setTab, onEnter, onStart }: { motif: MotifEntry; tab: DetailTab; setTab: (tab: DetailTab) => void; onEnter: () => void; onStart: (encounter: Encounter) => void }) {
   const { lang, t } = useLanguage()
+  const [composing, setComposing] = useState(false)
   const voice = motif.signals?.voice
   return <>
     <WorkspaceHeader
       eyebrow={t('片段')}
       title={motif.name || t('未命名')}
       meta={`${dateLabel(motif.createdAt, lang)} · ${t('本机保存')} · ${motif.capture.fragments.length} ${t('块意象')}`}
-      action={<button className="primary-button" onClick={onEnter}>{t('进入空间')}</button>}
+      action={<div className="actions"><button className="primary-button" onClick={onEnter}>{t('进入空间')}</button><button className="quiet" onClick={() => setComposing(value => !value)}>{composing ? t('关闭自定义') : t('自定义空间')}</button></div>}
     />
+    {composing && <SpaceComposer capture={motif.capture} motifId={motif.id} initial={motif.symbolic} onStart={onStart} onCancel={() => setComposing(false)} />}
     {tab === 'overview' && <div className="detail-grid">
       <section className="paper-card span-2">
         <p className="card-label">{t('身体线索')}</p>
@@ -146,7 +153,7 @@ function ContextPanel({ motif, encounter, onEnter, onBack, onDetail }: { motif: 
       <button className="primary-button wide" onClick={onBack}>{t('返回工作台')}</button>
       <div className="context-section">
         <p className="card-label">{t('这次的空间')}</p>
-        <p className="muted">{encounter.innerPlan?.format === 'space' ? t('180 秒空间') : t('75 秒相遇')} · {t('无声')} · symbolic</p>
+        <p className="muted">{encounter.innerPlan?.format === 'open' ? t('开放空间') : encounter.innerPlan?.format === 'space' ? t('180 秒空间') : t('75 秒相遇')} · {t('无声')} · symbolic</p>
       </div>
       <div className="context-note">
         <p className="card-label">{t('不解释')}</p>
@@ -238,7 +245,7 @@ export function DesktopShell() {
   const openNew = () => { setEncounter(null); setSelectedId(null); setView('new'); setDetailTab('overview') }
   const openMotif = (id: string) => { setSelectedId(id); setEncounter(null); setView('field'); setDetailTab('overview') }
   const recordAgency = (event: SymbolicAgencyEvent) => {
-    setEncounter(current => current ? { ...current, agency: [...(current.agency ?? []), event] } : current)
+    setEncounter(current => current ? { ...current, durationSec: event.durationSec ?? current.durationSec, agency: [...(current.agency ?? []), event] } : current)
   }
 
   const start = (next: Encounter) => {
@@ -250,16 +257,41 @@ export function DesktopShell() {
       void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: nextCaptures, symbolicSessions })
     }
   }
-  const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture)) }
+  const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture, selected.id, selected.symbolic)) }
+  const enterMotif = (id: string) => {
+    const motif = motifs.find(entry => entry.id === id)
+    if (!motif) return
+    setSelectedId(motif.id)
+    start(createInnerCaptureEncounter(motif.capture, motif.id, motif.symbolic))
+  }
   const backFromSpace = () => {
     if (encounter) {
       const session = createSymbolicSession(encounter)
-      const next = [session, ...symbolicSessions].slice(0, 100)
+      const next = [session, ...symbolicSessions].slice(0, symbolicSessionCapacity)
       setSymbolicSessions(next)
       void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions: next })
     }
     setEncounter(null)
     setView(selected ? 'field' : 'new')
+  }
+  const saveSpaceRevision = () => {
+    if (!encounter?.motifId || !encounter.innerPlan) return
+    const source = motifs.find(entry => entry.id === encounter.motifId)
+    if (!source) return
+    const plan = encounter.innerPlan
+    const symbolic = symbolicFromSpaceChanges({ format: plan.format, motifs: plan.motifs, figure: plan.figure }, encounter.agency ?? [])
+    const entry = createRevisit(motifs, source.id, { symbolic, note: t('从空间保存的调整') })
+    const next = [entry, ...motifs]
+    const nextField = attachFieldNode(fieldLayout, fieldNodeKey('motif', source.id), fieldNodeKey('motif', entry.id))
+    const session = createSymbolicSession({ ...encounter, motifId: entry.id })
+    const nextSessions = [session, ...symbolicSessions].slice(0, symbolicSessionCapacity)
+    setMotifs(next)
+    setFieldLayout(nextField)
+    setSymbolicSessions(nextSessions)
+    setSelectedId(entry.id)
+    setEncounter(null)
+    setView('continuity')
+    persist(next, relationships, nextField, signalSessions, captures, nextSessions)
   }
   const persist = (nextMotifs: MotifEntry[], nextRelationships: RelationshipTrigger[], nextField = fieldLayout, nextSignals = signalSessions, nextCaptures = captures, nextSymbolicSessions = symbolicSessions) => {
     void saveLocalSnapshot({ motifs: nextMotifs, relationships: nextRelationships, field: nextField, signals: nextSignals, captures: nextCaptures, symbolicSessions: nextSymbolicSessions })
@@ -284,6 +316,23 @@ export function DesktopShell() {
     const next = [createRelationshipTrigger(input), ...relationships]
     setRelationships(next)
     persist(motifs, next, fieldLayout, signalSessions)
+  }
+  const revisit = (sourceId: string, input: RevisitInput) => {
+    const entry = createRevisit(motifs, sourceId, input)
+    const next = [entry, ...motifs]
+    const nextField = attachFieldNode(fieldLayout, fieldNodeKey('motif', sourceId), fieldNodeKey('motif', entry.id))
+    setMotifs(next)
+    setFieldLayout(nextField)
+    setSelectedId(entry.id)
+    persist(next, relationships, nextField, signalSessions)
+  }
+  const revisitRelationship = (sourceId: string, input: RelationshipRevisitInput) => {
+    const entry = createRelationshipRevisit(relationships, sourceId, input)
+    const next = [entry, ...relationships]
+    const nextField = attachFieldNode(fieldLayout, fieldNodeKey('relationship', sourceId), fieldNodeKey('relationship', entry.id))
+    setRelationships(next)
+    setFieldLayout(nextField)
+    persist(motifs, next, nextField, signalSessions)
   }
   const removeRelationship = (id: string) => {
     const next = relationships.filter(entry => entry.id !== id)
@@ -526,7 +575,7 @@ export function DesktopShell() {
           <div className="workspace-tabs" {...(topTabs.length ? { role: 'tablist' } : {})}>
             {topTabs.length
               ? topTabs.map(tab => <button key={tab.id} role="tab" aria-selected={tab.active} className={tab.active ? 'active' : ''} onClick={tab.onClick}>{tab.label}</button>)
-              : <span className="top-label">{view === 'space' ? (encounter?.innerPlan?.format === 'space' ? '空间' : '相遇') : view === 'research' ? t('研究工具') : t(navItems.find(item => item.id === navView)?.label ?? '')}</span>}
+              : <span className="top-label">{view === 'space' ? (encounter?.innerPlan?.format === 'space' || encounter?.innerPlan?.format === 'open' ? '空间' : '相遇') : view === 'research' ? t('研究工具') : t(navItems.find(item => item.id === navView)?.label ?? '')}</span>}
           </div>
           <div className="ui-controls">
             {lockRecord && <button className="ui-toggle" onClick={lockNow} aria-label={t('立即锁定')} title={t('立即锁定')}>🔒</button>}
@@ -538,7 +587,7 @@ export function DesktopShell() {
         <div className="workspace-scroll">
           {view === 'space' && encounter
             ? <div className="scene-workspace">
-              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button><span>{encounter.innerPlan?.format === 'space' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
+              <div className="scene-toolbar"><button className="text-button" onClick={backFromSpace}>← {t('返回工作台')}</button>{encounter.motifId && <button type="button" className="quiet small" onClick={saveSpaceRevision}>{t('保存为新的进入')}</button>}<span>{encounter.innerPlan?.format === 'space' || encounter.innerPlan?.format === 'open' ? `${t('内在景观')} · ${t('空间')}` : `${t('内在景观')} · ${t('相遇')}`}</span><span className="local-badge">{t('无声 · 本地')}</span></div>
               <SceneView encounter={encounter} replay={replay} onAgency={recordAgency} />
               <div className="scene-footer"><span>{t('不解释、不诊断；离开随时可用。')}</span><button className="quiet-button" onClick={() => setReplay(value => value + 1)}>{t('重新进入')}</button></div>
             </div>
@@ -549,16 +598,19 @@ export function DesktopShell() {
                 {view === 'new' && (textMode
                   ? <div className="capture-wrap"><Suspense fallback={null}><InnerEntry onStart={start} /></Suspense></div>
                   : <div className="capture-wrap"><Suspense fallback={null}><SomaticEntry onStart={start} onRemember={remember} /></Suspense></div>)}
-                {view === 'motif' && selected && <MotifDetail motif={selected} tab={detailTab} setTab={setDetailTab} onEnter={enterSelected} />}
+                {view === 'motif' && selected && <MotifDetail motif={selected} tab={detailTab} setTab={setDetailTab} onEnter={enterSelected} onStart={start} />}
                 {view === 'motif' && !selected && <div className="empty-state"><h2>{t('这个片段不在了')}</h2><p>{t('它可能已被删除。可以从左侧新建一个片段。')}</p><button className="primary-button" onClick={openNew}>新建片段</button></div>}
               </>}
               {view === 'journal' && <>
                 <WorkspaceHeader eyebrow={t('本机片段日记')} title={t('反复出现的东西，先放在一起。')} meta={t('不推断因果，只做并列、回看与导出。')} />
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
               </>}
+              {view === 'continuity' && <>
+                <Suspense fallback={null}><ContinuityView motifs={motifs} sessions={symbolicSessions} focusId={selectedId} onRevisit={revisit} onOpen={openMotif} onEnter={enterMotif} onNew={openNew} /></Suspense>
+              </>}
               {view === 'relationship' && <>
                 <WorkspaceHeader eyebrow={t('关系瞬间')} title={t('只画你自己的地图。')} meta={t('不推断对方，不做匹配，也不把关系变成评分。')} />
-                <Suspense fallback={null}><RelationshipJournal entries={relationships} onAdd={addRelationship} onRemove={removeRelationship} onClear={() => { setRelationships([]); persist(motifs, []) }} /></Suspense>
+                <Suspense fallback={null}><RelationshipJournal entries={relationships} onAdd={addRelationship} onRevisit={revisitRelationship} onRemove={removeRelationship} onClear={() => { setRelationships([]); persist(motifs, []) }} /></Suspense>
               </>}
               {view === 'research' && <>
                 <WorkspaceHeader eyebrow={t('研究工具')} title={t('可选信号')} meta={t('模拟数据和设备桥接都明确标注；没有真实神经数据。')} action={<button type="button" className="quiet-button" onClick={() => setView('settings')}>← {t('返回设置')}</button>} />

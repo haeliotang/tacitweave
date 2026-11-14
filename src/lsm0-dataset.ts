@@ -50,7 +50,7 @@ export function datasetToLsm0Sessions(dataset: LocalDataset, participantId: stri
       capturedAt: motif.createdAt,
       somatic: motif.capture,
       ...(Object.keys(signals).length ? { signals } : {}),
-      ...(motif.symbolic ? { symbolic: { format: motif.symbolic.format, motifs: [...motif.symbolic.motifs], figure: motif.symbolic.figure } } : {}),
+      ...(motif.symbolic ? { symbolic: { format: motif.symbolic.format === 'open' ? 'space' : motif.symbolic.format, motifs: [...motif.symbolic.motifs], figure: motif.symbolic.figure } } : {}),
       simulatedSignals: false,
     })
   }

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Inceptless <support@inceptless.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest'
-import { addMotif, clearMotifs, exportMotifs, loadMotifs, motifDisplayName, removeMotif, type StorageLike } from './motif-journal'
+import { addMotif, clearMotifs, createMotif, exportMotifs, loadMotifs, motifCapacity, motifDisplayName, motifStorageKey, removeMotif, saveMotifs, type StorageLike } from './motif-journal'
 import type { SomaticCapture } from './somatic'
 import { grantLocalSignalConsent, voiceTraceFromSamples } from './somatic-signal'
 
@@ -59,6 +59,14 @@ describe('local motif journal', () => {
     expect(entries[0].symbolic).toEqual({ format: 'encounter', motifs: ['door', 'corridor'], figure: 'shadow' })
     expect(loadMotifs(storage)[0].symbolic?.figure).toBe('shadow')
     expect(JSON.stringify(entries)).not.toMatch(/diagnos|interpretation|score/i)
+  })
+
+  it('exposes and enforces an explicit retention ceiling', () => {
+    const storage = memoryStorage()
+    const entries = Array.from({ length: motifCapacity + 1 }, (_, index) => createMotif({ name: `motif-${index}`, capture, now: new Date(Date.UTC(2026, 0, 1, 0, 0, index)).toISOString() }))
+    saveMotifs(storage, entries)
+    expect(JSON.parse(storage.getItem(motifStorageKey) ?? '[]')).toHaveLength(motifCapacity)
+    expect(motifCapacity).toBe(1000)
   })
 
   it('exports a portable local JSON record without interpretation', () => {

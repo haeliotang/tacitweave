@@ -305,7 +305,7 @@ body, .desktop-shell { background: #f3f3f0; color: #252825 }
 [data-theme='dark'] .note { color: #9b9da0 }
 [data-theme='dark'] .error, [data-theme='dark'] .error-inline { color: #e0a79c }
 [data-theme='dark'] .actions button:not(.quiet):not(.primary-button) { background: #e7e7e3; color: #1d1e20 }
-[data-theme='dark'] .motif-item .small, [data-theme='dark'] .quiet.small { border-color: #3a3c41; color: #b8babc }
+[data-theme='dark'] .motif-item .small, [data-theme='dark'] .quiet.small { background: transparent; border-color: #3a3c41; color: #c4c5c3 }
 [data-theme='dark'] .host-dot { background: #6a6c70 }
 [data-theme='dark'] .host-dot.native { background: #7f9d83 }
 /* Tacitweave field: a spatial field, not a document editor. */
@@ -468,3 +468,11 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 /* Keep symbolic "left/ended" overlays inside the scene column, not the viewport. */
 .scene-workspace { position: relative }
 .scene-toolbar, .scene-footer { position: relative; z-index: 3 }
+.symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.symbolic-light-change, .symbolic-motif-change, .symbolic-figure-change { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.symbolic-light-change select, .symbolic-motif-change select, .symbolic-figure-change select { background: transparent; color: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 3px 5px; }
+
+.symbolic-episode.light-low .symbolic-sky, .symbolic-episode.light-low .symbolic-water { filter: brightness(.65) }
+.symbolic-episode.light-hard .symbolic-sky { filter: contrast(1.25) brightness(1.2) }
+.symbolic-episode.light-hard .symbolic-water { filter: contrast(1.15) brightness(1.1) }
+.symbolic-episode.light-flat .symbolic-sky, .symbolic-episode.light-flat .symbolic-water { filter: saturate(.35) brightness(1.05) }

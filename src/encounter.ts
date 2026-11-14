@@ -6,11 +6,15 @@ import type { EpisodePlan } from './episode-plan'
 
 export type RendererKind = 'genie4' | 'marble' | 'captured' | 'symbolic'
 
-export type SymbolicAgencyAction = 'approach' | 'stay' | 'resume' | 'leave' | 'reenter'
+export type SymbolicAgencyAction = 'approach' | 'stay' | 'resume' | 'leave' | 'reenter' | 'extend' | 'change'
 
 export interface SymbolicAgencyEvent {
   atSec: number
   action: SymbolicAgencyAction
+  /** For `extend`, the new total duration chosen by the user. */
+  durationSec?: number
+  /** For `change`, the user-selected in-space parameter and its value. */
+  change?: { field: 'figure' | 'motif' | 'light'; value: string }
 }
 
 export interface Encounter {
@@ -26,4 +30,6 @@ export interface Encounter {
   plan?: EpisodePlan
   /** User-authored agency events from the symbolic renderer. */
   agency?: SymbolicAgencyEvent[]
+  /** Optional local motif this encounter was opened from; not a psychological link. */
+  motifId?: string
 }

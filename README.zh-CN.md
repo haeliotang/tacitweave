@@ -169,6 +169,10 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 | 信号容错 | 本机 bridge 重连/退避、抖动/间隔健康、确定性回放与显式撤回 |
 | LSM-0 基线 | 离线确定性评估、数据导出与精度模拟；无实证数据、不作临床结论 |
 | 许可与贡献 | 分层 AGPL/Apache/CC-BY/品牌；CLA 1.0；PR 需通过 `license/cla` |
+| 连续性 v0.1 | 可再次进入、修改用户字段、保留修订并比较变化；也可把空间内调整保存为新修订 |
+| 动态空间 v0.1 | 75 秒相遇或 180 秒空间均可明确延长；开放空间无自动结束；空间内可改变意象、形象与光线 |
+| 关系瞬间连续性 v0.1 | 可再次进入关系瞬间、预填用户字段、保留原记录、记录每次进入并比较用户字段变化 |
+| 空间编辑器 v0.1 | 进入前选择 1–3 块意象、形象与 75/180 秒形式；系统只组合，不解释 |
 
 当前**没有**：
 
@@ -182,15 +186,19 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **177** 项 Vitest 单元/集成测试
-- **24** 项 Playwright 浏览器 E2E
-- **8** 项 Rust 桌面测试；ops crate 也会构建与测试
+- **198** 项 Vitest 单元/集成测试
+- **30** 项 Playwright 浏览器 E2E
+- **8** 项 Rust 桌面测试与 **10** 项 Rust ops 测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
-- 主 JS 约 **312 KB**，重组件 lazy load
+- 主 JS 约 **330 KB**，重组件 lazy load
 - v0.1.4 Release：**未签名**的 Linux AppImage/DEB 与 Windows NSIS；尚无 macOS 资产
 - CI：Symbolic space、Rust operational、Browser E2E 与 License checks
 
 项目仍是研究原型，不声称临床或真实 BCI 硬件能力。
+
+### 3.2 象征经验连续性 v0.1
+
+本机产品现在有明确的连续性层：过去的片段可以再次进入、修改和比较，原记录与每次修订都保留。它只记录用户自己填写的字段和说明，不推断好转、诊断或心理意义。见 [象征经验连续性 v0.1](docs/symbolic-continuity-v0.1.md) 与 [Symbolic Experience Platform 状态](docs/symbolic-experience-platform-status.md)。
 
 ## 4. 架构
 

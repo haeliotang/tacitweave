@@ -7,7 +7,11 @@ export interface SymbolicSession {
   id: string
   createdAt: string
   encounterId: string
-  format: 'encounter' | 'space'
+  /** Optional source motif, when the user entered from a stored fragment. */
+  motifId?: string
+  format: 'encounter' | 'space' | 'open'
+  /** True when the user chose an open-ended space; durationSec is only nominal. */
+  openEnded?: boolean
   durationSec: number
   completed: boolean
   leftEarly: boolean
@@ -15,8 +19,9 @@ export interface SymbolicSession {
 }
 
 export const symbolicSessionStorageKey = 'tacitweave.symbolic-sessions.v1'
-const maxSessions = 100
-const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter'])
+export const symbolicSessionCapacity = 1000
+const maxSessions = symbolicSessionCapacity
+const actions = new Set(['approach', 'stay', 'resume', 'leave', 'reenter', 'extend', 'change'])
 
 export function isSymbolicSession(value: unknown): value is SymbolicSession {
   if (!value || typeof value !== 'object') return false
@@ -25,29 +30,35 @@ export function isSymbolicSession(value: unknown): value is SymbolicSession {
     && typeof session.id === 'string' && session.id.length > 0
     && typeof session.createdAt === 'string' && !Number.isNaN(Date.parse(session.createdAt))
     && typeof session.encounterId === 'string' && session.encounterId.length > 0
-    && (session.format === 'encounter' || session.format === 'space')
+    && (session.motifId === undefined || (typeof session.motifId === 'string' && session.motifId.length > 0))
+    && (session.format === 'encounter' || session.format === 'space' || session.format === 'open')
+    && (session.openEnded === undefined || typeof session.openEnded === 'boolean')
     && typeof session.durationSec === 'number' && Number.isFinite(session.durationSec) && session.durationSec > 0
     && typeof session.completed === 'boolean'
     && typeof session.leftEarly === 'boolean'
     && Array.isArray(session.agency)
     && session.agency.every(event => event && typeof event === 'object'
       && typeof event.atSec === 'number' && Number.isFinite(event.atSec) && event.atSec >= 0
-      && typeof event.action === 'string' && actions.has(event.action))
+      && typeof event.action === 'string' && actions.has(event.action)
+      && (event.durationSec === undefined || (typeof event.durationSec === 'number' && Number.isFinite(event.durationSec) && event.durationSec > 0))
+      && (event.change === undefined || (event.change && typeof event.change === 'object' && (event.change.field === 'figure' || event.change.field === 'motif' || event.change.field === 'light') && typeof event.change.value === 'string' && event.change.value.length > 0)))
 }
 
 export function createSymbolicSession(encounter: Encounter, now = new Date().toISOString(), id: string = crypto.randomUUID()): SymbolicSession {
   const format = encounter.innerPlan?.format ?? 'encounter'
-  const durationSec = encounter.innerPlan?.durationSec ?? encounter.durationSec ?? 75
+  const durationSec = encounter.durationSec ?? encounter.innerPlan?.durationSec ?? 75
   const agency = [...(encounter.agency ?? [])]
   return {
     version: 'symbolic-session-v1',
     id,
     createdAt: now,
     encounterId: encounter.id,
+    ...(encounter.motifId ? { motifId: encounter.motifId } : {}),
     format,
+    ...(format === 'open' ? { openEnded: true } : {}),
     durationSec,
-    completed: agency.some(event => event.action === 'leave' && event.atSec >= durationSec),
-    leftEarly: agency.some(event => event.action === 'leave' && event.atSec < durationSec),
+    completed: format !== 'open' && agency.some(event => event.action === 'leave' && event.atSec >= durationSec),
+    leftEarly: format !== 'open' && agency.some(event => event.action === 'leave' && event.atSec < durationSec),
     agency,
   }
 }
