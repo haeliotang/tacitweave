@@ -11,6 +11,7 @@ export function LocalDataPanel({ snapshot, onImport, onClear, onRetractSignal, o
   const { t } = useLanguage()
   const input = useRef<HTMLInputElement>(null)
   const [status, setStatus] = useState('')
+  const [confirmClear, setConfirmClear] = useState(false)
 
   const download = (contents: string, name: string) => {
     const blob = new Blob([contents], { type: 'application/json' })
@@ -93,9 +94,14 @@ export function LocalDataPanel({ snapshot, onImport, onClear, onRetractSignal, o
       <button type="button" className="quiet" onClick={exportTimeline}>{t('导出本机时间轴')}</button>
       <button type="button" className="quiet" onClick={exportLsm0}>{t('导出 LSM-0 会话')}</button>
       <button type="button" className="quiet" onClick={() => input.current?.click()}>{t('导入本机数据')}</button>
-      <button type="button" className="quiet" onClick={() => { if (confirm(t('删除本机全部数据？此操作不可撤销。'))) onClear() }}>{t('删除全部本机数据')}</button>
+      <button type="button" className="quiet" onClick={() => setConfirmClear(true)}>{t('删除全部本机数据')}</button>
       <input ref={input} type="file" accept="application/json,.json" hidden onChange={event => void importFile(event.target.files?.[0])} />
     </div>
+    {confirmClear && <div className="confirm-clear" role="alertdialog" aria-labelledby="confirm-clear-title">
+      <p id="confirm-clear-title">{t('删除本机全部数据？此操作不可撤销。')}</p>
+      <button type="button" className="primary-button" onClick={() => { onClear(); setConfirmClear(false); setStatus(t('已删除全部本机数据')) }}>{t('确认删除')}</button>
+      <button type="button" className="quiet" onClick={() => setConfirmClear(false)}>{t('取消')}</button>
+    </div>}
     {status && <p className="note" role="status">{status}</p>}
   </section>
 }

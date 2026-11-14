@@ -59,9 +59,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ```text
 Vitest: 198 passed
-Playwright E2E: 29 passed
+Playwright E2E: 30 passed
 pnpm build: exit 0, main JS ~330 KB
-reuse lint: 263/263 compliant
+reuse lint: 264/264 compliant
 Rust: 8 desktop + 10 ops tests passed
 Tauri release build: pnpm tauri:build --no-bundle passed
 Retention: 1000 motifs + 1000 symbolic sessions (explicit, tested)
@@ -75,7 +75,8 @@ English UI untranslated-token audit covers continuity/composer
 - 浏览器 E2E 已验证保存、刷新与恢复；
 - Tauri release 二进制已手工验证：建立 demo 数据 → Composer 调整 → 保存为新修订 → 退出进程 → 重启 → 修订链、symbolic 配置、session 与 field link 均恢复；
 - 本地导出 JSON 已检查：3 motifs、1 session、3 field links，修订 symbolic 为 `encounter · water / house / door · animal`；
-- 删除全部本机数据的 UI 操作尚未完成自动化验证。
+- 删除全部本机数据：实际点击 UI → 二次确认 → 数据库 local_state 清空 → 退出/重启 → 空状态确认。
+- 因此 Tauri 7/7 手工验收完成。
 
 ## 明确不是
 

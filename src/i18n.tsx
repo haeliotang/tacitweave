@@ -164,6 +164,9 @@ const en: Record<string, string> = {
   '导出本机时间轴': 'Export local timeline',
   '导入本机数据': 'Import local data',
   '删除全部本机数据': 'Delete all local data',
+  '确认删除': 'Confirm delete',
+  '已删除全部本机数据': 'All local data deleted',
+
   '删除这条': 'Delete this',
   '全部删除': 'Delete all',
   '导出 JSON': 'Export JSON',
