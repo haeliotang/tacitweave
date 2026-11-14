@@ -38,12 +38,14 @@ const SignalSimulator = lazy(() => import('./signal-simulator').then(module => (
 const DeviceSignalPanel = lazy(() => import('./device-signal-panel').then(module => ({ default: module.DeviceSignalPanel })))
 const LocalDataPanel = lazy(() => import('./local-data-panel').then(module => ({ default: module.LocalDataPanel })))
 const UpdatePanel = lazy(() => import('./update-panel').then(module => ({ default: module.UpdatePanel })))
+const ExplorationView = lazy(() => import('./exploration-view').then(module => ({ default: module.ExplorationView })))
 
-type View = 'field' | 'new' | 'motif' | 'journal' | 'continuity' | 'relationship' | 'settings' | 'research' | 'space'
+type View = 'field' | 'explore' | 'new' | 'motif' | 'journal' | 'continuity' | 'relationship' | 'settings' | 'research' | 'space'
 type DetailTab = 'overview' | 'body' | 'imagery' | 'relationship'
 
 const navItems: Array<{ id: Exclude<View, 'motif' | 'space' | 'research'>; label: string; icon: string }> = [
   { id: 'field', label: '场域', icon: '◌' },
+  { id: 'explore', label: '探索', icon: '✦' },
   { id: 'journal', label: '片段', icon: '◫' },
   { id: 'continuity', label: '连续性', icon: '⟲' },
   { id: 'relationship', label: '关系', icon: '◇' },
@@ -195,6 +197,7 @@ export function DesktopShell() {
   const [signalSessions, setSignalSessions] = useState<SignalSession[]>(() => typeof window === 'undefined' ? [] : loadSignalSessions(window.localStorage))
   const [captures, setCaptures] = useState<CaptureProvenance[]>([])
   const [symbolicSessions, setSymbolicSessions] = useState<SymbolicSession[]>([])
+  const [experienceSpaces, setExperienceSpaces] = useState<import('./experience-space').ExperienceSpaceV2[]>([])
   const [lockRecord, setLockRecord] = useState<AppLockRecord | null>(() => typeof window === 'undefined' ? null : loadAppLockRecord(window.localStorage))
   const [locked, setLocked] = useState<boolean>(() => typeof window !== 'undefined' && Boolean(loadAppLockRecord(window.localStorage)))
   const [recoveryNeeded, setRecoveryNeeded] = useState(false)
@@ -230,6 +233,7 @@ export function DesktopShell() {
       setSignalSessions(snapshot.signals ?? [])
       setCaptures(snapshot.captures ?? [])
       setSymbolicSessions(snapshot.symbolicSessions ?? [])
+      setExperienceSpaces(snapshot.spaces ?? [])
       setSelectedId(current => current && snapshot.motifs.some(motif => motif.id === current) ? current : null)
     })
     return () => { active = false }
@@ -254,7 +258,7 @@ export function DesktopShell() {
     if (next.capture) {
       const nextCaptures = addCaptureProvenance(captures, next.capture)
       setCaptures(nextCaptures)
-      void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: nextCaptures, symbolicSessions })
+      void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: nextCaptures, symbolicSessions, spaces: experienceSpaces })
     }
   }
   const enterSelected = () => { if (selected) start(createInnerCaptureEncounter(selected.capture, selected.id, selected.symbolic)) }
@@ -269,7 +273,7 @@ export function DesktopShell() {
       const session = createSymbolicSession(encounter)
       const next = [session, ...symbolicSessions].slice(0, symbolicSessionCapacity)
       setSymbolicSessions(next)
-      void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions: next })
+      void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions: next, spaces: experienceSpaces })
     }
     setEncounter(null)
     setView(selected ? 'field' : 'new')
@@ -293,8 +297,8 @@ export function DesktopShell() {
     setView('continuity')
     persist(next, relationships, nextField, signalSessions, captures, nextSessions)
   }
-  const persist = (nextMotifs: MotifEntry[], nextRelationships: RelationshipTrigger[], nextField = fieldLayout, nextSignals = signalSessions, nextCaptures = captures, nextSymbolicSessions = symbolicSessions) => {
-    void saveLocalSnapshot({ motifs: nextMotifs, relationships: nextRelationships, field: nextField, signals: nextSignals, captures: nextCaptures, symbolicSessions: nextSymbolicSessions })
+  const persist = (nextMotifs: MotifEntry[], nextRelationships: RelationshipTrigger[], nextField = fieldLayout, nextSignals = signalSessions, nextCaptures = captures, nextSymbolicSessions = symbolicSessions, nextSpaces = experienceSpaces) => {
+    void saveLocalSnapshot({ motifs: nextMotifs, relationships: nextRelationships, field: nextField, signals: nextSignals, captures: nextCaptures, symbolicSessions: nextSymbolicSessions, spaces: nextSpaces })
   }
   const remember = (capture: Parameters<typeof createMotif>[0]['capture'], name: string, signals?: Parameters<typeof createMotif>[0]['signals']) => {
     const plan = innerPlanFromCapture(capture)
@@ -342,6 +346,7 @@ export function DesktopShell() {
     persist(motifs, next, nextField, signalSessions)
   }
   const importSnapshot = (snapshot: LocalSnapshot) => {
+    setExperienceSpaces(snapshot.spaces ?? [])
     setMotifs(snapshot.motifs)
     setRelationships(snapshot.relationships)
     setFieldLayout(snapshot.field ?? emptyFieldLayout())
@@ -358,6 +363,7 @@ export function DesktopShell() {
     setSignalSessions([])
     setCaptures([])
     setSymbolicSessions([])
+    setExperienceSpaces([])
     setSelectedId(null)
     window.localStorage.removeItem(appLockStorageKey)
     window.localStorage.removeItem('tacitweave.app-lock-lockout.v1')
@@ -375,10 +381,11 @@ export function DesktopShell() {
     setSignalSessions(snapshot.signals ?? [])
     setCaptures(snapshot.captures ?? [])
     setSymbolicSessions(snapshot.symbolicSessions ?? [])
+    setExperienceSpaces(snapshot.spaces ?? [])
     setSelectedId(current => current && snapshot.motifs.some(motif => motif.id === current) ? current : null)
   }
 
-  const currentSnapshot = (): LocalSnapshot => ({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions })
+  const currentSnapshot = (): LocalSnapshot => ({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions, spaces: experienceSpaces })
 
   const enableAppLock = async (pin: string) => {
     const record = await createAppLockRecord(pin)
@@ -481,31 +488,31 @@ export function DesktopShell() {
 
   const updateFieldLayout = (next: FieldLayout) => {
     setFieldLayout(next)
-    void saveLocalSnapshot({ motifs, relationships, field: next, signals: signalSessions, captures, symbolicSessions })
+    void saveLocalSnapshot({ motifs, relationships, field: next, signals: signalSessions, captures, symbolicSessions, spaces: experienceSpaces })
   }
 
   const recordSignalSession = (session: SignalSession) => {
     const next = [session, ...signalSessions].slice(0, 100)
     setSignalSessions(next)
-    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: next, captures, symbolicSessions })
+    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: next, captures, symbolicSessions, spaces: experienceSpaces })
   }
 
   const retractCapture = (captureId: string) => {
     const next = removeCaptureProvenance(captures, captureId)
     setCaptures(next)
-    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: next })
+    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures: next, spaces: experienceSpaces })
   }
 
   const retractSymbolicSession = (id: string) => {
     const next = removeSymbolicSession(symbolicSessions, id)
     setSymbolicSessions(next)
-    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions: next })
+    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions: next, spaces: experienceSpaces })
   }
 
   const retractSignalSession = (id: string) => {
     const next = removeSignalSession(signalSessions, id)
     setSignalSessions(next)
-    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: next, captures, symbolicSessions })
+    void saveLocalSnapshot({ motifs, relationships, field: fieldLayout, signals: next, captures, symbolicSessions, spaces: experienceSpaces })
   }
 
   const loadDemo = () => {
@@ -601,6 +608,9 @@ export function DesktopShell() {
                 {view === 'motif' && selected && <MotifDetail motif={selected} tab={detailTab} setTab={setDetailTab} onEnter={enterSelected} onStart={start} />}
                 {view === 'motif' && !selected && <div className="empty-state"><h2>{t('这个片段不在了')}</h2><p>{t('它可能已被删除。可以从左侧新建一个片段。')}</p><button className="primary-button" onClick={openNew}>新建片段</button></div>}
               </>}
+              {view === 'explore' && <>
+                <Suspense fallback={<div className="field-empty"><p>{t('正在打开探索空间…')}</p></div>}><ExplorationView spaces={experienceSpaces} onChange={next => { setExperienceSpaces(next); persist(motifs, relationships, fieldLayout, signalSessions, captures, symbolicSessions, next) }} /></Suspense>
+              </>}
               {view === 'journal' && <>
                 <WorkspaceHeader eyebrow={t('本机片段日记')} title={t('反复出现的东西，先放在一起。')} meta={t('不推断因果，只做并列、回看与导出。')} />
                 <Suspense fallback={null}><MotifJournal entries={motifs} onRemove={remove} onClear={() => { setMotifs([]); setSelectedId(null); persist([], relationships) }} /></Suspense>
@@ -637,14 +647,20 @@ export function DesktopShell() {
                 </div>
                 <Suspense fallback={null}><UpdatePanel currentVersion={host?.app_version ?? '0.1.3'} /></Suspense>
                 <Suspense fallback={null}><AppLockSettings enabled={Boolean(lockRecord)} autoLockMs={autoLockMs} onAutoLockChange={updateAutoLock} onEnable={enableAppLock} onDisable={disableAppLock} onLock={lockNow} /></Suspense>
-                <Suspense fallback={null}><LocalDataPanel snapshot={{ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions }} onImport={importSnapshot} onClear={clearAll} onRetractSignal={retractSignalSession} onRetractCapture={retractCapture} onRetractSymbolic={retractSymbolicSession} /></Suspense>
+                <Suspense fallback={null}><LocalDataPanel snapshot={{ motifs, relationships, field: fieldLayout, signals: signalSessions, captures, symbolicSessions, spaces: experienceSpaces }} onImport={importSnapshot} onClear={clearAll} onRetractSignal={retractSignalSession} onRetractCapture={retractCapture} onRetractSymbolic={retractSymbolicSession} /></Suspense>
               </>}
             </>}
         </div>
         {view !== 'space' && view !== 'settings' && view !== 'research' && <Suspense fallback={null}><TimelineRail motifs={visibleMotifs} relationships={visibleRelationships} onSelect={openMotif} /></Suspense>}
       </main>
 
-      {view === 'settings' || view === 'research'
+      {view === 'explore'
+        ? <aside className="context-panel">
+          <div className="context-heading"><span>{t('探索空间')}</span><span className="local-badge">{t('本地')}</span></div>
+          <p className="context-lead">{t('对象、位置和距离都由你改变；系统不解释它们的含义。')}</p>
+          <div className="context-note"><p className="card-label">{t('边界')}</p><p>{t('这里只记录你做的操作，不推断心理意义。')}</p></div>
+        </aside>
+        : view === 'settings' || view === 'research'
         ? <aside className="context-panel">
           <div className="context-heading"><span>{t(view === 'research' ? '研究工具' : '本机设置')}</span><span className="local-badge">{t('本地')}</span></div>
           <p className="context-lead">{view === 'research' ? t('可选信号与设备桥接是研究工具，不会进入象征空间。') : t('数据、应用锁与研究工具都在这里；所有记录默认留在本机。')}</p>

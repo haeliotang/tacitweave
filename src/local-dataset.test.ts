@@ -9,6 +9,7 @@ import type { SomaticCapture } from './somatic'
 import { createRevisit } from './continuity'
 import { attachFieldNode, fieldNodeKey, setFieldPosition } from './field'
 import { createSymbolicSession } from './symbolic-session'
+import { createExperienceSpace, placeObject } from './experience-space'
 
 function memoryStorage() {
   const values = new Map<string, string>()
@@ -39,6 +40,14 @@ describe('local dataset import/export', () => {
     expect(snapshot.field?.links).toHaveLength(1)
     expect(snapshot.symbolicSessions?.[0].motifId).toBe(revised.id)
     expect(JSON.stringify(snapshot)).not.toMatch(/diagnos|score|unconscious/i)
+  })
+
+  it('round-trips experience spaces through the local dataset', () => {
+    const space = placeObject(createExperienceSpace('blank', undefined, undefined, '2026-11-14T00:00:00Z'), 'door')
+    const parsed = parseLocalDataset(JSON.stringify({ version: 'local-dataset-v2', motifs: [], relationships: [], spaces: [space] }))
+    expect(parsed.spaces?.[0].objects[0].kind).toBe('door')
+    expect(JSON.parse(JSON.stringify(localDatasetFromSnapshot(parsed))).spaces).toHaveLength(1)
+    expect(() => parseLocalDataset(JSON.stringify({ version: 'local-dataset-v2', motifs: [], relationships: [], spaces: [{ version: 'experience-space-v2', objects: 'bad' }] }))).toThrow()
   })
 
   it('rejects a dataset with the wrong version or malformed records', () => {

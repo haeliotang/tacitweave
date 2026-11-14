@@ -176,6 +176,7 @@ See [BCI open-source landscape](docs/vision/bci-open-source-landscape.md),
 | Dynamic space v0.1 | Extend a 75s encounter or 180s space by explicit 30s stays; open-ended mode has no automatic end; motif, figure and light can be changed in-space |
 | Relationship continuity v0.1 | Re-enter a relationship moment, prefill its user fields, preserve the original, record each visit and compare user-field changes |
 | Space Composer v0.1 | Choose 1–3 motifs, figure and 75s/180s format before entering; the system composes, not interprets |
+| Symbolic Exploration v0.2 | P0/P1: start without labels, place/drag/adjust objects, save and revisit a user-built spatial configuration |
 
 Currently **not** implemented:
 
@@ -189,11 +190,11 @@ Currently **not** implemented:
 
 As of v0.1.4 on `main`:
 
-- **198** Vitest unit/integration tests
-- **30** Playwright browser E2E scenarios
+- **213** Vitest unit/integration tests
+- **38** Playwright browser E2E scenarios
 - **8** Rust desktop tests and **10** Rust ops tests
 - WCAG A/AA structural and contrast checks in light/dark themes
-- main JS bundle about **330 KB**, with heavy views lazy-loaded
+- main JS bundle about **346 KB**, with heavy views lazy-loaded
 - v0.1.4 release: **unsigned** Linux AppImage/DEB + Windows NSIS; no macOS asset yet
 - CI: Symbolic space, Rust operational, Browser E2E and License checks
 

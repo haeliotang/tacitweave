@@ -173,6 +173,7 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 | 动态空间 v0.1 | 75 秒相遇或 180 秒空间均可明确延长；开放空间无自动结束；空间内可改变意象、形象与光线 |
 | 关系瞬间连续性 v0.1 | 可再次进入关系瞬间、预填用户字段、保留原记录、记录每次进入并比较用户字段变化 |
 | 空间编辑器 v0.1 | 进入前选择 1–3 块意象、形象与 75/180 秒形式；系统只组合，不解释 |
+| 象征探索 v0.2 | P0/P1：无标签进入，放置/拖动/改变对象，保存并重访用户自己搭建的空间 |
 
 当前**没有**：
 
@@ -186,11 +187,11 @@ Tacitweave 的方向不是替代语言，而是补上语言之前的入口：**�
 
 截至 `main` 上的 v0.1.4：
 
-- **198** 项 Vitest 单元/集成测试
-- **30** 项 Playwright 浏览器 E2E
+- **213** 项 Vitest 单元/集成测试
+- **38** 项 Playwright 浏览器 E2E
 - **8** 项 Rust 桌面测试与 **10** 项 Rust ops 测试
 - 明暗主题 WCAG A/AA（结构 + 对比度）
-- 主 JS 约 **330 KB**，重组件 lazy load
+- 主 JS 约 **346 KB**，重组件 lazy load
 - v0.1.4 Release：**未签名**的 Linux AppImage/DEB 与 Windows NSIS；尚无 macOS 资产
 - CI：Symbolic space、Rust operational、Browser E2E 与 License checks
 

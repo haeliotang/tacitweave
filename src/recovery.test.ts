@@ -17,7 +17,7 @@ function storage(initial: Record<string, string> = {}) {
   }
 }
 
-const snapshot: LocalSnapshot = { motifs: [], relationships: [], field: { version: 'field-layout-v1', positions: {}, links: [] }, signals: [], captures: [], symbolicSessions: [] }
+const snapshot: LocalSnapshot = { motifs: [], relationships: [], field: { version: 'field-layout-v1', positions: {}, links: [] }, signals: [], captures: [], symbolicSessions: [], spaces: [] }
 
 afterEach(() => {
   delete (globalThis as { window?: unknown }).window

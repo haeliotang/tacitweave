@@ -23,7 +23,7 @@ fn secure_vacuum(connection: &Connection) -> Result<(), String> {
 fn read_snapshot(connection: &Connection) -> Result<Value, String> {
     let mut statement = connection
         .prepare(
-            "SELECT key, value FROM local_state WHERE key IN ('motifs', 'relationships', 'field', 'signals', 'captures', 'symbolic_sessions')",
+            "SELECT key, value FROM local_state WHERE key IN ('motifs', 'relationships', 'field', 'signals', 'captures', 'symbolic_sessions', 'experience_spaces')",
         )
         .map_err(|error| error.to_string())?;
     let rows = statement
@@ -37,6 +37,7 @@ fn read_snapshot(connection: &Connection) -> Result<Value, String> {
     let mut signals = Value::Array(Vec::new());
     let mut captures = Value::Array(Vec::new());
     let mut symbolic_sessions = Value::Array(Vec::new());
+    let mut spaces = Value::Array(Vec::new());
     for row in rows {
         let (key, value) = row.map_err(|error| error.to_string())?;
         let parsed: Value = serde_json::from_str(&value).map_err(|error| error.to_string())?;
@@ -52,10 +53,12 @@ fn read_snapshot(connection: &Connection) -> Result<Value, String> {
             captures = parsed;
         } else if key == "symbolic_sessions" {
             symbolic_sessions = parsed;
+        } else if key == "experience_spaces" {
+            spaces = parsed;
         }
     }
     Ok(
-        json!({ "motifs": motifs, "relationships": relationships, "field": field, "signals": signals, "captures": captures, "symbolicSessions": symbolic_sessions }),
+        json!({ "motifs": motifs, "relationships": relationships, "field": field, "signals": signals, "captures": captures, "symbolicSessions": symbolic_sessions, "spaces": spaces }),
     )
 }
 
@@ -84,6 +87,10 @@ fn write_snapshot(connection: &Connection, snapshot: &Value) -> Result<(), Strin
         .get("symbolicSessions")
         .cloned()
         .unwrap_or_else(|| Value::Array(Vec::new()));
+    let spaces = snapshot
+        .get("spaces")
+        .cloned()
+        .unwrap_or_else(|| Value::Array(Vec::new()));
     if field.get("version").and_then(Value::as_str) != Some("field-layout-v1")
         || !field
             .get("positions")
@@ -102,6 +109,9 @@ fn write_snapshot(connection: &Connection, snapshot: &Value) -> Result<(), Strin
     if !symbolic_sessions.is_array() {
         return Err("invalid_symbolic_sessions".into());
     }
+    if !spaces.is_array() {
+        return Err("invalid_experience_spaces".into());
+    }
     let statement = "INSERT INTO local_state (key, value) VALUES (?1, ?2) ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = CURRENT_TIMESTAMP";
     connection
         .execute("DELETE FROM local_state WHERE key = 'encrypted'", [])
@@ -113,6 +123,7 @@ fn write_snapshot(connection: &Connection, snapshot: &Value) -> Result<(), Strin
         ("signals", signals),
         ("captures", captures),
         ("symbolic_sessions", symbolic_sessions),
+        ("experience_spaces", spaces),
     ] {
         connection
             .execute(
@@ -331,7 +342,7 @@ fn write_encrypted_state(connection: &Connection, payload: &str) -> Result<(), S
         .map_err(|error| error.to_string())?;
     connection
         .execute(
-            "DELETE FROM local_state WHERE key IN ('motifs', 'relationships', 'field', 'signals', 'captures', 'symbolic_sessions')",
+            "DELETE FROM local_state WHERE key IN ('motifs', 'relationships', 'field', 'signals', 'captures', 'symbolic_sessions', 'experience_spaces')",
             [],
         )
         .map_err(|error| error.to_string())?;
@@ -548,7 +559,7 @@ mod tests {
         connection.execute_batch(super::LOCAL_STATE_SCHEMA).unwrap();
         write_snapshot(
             &connection,
-            &json!({ "motifs": [{"name":"a"}], "relationships": [], "field": { "version": "field-layout-v1", "positions": { "motif:a": { "x": 0.2, "y": 0.4 } }, "links": [] }, "captures": [{ "version": "capture-v1", "captureId": "capture-1", "rendererKind": "captured", "mimeType": "video/mp4", "durationSec": 75, "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "synthId": false, "createdAt": "2026-11-01T00:00:00.000Z" }] }),
+            &json!({ "motifs": [{"name":"a"}], "relationships": [], "field": { "version": "field-layout-v1", "positions": { "motif:a": { "x": 0.2, "y": 0.4 } }, "links": [] }, "captures": [{ "version": "capture-v1", "captureId": "capture-1", "rendererKind": "captured", "mimeType": "video/mp4", "durationSec": 75, "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "synthId": false, "createdAt": "2026-11-01T00:00:00.000Z" }], "spaces": [{ "version": "experience-space-v2", "id": "space-1" }] }),
         )
         .unwrap();
         let snapshot = read_snapshot(&connection).unwrap();
@@ -557,6 +568,7 @@ mod tests {
         assert_eq!(snapshot["field"]["positions"]["motif:a"]["x"], 0.2);
         assert_eq!(snapshot["signals"].as_array().unwrap().len(), 0);
         assert_eq!(snapshot["captures"][0]["captureId"], "capture-1");
+        assert_eq!(snapshot["spaces"][0]["id"], "space-1");
     }
 
     #[test]
