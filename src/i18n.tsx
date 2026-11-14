@@ -544,6 +544,10 @@ const en: Record<string, string> = {
   '连接两个存在': 'Connect the two presences',
   '显式连接': 'Explicit connection',
   '包含': 'Containment',
+  '区域': 'Region',
+  '让区域包含一个存在': 'Let the region contain a presence',
+  '确认删除空间': 'Confirm delete space',
+  '删除空间': 'Delete space',
 }
 
 type LanguageContextValue = {

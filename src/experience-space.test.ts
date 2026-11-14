@@ -78,6 +78,17 @@ describe('experience space v2', () => {
     expect(relationId).toBeTruthy()
   })
 
+  it('supports an explicit containment relation to a region', () => {
+    let space = createExperienceSpace('relationship')
+    space = placeObject(space, 'container', 0.5, 0.5)
+    const region = space.objects.find(object => object.kind === 'container')!
+    const presence = space.objects.find(object => object.kind === 'presence')!
+    space = connectObjects(space, region.id, presence.id, 'containment')
+    expect(space.relations?.[0].type).toBe('containment')
+    const child = branchExperienceSpace(space)
+    expect(compareExperienceSpaces(space, child)).toEqual([])
+  })
+
   it('groups snapshots into trails', () => {
     const root = createExperienceSpace('blank', undefined, undefined, '2026-11-14T00:00:00Z')
     const child = branchExperienceSpace(root, '2026-11-14T00:01:00Z')

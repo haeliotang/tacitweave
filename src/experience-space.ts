@@ -3,7 +3,7 @@
 
 export type ExperienceStart = 'body' | 'imagery' | 'blank' | 'relationship'
 
-export type SpatialObjectKind = 'body' | 'door' | 'water' | 'forest' | 'shape' | 'light' | 'boundary' | 'presence'
+export type SpatialObjectKind = 'body' | 'door' | 'water' | 'forest' | 'shape' | 'light' | 'boundary' | 'presence' | 'container'
 
 export type SpatialActionType = 'place' | 'move' | 'adjust' | 'visibility' | 'remove' | 'viewpoint' | 'connect' | 'disconnect'
 
@@ -66,7 +66,7 @@ export const experienceSpaceCapacity = 500
 const uuid = () => crypto.randomUUID()
 const now = () => new Date().toISOString()
 
-const kinds = new Set<SpatialObjectKind>(['body', 'door', 'water', 'forest', 'shape', 'light', 'boundary', 'presence'])
+const kinds = new Set<SpatialObjectKind>(['body', 'door', 'water', 'forest', 'shape', 'light', 'boundary', 'presence', 'container'])
 const starts = new Set<ExperienceStart>(['body', 'imagery', 'blank', 'relationship'])
 
 function clamp(value: number, min: number, max: number) {
@@ -220,7 +220,7 @@ export function saveExperienceSpaces(storage: ExperienceStorageLike, spaces: Exp
 export interface SpaceDifference {
   objectId?: string
   kind: SpatialObjectKind
-  field: 'added' | 'removed' | 'position' | 'depth' | 'scale' | 'opacity' | 'visibility' | 'viewpoint'
+  field: 'added' | 'removed' | 'position' | 'depth' | 'scale' | 'opacity' | 'visibility' | 'viewpoint' | 'relation'
   before: string
   after: string
 }
@@ -278,6 +278,14 @@ export function compareExperienceSpaces(before: ExperienceSpaceV2, after: Experi
     if (old.scale !== object.scale) differences.push({ objectId: object.id, kind: object.kind, field: 'scale', before: old.scale.toFixed(2), after: object.scale.toFixed(2) })
     if (old.opacity !== object.opacity) differences.push({ objectId: object.id, kind: object.kind, field: 'opacity', before: old.opacity.toFixed(2), after: object.opacity.toFixed(2) })
     if (old.visible !== object.visible) differences.push({ objectId: object.id, kind: object.kind, field: 'visibility', before: String(old.visible), after: String(object.visible) })
+  }
+  const beforeRelations = new Map((before.relations ?? []).map(relation => [relation.id, relation]))
+  const afterRelations = new Map((after.relations ?? []).map(relation => [relation.id, relation]))
+  for (const relation of before.relations ?? []) {
+    if (!afterRelations.has(relation.id)) differences.push({ kind: 'shape', field: 'relation', before: relation.type, after: '—' })
+  }
+  for (const relation of after.relations ?? []) {
+    if (!beforeRelations.has(relation.id)) differences.push({ kind: 'shape', field: 'relation', before: '—', after: relation.type })
   }
   if (before.viewpoint.distance !== after.viewpoint.distance) differences.push({ kind: 'shape', field: 'viewpoint', before: before.viewpoint.distance.toFixed(2), after: after.viewpoint.distance.toFixed(2) })
   return differences

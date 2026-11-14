@@ -33,6 +33,7 @@ const kinds: Array<{ value: SpatialObjectKind; label: string; labelEn: string }>
   { value: 'light', label: '光', labelEn: 'Light' },
   { value: 'boundary', label: '边界', labelEn: 'Boundary' },
   { value: 'presence', label: '存在', labelEn: 'Presence' },
+  { value: 'container', label: '区域', labelEn: 'Region' },
 ]
 
 function kindLabel(kind: SpatialObjectKind, lang: 'zh' | 'en') {
@@ -62,6 +63,7 @@ function SpatialShape({ kind }: { kind: SpatialObjectKind }) {
   if (kind === 'forest') return <span className="spatial-forest"><i /><i /><i /></span>
   if (kind === 'light') return <span className="spatial-light" />
   if (kind === 'presence') return <span className="spatial-presence" />
+  if (kind === 'container') return <span className="spatial-container" />
   if (kind === 'door') return <span className="spatial-door" />
   return <span className="spatial-shape" />
 }
@@ -76,6 +78,7 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
   const [status, setStatus] = useState('')
   const [compareBefore, setCompareBefore] = useState<string>('')
   const [compareAfter, setCompareAfter] = useState<string>('')
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   const [drag, setDrag] = useState<{ id: string; startX: number; startY: number; originX: number; originY: number; rect: DOMRect } | null>(null)
   const [preview, setPreview] = useState<{ id: string; x: number; y: number } | null>(null)
   const stage = useRef<HTMLDivElement>(null)
@@ -111,6 +114,15 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
     setSpace(child)
     setSelectedId(child.objects.at(-1)?.id ?? null)
     setStatus(t('已创建新分支；保存后写入本机。'))
+  }
+
+  const deleteSpace = (id: string) => {
+    const next = spaces.filter(item => item.id !== id)
+    setSpaces(next)
+    saveExperienceSpaces(window.localStorage, next)
+    setDeleteId(null)
+    if (space?.id === id) setSpace(null)
+    onSaved?.()
   }
 
   const leave = () => {
@@ -209,9 +221,12 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
         <p className="card-label">{t('回访已保存的空间')}</p>
         {buildSpaceTrails(spaces).map(trail => <div key={trail.rootId} className="saved-trail">
           <p className="note">{trail.visits.length} {t('个版本')} · {new Date(trail.root.createdAt).toLocaleString()}</p>
-          {trail.visits.map(saved => <button key={saved.id} type="button" className="saved-space" onClick={() => { setSpace(saved); setSelectedId(saved.objects.at(-1)?.id ?? null) }}>
-            <span>{saved.parentId ? t('分支') : t('原始空间')} · {new Date(saved.createdAt).toLocaleString()}</span><span>{saved.objects.length} {t('个对象')}</span>
-          </button>)}
+          {trail.visits.map(saved => <div key={saved.id} className="saved-space-row">
+            <button type="button" className="saved-space" onClick={() => { setSpace(saved); setSelectedId(saved.objects.at(-1)?.id ?? null) }}>
+              <span>{saved.parentId ? t('分支') : t('原始空间')} · {new Date(saved.createdAt).toLocaleString()}</span><span>{saved.objects.length} {t('个对象')}</span>
+            </button>
+            {deleteId === saved.id ? <><button type="button" className="quiet small" onClick={() => deleteSpace(saved.id)}>{t('确认删除空间')}</button><button type="button" className="quiet small" onClick={() => setDeleteId(null)}>{t('取消')}</button></> : <button type="button" className="quiet small" onClick={() => setDeleteId(saved.id)}>{t('删除空间')}</button>}
+          </div>)}
         </div>)}
         <details className="space-compare">
           <summary>{t('对照两个空间')}</summary>
@@ -228,6 +243,8 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
     </section>
   }
 
+  const container = space.objects.find(object => object.kind === 'container')
+  const relationPresence = space.objects.find(object => object.kind === 'presence')
   const renderedObjects = space.objects.map(object => preview?.id === object.id ? { ...object, x: preview.x, y: preview.y } : object)
   return <section className="exploration-canvas-view">
     <header className="canvas-toolbar">
@@ -277,7 +294,8 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
         {space.start === 'relationship' && <div className="canvas-panel-section">
           <p className="card-label">{t('关系')}</p>
           <p className="note">{t('距离由两个存在的位置决定；连接需要你明确建立。')}</p>
-          <button type="button" className="quiet small" disabled={space.objects.filter(object => object.kind === 'presence').length < 2 || (space.relations?.length ?? 0) > 0} onClick={() => { const presences = space.objects.filter(object => object.kind === 'presence'); if (presences.length >= 2) update(connectObjects(space, presences[0].id, presences[1].id)) }}>{t('连接两个存在')}</button>
+          <button type="button" className="quiet small" disabled={space.objects.filter(object => object.kind === 'presence').length < 2 || (space.relations ?? []).some(relation => relation.type === 'connection')} onClick={() => { const presences = space.objects.filter(object => object.kind === 'presence'); if (presences.length >= 2) update(connectObjects(space, presences[0].id, presences[1].id)) }}>{t('连接两个存在')}</button>
+          <button type="button" className="quiet small" disabled={!container || !relationPresence || (space.relations ?? []).some(relation => relation.type === 'containment')} onClick={() => { if (container && relationPresence) update(connectObjects(space, container.id, relationPresence.id, 'containment')) }}>{t('让区域包含一个存在')}</button>
           {(space.relations ?? []).map(relation => <div key={relation.id} className="relation-row"><span>{relation.type === 'connection' ? t('显式连接') : t('包含')}</span><button type="button" className="quiet small" onClick={() => update(disconnectRelation(space, relation.id))}>{t('断开')}</button></div>)}
         </div>}
         <div className="canvas-panel-section">
