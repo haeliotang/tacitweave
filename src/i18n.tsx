@@ -548,6 +548,9 @@ const en: Record<string, string> = {
   '让区域包含一个存在': 'Let the region contain a presence',
   '确认删除空间': 'Confirm delete space',
   '删除空间': 'Delete space',
+  '叠加对照': 'Overlay comparison',
+  '关闭叠加': 'Close overlay',
+  '两个空间的叠加对照': 'Overlay of two spaces',
 }
 
 type LanguageContextValue = {

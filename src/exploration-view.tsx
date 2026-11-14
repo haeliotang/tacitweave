@@ -79,6 +79,7 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
   const [compareBefore, setCompareBefore] = useState<string>('')
   const [compareAfter, setCompareAfter] = useState<string>('')
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [overlay, setOverlay] = useState(false)
   const [drag, setDrag] = useState<{ id: string; startX: number; startY: number; originX: number; originY: number; rect: DOMRect } | null>(null)
   const [preview, setPreview] = useState<{ id: string; x: number; y: number } | null>(null)
   const stage = useRef<HTMLDivElement>(null)
@@ -169,6 +170,9 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
     if (space && selected) update(adjustObject(space, selected.id, patch))
   }
 
+  const compareBeforeSpace = spaces.find(saved => saved.id === compareBefore) ?? null
+  const compareAfterSpace = spaces.find(saved => saved.id === compareAfter) ?? null
+
   if (!space) {
     return <section className="exploration-entry">
       <header className="exploration-heading">
@@ -237,6 +241,11 @@ export function ExplorationView({ onExit, onSaved }: { onExit?: () => void; onSa
           {compareBefore && compareAfter && compareBefore !== compareAfter ? <div className="space-diff">
             {compareExperienceSpaces(spaces.find(saved => saved.id === compareBefore)!, spaces.find(saved => saved.id === compareAfter)!).map((change, index) => <div key={`${change.objectId ?? 'view'}-${change.field}-${index}`} className="space-diff-row"><span>{change.field}</span><span>{change.kind}</span><span>{change.before}</span><span>→</span><span>{change.after}</span></div>)}
             {compareExperienceSpaces(spaces.find(saved => saved.id === compareBefore)!, spaces.find(saved => saved.id === compareAfter)!).length === 0 && <p className="note">{t('两个空间没有显式配置差异。')}</p>}
+            <button type="button" className="quiet small" onClick={() => setOverlay(value => !value)}>{overlay ? t('关闭叠加') : t('叠加对照')}</button>
+            {overlay && compareBeforeSpace && compareAfterSpace && <div className="space-overlay" aria-label={t('两个空间的叠加对照')}>
+              {compareBeforeSpace.objects.map(object => <span key={`before-${object.id}`} className={`overlay-object ghost kind-${object.kind}`} style={{ left: `${object.x * 100}%`, top: `${object.y * 100}%`, opacity: object.opacity * 0.45, transform: `translate(-50%, -50%) scale(${object.scale * depthScale(object)})` }}><SpatialShape kind={object.kind} /></span>)}
+              {compareAfterSpace.objects.map(object => <span key={`after-${object.id}`} className={`overlay-object kind-${object.kind}`} style={{ left: `${object.x * 100}%`, top: `${object.y * 100}%`, opacity: object.opacity, transform: `translate(-50%, -50%) scale(${object.scale * depthScale(object)})` }}><SpatialShape kind={object.kind} /></span>)}
+            </div>}
           </div> : <p className="note">{t('选择两个已保存空间进行比较。')}</p>}
         </details>
       </div>}

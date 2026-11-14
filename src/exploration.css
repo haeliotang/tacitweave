@@ -62,3 +62,6 @@
 .saved-space-row { display: flex; align-items: center; gap: 6px; }
 .saved-space-row .saved-space { flex: 1; }
 .spatial-container { display: block; width: 150px; height: 90px; margin: -20px auto; border: 1px dashed var(--muted); border-radius: 50%; opacity: .55; }
+.space-overlay { position: relative; height: 260px; margin-top: 10px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2, #eef0ea); }
+.overlay-object { position: absolute; width: 44px; height: 44px; }
+.overlay-object.ghost { filter: grayscale(1); opacity: .4; }

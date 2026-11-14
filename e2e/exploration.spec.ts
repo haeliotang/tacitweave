@@ -72,6 +72,9 @@ test('a saved space can branch and compare its explicit configuration', async ({
   await selects.nth(0).selectOption({ index: 1 })
   await selects.nth(1).selectOption({ index: 2 })
   await expect(page.locator('.space-diff')).toContainText('position')
+  await page.getByRole('button', { name: 'Overlay comparison' }).click()
+  await expect(page.locator('.space-overlay')).toBeVisible()
+  await expect(page.locator('.space-overlay .overlay-object')).toHaveCount(2)
 })
 
 
