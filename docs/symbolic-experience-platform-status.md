@@ -63,10 +63,17 @@ Playwright E2E: 29 passed
 pnpm build: exit 0, main JS ~330 KB
 reuse lint: 263/263 compliant
 Rust: 8 desktop + 10 ops tests passed
+Tauri release build: pnpm tauri:build --no-bundle passed
 Retention: 1000 motifs + 1000 symbolic sessions (explicit, tested)
 light + dark WCAG A/AA on main views
 English UI untranslated-token audit covers continuity/composer
 ```
+
+## Tauri 运行验收状态
+
+- 真实 release 二进制已构建成功；
+- 浏览器 E2E 已验证保存、刷新与恢复；
+- **Tauri WebView 内的保存/退出/重启/恢复尚未完成自动化验收**；在合并审查前应手工完成一次。
 
 ## 明确不是
 
